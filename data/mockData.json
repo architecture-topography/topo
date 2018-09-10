@@ -1,0 +1,37 @@
+{
+  "name": "Test Name",
+  "description": "Test Description",
+  "capabilities": [
+    "Design",
+    "Quality",
+    "Suppliers",
+    "Product Management"
+  ],
+  "primary-technologies": [],
+  "cycle-time-hours": "",
+  "tech-lead": {
+    "name": "",
+    "email": ""
+  },
+  "source-url": "",
+  "prod-url": "",
+  "depends-on": [
+    {
+      "target": "mainframe",
+      "nature": "direct-db-access"
+    },
+    {
+      "target": "purchasing",
+      "nature": ""
+    }
+  ],
+  "events-published": [
+    {
+      "name": ""
+    }
+  ],
+  "infrastructure": ["aws", "on-prem"],
+  "last-update": "20180530",
+  "createsEntity": ["Product"],
+  "dependsOnEntity": ["Order"]
+}
