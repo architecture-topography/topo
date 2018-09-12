@@ -5,5 +5,6 @@ import ReactDOM from 'react-dom';
 import App from './client/components/App';
 import registerServiceWorker from './client/registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const mappingConfig = JSON.parse(process.CONFIG_FILE_MAPPING);
+ReactDOM.render(<App config={mappingConfig} />, document.getElementById('root'));
 registerServiceWorker();
