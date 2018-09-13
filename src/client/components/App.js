@@ -3,6 +3,7 @@ import '../../resources/css/App.css';
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import PropTypes from 'prop-types';
+import { DomainView } from './DomainView';
 
 class App extends Component {
     static propTypes = {
@@ -39,7 +40,9 @@ class App extends Component {
                 <Dropzone onDrop={this.onDrop}>
                     <p>Try dropping some files here, or click to select files to upload.</p>
                 </Dropzone>
-            </div>
+                <DomainView/>
+
+            </div>   
         );
     }
 }

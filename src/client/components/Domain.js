@@ -13,7 +13,8 @@ export default class Domain extends Component {
 
     return (
         <div>
-            <span> { title } </span>
+            <span className="domain-title"> { title } </span>
+            { content }
         </div>
     )
    }
