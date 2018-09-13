@@ -1,13 +1,13 @@
 import { mount } from 'enzyme';
 import { StaticRouter } from 'react-router-dom'
 import React from 'react'
-import DomainWidget from './DomainWidget';
+import Domain from './Domain';
 
 describe('DomainWidget',()=>{
 
     it('renders the widget', ()=>{
     const component = mount(<StaticRouter context={{needed:"forTest"}}>
-            <DomainWidget />
+            <Domain />
         </StaticRouter>);
     })
 })
