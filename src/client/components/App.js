@@ -27,50 +27,44 @@ class App extends Component {
         super(props);
         this.onDrop = this.onDrop.bind(this);
 
-        console.log(JSON.stringify(props.config));
-
         this.state = {
             acceptedFiles: [],
             rejectedFiles: []
         };
     }
 
-    onDrop(acceptedFiles, rejectedFiles) {
-        const systems = [];
-        acceptedFiles.forEach((file, index) =>
-            fileParser(file).then(result => {
-                try {
-                    systems.push(JSON.parse(result));
-                } catch (e) {
-                    rejectedFiles.push(file);
-                }
+    async onDrop(acceptedFiles, rejectedFiles) {
+        const files = {
+            accepted: [],
+            rejected: rejectedFiles
+        };
 
-                if (index === acceptedFiles.length - 1) {
-                    this.onFileProcessed(systems, rejectedFiles);
-                }
-            }).catch(e => {
-                console.log(e);
-            })
-        )
+        const results = await Promise.all(acceptedFiles.map(fileParser)).catch(console.log);
+
+        results.forEach(data => {
+            Object.keys(data).forEach(key => files[key].push(data[key]));
+        });
+
+        this._onProcessedFiles(files);
     }
 
-    onFileProcessed(acceptedFiles, rejectedFiles) {
-        console.log('ACCEPTED', acceptedFiles.length);
-        console.log('REJECTED', rejectedFiles.length);
+    _onProcessedFiles(files) {
+        console.log('ACCEPTED', files.accepted.length);
+        console.log('REJECTED', files.rejected.length);
 
         this.setState({
-            acceptedFiles: acceptedFiles,
-            rejectedFiles: rejectedFiles
+            acceptedFiles: files.accepted,
+            rejectedFiles: files.rejected
         });
     }
 
     render() {
         return (
             <div className="App">
-                <Dropzone accept={'application/json'} onDrop={this.onDrop}>
-                    <p>Try dropping some files here, or click to select files to upload.</p>
-                </Dropzone>
                 <div>
+                    <Dropzone accept={'application/json'} onDrop={this.onDrop}>
+                        <p>Try dropping some files here, or click to select files to upload.</p>
+                    </Dropzone>
                     <span>
                         Rejected Files
                     </span>
