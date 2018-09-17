@@ -37,7 +37,7 @@ class FileDrop extends Component {
         this.setState({
             acceptedFiles: files.accepted,
             rejectedFiles: files.rejected
-        });
+        }, () => this.props.updateSystemMapping(this.state.acceptedFiles));
     }
 
     render() {

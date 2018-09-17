@@ -3,14 +3,16 @@ import './resources/css/index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './client/components/App';
-import {ConfigMappingContext} from './client/context/ConfigMappingContext';
+import DomainProvider from './client/context/DomainContext';
 import registerServiceWorker from './client/registerServiceWorker';
+
+const mappingConfig = JSON.parse(process.CONFIG_FILE_MAPPING);
 
 function AppWithContext(props) {
     return (
-        <ConfigMappingContext.Consumer>
-            {context => <App {...props} config={context} />}
-        </ConfigMappingContext.Consumer>
+        <DomainProvider config={mappingConfig}>
+            <App {...props} config={mappingConfig} />
+        </DomainProvider>
     );
 }
 

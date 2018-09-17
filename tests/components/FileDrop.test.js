@@ -12,6 +12,8 @@ const acceptedFileMock = {"name": "Accepted 1"};
 const rejectedFileMock = {"name": "Rejected 1"};
 const malformedJsonFileMock = "NOT_IN_JSON_FORMAT";
 
+const noop = () => {};
+
 describe('<FileDrop />', () => {
 
     afterEach(() => {
@@ -20,7 +22,7 @@ describe('<FileDrop />', () => {
 
     it('should render without crashing', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<FileDrop />, div);
+        ReactDOM.render(<FileDrop updateSystemMapping={noop} />, div);
         ReactDOM.unmountComponentAtNode(div);
     });
 
@@ -29,7 +31,7 @@ describe('<FileDrop />', () => {
             let wrapper;
 
             beforeEach(() => {
-                wrapper = mount(<FileDrop />);
+                wrapper = mount(<FileDrop updateSystemMapping={noop} />);
                 fileParser.mockImplementation(() => Promise.resolve({accepted: acceptedFileMock}))
             });
 
@@ -46,7 +48,7 @@ describe('<FileDrop />', () => {
             let wrapper;
 
             beforeEach(() => {
-                wrapper = mount(<FileDrop />);
+                wrapper = mount(<FileDrop updateSystemMapping={noop} />);
                 fileParser.mockImplementation(() => Promise.resolve({rejected: malformedJsonFileMock}));
             });
 
@@ -75,7 +77,7 @@ describe('<FileDrop />', () => {
             let wrapper;
 
             beforeEach(() => {
-                wrapper = mount(<FileDrop />);
+                wrapper = mount(<FileDrop updateSystemMapping={noop} />);
                 fileParser.mockImplementation(() => Promise.resolve({accepted: acceptedFileMock}))
             });
 
