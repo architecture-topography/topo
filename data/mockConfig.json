@@ -1,5 +1,5 @@
 {
-  "Platforms": [
+  "platforms": [
     {
       "name": "Platform 1",
       "domains": [
@@ -10,7 +10,8 @@
             {"name": "Capability 1", "order": 1},
             {"name": "Capability 2", "order": 2},
             {"name": "Capability 3", "order": 3}
-          ]
+          ],
+          "color": "#85C1E9"
         },
         {
           "name": "Domain 2",
@@ -24,5 +25,5 @@
       ]
     }
   ],
-  "Others": []
+  "others": []
 }

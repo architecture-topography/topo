@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from '../../src/client/components/App';
 
 const config = {
-    "Platforms": [
+    "platforms": [
         {
             "name": "Platform 1",
             "domains": [
@@ -18,7 +18,7 @@ const config = {
             ]
         }
     ],
-    "Others": []
+    "others": []
 };
 
 describe('<App />', () => {
@@ -26,8 +26,8 @@ describe('<App />', () => {
     it('should render without crashing', () => {
         const div = document.createElement('div');
         const wrapper = ReactDOM.render(<App config={config}/>, div);
-        ReactDOM.unmountComponentAtNode(div);
-
         expect(wrapper.props.config).toEqual(config);
+
+        ReactDOM.unmountComponentAtNode(div);
     });
 });
