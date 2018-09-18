@@ -6,16 +6,7 @@ cache:
     - .yarn
 
 stages:
-  - build
   - test
-
-Build:
-  stage: build
-  before_script: 
-    - yarn config set cache-folder .yarn
-    - yarn install 
-  script:
-    - yarn build
 
 Test:
   stage: test
