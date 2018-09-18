@@ -25,6 +25,7 @@ class FileDrop extends Component {
 
         results.forEach(data => {
             Object.keys(data).forEach(key => files[key].push(data[key]));
+            console.log("Object", Object.keys)
         });
 
         this._onProcessedFiles(files);
@@ -46,10 +47,15 @@ class FileDrop extends Component {
                 <Dropzone accept={'application/json'} onDrop={this.onDrop}>
                     <p>Try dropping some files here, or click to select files to upload.</p>
                 </Dropzone>
-                <span>
-                    <b>Rejected Files:</b>
-                </span>
+                    <p><b>Rejected:</b></p>
                 {this.state.rejectedFiles.map((file, index) => (
+                    <div key={index}>
+                        {file.name}
+                    </div>
+                ))}
+
+                <p><b>Accepted:</b></p>
+                {this.state.acceptedFiles.map((file, index) => (
                     <div key={index}>
                         {file.name}
                     </div>

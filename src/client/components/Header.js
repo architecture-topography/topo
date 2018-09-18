@@ -2,22 +2,24 @@ import '../../resources/css/App.css';
 
 import React, {Component} from 'react';
 
-class MainDisplay extends Component {
+class Header extends Component {
     render() {
         return (
-            <div className="MainDisplay">
-                <h1>Topo Main Display</h1>
-                {this.props.treasureMapData.platforms.map((platform, index) => (
+            <div className="Header">
+                <h1>Topo</h1>
+                <p />
+            </div>
+        );
+    }
+}
+
+/*                {this.props.treasureMapData.platforms.map((platform, index) => (
                     <div key={index}>
                         <p>{platform.name}</p>
                         {platform.domains.map((domain, index) =>
                             <p key={index}>{JSON.stringify(domain)}</p>
                         )}
                     </div>
-                ))}
-            </div>
-        );
-    }
-}
+                ))}*/
 
-export default MainDisplay;
+export default Header;

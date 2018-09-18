@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import PlatformView from './PlatformView';
 import FileDrop from './FileDrop';
 import DataMapper from '../helpers/dataMapper';
-import MainDisplay from './MainDisplay';
+import Header from './Header';
 import { platform } from 'os';
 
 class App extends Component {
@@ -65,18 +65,18 @@ class App extends Component {
 
         return (
             <div className="App">
-                <FileDrop updateSystemMapping={this.updateSystemMapping}/>
-                <b>Accepted Files:</b>
-                {this.state.systemMapping.map((system, index) => (
-                    <div key={index}>
-                        {JSON.stringify(system)}
-                    </div>
-                ))}
+                <Header />
                 <PlatformView platforms={config.platforms} />
-                
+                <FileDrop updateSystemMapping={this.updateSystemMapping}/>
             </div>
         );
     }
 }
+
+/*                {this.state.systemMapping.map((system, index) => (
+                    <div key={index}>
+                        {JSON.stringify(system)}
+                    </div>
+                ))}*/
 
 export default App;
