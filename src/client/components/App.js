@@ -3,11 +3,12 @@ import '../../resources/css/App.css';
 import React, {Component} from 'react';
 import FileDrop from './FileDrop';
 import PropTypes from "prop-types";
+import DataMapper from '../helpers/dataMapper';
 
 class App extends Component {
     static propTypes = {
         config: PropTypes.shape({
-            Platforms: PropTypes.arrayOf(PropTypes.shape({
+            platforms: PropTypes.arrayOf(PropTypes.shape({
                 name: PropTypes.string.isRequired,
                 domains: PropTypes.arrayOf(PropTypes.shape({
                     name: PropTypes.string.isRequired,
@@ -18,7 +19,7 @@ class App extends Component {
                     }))
                 }))
             })),
-            Others: PropTypes.array
+            others: PropTypes.array
         })
     };
 
@@ -38,31 +39,16 @@ class App extends Component {
     updateSystemMapping(systemMapping) {
         this.setState({
             systemMapping: systemMapping
-        }, this.createDataMapping);
+        }, this.buildDataMapping);
     }
 
-    createDataMapping() {
-        const domainsToSystemsMapping = Object.assign({}, this.props.config);
+    buildDataMapping() {
+        const treasureMapData = DataMapper.mapTreasureMapData(
+            Object.assign({}, this.props.config),
+            Array.from(this.state.systemMapping)
+        );
 
-        this.state.systemMapping.forEach(system => {
-            system.capabilities.forEach(capability => {
-                domainsToSystemsMapping.Platforms[0].domains.forEach(domain => {
-                    domain.capabilities.forEach(otherCapability => {
-                        if (otherCapability.name === capability) {
-                            if (!otherCapability.systems) {
-                                otherCapability.systems = [];
-                            }
-
-                            if (!otherCapability.systems.includes(system)) {
-                                otherCapability.systems.push(system);
-                            }
-                        }
-                    });
-                });
-            })
-        });
-
-        console.log(domainsToSystemsMapping);
+        console.log('TREASURE MAP DATA', treasureMapData);
     }
 
     render() {

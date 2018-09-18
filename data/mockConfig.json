@@ -1,5 +1,5 @@
 {
-  "Platforms": [
+  "platforms": [
     {
       "name": "Platform 1",
       "domains": [
@@ -24,5 +24,5 @@
       ]
     }
   ],
-  "Others": []
+  "others": []
 }
