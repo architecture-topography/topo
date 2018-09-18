@@ -1,10 +1,12 @@
 import '../../resources/css/App.css';
 
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import PlatformView from './PlatformView';
 import FileDrop from './FileDrop';
-import PropTypes from "prop-types";
 import DataMapper from '../helpers/dataMapper';
 import MainDisplay from './MainDisplay';
+import { platform } from 'os';
 
 class App extends Component {
     static propTypes = {
@@ -59,10 +61,14 @@ class App extends Component {
     }
 
     render() {
+        const { config } = this.props
+
         return (
             <div className="App">
                 <MainDisplay treasureMapData={this.state.treasureMapData}/>
                 <FileDrop updateSystemMapping={this.updateSystemMapping}/>
+
+                <PlatformView platforms={config.platforms} />
 
                 <b>Accepted Files:</b>
                 {this.state.systemMapping.map((system, index) => (
@@ -70,6 +76,7 @@ class App extends Component {
                         {JSON.stringify(system)}
                     </div>
                 ))}
+                
             </div>
         );
     }
