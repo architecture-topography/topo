@@ -3,16 +3,18 @@ import '../../resources/css/App.css';
 import React, {Component} from 'react';
 
 class MainDisplay extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
     render() {
         return (
             <div className="MainDisplay">
                 <h1>Topo Main Display</h1>
-                <p>{JSON.stringify(this.props.treasureMapData)}</p>
+                {this.props.treasureMapData.platforms.map((platform, index) => (
+                    <div key={index}>
+                        <p>{platform.name}</p>
+                        {platform.domains.map((domain, index) =>
+                            <p key={index}>{JSON.stringify(domain)}</p>
+                        )}
+                    </div>
+                ))}
             </div>
         );
     }

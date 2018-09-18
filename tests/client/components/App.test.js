@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from '../../src/client/components/App';
+import App from '../../../src/client/components/App';
 
 const config = {
     "platforms": [

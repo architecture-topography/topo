@@ -32,7 +32,7 @@ class App extends Component {
         this.state = {
             configMapping: this.props.config,
             systemMapping: [],
-            treasureMapData: []
+            treasureMapData: this.props.config
         };
 
         console.log('CONFIG:', this.props.config);
@@ -46,15 +46,16 @@ class App extends Component {
 
     buildDataMapping() {
         const treasureMapData = DataMapper.mapTreasureMapData(
-            Object.assign({}, this.props.config),
-            Array.from(this.state.systemMapping)
+            _objectDeepClone(this.state.treasureMapData), Array.from(this.state.systemMapping)
         );
 
         this.setState({
             treasureMapData: treasureMapData
-        })
+        });
 
-        console.log('TREASURE MAP DATA', treasureMapData);
+        function _objectDeepClone(object) {
+            return JSON.parse(JSON.stringify(object))
+        }
     }
 
     render() {
