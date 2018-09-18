@@ -1,21 +1,21 @@
 import React ,{Component} from 'react';
-import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Domain from './Domain';
 import PropTypes from 'prop-types';
 
 export default class DomainView extends Component {
 
-    // static propTypes = {
-    //   domains: PropTypes.arrayOf(Domain).isRequired
-    // }
-
+    static propTypes = {
+        domains: PropTypes.arrayOf(Domain).isRequired
+    }
 
     render(){
+        const { domains } = this.props
         return (
             <div>
-               
-             here!
+                {
+                    domains.map(domain => <Domain domain={domain}/>)
+                }
             </div>
         )
     }

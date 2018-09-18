@@ -3,7 +3,7 @@ import '../../resources/css/App.css';
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import PropTypes from 'prop-types';
-import { DomainView } from './DomainView';
+import DomainView from './DomainView';
 
 class App extends Component {
     static propTypes = {
@@ -27,21 +27,32 @@ class App extends Component {
         super(props);
         this.onDrop = this.onDrop.bind(this);
 
+        this.state = ({ content: undefined })
         console.log(JSON.stringify(props.config));
     }
 
     onDrop(files) {
         console.log("ACCEPTED", files);
+
+        this.setState({
+            config: "yes"
+        })
+
     }
 
     render() {
         return (
             <div className="App">
-                <Dropzone onDrop={this.onDrop}>
-                    <p>Try dropping some files here, or click to select files to upload.</p>
-                </Dropzone>
-                <DomainView/>
-
+                <Dropzone onDrop={this.onDrop} />
+                {
+                    this.state.config ? 
+                    (
+                        // <DomainView domains={this.state} />
+                        <p>hi</p>
+                    ) : (
+                        <p>Try dropping some files here, or click to select files to upload.</p>
+                    )
+                }
             </div>   
         );
     }
