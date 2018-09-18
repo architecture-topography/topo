@@ -16,8 +16,8 @@ export default class DomainView extends Component {
             <Grid>
                 <Grid.Row columns={domains.length}>
                 {
-                    domains.map(domain => {
-                        return <Grid.Column><Domain {...domain}/></Grid.Column>
+                    domains.map((domain, index) => {
+                        return (<Grid.Column key={index}><Domain {...domain}/></Grid.Column>)
                     })
                 }
                 </Grid.Row>

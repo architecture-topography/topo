@@ -3,7 +3,7 @@ import '../../resources/css/App.css';
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import PropTypes from 'prop-types';
-import DomainView from './DomainView';
+import PlatformView from './PlatformView';
 
 class App extends Component {
     static propTypes = {
@@ -36,58 +36,56 @@ class App extends Component {
 
         this.setState({
             domains: [
-                      {
-                        "name": "Domain 1",
-                        "description": "Description 1",
-                        "capabilities": [
-                          {"name": "Capability 1", "order": 1},
-                          {"name": "Capability 2", "order": 2},
-                          {"name": "Capability 3", "order": 3}
-                        ]
-                      },
-                      {
-                        "name": "Domain 2",
-                        "description": "Description something",
-                        "capabilities": [
-                          {"name": "Capability 1", "order": 1},
-                        ]
-                      },
-                      {
-                        "name": "Domain 3",
-                        "description": "Description something",
-                        "capabilities": [
-                          {"name": "Capability 1", "order": 1},
-                          {"name": "Capability 2", "order": 2},
-                          {"name": "Capability 3", "order": 3},
-                          {"name": "Capability 4", "order": 4},
-                          {"name": "Capability 5", "order": 5},
-                        ]
-                      },
-                      {
-                        "name": "Domain 4",
-                        "description": "Description something",
-                        "capabilities": [
-                          {"name": "Capability 1", "order": 1},
-                          {"name": "Capability 2", "order": 2},
-                        ]
-                      },
-                      {
-                        "name": "Domain 5",
-                        "description": "Description something",
-                        "capabilities": [
-                          {"name": "Capability 1", "order": 1},
-                          {"name": "Capability 2", "order": 2},
-                          {"name": "Capability 3", "order": 3},
-                          {"name": "Capability 4", "order": 4},
-                          {"name": "Capability 5", "order": 5},
-                          {"name": "Capability 6", "order": 6},
-                          {"name": "Capability 7", "order": 7},
-                        ]
-                      }
+                {
+                    "name": "Domain 1",
+                    "description": "Description 1",
+                    "capabilities": [
+                        {"name": "Capability 1", "order": 1},
+                        {"name": "Capability 2", "order": 2},
+                        {"name": "Capability 3", "order": 3}
                     ]
-              
+                },
+                    {
+                    "name": "Domain 2",
+                    "description": "Description something",
+                    "capabilities": [
+                        {"name": "Capability 1", "order": 1},
+                    ]
+                },
+                {
+                    "name": "Domain 3",
+                    "description": "Description something",
+                    "capabilities": [
+                        {"name": "Capability 1", "order": 1},
+                        {"name": "Capability 2", "order": 2},
+                        {"name": "Capability 3", "order": 3},
+                        {"name": "Capability 4", "order": 4},
+                        {"name": "Capability 5", "order": 5},
+                    ]
+                },
+                {
+                    "name": "Domain 4",
+                    "description": "Description something",
+                    "capabilities": [
+                        {"name": "Capability 1", "order": 1},
+                        {"name": "Capability 2", "order": 2},
+                    ]
+                },
+                {
+                    "name": "Domain 5",
+                    "description": "Description something",
+                    "capabilities": [
+                        {"name": "Capability 1", "order": 1},
+                        {"name": "Capability 2", "order": 2},
+                        {"name": "Capability 3", "order": 3},
+                        {"name": "Capability 4", "order": 4},
+                        {"name": "Capability 5", "order": 5},
+                        {"name": "Capability 6", "order": 6},
+                        {"name": "Capability 7", "order": 7},
+                    ]
+                }
+            ]
         })
-
     }
 
     render() {
@@ -97,7 +95,7 @@ class App extends Component {
                 {
                     this.state.domains ? 
                     (
-                        <DomainView domains={this.state.domains} />
+                        <PlatformView name='Platform' domains={this.state.domains} />
                     ) : (
                         <p>Try dropping some files here, or click to select files to upload.</p>
                     )

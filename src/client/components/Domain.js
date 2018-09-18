@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { Container, Segment } from 'semantic-ui-react'
+import PropTypes from 'prop-types';
 
 export default class Domain extends Component {
 
-    constructor(props){
-        super(props);
+    static propTypes = {
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        capabilities: PropTypes.arrayOf(PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            order: PropTypes.number
+        }))
     }
 
     render() {

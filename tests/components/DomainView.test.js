@@ -1,6 +1,6 @@
 import React from 'react';
 import DomainView from '../../src/client/components/DomainView';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 
 describe('DomainView',()=>{
   it('renders the correct number of Domains',()=>{
