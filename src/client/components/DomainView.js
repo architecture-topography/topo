@@ -2,6 +2,7 @@ import React ,{Component} from 'react';
 import "react-table/react-table.css";
 import Domain from './Domain';
 import PropTypes from 'prop-types';
+import { Grid } from 'semantic-ui-react'
 
 export default class DomainView extends Component {
 
@@ -12,11 +13,15 @@ export default class DomainView extends Component {
     render(){
         const { domains } = this.props
         return (
-            <div>
+            <Grid>
+                <Grid.Row columns={domains.length}>
                 {
-                    domains.map(domain => <Domain domain={domain}/>)
+                    domains.map(domain => {
+                        return <Grid.Column><Domain {...domain}/></Grid.Column>
+                    })
                 }
-            </div>
+                </Grid.Row>
+            </Grid>
         )
     }
 }

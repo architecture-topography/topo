@@ -29,9 +29,8 @@ describe('Domain',()=>{
         ]
 
         const wrapper = shallow(<Domain name={name} description={description} capabilities={capabilities}/>)
-        
-        expect(wrapper.find('.domain-cap').at(0).text()).toEqual("Capability 1")
-        expect(wrapper.find('.domain-cap').at(1).text()).toEqual("Capability 2")
-        expect(wrapper.find('.domain-cap').at(2).text()).toEqual("Capability 3")
+        expect(wrapper.find('.domain-cap').at(0).shallow().text()).toEqual("Capability 1")
+        expect(wrapper.find('.domain-cap').at(1).shallow().text()).toEqual("Capability 2")
+        expect(wrapper.find('.domain-cap').at(2).shallow().text()).toEqual("Capability 3")
     })
 });

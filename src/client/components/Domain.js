@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Container, Segment } from 'semantic-ui-react'
 
 export default class Domain extends Component {
 
@@ -13,15 +13,18 @@ export default class Domain extends Component {
             return a.order > b.order
         })
         return (
-            <div>
-                <span className="domain-name"> { name } </span>
-                <span className="domain-desc"> { description } </span>
+            <Container>
+                <Segment inverted color='blue'>
+                    <span className="domain-name"> { name } </span>
+                    <span className="domain-desc"> { description } </span>
+                </Segment>
+                
                 {
                     orderedCapabilities.map(capability => {
-                        return <span key={ capability.order } className="domain-cap">{ capability.name }</span>
+                        return <Segment key={ capability.order } className="domain-cap" content={capability.name}/>
                     })
                 }
-            </div>
+            </Container>
         )
     }
 }
