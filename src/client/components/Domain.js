@@ -14,6 +14,11 @@ export default class Domain extends Component {
             <div>
                 <span className="domain-name"> { name } </span>
                 <span className="domain-desc"> { description } </span>
+                {
+                    capabilities.map(capability => {
+                        return <span key={ capability.order } className="domain-cap"> { capability.name } </span>
+                    })
+                }
             </div>
         )
     }
