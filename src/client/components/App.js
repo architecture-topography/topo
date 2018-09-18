@@ -65,17 +65,14 @@ class App extends Component {
 
         return (
             <div className="App">
-                <MainDisplay treasureMapData={this.state.treasureMapData}/>
                 <FileDrop updateSystemMapping={this.updateSystemMapping}/>
-
-                <PlatformView platforms={config.platforms} />
-
                 <b>Accepted Files:</b>
                 {this.state.systemMapping.map((system, index) => (
                     <div key={index}>
                         {JSON.stringify(system)}
                     </div>
                 ))}
+                <PlatformView platforms={config.platforms} />
                 
             </div>
         );
