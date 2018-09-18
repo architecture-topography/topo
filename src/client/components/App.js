@@ -2,8 +2,25 @@ import '../../resources/css/App.css';
 
 import React, {Component} from 'react';
 import FileDrop from './FileDrop';
+import PropTypes from "prop-types";
 
 class App extends Component {
+    static propTypes = {
+        config: PropTypes.shape({
+            Platforms: PropTypes.arrayOf(PropTypes.shape({
+                name: PropTypes.string.isRequired,
+                domains: PropTypes.arrayOf(PropTypes.shape({
+                    name: PropTypes.string.isRequired,
+                    description: PropTypes.string.isRequired,
+                    capabilities: PropTypes.arrayOf(PropTypes.shape({
+                        name: PropTypes.string.isRequired,
+                        order: PropTypes.number
+                    }))
+                }))
+            })),
+            Others: PropTypes.array
+        })
+    };
 
     constructor(props) {
         super(props);
@@ -24,7 +41,7 @@ class App extends Component {
         }, this.createDataMapping);
     }
 
-    createDataMapping(){
+    createDataMapping() {
         const domainsToSystemsMapping = Object.assign({}, this.props.config);
 
         this.state.systemMapping.forEach(system => {
