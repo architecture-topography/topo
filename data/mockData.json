@@ -21,7 +21,7 @@
       "nature": "direct-db-access"
     },
     {
-      "target": "purchasing",
+      "target": "system x",
       "nature": ""
     }
   ],
