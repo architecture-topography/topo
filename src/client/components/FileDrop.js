@@ -47,7 +47,7 @@ class FileDrop extends Component {
                     <p>Try dropping some files here, or click to select files to upload.</p>
                 </Dropzone>
                 <span>
-                    Rejected Files
+                    <b>Rejected Files:</b>
                 </span>
                 {this.state.rejectedFiles.map((file, index) => (
                     <div key={index}>
