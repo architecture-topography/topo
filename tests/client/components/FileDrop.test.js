@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import FileDrop from '../../src/client/components/FileDrop';
+import FileDrop from '../../../src/client/components/FileDrop';
 
 import {mount} from 'enzyme';
-import fileParser from '../../src/client/io/fileParser';
+import fileParser from '../../../src/client/io/fileParser';
 
-jest.mock('../../src/client/io/fileParser');
+jest.mock('../../../src/client/io/fileParser');
 
 const acceptedFileMock = {"name": "Accepted 1"};
 const rejectedFileMock = {"name": "Rejected 1"};

@@ -9,6 +9,13 @@ function mapTreasureMapData(treasureMapData, systemMapping) {
                         if (_stringEquals(domainCapability.name, systemCapability)) {
                             if (!_arrayContains(domainCapability.systems, system)) {
                                 domainCapability.systems.push(system);
+                            } else {
+                                const currentSystem = domainCapability.systems.find(currentSystem => currentSystem.name === system.name);
+                                if (JSON.stringify(currentSystem) !== JSON.stringify(system)) {
+                                    const position = domainCapability.systems.indexOf(currentSystem);
+                                    const totalToDelete = 1;
+                                    domainCapability.systems.splice(position, totalToDelete, system)
+                                }
                             }
                         }
                     });
@@ -20,8 +27,8 @@ function mapTreasureMapData(treasureMapData, systemMapping) {
     return treasureMapData;
 }
 
-function _arrayContains(array, element) {
-    return array.includes(element)
+function _arrayContains(systems, otherSystem) {
+    return systems.filter((system) => system.name === otherSystem.name).length > 0;
 }
 
 function _stringEquals(first, second){
