@@ -31,7 +31,7 @@ describe('PlatformView', () => {
         ]
 
         const wrapper = shallow(<PlatformView platforms={platforms} />)
-        expect(wrapper.find('.platform-name').at(0).shallow().text()).toEqual(platforms[0].name)
+        expect(wrapper.find('Header').shallow().text()).toEqual(platforms[0].name)
         expect(wrapper.find('.platform-domains').length).toEqual(1)
     })
 })

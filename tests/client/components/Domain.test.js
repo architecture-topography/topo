@@ -16,7 +16,8 @@ describe('Domain',()=>{
         const wrapper = shallow(<Domain name={name} description={description} capabilities={capabilities}/>)
         expect(wrapper.find('.domain-name').at(0).text()).toEqual(name)
         expect(wrapper.find('.domain-desc').at(0).text()).toEqual(`"${description}"`)
-        expect(wrapper.find('.domain-cap')).toHaveLength(3)
+        expect(wrapper.find('Capability')).toHaveLength(3)
+
     })
 
     it('renders capability in the correct order', () => {
@@ -29,8 +30,8 @@ describe('Domain',()=>{
         ]
 
         const wrapper = shallow(<Domain name={name} description={description} capabilities={capabilities}/>)
-        expect(wrapper.find('.domain-cap').at(0).shallow().text()).toEqual("Capability 1")
-        expect(wrapper.find('.domain-cap').at(1).shallow().text()).toEqual("Capability 2")
-        expect(wrapper.find('.domain-cap').at(2).shallow().text()).toEqual("Capability 3")
+        expect(wrapper.find('Capability').get(0).props.order).toEqual(1);
+        expect(wrapper.find('Capability').get(1).props.order).toEqual(2);
+        expect(wrapper.find('Capability').get(2).props.order).toEqual(3);
     })
 });
