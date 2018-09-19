@@ -66,9 +66,9 @@ class App extends Component {
         return (
             <div className="App">
                 <Container>
-                  <Header />
-                  <PlatformView platforms={config.platforms} />
-                  <FileDrop updateSystemMapping={this.updateSystemMapping}/>
+                    <Header />
+                    <PlatformView platforms={config.platforms} />
+                    <FileDrop updateSystemMapping={this.updateSystemMapping}/>
                 </Container>
             </div>
         );
