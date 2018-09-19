@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Segment } from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 import '../../resources/css/Topo.css';
+import Capability from './Capability';
 
 export default class Domain extends Component {
 
@@ -10,6 +11,7 @@ export default class Domain extends Component {
         description: PropTypes.string,
         capabilities: PropTypes.arrayOf(PropTypes.shape({
             name: PropTypes.string.isRequired,
+            description: PropTypes.string,
             order: PropTypes.number.isRequired
         }))
     }
@@ -29,7 +31,7 @@ export default class Domain extends Component {
                 
                 {
                     orderedCapabilities.map(capability => {
-                        return <Segment key={ capability.order } inverted color={ color } tertiary className="domain-cap" content={capability.name}/>
+                        return (<Capability key={ capability.order } {...capability} />)
                     })
                 }
             </Container>
