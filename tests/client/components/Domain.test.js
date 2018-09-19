@@ -34,4 +34,37 @@ describe('Domain',()=>{
         expect(wrapper.find('Capability').get(1).props.order).toEqual(2);
         expect(wrapper.find('Capability').get(2).props.order).toEqual(3);
     })
+
+    it('domain and capabilities with no color specified in the json uses the default domain color',()=> {
+        const name = "Domain 1"
+        const description = "Description 1"
+        const capabilities = [
+            {"name": "Capability 3", "order": 3},
+            {"name": "Capability 1", "order": 1},
+            {"name": "Capability 2", "order": 2}
+        ]
+
+        const wrapper = shallow(<Domain name={name} description={description} capabilities={capabilities}/>)
+        const segments = wrapper.find('Segment');
+        segments.forEach(element => {
+            expect(element.get(0).props.style.backgroundColor).toContain("#AAB7B8");
+        });
+    })
+
+    it('domain and capabilities with #123456 color specified in the json uses that color',()=> {
+        const name = "Domain 1"
+        const description = "Description 1"
+        const capabilities = [
+            {"name": "Capability 3", "order": 3},
+            {"name": "Capability 1", "order": 1},
+            {"name": "Capability 2", "order": 2}
+        ]
+        const color = "#123456"
+
+        const wrapper = shallow(<Domain name={name} description={description} capabilities={capabilities} color={color} />)
+        const segments = wrapper.find('Segment');
+        segments.forEach(element => {
+            expect(element.get(0).props.style.backgroundColor).toContain("#123456");
+        });
+    })
 });

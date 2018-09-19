@@ -4,10 +4,9 @@ import '../../resources/css/Topo.css';
 
 export default class Capability extends Component {
     render() {
-        const { name } = this.props;
-        const color = "blue"
+        const { name, color } = this.props;
         return (
-            <Segment inverted color={color} tertiary className="domain-cap" content={name}/>
+            <Segment inverted style={{ backgroundColor: color }} color={color} tertiary className="domain-cap" content={name}/>
         )
     }
 }
