@@ -11,7 +11,8 @@ export default class Domain extends Component {
         capabilities: PropTypes.arrayOf(PropTypes.shape({
             name: PropTypes.string.isRequired,
             order: PropTypes.number.isRequired
-        }))
+        })),
+        color: PropTypes.string
     }
 
     render() {
