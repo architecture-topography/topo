@@ -6,6 +6,7 @@ import PlatformView from './PlatformView';
 import FileDrop from './FileDrop';
 import DataMapper from '../helpers/dataMapper';
 import Header from './Header';
+import { Container } from 'semantic-ui-react';
 
 class App extends Component {
     static propTypes = {
@@ -64,9 +65,11 @@ class App extends Component {
 
         return (
             <div className="App">
-                <Header />
-                <PlatformView platforms={config.platforms} />
-                <FileDrop updateSystemMapping={this.updateSystemMapping}/>
+                <Container>
+                  <Header />
+                  <PlatformView platforms={config.platforms} />
+                  <FileDrop updateSystemMapping={this.updateSystemMapping}/>
+                </Container>
             </div>
         );
     }

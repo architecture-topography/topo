@@ -2,6 +2,7 @@ import React ,{Component} from 'react';
 import DomainView from './DomainView'
 import PropTypes from 'prop-types';
 import { Grid, Header, Segment } from 'semantic-ui-react'
+import '../../resources/css/Topo.css'
 
 export default class PlatformView extends Component {
 
@@ -21,10 +22,10 @@ export default class PlatformView extends Component {
                     platforms.map((platform, index) => {
                         return (
                             <Grid.Column key={ index }>
-                                <Segment inverted color="green" secondary>
-                                    <Header className="platform-name">{ platform.name }</Header>
-                                    <DomainView className="platform-domains" domains={ platform.domains }/>
-                                </Segment>
+                              <Segment className="platform-name-title">
+                               <Header>{ platform.name }</Header>
+                              </Segment>
+                              <DomainView className="platform-domains" domains={ platform.domains }/>
                             </Grid.Column>
                         )})
                 }

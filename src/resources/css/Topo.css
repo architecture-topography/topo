@@ -8,3 +8,9 @@
     font-style: oblique;
 }
 
+.ui .platform-name-title {
+  color: black;
+  background-color: #FFE599;
+  border: none;
+  font-size: 1.5em;
+}
