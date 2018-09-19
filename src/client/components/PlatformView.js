@@ -1,7 +1,7 @@
 import React ,{Component} from 'react';
 import DomainView from './DomainView';
 import PropTypes from 'prop-types';
-import { Container, Segment } from 'semantic-ui-react'
+import { Header, Segment } from 'semantic-ui-react'
 
 export default class PlatformView extends Component {
 
@@ -14,11 +14,12 @@ export default class PlatformView extends Component {
 
     render(){
         const { platforms } = this.props
-        return platforms.map(platform => {
-                    return (<Container>
-                        <Segment className="platform-name" inverted color="green">{ platform.name }</Segment>
-                        <DomainView className="platform-domains" domains={ platform.domains }/>
-                    </Container>)
-                });
+        return platforms.map((platform, index) => {
+            return (
+                <Segment key={ index } inverted color="green" secondary>
+                    <Header className="platform-name">{ platform.name }</Header>
+                    <DomainView className="platform-domains" domains={ platform.domains }/>
+                </Segment>
+        )});
     }
 }

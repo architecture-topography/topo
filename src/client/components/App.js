@@ -6,7 +6,6 @@ import PlatformView from './PlatformView';
 import FileDrop from './FileDrop';
 import DataMapper from '../helpers/dataMapper';
 import Header from './Header';
-import { platform } from 'os';
 
 class App extends Component {
     static propTypes = {
@@ -72,11 +71,5 @@ class App extends Component {
         );
     }
 }
-
-/*                {this.state.systemMapping.map((system, index) => (
-                    <div key={index}>
-                        {JSON.stringify(system)}
-                    </div>
-                ))}*/
 
 export default App;
