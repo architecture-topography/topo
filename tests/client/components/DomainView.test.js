@@ -1,5 +1,5 @@
 import React from 'react';
-import DomainView from '../../src/client/components/DomainView';
+import DomainView from '../../../src/client/components/DomainView';
 import { shallow } from 'enzyme';
 
 describe('DomainView',()=>{

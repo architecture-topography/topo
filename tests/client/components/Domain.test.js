@@ -1,5 +1,5 @@
 import React from 'react';
-import Domain from '../../src/client/components/Domain';
+import Domain from '../../../src/client/components/Domain';
 
 describe('Domain',()=>{
 
@@ -12,7 +12,7 @@ describe('Domain',()=>{
             {"name": "Capability 2", "order": 2},
             {"name": "Capability 3", "order": 3}
         ]
-    
+
         const wrapper = shallow(<Domain name={name} description={description} capabilities={capabilities}/>)
         expect(wrapper.find('.domain-name').children().at(1).text()).toEqual(name)
         expect(wrapper.find('.domain-desc').children().at(1).text()).toEqual(description)

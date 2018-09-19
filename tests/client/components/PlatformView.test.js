@@ -1,5 +1,5 @@
 import React from 'react';
-import PlatformView from '../../src/client/components/PlatformView';
+import PlatformView from '../../../src/client/components/PlatformView';
 import {shallow} from 'enzyme';
 
 describe('PlatformView', () => {
