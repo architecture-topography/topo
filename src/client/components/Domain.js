@@ -16,20 +16,21 @@ export default class Domain extends Component {
 
     render() {
         const { name, description, capabilities } = this.props;
-        const color = "blue"
+        const defaultDomainColor = "#AAB7B8";
+        const color = this.props.color ? this.props.color : defaultDomainColor;
         let orderedCapabilities = capabilities.sort((a, b) => {
             return a.order > b.order
         })
         return (
             <Container>
-                <Segment inverted color={ color }>
+                <Segment inverted style={{ backgroundColor: color }}>
                     <span className="domain-name">{ name }</span> <br/>
                     <span className="domain-desc">"{ description }"</span>
                 </Segment>
                 
                 {
                     orderedCapabilities.map(capability => {
-                        return <Segment key={ capability.order } inverted color={ color } tertiary className="domain-cap" content={capability.name}/>
+                        return <Segment key={ capability.order } inverted style={{ backgroundColor: color }} tertiary className="domain-cap" content={capability.name}/>
                     })
                 }
             </Container>
