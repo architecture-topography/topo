@@ -1,4 +1,4 @@
-import '../../resources/css/App.css';
+import '../../resources/css/FileDrop.css';
 
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
@@ -44,7 +44,7 @@ class FileDrop extends Component {
     render() {
         return (
             <div className="DropFile">
-                <Dropzone accept={'application/json'} onDrop={this.onDrop}>
+                <Dropzone className="DropZone" accept={'application/json'} onDrop={this.onDrop}>
                     <p>Try dropping some files here, or click to select files to upload.</p>
                 </Dropzone>
                     <p><b>Rejected:</b></p>
