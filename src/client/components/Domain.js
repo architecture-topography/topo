@@ -7,10 +7,10 @@ export default class Domain extends Component {
 
     static propTypes = {
         name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
+        description: PropTypes.string,
         capabilities: PropTypes.arrayOf(PropTypes.shape({
             name: PropTypes.string.isRequired,
-            order: PropTypes.number
+            order: PropTypes.number.isRequired
         }))
     }
 
