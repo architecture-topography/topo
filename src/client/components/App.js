@@ -1,5 +1,6 @@
 import '../../resources/css/App.css';
 
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import PlatformView from './PlatformView';
@@ -65,11 +66,18 @@ class App extends Component {
 
         return (
             <div className="App">
-                <Container>
-                    <Header />
-                    <PlatformView platforms={config.platforms} />
-                    <FileDrop updateSystemMapping={this.updateSystemMapping}/>
-                </Container>
+              <HashRouter>
+                <Switch>
+                  <Route exact path="/" render={() => (
+                    <Container>
+                      <Header />
+                      <PlatformView platforms={config.platforms} />
+                      <FileDrop updateSystemMapping={this.updateSystemMapping}/>
+                    </Container>
+                    )}
+                  />
+                </Switch>
+              </HashRouter>
             </div>
         );
     }
