@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Segment } from 'semantic-ui-react'
 import PropTypes from 'prop-types';
+import '../../resources/css/Topo.css';
 
 export default class Domain extends Component {
 
@@ -22,8 +23,8 @@ export default class Domain extends Component {
         return (
             <Container>
                 <Segment inverted color={ color }>
-                    <span className="domain-name"> { name } </span>
-                    <span className="domain-desc"> { description } </span>
+                    <span className="domain-name">{ name }</span> <br/>
+                    <span className="domain-desc">"{ description }"</span>
                 </Segment>
                 
                 {

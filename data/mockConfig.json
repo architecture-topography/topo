@@ -21,6 +21,45 @@
             {"name": "Capability 2", "order": 2},
             {"name": "Capability 3", "order": 3}
           ]
+        },
+        {
+          "name": "Domain 3",
+          "description": "Description 3",
+          "capabilities": [
+            {"name": "Capability 1", "order": 1},
+            {"name": "Capability 2", "order": 2}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Platform 2",
+      "domains": [
+        {
+          "name": "Domain 1",
+          "description": "Description 1",
+          "capabilities": [
+            {"name": "Capability something", "order": 1},
+            {"name": "Capability 2", "order": 2}
+          ],
+          "color": "#85C1E9"
+        },
+        {
+          "name": "Domain 2",
+          "description": "Description 2",
+          "capabilities": [
+            {"name": "Capability 1", "order": 1},
+            {"name": "Capability 2", "order": 2},
+            {"name": "Capability 3", "order": 3}
+          ]
+        },
+        {
+          "name": "Domain 3",
+          "description": "Description 3",
+          "capabilities": [
+            {"name": "Capability 1", "order": 1},
+            {"name": "Capability 2", "order": 2}
+          ]
         }
       ]
     }

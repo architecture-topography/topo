@@ -14,8 +14,8 @@ describe('Domain',()=>{
         ]
 
         const wrapper = shallow(<Domain name={name} description={description} capabilities={capabilities}/>)
-        expect(wrapper.find('.domain-name').children().at(1).text()).toEqual(name)
-        expect(wrapper.find('.domain-desc').children().at(1).text()).toEqual(description)
+        expect(wrapper.find('.domain-name').at(0).text()).toEqual(name)
+        expect(wrapper.find('.domain-desc').at(0).text()).toEqual(`"${description}"`)
         expect(wrapper.find('.domain-cap')).toHaveLength(3)
     })
 

@@ -7,20 +7,18 @@ import { Grid } from 'semantic-ui-react'
 export default class DomainView extends Component {
 
     static propTypes = {
-        domains: PropTypes.arrayOf(Domain).isRequired
+        domains: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired
     }
 
     render(){
         const { domains } = this.props
         return (
-            <Grid>
-                <Grid.Row columns={domains.length}>
-                {
-                    domains.map((domain, index) => {
-                        return (<Grid.Column key={index}><Domain {...domain}/></Grid.Column>)
-                    })
-                }
-                </Grid.Row>
+            <Grid columns="equal">
+            {
+                domains.map((domain, index) => {
+                    return (<Grid.Column key={index}><Domain {...domain}/></Grid.Column>)
+                })
+            }
             </Grid>
         )
     }
