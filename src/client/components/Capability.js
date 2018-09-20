@@ -16,14 +16,15 @@ export default class Capability extends Component {
 
   render() {
     const { name, description, color, id } = this.props;
+    const desc = description ? `"${description}"` : "No description"
 
     return (
-        <Reveal animated='move' disabled={!description}>
+        <Reveal animated='fade' instant>
           <Reveal.Content visible className='full-width-height'>
             {this.getSegment(id, color, 'full-width-height capability-name', name)}
           </Reveal.Content>
           <Reveal.Content hidden className='full-width-height'>
-            {this.getSegment(id, 'grey', 'full-width-height capability-desc', `"${description}"`)}
+            {this.getSegment(id, 'grey', 'full-width-height capability-desc',desc)}
           </Reveal.Content>
         </Reveal>
     )
