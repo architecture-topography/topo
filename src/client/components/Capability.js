@@ -20,10 +20,10 @@ export default class Capability extends Component {
 
     return (
         <Reveal animated='fade' instant>
-          <Reveal.Content visible className='full-width-height'>
+          <Reveal.Content visible className='full-width-height capability-name-padding'>
             {this.getSegment(id, color, 'full-width-height capability-name', name)}
           </Reveal.Content>
-          <Reveal.Content hidden className='full-width-height'>
+          <Reveal.Content hidden className='full-width-height capability-desc-padding'>
             {this.getSegment(id, 'grey', 'full-width-height capability-desc',desc)}
           </Reveal.Content>
         </Reveal>
