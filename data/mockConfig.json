@@ -17,9 +17,9 @@
           "name": "Domain 2",
           "description": "Description 2",
           "capabilities": [
-            {"name": "Capability 1", "order": 1, "domain-capability-1"},
-            {"name": "Capability 2", "order": 2, "domain-capability-2"},
-            {"name": "Capability 3", "order": 3, "domain-capability-3"}
+            {"name": "Capability 1", "order": 1, "id": "domain-capability-1"},
+            {"name": "Capability 2", "order": 2, "id": "domain-capability-2"},
+            {"name": "Capability 3", "order": 3, "id": "domain-capability-3"}
           ],
           "color": "#E6B0AA"
         },

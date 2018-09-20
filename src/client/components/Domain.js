@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Container, Segment } from 'semantic-ui-react'
 import PropTypes from 'prop-types';
+import Capability from './Capability';
 import '../../resources/css/Topo.css';
 
 export default class Domain extends Component {
@@ -33,11 +33,11 @@ export default class Domain extends Component {
                 </Segment>
                 
                 {
-                    orderedCapabilities.map(capability => {
-                      return (
-                        <Segment as={ Link } to={`/capability/${capability.id}`} key={ capability.id } id={ capability.id } inverted color={ color } tertiary className="domain-cap link-child-item" content={capability.name} />
-                      )
-                    })
+                  orderedCapabilities.map(capability => {
+                    return (
+                      <Capability key={ capability.order } color={color} {...capability} />
+                    )
+                  })
                 }
             </Container>
         )
