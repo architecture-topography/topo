@@ -16,6 +16,5 @@ describe('Capability',()=>{
         expect(wrapper.find('.capability-name').at(0).render().text()).toEqual(capability.name)
         expect(wrapper.find('.capability-desc').at(0).render().text()).toEqual(`"${capability.description}"`)
         expect(wrapper.find('.capability-name').at(0).render().prop('style')).toHaveProperty('background-color', capability.color)
-        expect(wrapper.find('.capability-desc').at(0).render().prop('style')).toHaveProperty('background-color', capability.color)
     })
 });

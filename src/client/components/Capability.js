@@ -18,12 +18,12 @@ export default class Capability extends Component {
     const { name, description, color, id } = this.props;
 
     return (
-        <Reveal animated='fade'>
+        <Reveal animated='move' disabled={!description}>
           <Reveal.Content visible className='full-width-height'>
             {this.getSegment(id, color, 'full-width-height capability-name', name)}
           </Reveal.Content>
           <Reveal.Content hidden className='full-width-height'>
-            {this.getSegment(id, color, 'full-width-height capability-desc', `"${description}"`)}
+            {this.getSegment(id, 'grey', 'full-width-height capability-desc', `"${description}"`)}
           </Reveal.Content>
         </Reveal>
     )
