@@ -81,7 +81,7 @@ class App extends Component {
                   <Route exact path="/capability/:capabilityId" render={({ match, location }) => (
                     <Container>
                       <Header />
-                      <CapabilityView capabilities={config.capabilities} capabilityId={match.params.capabilityId} />
+                      {/* Note: capabilities shouldn't be a top-level array - to be removed. */}
                     </Container>
                     )}
                   />

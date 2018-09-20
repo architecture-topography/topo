@@ -66,6 +66,7 @@
   ],
   "capabilities": {
     "capability-1": {
+      "comment": "To do: refactor so capability isn't a top-level item.",
       "name": "Capability 1",
       "systems": [{
         "name": "System 1",
