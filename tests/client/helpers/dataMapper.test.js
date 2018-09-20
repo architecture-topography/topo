@@ -33,8 +33,41 @@ describe('dataMapper', () => {
 
     describe('mapTreasureMapData', () => {
 
-        it('should map systems to capabilities', () => {
+        it('should map single system to capabilities', () => {
             const mapTreasureMapData = dataMapper.mapTreasureMapData(getClonedConfig(), systems);
+            expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual(systems);
+        });
+
+        it('should map multiple systems to capabilities', () => {
+            const multipleSystems = [
+                {
+                    "name": "Test Name 1",
+                    "description": "Test Description 1",
+                    "capabilities": [
+                        "Capability 1"
+                    ],
+                    "infrastructure": ["aws"]
+                },
+                {
+                    "name": "Test Name 2",
+                    "description": "Test Description 2",
+                    "capabilities": [
+                        "Capability 1"
+                    ],
+                    "infrastructure": ["aws"]
+                }
+            ];
+
+            const mapTreasureMapData = dataMapper.mapTreasureMapData(getClonedConfig(), multipleSystems);
+            expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual(multipleSystems);
+        });
+
+        it('should map assets to capabilities', () => {
+            const assets = [{
+                "assets": systems
+            }];
+
+            const mapTreasureMapData = dataMapper.mapTreasureMapData(getClonedConfig(), assets);
             expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual(systems);
         });
 
@@ -83,6 +116,14 @@ describe('dataMapper', () => {
             const mapTreasureMapDataSecond = dataMapper.mapTreasureMapData(mapTreasureMapDataFirst, [newSystem]);
 
             expect(mapTreasureMapDataSecond.platforms[0].domains[0].capabilities[0].systems).toEqual([newSystem]);
+        });
+
+        it('should throw exception when system file have non-existent capabilities', () => {
+            const badJsonFile = {
+                "not_system_file": "some_value"
+            };
+
+            expect(() => dataMapper.mapTreasureMapData(getClonedConfig(), [badJsonFile])).toThrow();
         });
     });
 });

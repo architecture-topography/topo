@@ -1,37 +1,52 @@
 function mapTreasureMapData(treasureMapData, systemMapping) {
-    systemMapping.forEach(system => {
-        system.capabilities.forEach(systemCapability => {
-            treasureMapData.platforms.forEach(platform => {
-                platform.domains.forEach(domain => {
-                    domain.capabilities.forEach(domainCapability => {
-                        if (!domainCapability.systems) domainCapability.systems = [];
+    if (Array.isArray(systemMapping)) {
+        if (systemMapping.length > 0 && systemMapping[0].hasOwnProperty('assets') && Array.isArray(systemMapping[0].assets)) {
+            systemMapping = systemMapping[0].assets;
+        }
 
-                        if (_stringEquals(domainCapability.name, systemCapability)) {
-                            if (!_arrayContains(domainCapability.systems, system)) {
-                                domainCapability.systems.push(system);
-                            } else {
-                                const currentSystem = domainCapability.systems.find(currentSystem => currentSystem.name === system.name);
-                                if (JSON.stringify(currentSystem) !== JSON.stringify(system)) {
-                                    const position = domainCapability.systems.indexOf(currentSystem);
-                                    const totalToDelete = 1;
-                                    domainCapability.systems.splice(position, totalToDelete, system)
-                                }
-                            }
-                        }
-                    });
-                })
-            });
-        })
-    });
+        systemMapping.forEach(system => mapSystemToCapability(system, treasureMapData));
+    }
 
     return treasureMapData;
 }
 
-function _arrayContains(systems, otherSystem) {
-    return systems.filter((system) => system.name === otherSystem.name).length > 0;
+function mapSystemToCapability(system, treasureMapData) {
+    // Worth validating the entire json structure for each system not only capabilities
+    if (!system.capabilities) {
+        throw Error("System file does not contain capabilities")
+    }
+
+    return system.capabilities.map(systemCapability =>
+        treasureMapData.platforms.map(platform =>
+            platform.domains.map(domain =>
+                domain.capabilities.map(domainCapability => {
+                    if (!domainCapability.systems) domainCapability.systems = [];
+
+                    if (_stringEquals(domainCapability.name, systemCapability)) {
+                        const currentSystem = _findByName(domainCapability.systems, system);
+                        if (!currentSystem) {
+                            domainCapability.systems.push(system);
+                        } else {
+                            if (JSON.stringify(currentSystem) !== JSON.stringify(system)) {
+                                const position = domainCapability.systems.indexOf(currentSystem);
+                                const totalToDelete = 1;
+                                domainCapability.systems.splice(position, totalToDelete, system)
+                            }
+                        }
+                    }
+
+                    return domainCapability;
+                })
+            )
+        )
+    );
 }
 
-function _stringEquals(first, second){
+function _findByName(array, elementToFind) {
+    return array.find((element) => element.name === elementToFind.name);
+}
+
+function _stringEquals(first, second) {
     return first.toLowerCase() === second.toLowerCase()
 }
 

@@ -35,7 +35,6 @@ class App extends Component {
 
         this.state = {
             configMapping: this.props.config,
-            systemMapping: [],
             treasureMapData: this.props.config
         };
 
@@ -43,22 +42,22 @@ class App extends Component {
     }
 
     updateSystemMapping(systemMapping) {
-        this.setState({
-            systemMapping: systemMapping
-        }, this.buildDataMapping);
-    }
-
-    buildDataMapping() {
-        const treasureMapData = DataMapper.mapTreasureMapData(
-            _objectDeepClone(this.state.treasureMapData), Array.from(this.state.systemMapping)
-        );
+        const treasureMapData = this.buildDataMapping(systemMapping);
 
         this.setState({
             treasureMapData: treasureMapData
         });
+    }
 
-        function _objectDeepClone(object) {
+    buildDataMapping(systemMapping) {
+        function _deepClone(object) {
             return JSON.parse(JSON.stringify(object))
+        }
+
+        try {
+            return DataMapper.mapTreasureMapData(_deepClone(this.state.treasureMapData), _deepClone(systemMapping));
+        } catch (e) {
+            console.log(e);
         }
     }
 
