@@ -9,15 +9,20 @@
 }
 
 .ui .platform-name-title {
-  color: black;
-  background-color: #FFE599;
-  border: none;
-  font-size: 1.5em;
+    color: black;
+    background-color: #FFE599;
+    border: none;
+    font-size: 1.5em;
 }
 
 .ui .capability-name-title {
-  color: black;
-  background-color: #FFE599;
-  border: none;
-  font-size: 1.5em;
+    color: black;
+    background-color: #FFE599;
+    border: none;
+    font-size: 1.5em;
+}
+
+.full-width-height {
+    width: 100%;
+    height: 100%;
 }

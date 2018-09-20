@@ -6,8 +6,16 @@ describe('Capability',()=>{
 
     it('renders the correct content for Capability',()=>{
 
-        const name = "Capability 1"
-        const wrapper = shallow(<Capability name={name} />)
-        expect(wrapper.find('Segment').get(0).props.content).toEqual(name)
+        const capability = {
+            "name": "Capability 1",
+            "description": "Capability description",
+            "color": "red"
+        }
+
+        const wrapper = shallow(<Capability {...capability} />)
+        expect(wrapper.find('.capability-name').at(0).render().text()).toEqual(capability.name)
+        expect(wrapper.find('.capability-desc').at(0).render().text()).toEqual(`"${capability.description}"`)
+        expect(wrapper.find('.capability-name').at(0).render().prop('style')).toHaveProperty('background-color', capability.color)
+        expect(wrapper.find('.capability-desc').at(0).render().prop('style')).toHaveProperty('background-color', capability.color)
     })
 });

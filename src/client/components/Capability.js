@@ -5,24 +5,27 @@ import '../../resources/css/Topo.css';
 
 export default class Capability extends Component {
 
-    render() {
-        const { name, description, color, id } = this.props;
-        const square = { width: 175, height: 175 }
-        let segment;
+  getSegment(id, color, className, content) {
+    const capabilityLink = id ? `/capability/${id}` : null;
+    return (
+      <Segment as={ id ? Link : '' } to={capabilityLink} inverted padded style={{ backgroundColor: color, display: 'block' }} className={ className }>
+        {content}
+      </Segment>
+    )
+  }
 
-        const capabilityLink = id ? `/capability/${id}` : null;
+  render() {
+    const { name, description, color, id } = this.props;
 
-        segment = <Segment as={ id ? Link : '' } to={capabilityLink} circular style={square} inverted padded style={{ backgroundColor: color, display: 'block' }} color={color} tertiary className="domain-cap" content={name}/>
-
-        return (
-            <Reveal animated='fade'>
-              <Reveal.Content visible>
-                {segment}
-              </Reveal.Content>
-              <Reveal.Content hidden>
-                <Segment circular style={square} inverted style={{ backgroundColor: color }} color='grey' tertiary className="domain-cap" content={description}/>
-              </Reveal.Content>
-            </Reveal>
-        )
-    }
+    return (
+        <Reveal animated='fade'>
+          <Reveal.Content visible className='full-width-height'>
+            {this.getSegment(id, color, 'full-width-height capability-name', name)}
+          </Reveal.Content>
+          <Reveal.Content hidden className='full-width-height'>
+            {this.getSegment(id, color, 'full-width-height capability-desc', `"${description}"`)}
+          </Reveal.Content>
+        </Reveal>
+    )
+  }
 }
