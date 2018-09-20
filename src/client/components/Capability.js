@@ -8,12 +8,18 @@ export default class Capability extends Component {
     render() {
         const { name, description, color, id } = this.props;
         const square = { width: 175, height: 175 }
+        let segment;
+
+        if (id) {
+          segment = <Segment as={ Link } to={`/capability/${id}`} circular style={square} inverted padded style={{ backgroundColor: color, display: 'block' }} color={color} tertiary className="domain-cap" content={name}/>
+        } else {
+          segment = <Segment circular style={square} inverted padded style={{ backgroundColor: color, display: 'block' }} color={color} tertiary className="domain-cap" content={name}/>
+        }
         
-        // To do: handle case where id is undefined (shouldn't be a link).
         return (
             <Reveal animated='fade'>
               <Reveal.Content visible>
-                <Segment as={ Link } to={`/capability/${id}`} circular style={square} inverted padded style={{ backgroundColor: color, display: 'block' }} color={color} tertiary className="domain-cap" content={name}/>
+                {segment}
               </Reveal.Content>
               <Reveal.Content hidden>
                 <Segment circular style={square} inverted style={{ backgroundColor: color }} color='grey' tertiary className="domain-cap" content={description}/>
