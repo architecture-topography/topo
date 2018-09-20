@@ -9,6 +9,7 @@ export default class Capability extends Component {
         const { name, description, color, id } = this.props;
         const square = { width: 175, height: 175 }
         
+        // To do: handle case where id is undefined (shouldn't be a link).
         return (
             <Reveal animated='fade'>
               <Reveal.Content visible>
