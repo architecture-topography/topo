@@ -67,4 +67,22 @@ describe('Domain',()=>{
             expect(element.get(0).props.style.backgroundColor).toContain("#123456");
         });
     })
+
+    it('domain and capabilities with invalid hex in the json uses the default color',()=> {
+        const name = "Domain 1"
+        const description = "Description 1"
+        const capabilities = [
+            {"name": "Capability 3", "order": 3},
+            {"name": "Capability 1", "order": 1},
+            {"name": "Capability 2", "order": 2}
+        ]
+        const color = "#123aaa456"
+
+        const wrapper = shallow(<Domain name={name} description={description} capabilities={capabilities} color={color} />)
+        const segments = wrapper.find('Segment');
+        segments.forEach(element => {
+            expect(element.get(0).props.style.backgroundColor).toContain("#AAB7B8");
+        });
+    })
+
 });

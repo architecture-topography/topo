@@ -21,7 +21,7 @@ export default class Domain extends Component {
     render() {
         const { name, description, capabilities } = this.props;
         const defaultDomainColor = "#AAB7B8";
-        const color = this.props.color ? this.props.color : defaultDomainColor;
+        const color = this.props.color && this.validHex(this.props.color) ? this.props.color : defaultDomainColor;
         let orderedCapabilities = capabilities.sort((a, b) => {
             return a.order > b.order
         })
@@ -41,5 +41,10 @@ export default class Domain extends Component {
                 }
             </Container>
         )
+    }
+
+    validHex(hex) {
+        var regex = /#([a-f0-9]{3}){1,2}\b/i;
+        return regex.test(hex);
     }
 }
