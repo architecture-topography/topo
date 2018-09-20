@@ -4,6 +4,7 @@ import { HashRouter, Switch, Route } from 'react-router-dom';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import PlatformView from './PlatformView';
+import CapabilityView from './CapabilityView';
 import FileDrop from './FileDrop';
 import DataMapper from '../helpers/dataMapper';
 import Header from './Header';
@@ -76,9 +77,17 @@ class App extends Component {
                     </Container>
                     )}
                   />
+
+                  <Route exact path="/capability/:capabilityId" render={({ match, location }) => (
+                    <Container>
+                      <Header />
+                      <CapabilityView capabilities={config.capabilities} capabilityId={match.params.capabilityId} />
+                    </Container>
+                    )}
+                  />
                 </Switch>
               </HashRouter>
-            </div>
+          </div>
         );
     }
 }

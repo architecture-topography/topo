@@ -7,9 +7,9 @@
           "name": "Domain 1",
           "description": "Description 1",
           "capabilities": [
-            {"name": "Capability 1", "description": "Cap Description 1", "order": 1},
-            {"name": "Capability 2", "description": "Cap Description 2", "order": 2},
-            {"name": "Capability 3", "description": "Cap Description 3", "order": 3}
+            {"name": "Capability 1", "description": "Cap Description 1", "order": 1, "id": "capability-1"},
+            {"name": "Capability 2", "description": "Cap Description 2", "order": 2, "id": "capability-2"},
+            {"name": "Capability 3", "description": "Cap Description 3", "order": 3, "id": "capability-3"}
           ],
           "color": "#85C1E9"
         },
@@ -17,9 +17,9 @@
           "name": "Domain 2",
           "description": "Description 2",
           "capabilities": [
-            {"name": "Capability 1", "order": 1},
-            {"name": "Capability 2", "order": 2},
-            {"name": "Capability 3", "order": 3}
+            {"name": "Capability 1", "order": 1, "domain-capability-1"},
+            {"name": "Capability 2", "order": 2, "domain-capability-2"},
+            {"name": "Capability 3", "order": 3, "domain-capability-3"}
           ],
           "color": "#E6B0AA"
         },
@@ -27,8 +27,8 @@
           "name": "Domain 3",
           "description": "Description 3",
           "capabilities": [
-            {"name": "Capability 1", "order": 1},
-            {"name": "Capability 2", "order": 2}
+            {"name": "Capability 1", "order": 1, "id": "desc-capability-1"},
+            {"name": "Capability 2", "order": 2, "id": "desc-capability-2"}
           ]
         }
       ]
@@ -65,5 +65,44 @@
       ]
     }
   ],
+  "capabilities": {
+    "capability-1": {
+      "name": "Booking System",
+      "systems": [{
+        "name": "Postgres",
+	"description": "Database"
+      }, {
+        "name": "Apache Tomcat",
+	"description": "Web application."
+      }, {
+        "name": "Mule ESB",
+	"description": "Service bus."
+      }]
+    },
+    "capability-2": {
+      "name": "Recommendation Engine",
+      "systems": [{
+        "name": "Recommendation Models",
+	"description": "Pretrained models for recommendations."
+      }, {
+        "name": "Flask API",
+	"description": "Web application for serving predictions."
+      }, {
+        "name": "RabbitMQ",
+	"description": "Messaging for constant model retraining."
+      }]
+    },
+    "domain-capability-1": {
+      "name": "Dispatch",
+      "systems": [{
+        "name": "RabbitMQ",
+	"description": "Queue for dispatching jobs."
+      }, {
+        "name": "Lambda Processing Functions",
+	"description": "Lambda works tier for dealing with dispatch jobs."
+      }]
+    }
+
+  },
   "others": []
 }
