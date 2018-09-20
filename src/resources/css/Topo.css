@@ -22,6 +22,10 @@
     font-size: 1.5em;
 }
 
+.ui .capability-missing {
+    background-color: #f8d7da;
+}
+
 .full-width-height {
     width: 100%;
     height: 100%;
