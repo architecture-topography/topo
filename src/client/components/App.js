@@ -82,6 +82,7 @@ class App extends Component {
                     <Container>
                       <Header />
                       {/* Note: capabilities shouldn't be a top-level array - to be removed. */}
+                      <CapabilityView capabilities={config.capabilities} capabilityId={match.params.capabilityId} />
                     </Container>
                     )}
                   />
