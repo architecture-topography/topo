@@ -46,3 +46,30 @@
     border-width: 1px;
     margin: 5px;
 }
+
+.ui.grid > .row {
+    padding: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.ui.grid > .row:first-child {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ui.grid > .row > .column {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.ui.grid > .row > .column:first-child {
+    padding-right: 5px;
+    margin-left: 10px;
+
+}
+
+.ui.grid > .row > .column:last-child {
+    padding-left: 5px;
+    margin-right: 10px;
+}
