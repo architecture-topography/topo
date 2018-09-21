@@ -73,7 +73,8 @@
       "name": "Capability 1",
       "systems": [{
         "name": "System 1",
-	"description": "System 1 desc"
+        "description": "System 1 desc",
+        "capabilities": ["Other capability 1", "Other capability 2"]
       }]
     }
   },
