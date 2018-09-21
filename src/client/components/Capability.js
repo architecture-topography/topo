@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Segment, Reveal } from 'semantic-ui-react'
+import { Segment, Popup } from 'semantic-ui-react'
 import '../../resources/css/Topo.css';
 
 export default class Capability extends Component {
@@ -19,14 +19,15 @@ export default class Capability extends Component {
     const desc = description ? `"${description}"` : "No description"
 
     return (
-        <Reveal animated='fade' instant>
-          <Reveal.Content visible className='full-width-height capability-name-padding'>
-            {this.getSegment(id, color, 'full-width-height capability-name', name)}
-          </Reveal.Content>
-          <Reveal.Content hidden className='full-width-height capability-desc-padding'>
-            {this.getSegment(id, 'grey', 'full-width-height capability-desc',desc)}
-          </Reveal.Content>
-        </Reveal>
+        <Popup
+          trigger={this.getSegment(id, color, 'capability-name', name)}
+          size='small'
+          position='right center'
+        >
+          <Popup.Content className='capability-desc'>
+            { desc }
+          </Popup.Content>
+        </Popup>
     )
   }
 }

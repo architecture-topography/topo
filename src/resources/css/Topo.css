@@ -31,15 +31,6 @@
     height: 100%;
 }
 
-.capability-name-padding {
-    margin-bottom: 10px;
-}
-
-.capability-desc-padding {
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-
 .capability-desc {
     font-style: italic;
 }

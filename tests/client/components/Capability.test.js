@@ -1,5 +1,4 @@
 import React from 'react';
-import Domain from '../../../src/client/components/Capability';
 import Capability from '../../../src/client/components/Capability';
 
 describe('Capability',()=>{
@@ -12,9 +11,7 @@ describe('Capability',()=>{
             "color": "red"
         }
 
-        const wrapper = shallow(<Capability {...capability} />)
-        expect(wrapper.find('.capability-name').at(0).render().text()).toEqual(capability.name)
-        expect(wrapper.find('.capability-desc').at(0).render().text()).toEqual(`"${capability.description}"`)
-        expect(wrapper.find('.capability-name').at(0).render().prop('style')).toHaveProperty('background-color', capability.color)
+        const wrapper = mount(<Capability {...capability} />)
+        expect(wrapper.find('.capability-name').at(0).text()).toEqual(capability.name)
     })
 });
