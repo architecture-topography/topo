@@ -1,12 +1,15 @@
 import '../../resources/css/App.css';
 
 import React, {Component} from 'react';
+import { Image } from 'semantic-ui-react';
+import '../../resources/css/Topo.css'
+import topo_logo from '../../resources/img/Topo-02.png'
 
 class Header extends Component {
     render() {
         return (
             <div className="Header">
-                <h1>Topo</h1>
+                <Image src={ topo_logo } size='small' className='topo-logo' wrapped spaced />
                 <p />
             </div>
         );
