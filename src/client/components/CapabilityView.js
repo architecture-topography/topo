@@ -10,11 +10,31 @@ export default class CapabilityView extends Component {
         capabilityId: PropTypes.string.isRequired
     }
 
-    render() {
-        const capabilities = this.props.treasureMapData.capabilities;
-        const capabilityId = this.props.capabilityId;
+    getCapabilityFromId() {
+        let platform;
+        let domain;
+        let capability;
 
-        const capability = capabilities[capabilityId];
+        for (let i = 0; i < this.props.treasureMapData.platforms.length; i++) {
+            platform = this.props.treasureMapData.platforms[i];
+
+            for (let j = 0; j < platform.domains.length; j++) {
+                domain = platform.domains[j];
+
+                for (let k = 0; k < domain.capabilities.length; k++) {
+                    capability = domain.capabilities[k];
+                    if (capability.id === this.props.capabilityId) {
+                        return capability
+                    }
+                }
+            }
+        }
+
+        return null
+    }
+
+    render() {
+        const capability = this.getCapabilityFromId();
 
         if (!capability) {
           return (
@@ -28,21 +48,25 @@ export default class CapabilityView extends Component {
           )
         }
 
+        let systems = '';
+        if (capability.systems) {
+            systems = capability.systems.map((system, index) => {
+                return (
+                  <Segment key={ index } inverted color="blue" tertiary className="domain-cap">
+                    <Header as='h3'>{system.name}</Header>
+                    {this.otherCapabilities(system.capabilities)}
+                  </Segment>
+                )
+            })
+        }
+
         return (
           <Grid columns="equal">
             <Grid.Column>
               <Segment className="capability-name-title">
                 <Header>{ capability.name }</Header>
               </Segment>
-              {
-                capability.systems.map((system, index) => {
-                  return (
-                  <Segment key={ index } inverted color="blue" tertiary className="domain-cap">
-                    <Header as='h3'>{system.name}</Header>
-                    {this.otherCapabilities(system.capabilities)}
-                  </Segment>
-                )})
-              }
+              { systems }
             </Grid.Column>
           </Grid>
         )
