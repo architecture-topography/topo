@@ -16,7 +16,7 @@ export default class PlatformView extends Component {
                 {
                     this.props.treasureMapData.platforms.map((platform, index) => {
                         return (
-                            <Grid.Column key={ index }>
+                            <Grid.Column key={ index } className='platform-border'>
                               <Segment className="platform-name-title">
                                <Header>{ platform.name }</Header>
                               </Segment>

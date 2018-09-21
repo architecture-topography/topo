@@ -39,3 +39,10 @@
 .topo-logo {
     margin: 20px;
 }
+
+.platform-border {
+    border-style: dashed;
+    border-radius: 5px;
+    border-width: 1px;
+    margin: 5px;
+}
