@@ -20,17 +20,6 @@ describe('Capability View',()=>{
             ]
           }
         ],
-        "capabilities": {
-          "capability-1": {
-            "comment": "To do: refactor so capability isn't a top-level item.",
-            "name": "Capability 1",
-            "systems": [{
-              "name": "System 1",
-          "description": "System 1 desc",
-                "capabilities": ["Other capability 1", "Other capability 2"]
-            }]
-          }
-        },
         "others": []
       }
       
@@ -38,11 +27,9 @@ describe('Capability View',()=>{
     it('renders the correct content for Capability View', ()=>{
         
         const capabilityId = "capability-1"
-        const capability = treasureMapData.capabilities["capability-1"];
+        const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
 
         const wrapper = shallow(<CapabilityView treasureMapData={treasureMapData} capabilityId={capabilityId}/>)
         expect(wrapper.find('Header').at(0).render().text()).toEqual(capability.name)
-        expect(wrapper.find('Header').at(1).render().text()).toEqual(capability.systems[0].name)
-        expect(wrapper.find('Container').at(0).render().text()).toContain(capability.systems[0].capabilities.join(", "))
     })
 });
