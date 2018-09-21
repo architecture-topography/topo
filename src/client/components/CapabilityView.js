@@ -6,12 +6,14 @@ import '../../resources/css/Topo.css'
 export default class CapabilityView extends Component {
 
     static propTypes = {
-        capabilities: PropTypes.instanceOf(Object).isRequired,
+        treasureMapData: PropTypes.instanceOf(Object).isRequired,
         capabilityId: PropTypes.string.isRequired
     }
 
     render() {
-        const { capabilities, capabilityId } = this.props
+        const capabilities = this.props.treasureMapData.capabilities;
+        const capabilityId = this.props.capabilityId;
+
         const capability = capabilities[capabilityId];
 
         if (!capability) {

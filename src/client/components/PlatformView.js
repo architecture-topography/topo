@@ -7,19 +7,14 @@ import '../../resources/css/Topo.css'
 export default class PlatformView extends Component {
 
     static propTypes = {
-        platforms: PropTypes.arrayOf(PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            domains: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired
-        }))
+        treasureMapData: PropTypes.instanceOf(Object).isRequired
     }
 
-    render(){
-        const { platforms } = this.props
-        
+    render() {
         return (
             <Grid columns="equal">
                 {
-                    platforms.map((platform, index) => {
+                    this.props.treasureMapData.platforms.map((platform, index) => {
                         return (
                             <Grid.Column key={ index }>
                               <Segment className="platform-name-title">
