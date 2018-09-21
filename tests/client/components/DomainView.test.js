@@ -27,26 +27,7 @@ describe('DomainView',()=>{
     ]
 
     const wrapper = shallow(<DomainView domains={domains} />);
-    expect(wrapper.find('Domain')).toHaveLength(2)
-
-  })
-
-  it('renders the correct number of Domains',()=>{
-
-    const domains = [
-      {
-        "name": "Domain 1",
-        "description": "Description 1",
-        "capabilities": [
-            {"name": "Capability 1", "order": 1},
-            {"name": "Capability 2", "order": 2},
-            {"name": "Capability 3", "order": 3}
-        ]
-      }
-    ]
-
-    const wrapper = shallow(<DomainView domains={domains} />);
-    expect(wrapper.find('Domain')).toHaveLength(1)
+    expect(wrapper.find('.domain-name')).toHaveLength(2)
 
   })
 })

@@ -20,7 +20,7 @@ export default class Capability extends Component {
 
     return (
         <Popup
-          trigger={this.getSegment(id, color, 'capability-name', name)}
+          trigger={this.getSegment(id, color, 'capability-name full-width-height', name)}
           size='small'
           position='right center'
         >
