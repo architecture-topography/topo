@@ -1,3 +1,7 @@
+.DropFile {
+    margin-top: 50px;
+}
+
 .DropZone {
     position: relative;
     width: 300px;
