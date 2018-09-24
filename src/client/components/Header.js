@@ -17,13 +17,4 @@ class Header extends Component {
     }
 }
 
-/*                {this.props.treasureMapData.platforms.map((platform, index) => (
-                    <div key={index}>
-                        <p>{platform.name}</p>
-                        {platform.domains.map((domain, index) =>
-                            <p key={index}>{JSON.stringify(domain)}</p>
-                        )}
-                    </div>
-                ))}*/
-
 export default Header;
