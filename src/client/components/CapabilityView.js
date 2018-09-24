@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Header, Segment, Divider, Container } from 'semantic-ui-react'
+import { Grid, Header, Segment, Divider, Container, Label } from 'semantic-ui-react'
 import '../../resources/css/Topo.css'
 
 export default class CapabilityView extends Component {
@@ -77,9 +77,12 @@ export default class CapabilityView extends Component {
         return (
           <Container>
           <Divider/>
-          <p>
-            Other capabilities: {capabilities.join(", ")}
-          </p>
+          <span>Other capabilities: </span>
+          {capabilities.map((capability, index) => {
+            return (
+              <Label key={index} size='small'>{capability}</Label>
+              );
+          })}
           </Container>
         )
       }
