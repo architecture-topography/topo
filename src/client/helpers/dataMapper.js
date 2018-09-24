@@ -1,28 +1,28 @@
-function mapTreasureMapData(treasureMapData, systemMapping) {
-    if (Array.isArray(systemMapping)) {
-        if (systemMapping.length > 0 && systemMapping[0].hasOwnProperty('assets') && Array.isArray(systemMapping[0].assets)) {
-            systemMapping = systemMapping[0].assets;
-        }
+function buildTreasureMapData(treasureMapData, systemMapping) {
+    systemMapping.assets.map(system => _mapSystemToCapability(system, treasureMapData));
 
-        systemMapping.forEach(system => mapSystemToCapability(system, treasureMapData));
-    }
-
-    return treasureMapData;
+    return treasureMapData
 }
 
-function mapSystemToCapability(system, treasureMapData) {
+function _mapSystemToCapability(system, treasureMapData) {
     // Worth validating the entire json structure for each system not only capabilities
     if (!system.capabilities) {
         throw Error("System file does not contain capabilities")
     }
+
+    let capabilityId = 1;
 
     return system.capabilities.map(systemCapability =>
         treasureMapData.platforms.map(platform =>
             platform.domains.map(domain =>
                 domain.capabilities.map(domainCapability => {
                     if (!domainCapability.systems) domainCapability.systems = [];
+                    if (!domainCapability.id) domainCapability.id = `${capabilityId++}`;
+                    const capability = (typeof systemCapability === 'object')
+                        ? systemCapability.capability
+                        : systemCapability;
 
-                    if (_stringEquals(domainCapability.name, systemCapability)) {
+                    if (_stringEquals(domainCapability.name, capability)) {
                         const currentSystem = _findByName(domainCapability.systems, system);
                         if (!currentSystem) {
                             domainCapability.systems.push(system);
@@ -51,5 +51,5 @@ function _stringEquals(first, second) {
 }
 
 export default {
-    mapTreasureMapData: mapTreasureMapData
+    buildTreasureMapData: buildTreasureMapData
 };

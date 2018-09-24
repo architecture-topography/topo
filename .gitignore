@@ -5,3 +5,4 @@ node_modules/
 build/
 builds/
 .DS_Store
+assets.json

@@ -18,104 +18,89 @@ const config = {
     "others": []
 };
 
-const systems = [
-    {
-        "name": "Test Name",
-        "description": "Test Description",
-        "capabilities": [
-            "Capability 1"
-        ],
-        "infrastructure": ["aws"]
-    }
-];
-
 describe('dataMapper', () => {
 
     describe('mapTreasureMapData', () => {
 
         it('should map single system to capabilities', () => {
-            const mapTreasureMapData = dataMapper.mapTreasureMapData(getClonedConfig(), systems);
-            expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual(systems);
+            const systems = {
+                "assets": [{
+                    "name": "Test Name",
+                    "description": "Test Description",
+                    "capabilities": [
+                        "Capability 1"
+                    ],
+                    "infrastructure": ["aws"]
+                }]
+            };
+
+            const mapTreasureMapData = dataMapper.buildTreasureMapData(getClonedConfig(), systems);
+            expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual(systems.assets);
         });
 
         it('should map multiple systems to capabilities', () => {
-            const multipleSystems = [
-                {
+            const multipleSystems = {
+                "assets": [{
                     "name": "Test Name 1",
                     "description": "Test Description 1",
                     "capabilities": [
                         "Capability 1"
                     ],
                     "infrastructure": ["aws"]
-                },
-                {
+                }, {
                     "name": "Test Name 2",
                     "description": "Test Description 2",
                     "capabilities": [
                         "Capability 1"
                     ],
                     "infrastructure": ["aws"]
-                }
-            ];
+                }]
+            };
 
-            const mapTreasureMapData = dataMapper.mapTreasureMapData(getClonedConfig(), multipleSystems);
-            expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual(multipleSystems);
-        });
-
-        it('should map assets to capabilities', () => {
-            const assets = [{
-                "assets": systems
-            }];
-
-            const mapTreasureMapData = dataMapper.mapTreasureMapData(getClonedConfig(), assets);
-            expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual(systems);
+            const mapTreasureMapData = dataMapper.buildTreasureMapData(getClonedConfig(), multipleSystems);
+            expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual(multipleSystems.assets);
         });
 
         it('should not map same system more than once', () => {
-            const mapTreasureMapData = dataMapper.mapTreasureMapData(getClonedConfig(), [systems[0], systems[0]]);
-            expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual(systems);
-        });
-
-        it('should not override existing capabilities when called multiple times with different systems', () => {
-            const anotherSystem = {
-                "name": "Test Name 2",
-                "description": "Test Description 2",
+            const system = {
+                "name": "Test Name",
+                "description": "Test Description",
                 "capabilities": [
                     "Capability 1"
                 ],
-                "infrastructure": ["db"]
+                "infrastructure": ["aws"]
             };
 
-            const otherSystems = [systems[0], anotherSystem];
+            const repeatedSystems = {
+                "assets": [system, system]
+            };
 
-            const mapTreasureMapData1 = dataMapper.mapTreasureMapData(getClonedConfig(), systems);
-            const mapTreasureMapData2 = dataMapper.mapTreasureMapData(mapTreasureMapData1, otherSystems);
-            expect(mapTreasureMapData2.platforms[0].domains[0].capabilities[0].systems).toEqual(otherSystems);
+            const mapTreasureMapData = dataMapper.buildTreasureMapData(getClonedConfig(), repeatedSystems);
+            expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual([system]);
         });
 
         it('should replace systems with same name in capabilities when contents are different', () => {
-            const oldSystem = {
-                "name": "Test Name 2",
-                "description": "Test Description 2",
-                "capabilities": [
-                    "Capability 1"
-                ],
-                "infrastructure": ["db"]
+            const assets = {
+                "assets": [{
+                    "name": "Test Name 2",
+                    "description": "Test Description 2",
+                    "capabilities": [
+                        "Capability 1"
+                    ],
+                    "infrastructure": ["db"]
+                }, {
+                    "name": "Test Name 2",
+                    "description": "Test Description 2",
+                    "capabilities": [
+                        "Capability 1"
+                    ],
+                    "infrastructure": ["db", "aws"]
+                }]
             };
 
-            const newSystem = {
-                "name": "Test Name 2",
-                "description": "Test Description 2",
-                "capabilities": [
-                    "Capability 1"
-                ],
-                "infrastructure": ["db", "aws"]
-            };
+            const mapTreasureMapData = dataMapper.buildTreasureMapData(getClonedConfig(), assets);
 
-            const mapTreasureMapDataFirst = dataMapper.mapTreasureMapData(getClonedConfig(), [oldSystem]);
-            const mapTreasureMapDataSecond = dataMapper.mapTreasureMapData(mapTreasureMapDataFirst, [newSystem]);
-
-            expect(mapTreasureMapDataSecond.platforms[0].domains[0].capabilities[0].systems).toEqual([newSystem]);
+            expect(mapTreasureMapData.platforms[0].domains[0].capabilities[0].systems).toEqual([assets.assets[1]]);
         });
 
         it('should throw exception when system file have non-existent capabilities', () => {
@@ -123,7 +108,7 @@ describe('dataMapper', () => {
                 "not_system_file": "some_value"
             };
 
-            expect(() => dataMapper.mapTreasureMapData(getClonedConfig(), [badJsonFile])).toThrow();
+            expect(() => dataMapper.buildTreasureMapData(getClonedConfig(), [badJsonFile])).toThrow();
         });
     });
 });

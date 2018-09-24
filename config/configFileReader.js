@@ -2,12 +2,12 @@
 const fs = require('fs');
 const path = require('path');
 
-function readConfigFile() {
+function readConfigFile(pathToConfigFile) {
     const raw = function() {
-        const filePath = path.resolve(process.env.REACT_APP_CONFIG_FILE);
+        const filePath = path.resolve(pathToConfigFile);
         if (!fs.existsSync(filePath)) throw new Error(`No file found at location: ${filePath}`);
 
-        return fs.readFileSync(filePath, 'utf-8');
+        return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
     }();
 
     const stringified = {

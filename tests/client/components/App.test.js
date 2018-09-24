@@ -21,11 +21,22 @@ const config = {
     "others": []
 };
 
+const systems = {
+    "assets": [{
+        "name": "Test Name",
+        "description": "Test Description",
+        "capabilities": [
+            "Capability 1"
+        ],
+        "infrastructure": ["aws"]
+    }]
+};
+
 describe('<App />', () => {
 
     it('should render without crashing', () => {
         const div = document.createElement('div');
-        const wrapper = ReactDOM.render(<App config={config}/>, div);
+        const wrapper = ReactDOM.render(<App config={config} systems={systems}/>, div);
         expect(wrapper.props.config).toEqual(config);
 
         ReactDOM.unmountComponentAtNode(div);
