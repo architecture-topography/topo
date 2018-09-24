@@ -73,24 +73,25 @@ export default class CapabilityView extends Component {
     }
 
     otherCapabilities(capabilities) {
-      const capabilityOnView = this.getCapabilityFromId();
-      const capabilitiesWithoutCapabilityOnView = capabilities.filter((capability) => {
-        return capability !== capabilityOnView.name;
-      });
-
-
-      if (capabilitiesWithoutCapabilityOnView && capabilitiesWithoutCapabilityOnView.length) {
-        return (
-          <Container>
-          <Divider/>
-          <span>Other capabilities: </span>
-          {capabilitiesWithoutCapabilityOnView.map((capability, index) => {
-            return (
-              <Label key={index} size='small'>{capability}</Label>
-              );
-          })}
-          </Container>
-        )
+      if (capabilities && capabilities.length) {
+        const capabilityOnView = this.getCapabilityFromId();
+        const capabilitiesWithoutCapabilityOnView = capabilities.filter((capability) => {
+          return capability !== capabilityOnView.name;
+        });
+  
+        if (capabilitiesWithoutCapabilityOnView && capabilitiesWithoutCapabilityOnView.length) {
+          return (
+            <Container id='other-capabilities'>
+            <Divider/>
+            <span>Other capabilities: </span>
+            {capabilitiesWithoutCapabilityOnView.map((capability, index) => {
+              return (
+                <Label key={index} size='small'>{capability}</Label>
+                );
+            })}
+            </Container>
+          )
+        }  
       }
     }
 }
