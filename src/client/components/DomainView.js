@@ -47,8 +47,9 @@ export default class DomainView extends Component {
             capabilities_row = [];
             for (var index in domains) {
                 let capabilities = domains[index].capabilities;
-                let color = domains[index].color
+                let color = domains[index].color;
                 color = color && this.validHex(color) ? color : defaultDomainColor;
+                domains[index].color = color;
                 let capability = this.getCapability(capabilities, count)
                 if (capability) {
                     capability['color'] = color
