@@ -38,7 +38,7 @@ describe('Capability View',()=>{
     const capabilityId = "capability-1"
     const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
     capability.systems = [{"name": "System 1", "capabilities": ["Capability 1", "Capability 2", "Capability 3"]}]
-    const wrapper = shallow(<CapabilityView treasureMapData={treasureMapData} capabilityId={capabilityId}/>)
+    const wrapper = mount(<CapabilityView treasureMapData={treasureMapData} capabilityId={capabilityId}/>)
     expect(wrapper.find('Label').at(0).render().text()).toEqual(capability.systems[0].capabilities[1])
     expect(wrapper.find('Label').at(1).render().text()).toEqual(capability.systems[0].capabilities[2])
   })
@@ -47,7 +47,7 @@ describe('Capability View',()=>{
     const capabilityId = "capability-1"
     const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
     capability.systems = [{"name": "System 1", "capabilities": ["Capability 1"]}]
-    const wrapper = shallow(<CapabilityView treasureMapData={treasureMapData} capabilityId={capabilityId}/>)
+    const wrapper = mount(<CapabilityView treasureMapData={treasureMapData} capabilityId={capabilityId}/>)
     expect(wrapper.find("#other-capabilities")).toHaveLength(0);
   })
 });

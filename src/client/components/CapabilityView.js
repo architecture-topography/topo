@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Header, Segment, Divider, Container, Label } from 'semantic-ui-react'
+import { Grid, Header, Segment, Divider, Container, Label, Popup, List } from 'semantic-ui-react'
 import '../../resources/css/Topo.css'
 
 export default class CapabilityView extends Component {
@@ -8,6 +8,20 @@ export default class CapabilityView extends Component {
     static propTypes = {
         treasureMapData: PropTypes.instanceOf(Object).isRequired,
         capabilityId: PropTypes.string.isRequired
+    }
+
+    getListOfSystemAttribute(system, attribute) {
+      if (system[attribute] && system[attribute].length > 0) {
+        return (
+          <List as='ul'>
+            {system[attribute].map((val, index) => {
+              return <List.Item key={ index } as='li'>{ val }</List.Item>
+            })}
+          </List>
+        )
+      } else {
+        return "None"
+      }
     }
 
     getCapabilityFromId() {
@@ -52,10 +66,25 @@ export default class CapabilityView extends Component {
         if (capability.systems) {
             systems = capability.systems.map((system, index) => {
                 return (
-                  <Segment key={ index } inverted color="blue" tertiary className="domain-cap">
-                    <Header as='h3'>{system.name}</Header>
-                    {this.otherCapabilities(system.capabilities)}
-                  </Segment>
+                  <Popup
+                    trigger={
+                      <Segment inverted color="blue" tertiary className="domain-cap">
+                        <Header as='h3'>{system.name}</Header>
+                        {this.otherCapabilities(system.capabilities)}
+                      </Segment>
+                    }
+                    key={ index }
+                    size='small'
+                    position='right center'
+                  >
+                    <Popup.Content className='system-tech-stack'>
+                      <Header as='h3'>Primary technologies</Header>
+                      {this.getListOfSystemAttribute(system, 'primary-technologies')}
+                      <Header as='h3'>Infrastructure</Header>
+                      {this.getListOfSystemAttribute(system, 'infrastructure')}
+                    </Popup.Content>
+                  </Popup>
+                  
                 )
             })
         }
