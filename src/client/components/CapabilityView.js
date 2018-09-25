@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Header, Segment, Popup, List } from 'semantic-ui-react'
+import { Grid, Header, Popup, List, Card, Segment, Container } from 'semantic-ui-react'
 import '../../resources/css/Topo.css'
 
 export default class CapabilityView extends Component {
@@ -40,9 +40,7 @@ export default class CapabilityView extends Component {
         return (
           <Grid columns="equal">
             <Grid.Column>
-              <Segment className="capability-name-title capability-missing">
-                <Header>Capability missing</Header>
-              </Segment>
+            <Header as='h1' className='capability-name-title'>Capability missing...</Header>
             </Grid.Column>
           </Grid>
         )
@@ -51,10 +49,14 @@ export default class CapabilityView extends Component {
       return (
         <Grid columns="equal">
           <Grid.Column>
-            <Segment className="capability-name-title">
-              <Header>{ capability.name }</Header>
+          <Header as='h1' attached='top' className='capability-name-title'>{ capability.name }</Header>
+            <Segment padded attached>
+              <Container>
+                <Card.Group itemsPerRow={3}>
+                  { this.getSystems(capability) }
+                </Card.Group>
+              </Container>
             </Segment>
-            { this.getSystems(capability) }
           </Grid.Column>
         </Grid>
       )
@@ -65,25 +67,26 @@ export default class CapabilityView extends Component {
       if (capability.systems) {
           systems = capability.systems.map((system, index) => {
               return (
-                <Popup
-                  trigger={
-                    <Segment inverted color="blue" tertiary className="domain-cap">
-                      <Header as='h3'>{system.name}</Header>
-                    </Segment>
-                  }
-                  key={ index }
-                  size='small'
-                  position='right center'
-                >
-                  <Popup.Content className='system-tech-stack'>
-                    <Header as='h3'>Primary technologies</Header>
-                    {this.getListOfSystemAttribute(system, 'primary-technologies')}
-                    <Header as='h3'>Infrastructure</Header>
-                    {this.getListOfSystemAttribute(system, 'infrastructure')}
-                    <Header className={'other-capabilities'} as='h3'>Other Capabilities</Header>
-                    {this.getListOfOtherCapabilities(system, capability)}
-                  </Popup.Content>
-                </Popup>
+                  <Popup
+                    trigger={
+                      <Card className='system-card'>
+                        <Card.Content className='system-card-header' header={system.name} />
+                        <Card.Content className='system-card-desc' description={system.description} />
+                      </Card>
+                    }
+                    key={ index }
+                    size='small'
+                    position='right center'
+                  >
+                    <Popup.Content className='system-tech-stack'>
+                      <Header as='h3'>Primary technologies</Header>
+                      {this.getListOfSystemAttribute(system, 'primary-technologies')}
+                      <Header as='h3'>Infrastructure</Header>
+                      {this.getListOfSystemAttribute(system, 'infrastructure')}
+                      <Header className={'other-capabilities'} as='h3'>Other Capabilities</Header>
+                      {this.getListOfOtherCapabilities(system, capability)}
+                    </Popup.Content>
+                  </Popup>
               )
           })
       }
