@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Header, Popup, List, Card, Segment, Container } from 'semantic-ui-react'
+import { Grid, Header, Popup, List, Card, Segment, Container, Divider } from 'semantic-ui-react'
 import '../../resources/css/Topo.css'
 
 export default class CapabilityView extends Component {
@@ -24,6 +24,7 @@ export default class CapabilityView extends Component {
                 for (let k = 0; k < domain.capabilities.length; k++) {
                     capability = domain.capabilities[k];
                     if (capability.id === this.props.capabilityId) {
+                        capability.domain = domain;
                         return capability
                     }
                 }
@@ -49,7 +50,11 @@ export default class CapabilityView extends Component {
       return (
         <Grid columns="equal">
           <Grid.Column>
-          <Header as='h1' attached='top' className='capability-name-title'>{ capability.name }</Header>
+          <Header as='h1' attached='top' className='capability-name-title'>
+            { capability.name } 
+            <Header.Subheader>{capability.domain.name}</Header.Subheader>
+          </Header>
+          
             <Segment padded attached>
               <Container>
                 <Card.Group itemsPerRow={3}>
