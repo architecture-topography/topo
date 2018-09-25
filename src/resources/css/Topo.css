@@ -16,11 +16,8 @@
     font-size: 1.5em;
 }
 
-.ui .capability-name-title {
-    color: black;
-    background-color: #FFE599;
-    border: none;
-    font-size: 1.5em;
+.ui.attached.header.capability-name-title {
+    padding: 25px;
 }
 
 .ui .capability-missing {
@@ -38,6 +35,8 @@
 
 .topo-logo {
     margin: 20px;
+    height:100px;
+    margin-bottom: 4g0px;
 }
 
 .platform-border {
@@ -72,4 +71,19 @@
 .ui.grid > .row > .column:last-child {
     padding-left: 5px;
     margin-right: 10px;
+}
+
+.ui.card.system-card .content.system-card-header {
+    background-color: #F2F2F2;
+    padding:25px;
+}
+
+.ui.card.system-card .content.system-card-header .header {
+    font-size: 18px;
+}
+
+.ui.card.system-card .content.system-card-desc {
+    background-color: white;
+    padding: 20px;
+    height:100%;
 }

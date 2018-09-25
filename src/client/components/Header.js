@@ -10,7 +10,7 @@ class Header extends Component {
     render() {
         return (
             <div className="Header">
-                <Image src={ topo_logo } size='small' className='topo-logo' as={Link} to='/' wrapped spaced />
+                <Image src={ topo_logo } className='topo-logo' as={Link} to='/' wrapped spaced />
                 <p />
             </div>
         );
