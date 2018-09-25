@@ -8,11 +8,11 @@ function bundleSystemFiles(pathToSourceDir, pathToDestinationDir) {
     if (!pathToDestinationDir) pathToDestinationDir = "./public";
 
     const absolutePathToDestinationDir = path.resolve(pathToDestinationDir);
-    const pathToAssetsFile =  absolutePathToDestinationDir + "/assets.json";
+    const pathToAssetsFile = absolutePathToDestinationDir + "/assets.json";
 
     if (!fs.existsSync(absolutePathToDestinationDir)) fs.mkdirSync(absolutePathToDestinationDir);
 
-    const raw = function() {
+    const raw = function () {
         const files = new Glob({})
             .use((file) => {
                 if (/(.*)\/assets.json/.test(file.path)) file.exclude = true;
@@ -22,7 +22,16 @@ function bundleSystemFiles(pathToSourceDir, pathToDestinationDir) {
 
         if (files.length === 0) throw new Error('The specified folder does not contain JSON files');
 
-        const output = { assets: files.map((filename) => JSON.parse(fs.readFileSync(filename, 'utf8'))) };
+        const output = {
+            assets: files.map((filename) => {
+                try {
+                    return JSON.parse(fs.readFileSync(filename, 'utf8'))
+                } catch (error) {
+                    console.log(error);
+                    throw new Error(`Fail to parse "${filename}" - the file is not in proper JSON format`);
+                }
+            })
+        };
 
         fs.writeFileSync(pathToAssetsFile, JSON.stringify(output));
 
@@ -33,7 +42,7 @@ function bundleSystemFiles(pathToSourceDir, pathToDestinationDir) {
         'process.SYSTEMS_BUNDLE': JSON.stringify(raw)
     };
 
-    return { stringified, raw };
+    return {stringified, raw};
 }
 
 module.exports = bundleSystemFiles;

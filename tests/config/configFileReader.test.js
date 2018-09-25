@@ -45,7 +45,7 @@ describe('configFileReader', () => {
         expect(actualConfig.stringified['process.CONFIG_FILE_MAPPING']).toEqual(JSON.stringify(config))
     });
 
-    it('should read config file and return stringify contents', () => {
+    it('should throw exception when config file does not exist', () => {
         expect(() => configFileReader('tests/resources/missingFile.json')).toThrow(/^(No file found at location:).*(missingFile.json)$/);
     });
 });
