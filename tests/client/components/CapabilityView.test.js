@@ -28,10 +28,11 @@ describe('Capability View',()=>{
   })      
   it('renders the correct content for Capability View', ()=>{
       const capabilityId = "capability-1"
-      const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
+      const domain = treasureMapData.platforms[0].domains[0]
+      const capability = domain.capabilities[0];
 
       const wrapper = shallow(<CapabilityView treasureMapData={treasureMapData} capabilityId={capabilityId}/>)
-      expect(wrapper.find('Header').at(0).render().text()).toEqual(capability.name)
+      expect(wrapper.find('Header').at(0).render().text()).toEqual(capability.name+domain.name)
   })
 
   it('renders the correct content for other capabilties of the system (should be every capability but the capability expanded)', ()=> {
