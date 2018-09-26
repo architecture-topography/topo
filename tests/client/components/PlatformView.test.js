@@ -33,7 +33,7 @@ describe('PlatformView', () => {
         }
 
         const wrapper = shallow(<PlatformView treasureMapData={treasureMapData} />)
-        expect(wrapper.find('.platform-name-title').at(0).render().text()).toEqual(treasureMapData.platforms[0].name)
+        expect(wrapper.find('.header').at(0).render().text()).toEqual(treasureMapData.platforms[0].name)
         expect(wrapper.find('.platform-domains').length).toEqual(1)
     })
 })

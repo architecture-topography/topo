@@ -50,18 +50,17 @@ export default class CapabilityView extends Component {
       return (
         <Grid columns="equal">
           <Grid.Column>
-          <Header as='h1' attached='top' className='capability-name-title'>
+          <Header as='h1' attached='top' className='header capability-view-header'>
             { capability.name } 
             <Header.Subheader>{capability.domain.name}</Header.Subheader>
           </Header>
-          
-            <Segment padded attached>
-              <Container>
-                <Card.Group itemsPerRow={3}>
-                  { this.getSystems(capability) }
-                </Card.Group>
-              </Container>
-            </Segment>
+          <Segment padded attached>
+            <Container>
+              <Card.Group itemsPerRow={3}>
+                { this.getSystems(capability) }
+              </Card.Group>
+            </Container>
+          </Segment>
           </Grid.Column>
         </Grid>
       )

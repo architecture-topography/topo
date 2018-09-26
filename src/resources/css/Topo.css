@@ -9,14 +9,7 @@
     font-style: italic;
 }
 
-.ui .platform-name-title {
-    color: black;
-    background-color: #FFE599;
-    border: none;
-    font-size: 1.5em;
-}
-
-.ui.attached.header.capability-name-title {
+.ui.top.attached.header {
     padding: 25px;
 }
 
