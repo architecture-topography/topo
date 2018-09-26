@@ -1,7 +1,7 @@
 import React ,{Component} from 'react';
 import DomainView from './DomainView'
 import PropTypes from 'prop-types';
-import { Grid, Header, Segment, Container } from 'semantic-ui-react'
+import { Grid, Header, Segment } from 'semantic-ui-react'
 import '../../resources/css/Topo.css'
 
 export default class PlatformView extends Component {
@@ -22,9 +22,7 @@ export default class PlatformView extends Component {
                                         { platform.name } 
                                     </Header>
                                     <Segment padded attached>
-                                        <Container>
                                         <DomainView className="platform-domains" domains={ platform.domains }/>
-                                        </Container>
                                     </Segment>
                                 </Grid.Column>
                             </Grid>

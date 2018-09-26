@@ -8,7 +8,7 @@ export default class Capability extends Component {
   getSegment(id, color, className, content) {
     const capabilityLink = id ? `/capability/${id}` : null;
     return (
-      <Segment as={ id ? Link : '' } to={capabilityLink} tertiary inverted padded style={{ backgroundColor: color, display: 'block' }} className={ className }>
+      <Segment as={ id ? Link : '' } to={capabilityLink} style={{ borderColor: color,  borderStyle: 'solid' }} className={ className }>
         {content}
       </Segment>
     )

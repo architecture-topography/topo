@@ -1,6 +1,14 @@
+.ui.card.system-card:hover, .ui.cards a.card:hover {
+    cursor: default;
+}
+
 .domain-name {
     font-size: 16px;
     font-weight: 700;
+}
+
+.ui.segment.capability-name:hover {
+    box-shadow: 0 0 8px #8c8c8c;
 }
 
 .domain-desc {
@@ -9,7 +17,21 @@
     font-style: italic;
 }
 
-.ui.top.attached.header {
+.ui .platform-name-title {
+    color: black;
+    background-color: #FFE599;
+    border: none;
+    font-size: 1.5em;
+}
+
+.ui.segment.capability-name {
+    color:#525252;
+    display:block;
+    font-size:15.5px;
+    padding:16px;
+}
+
+.ui.attached.header.capability-name-title {
     padding: 25px;
 }
 
@@ -37,6 +59,10 @@
     border-radius: 5px;
     border-width: 1px;
     margin: 5px;
+}
+
+.ui.grid {
+    padding: 0;
 }
 
 .ui.grid > .row {
@@ -72,7 +98,7 @@
 }
 
 .ui.card.system-card .content.system-card-header .header {
-    font-size: 18px;
+    font-size: 23px;
     color: white;
 }
 

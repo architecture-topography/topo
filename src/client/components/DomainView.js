@@ -2,7 +2,7 @@ import React ,{Component} from 'react';
 import "react-table/react-table.css";
 import Capability from './Capability';
 import PropTypes from 'prop-types';
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid, Popup ,Card} from 'semantic-ui-react'
 
 export default class DomainView extends Component {
 
@@ -75,13 +75,17 @@ export default class DomainView extends Component {
                 <Grid.Row>
                 {
                     domains.map((domain, index) => {
-                        return (<Grid.Column key={ index }>
-                            <Segment inverted style={{ backgroundColor: domain.color }} className='full-width-height'>
-                                <div>
-                                    <span className="domain-name">{ domain.name }</span> <br/>
-                                    <span className="domain-desc">"{ domain.description }"</span>
-                                </div>
-                            </Segment>
+                        return (
+                        <Grid.Column key={ index }>
+                            <Popup
+                                trigger={
+                                    <Card className='system-card'>
+                                        <Card.Content className="domain-name system-card-header" header={domain.name } style={{ backgroundColor: domain.color }} />
+                                    </Card>
+                                }
+                                content={domain.description}
+                                hideOnScroll
+                                />
                         </Grid.Column>)
                     })
                 }

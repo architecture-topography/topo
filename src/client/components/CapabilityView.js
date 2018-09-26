@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Header, Popup, List, Card, Segment, Container } from 'semantic-ui-react'
+import { Grid, Header, Popup, List, Card, Segment } from 'semantic-ui-react'
 import '../../resources/css/Topo.css'
 
 export default class CapabilityView extends Component {
@@ -55,11 +55,9 @@ export default class CapabilityView extends Component {
             <Header.Subheader>{capability.domain.name}</Header.Subheader>
           </Header>
           <Segment padded attached>
-            <Container>
-              <Card.Group itemsPerRow={3}>
-                { this.getSystems(capability) }
-              </Card.Group>
-            </Container>
+            <Card.Group itemsPerRow={3}>
+              { this.getSystems(capability) }
+            </Card.Group>
           </Segment>
           </Grid.Column>
         </Grid>
