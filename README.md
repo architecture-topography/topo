@@ -41,3 +41,11 @@ You can run the build server as follows:
 ```
 /usr/local/bin/gitlab-ci-multi-runner run
 ```
+
+## Deployment
+
+After running `yarn build`, the artifact can be deployed to an AWS S3 bucket for example. At runtime, the app will need two files to be loaded:
+- `config.json`: this file contains the initial mapping between `Platforms` -> `Domains` -> `Capabilities`
+- `assets.json`: this file is bundled with all the systems matching each capability
+
+Both files must be located in the root folder of the project (e.g. `/build`). Deployment options can be found at [deployment](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment).

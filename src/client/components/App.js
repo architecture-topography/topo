@@ -28,7 +28,7 @@ class App extends Component {
 
         this.setState({
             treasureMapData: treasureMapData
-        }, this._logInputData());
+        }, this._logInputData);
     }
 
     _logInputData() {

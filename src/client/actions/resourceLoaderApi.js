@@ -15,9 +15,15 @@ const getResource = async (pathToResource) => {
         return JSON.parse(response.data);
     } catch (error) {
         console.error(error);
-        throw new Error(`Error parsing JSON file: ${pathToResource} \n ${_formatError(error)}`)
+        throw new Error(_buildErrorMessage(error, pathToResource));
     }
 };
+
+function _buildErrorMessage(error, pathToResource) {
+    return (error.response && error.response.status === 200)
+        ? `Error parsing JSON file: ${pathToResource} \n ${_formatError(error)}`
+        : `File not found at location: ./${pathToResource}`;
+}
 
 function _formatError(error) {
     // Remove all new or return characters

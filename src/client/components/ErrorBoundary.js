@@ -19,7 +19,7 @@ class ErrorBoundary extends React.Component {
             hasError: true,
             error: error,
             info: info
-        }, this._logError());
+        }, this._logError);
     }
 
     _logError() {
