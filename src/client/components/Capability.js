@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Segment, Popup } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 import '../../resources/css/Topo.css';
 
 export default class Capability extends Component {
@@ -15,19 +15,8 @@ export default class Capability extends Component {
   }
 
   render() {
-    const { name, description, color, id } = this.props;
-    const desc = description ? `"${description}"` : "No description"
+    const { name, color, id } = this.props;
 
-    return (
-        <Popup
-          trigger={this.getSegment(id, color, 'capability-name full-width-height', name)}
-          size='small'
-          position='right center'
-        >
-          <Popup.Content className='capability-desc'>
-            { desc }
-          </Popup.Content>
-        </Popup>
-    )
+    return this.getSegment(id, color, 'capability-name full-width-height', name);
   }
 }

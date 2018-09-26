@@ -12,7 +12,6 @@ export default class DomainView extends Component {
             description: PropTypes.string,
             capabilities: PropTypes.arrayOf(PropTypes.shape({
                 name: PropTypes.string.isRequired,
-                description: PropTypes.string,
                 order: PropTypes.number.isRequired,
                 id: PropTypes.string
             })),
