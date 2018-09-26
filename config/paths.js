@@ -52,4 +52,6 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  mockConfig: resolveApp('public/mockConfig.json'),
+  mockAssets: resolveApp('public/mockAssets.json'),
 };
