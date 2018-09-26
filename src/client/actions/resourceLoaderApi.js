@@ -15,10 +15,14 @@ const getResource = async (pathToResource) => {
         return JSON.parse(response.data);
     } catch (error) {
         console.error(error);
-        const originalError = error.toString().replace(/(?:\r\n|\r|\n)/g, '');
-        throw new Error(`Error parsing JSON file: ${pathToResource} \n ${originalError}`)
+        throw new Error(`Error parsing JSON file: ${pathToResource} \n ${_formatError(error)}`)
     }
 };
+
+function _formatError(error) {
+    // Remove all new or return characters
+    return error.toString().replace(/(?:\r\n|\r|\n)/g, '');
+}
 
 export {
     getResource

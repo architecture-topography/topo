@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import App from './client/components/App';
 import registerServiceWorker from './client/registerServiceWorker';
 import {getResource} from './client/actions/resourceLoaderApi';
+import ErrorBoundary from './client/components/ErrorBoundary';
 
 const pathToConfigFile = process.env.REACT_APP_CONFIG_FILE;
 const pathToAssetsFile = process.env.REACT_APP_ASSETS_FILE;
@@ -16,6 +17,7 @@ Promise
         registerServiceWorker();
     })
     .catch(error => {
+        renderDom(<ErrorBoundary message={error.toString()} displayError={true}><p/></ErrorBoundary>);
         console.error(error);
     });
 
