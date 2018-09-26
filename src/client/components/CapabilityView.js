@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Header, Popup, List, Card, Segment, Container, Divider } from 'semantic-ui-react'
+import { Grid, Header, Popup, List, Card, Segment, Container } from 'semantic-ui-react'
 import '../../resources/css/Topo.css'
 
 export default class CapabilityView extends Component {
@@ -75,7 +75,7 @@ export default class CapabilityView extends Component {
                   <Popup
                     trigger={
                       <Card className='system-card'>
-                        <Card.Content className='system-card-header' header={system.name} />
+                        <Card.Content style={{"backgroundColor": capability.domain.color}} className='system-card-header' header={system.name} />
                         <Card.Content className='system-card-desc' description={system.description} />
                       </Card>
                     }
