@@ -76,7 +76,9 @@ export default class CapabilityView extends Component {
                     trigger={
                       <Card className='system-card'>
                         <Card.Content style={{"backgroundColor": capability.domain.color}} className='system-card-header' header={system.name} />
-                        <Card.Content className='system-card-desc' description={system.description} />
+                        <Card.Content className='system-card-desc' style={(!system.description || !system.description.length ? {"fontStyle":"italic"} : {})}>
+                          {(!system.description || !system.description.length ? "No system description" : system.description)}
+                        </Card.Content>
                       </Card>
                     }
                     key={ index }
