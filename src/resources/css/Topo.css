@@ -36,8 +36,8 @@
 }
 
 .ui.attached.header.capability-name-title {
-    padding: 25px;
-}
+    padding: 20px;
+}å
 
 .ui .capability-missing {
     background-color: #f8d7da;
@@ -58,11 +58,9 @@
     margin-bottom: 40px;
 }
 
-.platform-border {
-    border-style: dashed;
-    border-radius: 5px;
-    border-width: 1px;
-    margin: 5px;
+.ui.top.header.platform-header, .ui.top.header.capability-view-header {
+    padding: 30px;
+    font-size: 2.25em;
 }
 
 .ui.grid {
@@ -77,7 +75,6 @@
 
 .ui.grid > .row:first-child {
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .ui.grid > .row > .column {
