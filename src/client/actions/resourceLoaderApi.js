@@ -20,9 +20,9 @@ const getResource = async (pathToResource) => {
 };
 
 function _buildErrorMessage(error, pathToResource) {
-    return (error.response && error.response.status === 200)
-        ? `Error parsing JSON file: ${pathToResource} \n ${_formatError(error)}`
-        : `File not found at location: ./${pathToResource}`;
+    return (error.response && error.response.status !== 200)
+        ? `File not found: ${pathToResource}`
+        : `Error parsing JSON file: ${pathToResource} \n ${_formatError(error)}`;
 }
 
 function _formatError(error) {
