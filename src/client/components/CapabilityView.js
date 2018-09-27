@@ -99,7 +99,7 @@ export default class CapabilityView extends Component {
 
     getListOfOtherCapabilities(system, expandedCapability) {
       let otherCapabilities = system.capabilities.filter((capability) => capability !== expandedCapability.name)
-      if (otherCapabilities.length <= 1) return <span id="no-capabilities-text" style={{"fontStyle": "italic"}}>No other capabilities</span>;
+      if (otherCapabilities.length <= 1) return <span id="no-capabilities-text">None</span>
       return this.getListOfSystemAttribute(system, 'capabilities', otherCapabilities);
     }
 
