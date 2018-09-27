@@ -1,3 +1,7 @@
+.ui.card.system-card {
+    width:100%;
+}
+
 .ui.card.system-card:hover, .ui.cards a.card:hover {
     cursor: default;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import DomainView from '../../../src/client/components/DomainView';
 import { shallow } from 'enzyme';
+import { stringify } from 'postcss';
 
 describe('DomainView',()=>{
   it('renders the correct number of Domains',()=>{
@@ -27,7 +28,10 @@ describe('DomainView',()=>{
     ]
 
     const wrapper = shallow(<DomainView domains={domains} />);
-    expect(wrapper.find('.domain-name')).toHaveLength(2)
-
+    const popupWrapper = shallow(wrapper.find('Popup').get(0));
+    const node = popupWrapper.prop('trigger');
+    const debug = shallow(node);
+    const d = debug.find('CardContent');
+    expect(d.prop('header')).toContain('Domain 1');
   })
 })
