@@ -28,10 +28,11 @@ describe('DomainView',()=>{
     ]
 
     const wrapper = shallow(<DomainView domains={domains} />);
-    const popupWrapper = shallow(wrapper.find('Popup').get(0));
-    const node = popupWrapper.prop('trigger');
-    const debug = shallow(node);
-    const d = debug.find('CardContent');
-    expect(d.prop('header')).toContain('Domain 1');
+    const popups = wrapper.find('Popup');
+    popups.forEach((popup, index) => {
+      const domaninCardNode = shallow(popup.prop('trigger'));
+      const domainCardContent = domaninCardNode.find('CardContent');
+      expect(domainCardContent.prop('header')).toContain(domains[index].name);
+    })
   })
 })
