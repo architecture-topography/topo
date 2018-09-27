@@ -105,7 +105,9 @@ export default class CapabilityView extends Component {
 
     getListOfSystemAttribute(system, attribute, optionalAttributeList) {
 
-      let attributeList = (optionalAttributeList && optionalAttributeList.length ? optionalAttributeList : system[attribute]);
+      let attributeListUnfiltered = (optionalAttributeList && optionalAttributeList.length ? optionalAttributeList : system[attribute]);
+
+      let attributeList = attributeListUnfiltered.filter(element => element);
 
       if (attributeList && attributeList.length) {
         return (
