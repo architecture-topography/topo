@@ -33,6 +33,10 @@
     display:block;
     font-size:15.5px;
     padding:16px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-overflow: ellipsis;
 }
 
 .ui.attached.header.capability-name-title {
