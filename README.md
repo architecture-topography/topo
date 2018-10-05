@@ -49,3 +49,11 @@ After running `yarn build`, the artifact can be deployed to an AWS S3 bucket for
 - `assets.json`: this file is bundled with all the systems matching each capability
 
 Both files must be located in the root folder of the project (e.g. `/build`). Deployment options can be found at [deployment](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment).
+
+## License
+
+Topo is released under [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)
+
+## Copyright
+
+Copyright 2018 ThoughtWorks, Inc.
