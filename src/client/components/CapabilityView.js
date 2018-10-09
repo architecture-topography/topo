@@ -33,7 +33,6 @@ export default class CapabilityView extends Component {
 
         for (let i = 0; i < this.props.treasureMapData.platforms.length; i++) {
             platform = this.props.treasureMapData.platforms[i];
-
             for (let j = 0; j < platform.domains.length; j++) {
                 domain = platform.domains[j];
 
@@ -41,6 +40,7 @@ export default class CapabilityView extends Component {
                     capability = domain.capabilities[k];
                     if (capability.id === this.props.capabilityId) {
                         capability.domain = domain;
+                        capability.platformName = platform.name;
                         return capability
                     }
                 }
@@ -65,7 +65,18 @@ export default class CapabilityView extends Component {
 
       return (
         <Grid columns="equal">
-          <Grid.Column>
+          <Grid.Row>
+          <div className="ui large breadcrumb">
+            <a className="home-section" href="/">Home</a>
+            <i className="right chevron icon divider"></i>
+            <a className="section"> {capability.platformName} </a>
+            <i className="right chevron icon divider"></i>
+            <a className="section"> {capability.domain.name} </a>
+            <i className="right chevron icon divider"></i>
+            <div className="active section"> {capability.name} </div>
+           </div>
+           </Grid.Row>
+           <Grid.Column>
           <Header as='h1' attached='top' className='header capability-view-header'>
             { capability.name } 
             <Header.Subheader>{capability.domain.name}</Header.Subheader>

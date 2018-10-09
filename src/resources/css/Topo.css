@@ -123,6 +123,17 @@ a.ui.card.system-card:hover {
     color: #505050;
 }
 
+.ui.large.breadcrumb .section {
+    color: grey;
+}
+
+.ui.large.breadcrumb a.section {
+    cursor: auto;
+}
+
+.ui.large.breadcrumb .active.section {
+    color: black;
+}
 
 @-webkit-keyframes swing
 {
