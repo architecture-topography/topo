@@ -56,10 +56,10 @@ describe('Capability View',()=>{
     const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
     capability.systems = [{"name": "System 1", "capabilities": ["Capability 1", "Capability 2", "Capability 3"]}]
     const wrapper = shallow(<CapabilityView treasureMapData={treasureMapData} capabilityId={capabilityId}/>)
-    const popupWrapper = shallow(wrapper.find('Popup').get(0));
-
+    const accordionWrapper = shallow(wrapper.find('Accordion').get(0));
+      
     ["Capability 2", "Capability 3"].forEach((element, index) => {
-      expect(popupWrapper.find('ListItem').at(index).render().text()).toEqual(element);
+      expect(accordionWrapper.find('ListItem').at(index).render().text()).toEqual(element);
     });
   })
 
@@ -68,8 +68,8 @@ describe('Capability View',()=>{
     const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
     capability.systems = [{"name": "System 1", "capabilities": ["Capability 1"]}]
     const wrapper = shallow(<CapabilityView treasureMapData={treasureMapData} capabilityId={capabilityId}/>)
-    const popupWrapper = shallow(wrapper.find('Popup').get(0));
+    const accordionWrapper = shallow(wrapper.find('Accordion').get(0));
     
-    expect(popupWrapper.find("#no-capabilities-text")).toHaveLength(1);
+    expect(accordionWrapper.find("#no-capabilities-text")).toHaveLength(1);
   })
 });
