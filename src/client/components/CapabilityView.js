@@ -14,12 +14,27 @@
  * limitations under the License.
  */
 
- import React ,{Component} from 'react';
+import React ,{Component} from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Header, Popup, List, Card, Segment } from 'semantic-ui-react'
+import { Grid, Header, List, Card, Segment, Accordion} from 'semantic-ui-react'
 import '../../resources/css/Topo.css'
 
 export default class CapabilityView extends Component {
+
+    state = { activeIndex: [] }
+
+    handleClick = (e,titleProps) => {
+        const { index } = titleProps
+        const { activeIndex } = this.state
+        const newIndex = ({activeIndex}.activeIndex.indexOf(index)!==-1) ? -1 : index
+        let newArray = {activeIndex}.activeIndex
+        if (newIndex !== -1) {
+           newArray.push(newIndex)
+        }else {
+            newArray.splice(newArray.indexOf(index),1)
+        }
+        this.setState({activeIndex:newArray})
+    }
 
     static propTypes = {
         treasureMapData: PropTypes.instanceOf(Object).isRequired,
@@ -65,6 +80,7 @@ export default class CapabilityView extends Component {
 
       return (
         <Grid columns="equal">
+
           <Grid.Row>
           <div className="ui large breadcrumb">
             <a className="home-section" href="/">Home</a>
@@ -76,6 +92,7 @@ export default class CapabilityView extends Component {
             <div className="active section"> {capability.name} </div>
            </div>
            </Grid.Row>
+
            <Grid.Column>
           <Header as='h1' attached='top' className='header capability-view-header'>
             { capability.name } 
@@ -92,32 +109,35 @@ export default class CapabilityView extends Component {
     }
 
     getSystems(capability) {
+      const { activeIndex } = this.state;
       let systems = '';
       if (capability.systems) {
           systems = capability.systems.map((system, index) => {
               return (
-                  <Popup
-                    trigger={
-                      <Card className='system-card'>
+
+                        <Card className='system-card'>
+                        <Accordion>
+                        <Accordion.Title active={activeIndex.indexOf(index)!==-1} index={index} onClick={this.handleClick}>
                         <Card.Content style={{"backgroundColor": capability.domain.color}} className='system-card-header' header={system.name} />
+
                         <Card.Content className='system-card-desc' style={(!system.description || !system.description.length ? {"fontStyle":"italic"} : {})}>
                           {(!system.description || !system.description.length ? "No system description" : system.description)}
                         </Card.Content>
-                      </Card>
-                    }
-                    key={ index }
-                    size='small'
-                    position='right center'
-                  >
-                    <Popup.Content className='system-tech-stack'>
-                      <Header as='h3'>Primary technologies</Header>
-                      {this.getListOfSystemAttribute(system, 'primary-technologies')}
-                      <Header as='h3'>Infrastructure</Header>
-                      {this.getListOfSystemAttribute(system, 'infrastructure')}
-                      <Header className={'other-capabilities'} as='h3'>Other Capabilities</Header>
-                      {this.getListOfOtherCapabilities(system, capability)}
-                    </Popup.Content>
-                  </Popup>
+                        </Accordion.Title>
+                        <Accordion.Content active={activeIndex.indexOf(index)!==-1}>
+                        <Card.Content className='system-card-extra'>
+                           <Header className={'primary-technologies'} as='h3'>Primary technologies</Header>
+                            {this.getListOfSystemAttribute(system, 'primary-technologies')}
+
+                            <Header className={'infrastructure'} as='h3'>Infrastructure</Header>
+                            {this.getListOfSystemAttribute(system, 'infrastructure')}
+
+                            <Header className={'other-capabilities'} as='h3'>Other Capabilities</Header>
+                            {this.getListOfOtherCapabilities(system, capability)}
+                        </Card.Content>
+                        </Accordion.Content>
+                        </Accordion>
+                        </Card>
               )
           })
       }

@@ -106,6 +106,9 @@ a.ui.card.system-card:hover {
     margin-right: 10px;
 }
 
+.ui.card.system-card {
+    height: fit-content;
+}
 .ui.card.system-card .content.system-card-header {
     background-color: #F2F2F2;
     padding:25px;
@@ -123,6 +126,18 @@ a.ui.card.system-card:hover {
     color: #505050;
 }
 
+.ui.card.system-card .content.system-card-extra{
+    padding:20pt 0 25pt;
+    background-color: #f5f5f5;
+    border-top-color: #f1f1f1;
+    border-top-style: solid;
+    border-top-width: 1pt;
+}
+
+.ui.card.system-card .ui.accordion .title:not(.ui) {
+    padding-top: 0;
+}
+
 .ui.large.breadcrumb .section {
     color: grey;
 }
@@ -134,6 +149,7 @@ a.ui.card.system-card:hover {
 .ui.large.breadcrumb .active.section {
     color: black;
 }
+
 
 @-webkit-keyframes swing
 {
