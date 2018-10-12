@@ -16,7 +16,7 @@
 
 import React ,{Component} from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Header, List, Card, Segment, Accordion} from 'semantic-ui-react'
+import { Grid, Header, List, Card, Segment, Accordion, Icon} from 'semantic-ui-react'
 import '../../resources/css/Topo.css'
 
 export default class CapabilityView extends Component {
@@ -123,8 +123,13 @@ export default class CapabilityView extends Component {
                         <Card.Content className='system-card-desc' style={(!system.description || !system.description.length ? {"fontStyle":"italic"} : {})}>
                           {(!system.description || !system.description.length ? "No system description" : system.description)}
                         </Card.Content>
+                        <Card.Content className='system-card-icon'>
+                        <Icon name={activeIndex.indexOf(index)!==-1 ? 'chevron up' : 'chevron down'}/>
+                        </Card.Content>
                         </Accordion.Title>
+
                         <Accordion.Content active={activeIndex.indexOf(index)!==-1}>
+
                         <Card.Content className='system-card-extra'>
                            <Header className={'primary-technologies'} as='h3'>Primary technologies</Header>
                             {this.getListOfSystemAttribute(system, 'primary-technologies')}
