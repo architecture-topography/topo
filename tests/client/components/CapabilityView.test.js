@@ -31,8 +31,8 @@ describe('Capability View',()=>{
               "description": "Description 1",
               "capabilities": [
                 {"name": "Capability 1", "order": 1, "id": "capability-1"},
-                {"name": "Capability 2", "order": 2},
-                {"name": "Capability 3", "order": 3}
+                {"name": "Capability 2", "order": 2,"id": "capability-2"},
+                {"name": "Capability 3", "order": 3, "id": "capability-3"}
               ],
               "color": "#85C1E9"
             },
@@ -41,7 +41,8 @@ describe('Capability View',()=>{
       ],
       "others": []
     }
-  })      
+  })    
+
   it('renders the correct content for Capability View', ()=>{
       const capabilityId = "capability-1"
       const domain = treasureMapData.platforms[0].domains[0]
@@ -72,4 +73,21 @@ describe('Capability View',()=>{
     
     expect(accordionWrapper.find("#no-capabilities-text")).toHaveLength(1);
   })
+
+  it('capability links to the correct capability page', ()=> {
+    console.log("lol");
+    // for each capability in "others" link is correct
+    const capabilityId = "capability-1"
+    const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
+    capability.systems = [{"name": "System 1", "capabilities": ["Capability 1", "Capability 2", "Capability 3"]}]
+    const wrapper = shallow(<CapabilityView treasureMapData={treasureMapData} capabilityId={capabilityId}/>)
+    const accordionWrapper = shallow(wrapper.find('Accordion').get(0));
+    const listWrapper = accordionWrapper.find('List');
+
+    ["Capability 2", "Capability 3"].forEach((element, index) => {
+      expect(listWrapper.find('ListItem').at(index).prop('href')).toEqual("/#/capability/capability-"+(index+2));
+    });
+  })
+
 });
+

@@ -41,11 +41,37 @@ export default class CapabilityView extends Component {
         capabilityId: PropTypes.string.isRequired
     }
 
+    getListOfAllCapabilities(){
+      let platform;
+      let domain;
+      let capability;
+      let capabilityList=[];
+        
+        for (let i = 0; i < this.props.treasureMapData.platforms.length; i++) {
+            platform = this.props.treasureMapData.platforms[i];
+            for (let j = 0; j < platform.domains.length; j++) {
+                domain = platform.domains[j];
+                for (let k = 0; k < domain.capabilities.length; k++) {
+                    capability = domain.capabilities[k];
+                    capabilityList.push(capability);
+                }
+            }
+        }
+        // sort capability list by capability id
+        capabilityList.sort((a,b) => {
+          if(a.id < b.id) return -1;
+          else if (a.id > b.id) return 1;
+          return 0;
+        });
+
+        return capabilityList;
+    }
+
     getCapabilityFromId() {
         let platform;
         let domain;
         let capability;
-
+        
         for (let i = 0; i < this.props.treasureMapData.platforms.length; i++) {
             platform = this.props.treasureMapData.platforms[i];
             for (let j = 0; j < platform.domains.length; j++) {
@@ -112,6 +138,7 @@ export default class CapabilityView extends Component {
       const { activeIndex } = this.state;
       let systems = '';
       if (capability.systems) {
+
           systems = capability.systems.map((system, index) => {
               return (
 
@@ -151,22 +178,31 @@ export default class CapabilityView extends Component {
 
     getListOfOtherCapabilities(system, expandedCapability) {
       let otherCapabilities = system.capabilities.filter((capability) => capability !== expandedCapability.name)
+
       if (otherCapabilities.length <= 1) return <span id="no-capabilities-text">None</span>
       return this.getListOfSystemAttribute(system, 'capabilities', otherCapabilities);
     }
 
     getListOfSystemAttribute(system, attribute, optionalAttributeList) {
-
+      
       let attributeListUnfiltered = (optionalAttributeList && optionalAttributeList.length ? optionalAttributeList : system[attribute]);
       
       let attributeList;
       if (attributeListUnfiltered && attributeListUnfiltered.length) attributeList = attributeListUnfiltered.filter(element => element);
+      
+      let capabilityList = this.getListOfAllCapabilities();
 
       if (attributeList && attributeList.length) {
         return (
-          <List as='ul'>
+          <List as='ul' bulleted>
             {attributeList.map((val, index) => {
-              return <List.Item key={ index } as='li'>{ val }</List.Item>
+              let capabilityId = 0;
+              if (attribute === "capabilities"){
+              let capabilityFromList = capabilityList.find(obj => obj.name == val);
+              capabilityId = capabilityFromList ? capabilityFromList.id : 0; // 0 means capability view not rendered for it
+              }
+              let linkPath = attribute === "capabilities" ? '/#/capability/'+capabilityId : '';
+              return <List.Item key={ index } href={linkPath}>{ val }</List.Item>
             })}
           </List>
         )
