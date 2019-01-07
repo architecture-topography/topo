@@ -39,7 +39,7 @@ export default class Domain extends Component {
         const defaultDomainColor = "#AAB7B8";
         const color = this.props.color && this.validHex(this.props.color) ? this.props.color : defaultDomainColor;
         let orderedCapabilities = capabilities.sort((a, b) => {
-            return a.order > b.order
+            return a.order - b.order
         })
         return (
             <Container>
