@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react';
-import { Container, Segment } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import Capability from './Capability';
-import '../resources/css/Topo.css';
+import React, { Component } from "react";
+import { Container, Segment } from "semantic-ui-react";
+import PropTypes from "prop-types";
+import Capability from "./Capability";
+import "../resources/css/Topo.css";
 
 export default class Domain extends Component {
   static propTypes = {
@@ -29,15 +29,15 @@ export default class Domain extends Component {
         name: PropTypes.string.isRequired,
         description: PropTypes.string,
         order: PropTypes.number.isRequired,
-        id: PropTypes.string,
+        id: PropTypes.string
       })
     ),
-    color: PropTypes.string,
+    color: PropTypes.string
   };
 
   render() {
     const { name, description, capabilities } = this.props;
-    const defaultDomainColor = '#AAB7B8';
+    const defaultDomainColor = "#AAB7B8";
     const color =
       this.props.color && this.validHex(this.props.color)
         ? this.props.color

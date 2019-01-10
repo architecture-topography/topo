@@ -14,20 +14,23 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import Capability from './Capability';
+import React from "react";
+import Capability from "./Capability";
 
-describe('Capability',()=>{
+describe("Capability", () => {
+  it("renders the correct content for Capability", () => {
+    const capability = {
+      name: "Capability 1",
+      description: "Capability description",
+      color: "red"
+    };
 
-    it('renders the correct content for Capability',()=>{
-
-        const capability = {
-            "name": "Capability 1",
-            "description": "Capability description",
-            "color": "red"
-        }
-
-        const wrapper = mount(<Capability {...capability} />)
-        expect(wrapper.find('.capability-name').at(0).text()).toEqual(capability.name)
-    })
+    const wrapper = mount(<Capability {...capability} />);
+    expect(
+      wrapper
+        .find(".capability-name")
+        .at(0)
+        .text()
+    ).toEqual(capability.name);
+  });
 });

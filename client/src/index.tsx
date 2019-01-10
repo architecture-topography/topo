@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import './resources/css/index.css';
+import "./resources/css/index.css";
 
-import React, { ReactElement } from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
-import { register } from './serviceWorker';
-import { getResource } from './actions/resourceLoaderApi';
-import ErrorBoundary from './components/ErrorBoundary';
+import React, { ReactElement } from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App";
+import { register } from "./serviceWorker";
+import { getResource } from "./actions/resourceLoaderApi";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const pathToConfigFile = process.env.REACT_APP_CONFIG_FILE;
 const pathToAssetsFile = process.env.REACT_APP_ASSETS_FILE;
@@ -41,5 +41,5 @@ Promise.all([getResource(pathToConfigFile), getResource(pathToAssetsFile)])
   });
 
 function renderDom(rootElement: ReactElement<any>) {
-  return ReactDOM.render(rootElement, document.getElementById('root'));
+  return ReactDOM.render(rootElement, document.getElementById("root"));
 }

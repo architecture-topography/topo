@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Segment } from 'semantic-ui-react';
-import '../resources/css/Topo.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Segment } from "semantic-ui-react";
+import "../resources/css/Topo.css";
 
 export default class Capability extends Component {
   getSegment(id, color, className, content) {
     const capabilityLink = id ? `/capability/${id}` : null;
     return (
       <Segment
-        as={id ? Link : ''}
+        as={id ? Link : ""}
         to={capabilityLink}
-        style={{ borderColor: color, borderStyle: 'solid' }}
+        style={{ borderColor: color, borderStyle: "solid" }}
         className={className}
       >
         {content}
@@ -40,7 +40,7 @@ export default class Capability extends Component {
     return this.getSegment(
       id,
       color,
-      'capability-name full-width-height',
+      "capability-name full-width-height",
       name
     );
   }

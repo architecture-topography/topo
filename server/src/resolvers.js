@@ -1,8 +1,7 @@
-
 const resolvers = {
   Query: {
-    hello: () => 'Hello, Topo',
-  },
+    hello: () => "Hello, Topo"
+  }
 };
 
 module.exports = resolvers;

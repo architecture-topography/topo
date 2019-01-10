@@ -25,7 +25,7 @@ function buildTreasureMapData(treasureMapData, systemMapping) {
 function _mapSystemToCapability(system, treasureMapData) {
   // Worth validating the entire json structure for each system not only capabilities
   if (!system.capabilities) {
-    throw Error('System file does not contain capabilities');
+    throw Error("System file does not contain capabilities");
   }
 
   let capabilityId = 1;
@@ -37,7 +37,7 @@ function _mapSystemToCapability(system, treasureMapData) {
           if (!domainCapability.systems) domainCapability.systems = [];
           if (!domainCapability.id) domainCapability.id = `${capabilityId++}`;
           const capability =
-            typeof systemCapability === 'object'
+            typeof systemCapability === "object"
               ? systemCapability.capability
               : systemCapability;
 
@@ -76,5 +76,5 @@ function _stringEquals(first, second) {
 }
 
 export default {
-  buildTreasureMapData: buildTreasureMapData,
+  buildTreasureMapData: buildTreasureMapData
 };

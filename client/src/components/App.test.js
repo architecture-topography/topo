@@ -14,47 +14,47 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import App from './App';
+import App from "./App";
 
 const config = {
-    "platforms": [
+  platforms: [
+    {
+      name: "Platform 1",
+      domains: [
         {
-            "name": "Platform 1",
-            "domains": [
-                {
-                    "name": "Domain 1",
-                    "description": "Description 1",
-                    "capabilities": [
-                        {"name": "Capability 1", "order": 1}
-                    ]
-                }
-            ]
+          name: "Domain 1",
+          description: "Description 1",
+          capabilities: [{ name: "Capability 1", order: 1 }]
         }
-    ],
-    "others": []
+      ]
+    }
+  ],
+  others: []
 };
 
 const systems = {
-    "assets": [{
-        "name": "Test Name",
-        "description": "Test Description",
-        "capabilities": [
-            "Capability 1"
-        ],
-        "infrastructure": ["aws"]
-    }]
+  assets: [
+    {
+      name: "Test Name",
+      description: "Test Description",
+      capabilities: ["Capability 1"],
+      infrastructure: ["aws"]
+    }
+  ]
 };
 
-describe('<App />', () => {
+describe("<App />", () => {
+  it("should render without crashing", () => {
+    const div = document.createElement("div");
+    const wrapper = ReactDOM.render(
+      <App config={config} systems={systems} />,
+      div
+    );
+    expect(wrapper.props.config).toEqual(config);
 
-    it('should render without crashing', () => {
-        const div = document.createElement('div');
-        const wrapper = ReactDOM.render(<App config={config} systems={systems}/>, div);
-        expect(wrapper.props.config).toEqual(config);
-
-        ReactDOM.unmountComponentAtNode(div);
-    });
+    ReactDOM.unmountComponentAtNode(div);
+  });
 });

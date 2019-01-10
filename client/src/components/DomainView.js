@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react';
-import 'react-table/react-table.css';
-import Capability from './Capability';
-import PropTypes from 'prop-types';
-import { Grid, Popup, Card } from 'semantic-ui-react';
+import React, { Component } from "react";
+import "react-table/react-table.css";
+import Capability from "./Capability";
+import PropTypes from "prop-types";
+import { Grid, Popup, Card } from "semantic-ui-react";
 
 export default class DomainView extends Component {
   static propTypes = {
@@ -30,12 +30,12 @@ export default class DomainView extends Component {
           PropTypes.shape({
             name: PropTypes.string.isRequired,
             order: PropTypes.number.isRequired,
-            id: PropTypes.string,
+            id: PropTypes.string
           })
         ),
-        color: PropTypes.string,
+        color: PropTypes.string
       })
-    ).isRequired,
+    ).isRequired
   };
 
   getCapability(capabilities, count) {
@@ -57,7 +57,7 @@ export default class DomainView extends Component {
 
   // Transpose capabilities
   reMapCapabilities(domains) {
-    const defaultDomainColor = '#AAB7B8';
+    const defaultDomainColor = "#AAB7B8";
     let count = 1;
     let capabilities_dict = {};
     let capabilities_row = [];
@@ -70,7 +70,7 @@ export default class DomainView extends Component {
         domains[index].color = color;
         let capability = this.getCapability(capabilities, count);
         if (capability) {
-          capability['color'] = color;
+          capability["color"] = color;
         }
         capabilities_row.push(capability);
       }
@@ -102,7 +102,7 @@ export default class DomainView extends Component {
                         className="domain-name system-card-header"
                         header={domain.name}
                         style={{
-                          backgroundColor: domain.color,
+                          backgroundColor: domain.color
                         }}
                       />
                     </Card>

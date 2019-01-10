@@ -1,7 +1,7 @@
-const resolvers = require('./resolvers');
+const resolvers = require("./resolvers");
 
-describe('hello resolver', () => {
-  it('returns hello topo', () => {
-    expect(resolvers.Query.hello()).toEqual('Hello, Topo');
+describe("hello resolver", () => {
+  it("returns hello topo", () => {
+    expect(resolvers.Query.hello()).toEqual("Hello, Topo");
   });
-})
+});

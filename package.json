@@ -1,4 +1,26 @@
 {
   "private": true,
-  "workspaces": ["client", "server"]
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "prettier": "prettier --write '**/*.{ts,js,graphql}?(x)'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js,graphql}?(x)": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3"
+  }
 }

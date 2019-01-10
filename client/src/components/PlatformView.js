@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react';
-import DomainView from './DomainView';
-import PropTypes from 'prop-types';
-import { Grid, Header, Segment } from 'semantic-ui-react';
-import '../resources/css/Topo.css';
+import React, { Component } from "react";
+import DomainView from "./DomainView";
+import PropTypes from "prop-types";
+import { Grid, Header, Segment } from "semantic-ui-react";
+import "../resources/css/Topo.css";
 
 export default class PlatformView extends Component {
   static propTypes = {
-    treasureMapData: PropTypes.instanceOf(Object).isRequired,
+    treasureMapData: PropTypes.instanceOf(Object).isRequired
   };
 
   render() {
