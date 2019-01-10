@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const DEFAULT_REQUEST_CONFIG = {
   headers: {
@@ -23,13 +23,11 @@ const DEFAULT_REQUEST_CONFIG = {
   }
 };
 
-const _httpGetClient = (url, config) => axios.get(url, config);
-
-const getResource = async pathToResource => {
+const getResource = async (pathToResource: string | undefined) => {
   try {
-    const response = await _httpGetClient(`/${pathToResource}`, {
+    const response = await axios.get(`/${pathToResource}`, {
       transformResponse: [data => data],
-      DEFAULT_REQUEST_CONFIG
+      ...DEFAULT_REQUEST_CONFIG
     });
     return JSON.parse(response.data);
   } catch (error) {
@@ -38,13 +36,16 @@ const getResource = async pathToResource => {
   }
 };
 
-function _buildErrorMessage(error, pathToResource) {
+function _buildErrorMessage(
+  error: AxiosError,
+  pathToResource: string | undefined
+) {
   return error.response && error.response.status === 404
     ? `File not found: ${pathToResource}`
     : `Error parsing JSON file: ${pathToResource} \n ${_formatError(error)}`;
 }
 
-function _formatError(error) {
+function _formatError(error: Error) {
   // Remove all new or return characters
   return error.toString().replace(/(?:\r\n|\r|\n)/g, "");
 }

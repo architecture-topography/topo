@@ -16,7 +16,7 @@
 
 import { getResource } from "./resourceLoaderApi";
 
-import * as axios from "axios";
+import axios from "axios";
 
 jest.mock("axios");
 
@@ -29,7 +29,7 @@ describe("ResourceLoaderApi", () => {
 
   describe("getResource", () => {
     it("should parse the JSON response and return a valid object", async () => {
-      axios.get.mockImplementation(() =>
+      axios.get = jest.fn(() =>
         Promise.resolve({ data: '{ "key": "Test data" }' })
       );
       const response = await getResource(pathToFakeFile);
@@ -44,7 +44,7 @@ describe("ResourceLoaderApi", () => {
         }
       };
 
-      axios.get.mockImplementation(() => Promise.reject(error));
+      axios.get = jest.fn(() => Promise.reject(error));
       await expect(getResource(pathToFakeFile)).rejects.toMatchObject({
         message: "File not found: any/path/to/file.json"
       });
@@ -52,7 +52,7 @@ describe("ResourceLoaderApi", () => {
     });
 
     it("should throw Exception when file is not proper JSON", async () => {
-      axios.get.mockImplementation(() =>
+      axios.get = jest.fn(() =>
         Promise.resolve({ data: '{ malformedKey": "Test data" }' })
       );
 
