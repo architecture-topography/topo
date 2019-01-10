@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import "../resources/css/ErrorBoundary.css";
-
+import styles from "./ErrorBoundary.module.css";
 import React from "react";
 import PropTyes from "prop-types";
 
@@ -49,7 +48,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError || this.props.displayError) {
       return (
-        <div className="ErrorBoundary">
+        <div className={styles.container}>
           <h1>Oops!!! Something went wrong...</h1>
           <h2>{this.props.message}</h2>
         </div>
