@@ -20,13 +20,17 @@ import React, { ReactElement } from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
 import { register } from "./serviceWorker";
-import { getResource } from "./actions/resourceLoaderApi";
 import ErrorBoundary from "./components/ErrorBoundary";
+import * as AssetFile from "./actions/assetLoader";
+import * as ConfigFile from "./actions/configLoader";
 
 const pathToConfigFile = process.env.REACT_APP_CONFIG_FILE;
 const pathToAssetsFile = process.env.REACT_APP_ASSETS_FILE;
 
-Promise.all([getResource(pathToConfigFile), getResource(pathToAssetsFile)])
+Promise.all([
+  ConfigFile.load(pathToConfigFile),
+  AssetFile.load(pathToAssetsFile)
+])
   .then(([config, assets]) => {
     renderDom(<App config={config} systems={assets} />);
     register();
