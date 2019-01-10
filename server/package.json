@@ -1,0 +1,8 @@
+{
+  "name": "topo-server",
+  "version": "1.0.0",
+  "description": "Server for topo",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "private": false
+}
