@@ -4,5 +4,16 @@
   "description": "Server for topo",
   "main": "index.js",
   "license": "Apache-2.0",
-  "private": false
+  "private": false,
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "apollo-server": "^2.3.1",
+    "graphql": "^14.0.2"
+  },
+  "devDependencies": {
+    "apollo-server-testing": "^2.3.1",
+    "jest": "^23.6.0"
+  }
 }
