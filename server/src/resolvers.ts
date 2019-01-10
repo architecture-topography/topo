@@ -1,7 +1,5 @@
-const resolvers = {
+export default {
   Query: {
     hello: () => "Hello, Topo"
   }
 };
-
-module.exports = resolvers;
