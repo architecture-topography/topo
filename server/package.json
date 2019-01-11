@@ -14,7 +14,8 @@
     "dotenv": "^6.2.0",
     "graphql": "^14.0.2",
     "graphql-import": "^0.7.1",
-    "neo4j-driver": "^1.7.2"
+    "neo4j-driver": "^1.7.2",
+    "typescript": "^3.2.2"
   },
   "devDependencies": {
     "apollo-server-testing": "^2.3.1",
