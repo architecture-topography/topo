@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:10-alpine
 ADD . /var/app
 WORKDIR /var/app
 RUN yarn install
