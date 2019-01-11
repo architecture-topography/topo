@@ -19,7 +19,7 @@ describe("resolvers", () => {
         const mockQueries = {
           findPlatforms: jest.fn().mockResolvedValue(stubPlatforms)
         };
-        const stubContext = () => ({ queries: mockQueries });
+        const stubContext = { queries: mockQueries };
 
         const platforms = await resolvers.Query.getPlatforms(
           platform,
