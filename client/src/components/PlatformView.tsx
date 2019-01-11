@@ -16,15 +16,15 @@
 
 import React, { Component } from "react";
 import DomainView from "./DomainView";
-import PropTypes from "prop-types";
 import { Grid, Header, Segment } from "semantic-ui-react";
 import "../resources/css/Topo.css";
+import { TreasureMapData } from "../domain/treasureMap";
 
-export default class PlatformView extends Component {
-  static propTypes = {
-    treasureMapData: PropTypes.instanceOf(Object).isRequired
-  };
+interface Props {
+  treasureMapData: TreasureMapData;
+}
 
+export default class PlatformView extends Component<Props> {
   render() {
     return (
       <Grid columns="equal">
