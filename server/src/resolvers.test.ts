@@ -21,7 +21,7 @@ describe("resolvers", () => {
         };
         const stubContext = { queries: mockQueries };
 
-        const platforms = await resolvers.Query.getPlatforms(
+        const platforms = await resolvers.Query.platforms(
           platform,
           null,
           stubContext
