@@ -1,3 +1,9 @@
 type Query {
   hello: String!
+  getPlatforms: [Platform]!
+}
+
+type Platform {
+  id: ID!
+  name: String!
 }
