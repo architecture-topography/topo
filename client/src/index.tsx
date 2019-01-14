@@ -23,6 +23,12 @@ import { register } from "./serviceWorker";
 import ErrorBoundary from "./components/ErrorBoundary";
 import * as AssetFile from "./actions/assetLoader";
 import * as ConfigFile from "./actions/configLoader";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+
+const client = new ApolloClient({
+  uri: process.env.REACT_APP_SERVER_URI
+});
 
 const pathToConfigFile = process.env.REACT_APP_CONFIG_FILE;
 const pathToAssetsFile = process.env.REACT_APP_ASSETS_FILE;
@@ -32,7 +38,11 @@ Promise.all([
   AssetFile.load(pathToAssetsFile)
 ])
   .then(([config, assets]) => {
-    renderDom(<App config={config} systems={assets} />);
+    renderDom(
+      <ApolloProvider client={client}>
+        <App config={config} systems={assets} />
+      </ApolloProvider>
+    );
     register();
   })
   .catch(error => {

@@ -4,6 +4,10 @@ services:
     build: ./client
     ports: 
       - "5000:5000"
+    links:
+      - server
+    environment:
+      - REACT_APP_SERVER_URI="http://localhost:4000"
   db:
     build: ./db/test
     environment: 

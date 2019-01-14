@@ -20,6 +20,7 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import PlatformView from "./PlatformView";
+import PlatformViewContainer from "./PlatformViewContainer";
 import CapabilityView from "./CapabilityView";
 import DataMapper from "../helpers/dataMapper";
 import Header from "./Header";
@@ -76,6 +77,9 @@ class App extends Component {
       <ErrorBoundary
         message={"Please make sure your data is properly formatted."}
       >
+        <div>
+          <PlatformViewContainer />
+        </div>
         <div className="App">
           <HashRouter>
             <Switch>
