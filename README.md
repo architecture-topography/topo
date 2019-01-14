@@ -4,8 +4,18 @@
 At a number of clients we're doing serious Enterprise Architecture (in title case), in particular helping with the establishment of a town plan - business capability model, mapped to systems, data, ownership, health, dependencies and other attributes.
 
 ## Development
+The project is split into Client, Server and Database. There is a docker compose file to spin an instance for all of them up.
+```
+docker-compose up
+``` 
+The client starts up under http://localhost:5000
 
-### Setup
+The server http://localhost:4000
+
+The database browser interface http://localhost:7474/browser/
+
+### Setup Client locally 
+Go into client folder
 Run `yarn install` to install all the dependencies
 
 ### Run
@@ -42,7 +52,7 @@ You can run the build server as follows:
 /usr/local/bin/gitlab-ci-multi-runner run
 ```
 
-## Deployment
+## Deployment (old)
 
 After running `yarn build`, the artifact can be deployed to an AWS S3 bucket for example. At runtime, the app will need two files to be loaded:
 - `config.json`: this file contains the initial mapping between `Platforms` -> `Domains` -> `Capabilities`
