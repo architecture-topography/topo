@@ -1,2 +1,6 @@
 FROM neo4j:latest
 ENV NEO4J_AUTH=neo4j/test
+ENV NEO4J_dbms_connector_bolt_listen__address=localhost:7686
+ENV NEO4J_dbms_connector_bolt_advertised__address=localhost:7686
+EXPOSE 7474
+EXPOSE 7686
