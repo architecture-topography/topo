@@ -6,7 +6,18 @@ services:
       - "5000:5000"
   db:
     build: ./db/test
+    environment: 
+      - NEO4J_AUTH=neo4j/test
+    ports:
+      - "7687:7687"
+      - "7474:7474"
   server:
     build: ./server
     ports:
       - "4000:4000"
+    links:
+      - db
+    environment:
+      - NEO4J_URL=bolt://db:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=test
