@@ -8,13 +8,19 @@ The project is split into Client, Server and Database. There is a docker compose
 ```
 docker-compose up
 ``` 
-The client starts up under http://localhost:5000
+The prod build client starts up under http://localhost:5000
 
 The server http://localhost:4000
 
 The database browser interface http://localhost:7474/browser/
 
 ### Setup Client locally 
+It's very slow and inconvenient to have to re-build the docker images every time
+you make a change. So instead we recommend running the client in dev mode
+locally. This means that you end up with two versions of the client (on ports
+5000 and 3000) but with the added convenience of hot-reloading and all that
+good stuff.
+
 Go into client folder
 Run `yarn install` to install all the dependencies
 
