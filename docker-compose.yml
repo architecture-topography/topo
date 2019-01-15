@@ -1,11 +1,12 @@
 version: '3'
 services:
   web:
-    build: ./client
+    build:
+      context: ./client
+      args:
+        - REACT_APP_SERVER_URI=http://localhost:4000
     ports:
       - "5000:5000"
-    environment:
-      - REACT_APP_SERVER_URI="http://localhost:4000"
   db:
     build: ./db/test
     environment: 
