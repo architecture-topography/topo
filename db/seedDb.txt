@@ -16,8 +16,10 @@ CREATE
   (TW)-[:HAS]->(People),
   (TW)-[:HAS]->(PS)
 
+WITH TW as p
+MATCH(p)-[:HAS]->(d) RETURN p, d
+
+// show everything in the db
 MATCH(n) RETURN n
-
-
 
 
