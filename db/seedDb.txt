@@ -1,0 +1,23 @@
+// delete everything
+MATCH(n) DETACH DELETE n
+
+// Seed db (copy all statements in one go)
+CREATE (TW:Platform {name:'TW'})
+CREATE (Demand:Domain {name:'Demand'})
+CREATE (Staffing:Domain {name:'Staffing'})
+CREATE (Finance:Domain {name:'Finance'})
+CREATE (People:Domain {name:'People'})
+CREATE (PS:Domain {name:'Professional Services'})
+
+CREATE
+  (TW)-[:HAS]->(Demand),
+  (TW)-[:HAS]->(Staffing),
+  (TW)-[:HAS]->(Finance),
+  (TW)-[:HAS]->(People),
+  (TW)-[:HAS]->(PS)
+
+MATCH(n) RETURN n
+
+
+
+
