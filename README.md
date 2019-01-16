@@ -6,9 +6,9 @@ At a number of clients we're doing serious Enterprise Architecture (in title cas
 ## Development
 The project is split into Client, Server and Database. There is a docker compose file to spin an instance for all of them up.
 ```
-docker-compose up
+yarn docker-dev up
 ``` 
-The prod build client starts up under http://localhost:5000
+The client starts up under http://localhost:5000
 
 The server http://localhost:4000
 

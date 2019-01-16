@@ -17,7 +17,7 @@ describe("queries", () => {
 
       const platforms = await findPlatforms();
 
-      expect(platforms).toContainEqual({ name });
+      expect(platforms.map(platform => platform.name)).toContainEqual(name);
     });
   });
 
