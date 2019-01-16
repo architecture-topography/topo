@@ -27,7 +27,7 @@ const mocks = [
     },
     result: {
       data: {
-        platforms: [{ name: "TW_test", __typename: "Platform" }]
+        platforms: [{ id: "0", name: "TW_test", __typename: "Platform" }]
       }
     }
   }
