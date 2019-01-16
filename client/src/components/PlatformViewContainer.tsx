@@ -25,9 +25,7 @@ export default class PlatformViewContainer extends Component {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
           const platforms: Platform[] = data.platforms;
-          return platforms.map(platform => (
-            <h1 key={platform.id}>{platform.name}</h1>
-          ));
+          return <PlatformView treasureMapData={data} />;
         }}
       </Query>
     );

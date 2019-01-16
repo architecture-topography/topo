@@ -77,9 +77,6 @@ class App extends Component {
       <ErrorBoundary
         message={"Please make sure your data is properly formatted."}
       >
-        <div>
-          <PlatformViewContainer />
-        </div>
         <div className="App">
           <HashRouter>
             <Switch>
@@ -89,6 +86,7 @@ class App extends Component {
                 render={() => (
                   <Container>
                     <Header />
+                    <PlatformViewContainer />
                     <PlatformView
                       treasureMapData={this.state.treasureMapData}
                     />

@@ -132,3 +132,7 @@ export default class DomainView extends Component {
     );
   }
 }
+
+DomainView.defaultProps = {
+  domains: []
+};
