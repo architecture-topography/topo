@@ -51,6 +51,7 @@ You can run the build server as follows:
 ## Decision Register
 
 We document our decisions in the doc/adr/ directory. Add a new subsequent file e.g. *0001-graphql-as-query-language.md* and follow the format used in previous decision registers.
+
 OR use [adr-tools](https://github.com/npryce/adr-tools) to easily create a new decision register file for your decision. 
 
 ## Deployment (old)
