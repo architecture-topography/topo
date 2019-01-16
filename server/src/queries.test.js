@@ -19,19 +19,19 @@ describe("queries", () => {
 
       expect(platforms.map(platform => platform.name)).toContainEqual(name);
     });
-  });
 
-  afterEach(async () => {
-    const session = driver.session();
+    afterEach(async () => {
+      const session = driver.session();
 
-    try {
-      await session.run(
-        "MATCH (platform:Platform { name: $name }) DELETE platform",
-        { name }
-      );
-    } finally {
-      session.close();
-    }
-    driver.close();
+      try {
+        await session.run(
+          "MATCH (platform:Platform { name: $name }) DELETE platform",
+          { name }
+        );
+      } finally {
+        session.close();
+      }
+      driver.close();
+    });
   });
 });
