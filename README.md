@@ -50,9 +50,31 @@ You can run the build server as follows:
 
 ## Decision Register
 
-We document our decisions in the doc/adr/ directory. Add a new subsequent file e.g. *0001-graphql-as-query-language.md* and follow the format used in previous decision registers.
+We document our decisions in the *doc/adr/* directory. Add a new subsequent file e.g. *0001-this-is-the-title.md* and follow the content format explained below.
 
-OR use [adr-tools](https://github.com/npryce/adr-tools) to easily create a new decision register file for your decision. 
+OR use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision. 
+
+```
+# 1. *This is the title*
+
+Date: 2019-01-17
+
+## Status
+
+Accepted
+
+## Context
+
+The issue motivating this decision, and any context that influences or constrains the decision.
+
+## Decision
+
+The change that we're proposing or have agreed to implement.
+
+## Consequences
+
+What becomes easier or more difficult to do and any risks introduced by the change that will need to be mitigated.
+```
 
 ## Deployment (old)
 
