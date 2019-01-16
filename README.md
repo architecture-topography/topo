@@ -48,6 +48,11 @@ You can run the build server as follows:
 /usr/local/bin/gitlab-ci-multi-runner run
 ```
 
+## Decision Register
+
+We document our decisions in the doc/adr/ directory. Add a new subsequent file e.g. *0001-graphql-as-query-language.md* and follow the format used in previous decision registers.
+OR use [adr-tools](https://github.com/npryce/adr-tools) to easily create a new decision register file for your decision. 
+
 ## Deployment (old)
 
 After running `yarn build`, the artifact can be deployed to an AWS S3 bucket for example. At runtime, the app will need two files to be loaded:
