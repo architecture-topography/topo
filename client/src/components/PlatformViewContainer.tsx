@@ -3,11 +3,6 @@ import { Query } from "react-apollo";
 import PlatformView from "./PlatformView";
 import React, { Component } from "react";
 
-interface Platform {
-  name: string;
-  id: string;
-}
-
 export const GET_PLATFORMS = gql`
   {
     platforms {
@@ -24,7 +19,6 @@ export default class PlatformViewContainer extends Component {
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
-          const platforms: Platform[] = data.platforms;
           return <PlatformView treasureMapData={data} />;
         }}
       </Query>

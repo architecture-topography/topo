@@ -7,6 +7,6 @@ services:
     ports:
       - "5000:3000"
   server:
-    command: yarn start-dev
+    command: yarn start
     volumes:
       - ./server/src:/var/app/src

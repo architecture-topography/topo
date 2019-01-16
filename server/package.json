@@ -6,8 +6,8 @@
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
-    "start-dev": "NODE_ENV=dev yarn nodemon",
-    "start": "NODE_ENV=dev ts-node src",
+    "start": "NODE_ENV=dev yarn nodemon",
+    "start-prod": "NODE_ENV=dev ts-node src",
     "test": "jest"
   },
   "dependencies": {

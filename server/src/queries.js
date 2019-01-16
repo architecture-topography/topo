@@ -5,7 +5,7 @@ const findPlatforms = async () => {
 
   try {
     const result = await session.run(
-      "MATCH (platform:Platform) RETURN id(platform) as id, platform"
+      "MATCH (platform:Platform) RETURN platform"
     );
 
     return result.records.map(x => {

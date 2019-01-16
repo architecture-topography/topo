@@ -8,5 +8,5 @@ ENV PATH="/var/app/node_modules/.bin/:${PATH}"
 
 RUN yarn install
 RUN yarn build
-CMD serve -s build
+CMD yarn start-prod
 EXPOSE 5000
