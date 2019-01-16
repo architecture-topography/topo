@@ -1,22 +1,15 @@
 version: '3'
 services:
   db:
-    build: ./db/test
     environment: 
       - NEO4J_AUTH=neo4j/test
     ports:
       - "7687:7687"
       - "7474:7474"
   server:
-    build: ./server
     ports:
       - "4000:4000"
     environment:
       - NEO4J_URL=bolt://db:7687
       - NEO4J_USER=neo4j
       - NEO4J_PASSWORD=test
-  web:
-    build:
-      context: ./client
-      args:
-        - REACT_APP_SERVER_URI=http://localhost:4000

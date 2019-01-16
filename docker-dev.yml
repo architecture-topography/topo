@@ -1,6 +1,10 @@
 version: '3'
 services:
   web:
+    build:
+      context: ./client
+      args:
+        - REACT_APP_SERVER_URI=http://localhost:4000
     command: yarn start
     volumes:
       - ./client/src:/var/app/src
@@ -10,3 +14,6 @@ services:
     command: yarn start
     volumes:
       - ./server/src:/var/app/src
+    build: ./server
+  db:
+    build: ./db/test
