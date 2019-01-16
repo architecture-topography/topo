@@ -5,7 +5,9 @@
     "server"
   ],
   "scripts": {
-    "prettier": "prettier --write '**/*.{ts,js,graphql}?(x)'"
+    "prettier": "prettier --write '**/*.{ts,js,graphql}?(x)'",
+    "docker-prod": "docker-compose -f docker-base.yml -f docker-prod.yml",
+    "docker-dev": "docker-compose -f docker-base.yml -f docker-dev.yml"
   },
   "husky": {
     "hooks": {
