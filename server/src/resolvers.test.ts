@@ -11,8 +11,9 @@ describe("resolvers", () => {
     describe("getPlatforms", () => {
       it("should return all platforms", async () => {
         const platform = {
-          id: "e71278fa-ba70-4043-9a39-9dce0497d5a3",
-          name: "TW"
+          id: "0",
+          name: "TW",
+          domains: [{ id: "1", name: "test domain" }]
         };
         const stubPlatforms = [platform];
 

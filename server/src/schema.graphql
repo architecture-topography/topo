@@ -6,4 +6,10 @@ type Query {
 type Platform {
   id: ID!
   name: String!
+  domains: [Domain!]!
+}
+
+type Domain {
+  id: ID!
+  name: String!
 }
