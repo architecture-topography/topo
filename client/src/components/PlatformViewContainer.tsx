@@ -8,6 +8,10 @@ export const GET_PLATFORMS = gql`
     platforms {
       name
       id
+      domains {
+        id
+        name
+      }
     }
   }
 `;

@@ -39,7 +39,7 @@ export default class DomainView extends Component {
   };
 
   getCapability(capabilities, count) {
-    if (capabilities.length >= count) {
+    if (capabilities && capabilities.length >= count) {
       return capabilities.find(capability => capability.order === count);
     } else {
       return null;

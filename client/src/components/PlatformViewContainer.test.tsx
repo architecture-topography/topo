@@ -27,7 +27,14 @@ const mocks = [
     },
     result: {
       data: {
-        platforms: [{ id: "0", name: "TW_test", __typename: "Platform" }]
+        platforms: [
+          {
+            id: "0",
+            name: "TW_test",
+            domains: [{ id: "1", name: "Katie", __typename: "Domain" }],
+            __typename: "Platform"
+          }
+        ]
       }
     }
   }
@@ -45,5 +52,17 @@ describe("PlatformViewContainer", () => {
     component.update();
 
     expect(component.debug()).toContain("TW_test");
+  });
+  it("renders a domain", async () => {
+    const component = mount(
+      <MockedProvider mocks={mocks}>
+        <PlatformViewContainer />
+      </MockedProvider>
+    );
+
+    await wait(0);
+    component.update();
+
+    expect(component.debug()).toContain("Katie");
   });
 });
