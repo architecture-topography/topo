@@ -1,8 +1,5 @@
-<h1 align="center">TOPO</h1>
-<br/>
-
 <p align="center">
-  <img align="center" src="client/src/resources/img/Topo-02.png" width="250" />
+  <img align="center" src="client/src/resources/img/Topo-02.png" width="250" alt="TOPO" />
 </p>
 <br/>
 <br/>
