@@ -1,11 +1,7 @@
-#  TOPO
-
-&nbsp;
+# TOPO
 
 ## Description
-At a number of clients we're doing serious Enterprise Architecture (in title case), in particular helping with the establishment of a town plan - business capability model, mapped to systems, data, ownership, health, dependencies and other attributes.
-
-&nbsp;
+> At a number of clients we're doing serious Enterprise Architecture (in title case), in particular helping with the establishment of a town plan - business capability model, mapped to systems, data, ownership, health, dependencies and other attributes.
 
 ## Development
 The project is split into Client, Server and Database. There is a docker compose file to spin an instance for all of them up.
@@ -31,8 +27,6 @@ Run `yarn install` to install all the dependencies
 ### Test
 Use `yarn test` to launch the test runner in the interactive watch mode.
 
-&nbsp;
-
 ## Decision Register
 
 We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision. More details in the wiki.
@@ -45,8 +39,6 @@ Topo is released under [Apache 2.0 License](https://www.apache.org/licenses/LICE
 
 Copyright 2018 ThoughtWorks, Inc.
 
-&nbsp;
-___
 &nbsp;
 
 ## Old information
