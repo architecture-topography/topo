@@ -1,7 +1,11 @@
 #  TOPO
 
+
+
 ## Description
 At a number of clients we're doing serious Enterprise Architecture (in title case), in particular helping with the establishment of a town plan - business capability model, mapped to systems, data, ownership, health, dependencies and other attributes.
+
+
 
 ## Development
 The project is split into Client, Server and Database. There is a docker compose file to spin an instance for all of them up.
@@ -28,9 +32,11 @@ Run `yarn install` to install all the dependencies
 Use `yarn test` to launch the test runner in the interactive watch mode.
 
 
+
 ## Decision Register
 
 We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision.
+
 
 
 ## Deployment (old)
@@ -41,9 +47,13 @@ After running `yarn build`, the artifact can be deployed to an AWS S3 bucket for
 
 Both files must be located in the root folder of the project (e.g. `/build`). Deployment options can be found at [deployment](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment).
 
+
+
 ## License
 
 Topo is released under [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)
+
+
 
 ## Copyright
 
