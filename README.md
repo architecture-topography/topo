@@ -1,7 +1,12 @@
+<h1 align="center">TOPO</h1>
+<br/>
 
-<img src="client/src/resources/img/Topo-02.png" width="250">
+<p align="center">
+  <img align="center" src="client/src/resources/img/Topo-02.png" width="250" />
+</p>
+<br/>
+<br/>
 
-<h1>TOPO</h1>
 
 ## Description
 > At a number of clients we're doing serious Enterprise Architecture (in title case), in particular helping with the establishment of a town plan - business capability model, mapped to systems, data, ownership, health, dependencies and other attributes.
