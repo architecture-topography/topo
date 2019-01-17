@@ -35,7 +35,7 @@ Use `yarn test` to launch the test runner in the interactive watch mode.
 
 ## Decision Register
 
-We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision.
+We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision. More details in the wiki.
 
 
 
