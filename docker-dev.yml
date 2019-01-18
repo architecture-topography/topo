@@ -16,4 +16,13 @@ services:
       - ./server/src:/var/app/src
     build: ./server
   db:
-    build: ./db/test
+    build: ./db
+  db-test:
+    ports:
+      - "7688:7688"
+    environment:
+      - NEO4J_dbms_connector_bolt_listen__address=:7688
+      - NEO4J_dbms_connector_bolt_advertised__address=:7688
+    build:
+      context: ./db
+      dockerfile: Dockerfile

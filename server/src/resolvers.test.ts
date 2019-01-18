@@ -4,15 +4,10 @@ import { createTestClient } from "apollo-server-testing";
 import driver from "./neo";
 import { ApolloServerBase } from "apollo-server-core";
 
-// STEP ONE
-// import server - done
-// use test client to create integration tests
-//put data into db
-
 // STEP TWO
+// work out how to spin up test database
 // work out how to connect to test database
 // work out how to clean database
-// work out how to spin up test database
 
 describe("resolvers", () => {
   describe("hello", () => {
