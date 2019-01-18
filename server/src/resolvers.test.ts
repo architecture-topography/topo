@@ -1,13 +1,7 @@
 import resolvers from "./resolvers";
 import { testServer } from "./server";
 import { createTestClient } from "apollo-server-testing";
-import driver from "./neoTest";
-import { ApolloServerBase } from "apollo-server-core";
-
-// STEP TWO
-// work out how to spin up test database
-// work out how to connect to test database
-// work out how to clean database
+import { testDriver } from "./neo";
 
 describe("resolvers", () => {
   describe("hello", () => {
@@ -20,7 +14,7 @@ describe("resolvers", () => {
     const name = "Test Platform";
     const domainName = "Test Domain";
     it("should return all platforms", async () => {
-      const session = driver.session();
+      const session = testDriver.session();
       const { query } = createTestClient(testServer);
       try {
         await session.run(
@@ -64,7 +58,7 @@ describe("resolvers", () => {
     });
 
     afterEach(async () => {
-      const session = driver.session();
+      const session = testDriver.session();
 
       try {
         await session.run(
@@ -78,7 +72,7 @@ describe("resolvers", () => {
       } finally {
         session.close();
       }
-      driver.close();
+      testDriver.close();
     });
   });
 });

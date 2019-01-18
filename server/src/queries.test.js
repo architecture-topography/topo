@@ -1,12 +1,12 @@
-const driver = require("./neo");
-const { findPlatforms } = require("./queries")(driver);
+const { testDriver } = require("./neo");
+const { findPlatforms } = require("./queries")(testDriver);
 
 describe("queries", () => {
   describe("findPlatforms with Domains", () => {
     const name = "Test Platform";
     const domainName = "Test Domain";
     it("returns all the platforms", async () => {
-      const session = driver.session();
+      const session = testDriver.session();
 
       try {
         await session.run(
@@ -31,7 +31,7 @@ describe("queries", () => {
     });
 
     afterEach(async () => {
-      const session = driver.session();
+      const session = testDriver.session();
 
       try {
         await session.run(
@@ -45,7 +45,7 @@ describe("queries", () => {
       } finally {
         session.close();
       }
-      driver.close();
+      testDriver.close();
     });
   });
 });
