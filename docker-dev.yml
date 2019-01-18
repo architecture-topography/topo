@@ -23,6 +23,7 @@ services:
     environment:
       - NEO4J_dbms_connector_bolt_listen__address=:7688
       - NEO4J_dbms_connector_bolt_advertised__address=:7688
+      - NEO4J_AUTH=neo4j/test
     build:
       context: ./db
       dockerfile: Dockerfile

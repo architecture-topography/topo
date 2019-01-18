@@ -1,5 +1,5 @@
 const driver = require("./neo");
-const { findPlatforms } = require("./queries");
+const { findPlatforms } = require("./queries")(driver);
 
 describe("queries", () => {
   describe("findPlatforms with Domains", () => {

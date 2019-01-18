@@ -2,13 +2,21 @@ const { ApolloServer } = require("apollo-server");
 const resolvers = require("./resolvers").default;
 const { importSchema } = require("graphql-import");
 const queries = require("./queries");
+const driver = require("./neo");
+const testdriver = require("./neoTest");
 
 const typeDefs = importSchema(require.resolve("./schema.graphql"));
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => ({ queries })
+  context: () => ({ queries: queries(driver) })
 });
 
-module.exports = { server };
+const testServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: () => ({ queries: queries(testdriver) })
+});
+
+module.exports = { server, testServer };

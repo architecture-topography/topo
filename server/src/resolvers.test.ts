@@ -1,7 +1,7 @@
 import resolvers from "./resolvers";
-import { server } from "./server";
+import { testServer } from "./server";
 import { createTestClient } from "apollo-server-testing";
-import driver from "./neo";
+import driver from "./neoTest";
 import { ApolloServerBase } from "apollo-server-core";
 
 // STEP TWO
@@ -21,7 +21,7 @@ describe("resolvers", () => {
     const domainName = "Test Domain";
     it("should return all platforms", async () => {
       const session = driver.session();
-      const { query } = createTestClient(server);
+      const { query } = createTestClient(testServer);
       try {
         await session.run(
           `CREATE (platform:Platform { name: $name })

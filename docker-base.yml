@@ -11,5 +11,6 @@ services:
       - "4000:4000"
     environment:
       - NEO4J_URL=bolt://db:7687
+      - NEO4J_TEST_URL=bolt://db-test:7688
       - NEO4J_USER=neo4j
       - NEO4J_PASSWORD=test
