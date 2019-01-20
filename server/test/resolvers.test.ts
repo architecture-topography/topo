@@ -1,8 +1,8 @@
-import resolvers from "./resolvers";
-import { server } from "./server";
+import resolvers from "../src/resolvers";
+import { server } from "../src/server";
 import { createTestClient } from "apollo-server-testing";
-import { driver } from "./neo";
-import { clearDb } from "./testHelper";
+import { driver } from "../src/neo";
+import { clearDb } from "../src/testHelper";
 
 describe("resolvers", () => {
   describe("hello", () => {
