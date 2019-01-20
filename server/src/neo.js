@@ -9,13 +9,8 @@ const driver = neo4j.driver(
   neo4j.auth.basic(process.env.NEO4J_USER, process.env.NEO4J_PASSWORD)
 );
 
-const testDriver = neo4j.driver(
-  "bolt://localhost:7688",
-  neo4j.auth.basic(process.env.NEO4J_USER, process.env.NEO4J_PASSWORD)
-);
-
 process.on("exit", () => {
   driver.close();
 });
 
-module.exports = { driver, testDriver };
+module.exports = { driver };

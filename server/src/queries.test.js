@@ -1,12 +1,12 @@
-const { testDriver } = require("./neo");
-const { findPlatforms } = require("./queries")(testDriver);
+const { driver } = require("./neo");
+const { findPlatforms } = require("./queries")(driver);
 
 describe("queries", () => {
   describe("findPlatforms with Domains", () => {
     const name = "Test Platform";
     const domainName = "Test Domain";
     it("returns all the platforms", async () => {
-      const session = testDriver.session();
+      const session = driver.session();
 
       try {
         await session.run(
