@@ -1,5 +1,6 @@
 const { driver } = require("./neo");
 const { findPlatforms } = require("./queries")(driver);
+import { clearDb } from "./testHelper";
 
 describe("queries", () => {
   describe("findPlatforms with Domains", () => {
@@ -30,22 +31,6 @@ describe("queries", () => {
       expect(testPlatform.domains.length).toBe(1);
     });
 
-    afterEach(async () => {
-      const session = testDriver.session();
-
-      try {
-        await session.run(
-          "MATCH (platform:Platform { name: $name }) DETACH DELETE platform",
-          { name }
-        );
-        await session.run(
-          "MATCH (domain:Domain { name: $domainName }) DETACH DELETE domain",
-          { domainName }
-        );
-      } finally {
-        session.close();
-      }
-      testDriver.close();
-    });
+    afterEach(clearDb);
   });
 });

@@ -2,6 +2,7 @@ import resolvers from "./resolvers";
 import { server } from "./server";
 import { createTestClient } from "apollo-server-testing";
 import { driver } from "./neo";
+import { clearDb } from "./testHelper";
 
 describe("resolvers", () => {
   describe("hello", () => {
@@ -56,23 +57,6 @@ describe("resolvers", () => {
         name: "Test Platform"
       });
     });
-
-    afterEach(async () => {
-      const session = testDriver.session();
-
-      try {
-        await session.run(
-          "MATCH (platform:Platform { name: $name }) DETACH DELETE platform",
-          { name }
-        );
-        await session.run(
-          "MATCH (domain:Domain { name: $domainName }) DETACH DELETE domain",
-          { domainName }
-        );
-      } finally {
-        session.close();
-      }
-      testDriver.close();
-    });
+    afterEach(clearDb);
   });
 });
