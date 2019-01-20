@@ -18,4 +18,4 @@ Accepted
 
 ## Consequences
 
-* The project is cloud provider agnostic, which is a constraint of this project (should able to be run easily on any cloud provider instance).
+* The project is cloud provider agnostic, which is a constraint of this project (should be able to be run easily on any cloud provider instance).
