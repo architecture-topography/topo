@@ -23,6 +23,20 @@ export default class PlatformViewContainer extends Component {
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
+
+          // added for nicer display formatting until we do something about the capabilities - CAN DELETE THIS WHEN WE DO SOMETHING ABOUT CAPABILITIES
+          data.platforms.map((platform: any) => {
+            platform.domains.map((domain: any) => {
+              if (!domain.capabiltiies) {
+                domain.capabilities = [
+                  { name: "Capability 1", order: 1 },
+                  { name: "Capability 2", order: 2 },
+                  { name: "Capability 3", order: 3 }
+                ];
+              }
+            });
+          });
+
           return <PlatformView treasureMapData={data} />;
         }}
       </Query>
