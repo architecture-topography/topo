@@ -1,10 +1,10 @@
-const { groupBy, map } = require("lodash");
+import * as _ from "lodash";
 
-const queries = driver => ({
+const queries = (driver: any) => ({
   findPlatforms: async () => {
     const session = driver.session();
 
-    const getProperties = (record, name) => {
+    const getProperties = (record: any, name: any) => {
       const properties = record.get(name).properties;
       const id = record.get(name).identity.toString();
       return { ...properties, id };
@@ -15,12 +15,12 @@ const queries = driver => ({
         "MATCH (platform:Platform)-[:HAS]->(domain:Domain) RETURN platform,domain"
       );
 
-      const groupedRecordsByPlatform = groupBy(result.records, record => {
+      const groupedRecordsByPlatform = _.groupBy(result.records, record => {
         const id = record.get("platform").identity.toString();
         return id;
       });
 
-      const platforms = map(groupedRecordsByPlatform, records => {
+      const platforms = _.map(groupedRecordsByPlatform, records => {
         const platform = getProperties(records[0], "platform");
         const domains = records.map(edge => {
           return { ...getProperties(edge, "domain") };
