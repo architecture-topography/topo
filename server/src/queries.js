@@ -1,10 +1,10 @@
 import * as _ from "lodash";
 
-const queries = (driver: any) => ({
+const queries = driver => ({
   findPlatforms: async () => {
     const session = driver.session();
 
-    const getProperties = (record: any, name: any) => {
+    const getProperties = (record, name) => {
       const properties = record.get(name).properties;
       const id = record.get(name).identity.toString();
       return { ...properties, id };
