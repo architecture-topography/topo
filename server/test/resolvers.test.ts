@@ -1,8 +1,8 @@
 import resolvers from "../src/resolvers";
 import { server } from "../src/server";
 import { createTestClient } from "apollo-server-testing";
-import { driver } from "../src/neo";
-import { clearDb } from "../src/testHelper";
+import { clearDb } from "./testHelper";
+import { createTestPlatformAndDomain } from "./domainHelper";
 
 describe("resolvers", () => {
   describe("hello", () => {
@@ -12,25 +12,9 @@ describe("resolvers", () => {
   });
 
   describe("getPlatfroms", () => {
-    const name = "Test Platform";
-    const domainName = "Test Domain";
     it("should return all platforms", async () => {
-      const session = driver.session();
       const { query } = createTestClient(server);
-      try {
-        await session.run(
-          `CREATE (platform:Platform { name: $name })
-          CREATE (domain:Domain { name: $domainName })
-          CREATE (platform)-[:HAS]->(domain)
-        `,
-          {
-            name,
-            domainName
-          }
-        );
-      } finally {
-        session.close();
-      }
+      await createTestPlatformAndDomain();
 
       const QUERY = `
       query {
