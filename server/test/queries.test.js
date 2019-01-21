@@ -1,6 +1,6 @@
 const { driver } = require("../src/neo");
 const { findPlatforms } = require("../src/queries")(driver);
-import { clearDb } from "./helpers/testHelper";
+const { clearDb } = require("./helpers/testHelper");
 
 describe("queries", () => {
   describe("findPlatforms with Domains", () => {
