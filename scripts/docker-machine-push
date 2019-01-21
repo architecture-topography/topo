@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+aws s3 sync .docker/machine s3://topo-docker-machine

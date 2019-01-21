@@ -8,3 +8,4 @@ builds/
 assets.json
 config.json
 .history/.log
+.docker
