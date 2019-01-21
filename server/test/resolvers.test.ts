@@ -13,8 +13,9 @@ describe("resolvers", () => {
 
   describe("getPlatfroms", () => {
     it("should return all platforms", async () => {
+      const platformName = "Test Platform";
+      const domainName = "Test Domain";
       const { query } = createTestClient(server);
-      await createTestPlatformAndDomain();
 
       const QUERY = `
       query {
@@ -27,6 +28,7 @@ describe("resolvers", () => {
       }
       `;
 
+      await createTestPlatformAndDomain(platformName, domainName);
       const res = await query({
         query: QUERY
       });
