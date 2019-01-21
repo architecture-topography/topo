@@ -1,11 +1,11 @@
-const { ApolloServer, gql } = require("apollo-server");
-const { importSchema } = require("graphql-import");
-const { createTestClient } = require("apollo-server-testing");
+import { ApolloServer, gql } from "apollo-server";
+import { importSchema } from "graphql-import";
+import { createTestClient } from "apollo-server-testing";
 
 const typeDefs = importSchema(require.resolve("./schema.graphql"));
 
 describe("Schema definitions", () => {
-  let server;
+  let server: ApolloServer;
   let query;
 
   beforeAll(() => {
