@@ -1,4 +1,4 @@
-import { driver } from "../src/neo";
+import { driver } from "../../src/neo";
 
 export const clearDb = async () => {
   const session = driver.session();

@@ -1,4 +1,4 @@
-import { driver } from "../src/neo";
+import { driver } from "../../src/neo";
 
 export const createTestPlatformAndDomain = async () => {
   const name = "Test Platform";
