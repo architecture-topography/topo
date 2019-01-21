@@ -13,6 +13,7 @@
     "test-all": "yarn test && yarn test-int"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.120",
     "apollo-server": "^2.3.1",
     "dotenv": "^6.2.0",
     "graphql": "^14.0.2",
@@ -31,7 +32,7 @@
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",
     "setupFiles": [
-      "./testSetup"
+      "./testSetup.ts"
     ]
   }
 }

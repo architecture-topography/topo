@@ -1,8 +1,7 @@
 import { Platform } from "../src/domain";
-const { driver } = require("../src/neo");
-const { findPlatforms } = require("../src/queries")(driver);
-const { clearDb } = require("./helpers/testHelper");
-const { createTestPlatformAndDomain } = require("./helpers/domainHelper");
+import { findPlatforms } from "../src/queries";
+import { clearDb } from "./helpers/testHelper";
+import { createTestPlatformAndDomain } from "./helpers/domainHelper";
 
 describe("queries", () => {
   describe("findPlatforms with Domains", () => {
@@ -11,14 +10,15 @@ describe("queries", () => {
     it("returns all the platforms", async () => {
       await createTestPlatformAndDomain(platformName, domainName);
       const platforms = await findPlatforms();
-
       expect(
         platforms.map((platform: Platform) => platform.name)
       ).toContainEqual(platformName);
       const testPlatform = platforms.find(
         (platform: Platform) => platform.name === platformName
       );
-      expect(testPlatform.domains.length).toBe(1);
+      expect(testPlatform ? testPlatform.domains[0].name : "").toEqual(
+        domainName
+      );
     });
 
     afterEach(clearDb);

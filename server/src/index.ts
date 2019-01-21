@@ -1,6 +1,6 @@
 require("./dotenv");
 
-const { server } = require("./server");
+import server from "./server";
 
 server
   .listen()

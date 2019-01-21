@@ -1,5 +1,5 @@
 import { createTestClient } from "apollo-server-testing";
-import { server } from "./server";
+import server from "./server";
 
 it("should return hello", async () => {
   const expectedResponse = {
