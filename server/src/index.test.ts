@@ -1,5 +1,5 @@
-const { createTestClient } = require("apollo-server-testing");
-const { server } = require("./server");
+import { createTestClient } from "apollo-server-testing";
+import { server } from "./server";
 
 it("should return hello", async () => {
   const expectedResponse = {
