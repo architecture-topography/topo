@@ -6,16 +6,11 @@ export const createTestPlatformAndDomain = async (
 ) => {
   const session = driver.session();
   try {
-    await session.run(
-      `CREATE (platform:Platform { name: $platformName })
-          CREATE (domain:Domain { name: $domainName })
-          CREATE (platform)-[:HAS]->(domain)
-        `,
-      {
-        platformName,
-        domainName
-      }
-    );
+    await session.run(`
+        CREATE (platform:Platform { name: ${platformName} })
+        CREATE (domain:Domain { name: ${domainName} })
+        CREATE (platform)-[:HAS]->(domain)
+    `);
   } finally {
     session.close();
   }
