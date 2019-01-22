@@ -38,5 +38,5 @@ jobs:
           command: |-
             cd server
             yarn install
-            yarn test-all
+            yarn test
 
