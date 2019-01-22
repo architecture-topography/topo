@@ -19,7 +19,19 @@ jobs:
             yarn install
 
       - run:
-          name: Run Unit Tests
+          name: Run Server Unit Tests
           command: |
             cd server
             yarn test
+      - run:
+          name: Install client packages
+          command: |
+            cd client
+            yarn install
+
+      - run:
+          name: Run Client Unit Tests
+          command: |
+            cd client
+            yarn test
+    
