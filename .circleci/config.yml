@@ -37,7 +37,7 @@ jobs:
           paths:
             - server/node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-          
+
   test: 
     docker:
       - image: circleci/node:8.12
@@ -47,3 +47,9 @@ jobs:
           command: |
             cd server
             yarn test
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
