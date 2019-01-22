@@ -37,11 +37,11 @@ jobs:
           paths:
             - server/node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
   test: 
     docker:
       - image: circleci/node:8.12
     steps:
+      - checkout
       - run:
           name: Run Unit Tests
           command: |
