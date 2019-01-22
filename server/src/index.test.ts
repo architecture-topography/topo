@@ -3,7 +3,7 @@ import server from "./server";
 
 it("should return hello", async () => {
   const expectedResponse = {
-    hello: "Hello, TopoFAIL"
+    hello: "Hello, Topo"
   };
 
   const { query } = createTestClient(server);
