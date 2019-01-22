@@ -21,7 +21,7 @@ describe("Capability", () => {
   it("renders the correct content for Capability", () => {
     const capability = {
       name: "Capability 1",
-      description: "Capability description",
+      description: "Capability description FAIL",
       color: "red"
     };
 
