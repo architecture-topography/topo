@@ -35,7 +35,7 @@ jobs:
         
       # run tests!
       - run: 
-        command: |-
-          cd server
-          yarn test-all
+          command: |-
+            cd server
+            yarn test-all
 
