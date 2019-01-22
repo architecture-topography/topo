@@ -17,20 +17,9 @@ jobs:
           command: |
             cd server
             yarn install
-  test: 
-    docker:
-      - image: circleci/node:8.12
-    steps:
-      - checkout
-      
+
       - run:
           name: Run Unit Tests
           command: |
             cd server
             yarn test
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test
