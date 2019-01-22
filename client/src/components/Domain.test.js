@@ -39,7 +39,7 @@ describe("Domain", () => {
         .find(".domain-name")
         .at(0)
         .text()
-    ).toEqual(name);
+    ).toEqual(name + "fail");
     expect(
       wrapper
         .find(".domain-desc")
