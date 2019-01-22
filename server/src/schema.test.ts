@@ -6,19 +6,17 @@ const typeDefs = importSchema(require.resolve("./schema.graphql"));
 
 describe("Schema definitions", () => {
   let server: ApolloServer;
-  let query;
+  let query: any;
 
   beforeAll(() => {
     server = new ApolloServer({
       typeDefs,
       mocks: true
     });
-    query = createTestClient(server);
+    query = createTestClient(server).query;
   });
 
   it("Accepts platform query", async () => {
-    const { query } = createTestClient(server);
-
     const QUERY = `
     query {
       platforms{
@@ -35,8 +33,6 @@ describe("Schema definitions", () => {
   });
 
   it("Accepts platform query with embedded domains", async () => {
-    const { query } = createTestClient(server);
-
     const QUERY = `
     query {
       platforms{
