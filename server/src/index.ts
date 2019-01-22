@@ -1,4 +1,4 @@
-require("./dotenv");
+require("../testSetup");
 
 import server from "./server";
 
