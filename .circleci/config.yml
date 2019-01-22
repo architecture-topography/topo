@@ -7,41 +7,20 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.12
-
-    working_directory: ~/topo
-
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
       - run: yarn install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
       
       - run:
           name: Install server packages
           command: |
             cd server
             yarn install
-
-      - save_cache:
-          paths:
-            - server/node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
   test: 
     docker:
       - image: circleci/node:8.12
     steps:
-      - checkout
       - run:
           name: Run Unit Tests
           command: |
