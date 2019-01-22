@@ -34,8 +34,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: 
-        - cd server
-        - yarn test-all
-
+      - run: yarn jest
 
