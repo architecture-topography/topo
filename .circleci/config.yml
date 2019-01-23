@@ -46,9 +46,14 @@ jobs:
       - setup_remote_docker:    
 
       - run: 
-          name: Run Integration Tests
+          name: Setup Docker Build
           command: |
             docker-compose -f docker-base.yml -f docker-dev.yml build
             yarn docker-dev up -d
+
+      - run:
+          name: Run Server Integration tests
+          command: |
+            cd server
             yarn test-int
     
