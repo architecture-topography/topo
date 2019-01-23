@@ -1,0 +1,15 @@
+version: '3'
+services:
+  db:
+    build: ./db
+    ports:
+      - "7688:7688"
+    environment:
+      - NEO4J_dbms_connector_bolt_listen__address=:7688
+      - NEO4J_dbms_connector_bolt_advertised__address=:7688
+      - NEO4J_AUTH=neo4j/test
+  tests:
+    build: ./server
+    environment:
+      - NODE_ENV=test-int
+    command: tail -F anything
