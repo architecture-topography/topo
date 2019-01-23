@@ -12,7 +12,6 @@ export const GET_PLATFORMS = gql`
         id
         name
         capabilities {
-          id
           name
         }
       }
@@ -27,6 +26,7 @@ export default class PlatformViewContainer extends Component {
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
+
           return <PlatformView treasureMapData={data} />;
         }}
       </Query>

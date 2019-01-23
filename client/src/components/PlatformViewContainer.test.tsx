@@ -35,14 +35,14 @@ const mocks = [
               {
                 id: "1",
                 name: "Katie",
-                __typename: "Domain",
                 capabilities: [
                   {
                     id: "1",
-                    name: "Capability",
+                    name: "test capability",
                     __typename: "Capability"
                   }
-                ]
+                ],
+                __typename: "Domain"
               }
             ],
             __typename: "Platform"
