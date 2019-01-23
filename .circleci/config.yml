@@ -12,23 +12,17 @@ jobs:
       - checkout
 
       - run: yarn install
-      
-      - run:
-          name: Install server packages
-          command: |
-            cd server
-            yarn install
-
-      - run:
-          name: Run Server Unit Tests
-          command: |
-            cd server
-            yarn test
 
       - run:
           name: Install client packages
           command: |
             cd client
+            yarn install
+      
+      - run:
+          name: Install server packages
+          command: |
+            cd server
             yarn install
 
       - run:
@@ -38,23 +32,19 @@ jobs:
             yarn test
 
       - run:
-          name: install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-          environment:
-            DOCKERIZE_VERSION: v0.3.0
-
-      # - run:
-      #     name: Install Docker Compose
-      #     command: |
-      #       curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-      #       chmod +x ~/docker-compose
-      #       sudo mv ~/docker-compose /usr/local/bin/docker-compose
+          name: Run Server Unit Tests
+          command: |
+            cd server
+            yarn test
       
       - setup_remote_docker
 
       - run: 
-          name: Setup Docker Build
+          name: Build and Start Integration Test Docker Containers
           command: |
             docker-compose -f docker-int.yml up --build -d
-            sleep 5
+
+      - run:
+          name: Run Server Integration tests
+          command: |
             docker-compose -f docker-int.yml run tests yarn jest --forceExit test-int/
