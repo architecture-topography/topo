@@ -56,11 +56,8 @@ jobs:
           command: |
             docker-compose -f docker-base.yml -f docker-dev.yml build
             yarn docker-dev up -d
+            docker ps
             dockerize -wait tcp://localhost:7688 -timeout 5m
-
-      - run:
-          name: Run Server Integration tests
-          command: |
+            docker ps
             cd server
             yarn test-int
-    
