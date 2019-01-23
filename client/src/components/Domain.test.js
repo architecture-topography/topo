@@ -16,6 +16,7 @@
 
 import React from "react";
 import Domain from "./Domain";
+import { shallow } from "enzyme";
 
 describe("Domain", () => {
   it("renders the correct content for Domain", () => {

@@ -37,8 +37,8 @@ const mocks = [
                 name: "Katie",
                 capabilities: [
                   {
-                    id: "1",
                     name: "test capability",
+                    id: "657",
                     __typename: "Capability"
                   }
                 ],

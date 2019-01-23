@@ -13,6 +13,7 @@ export const GET_PLATFORMS = gql`
         name
         capabilities {
           name
+          id
         }
       }
     }

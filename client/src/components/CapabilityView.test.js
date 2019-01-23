@@ -16,6 +16,7 @@
 
 import React from "react";
 import CapabilityView from "./CapabilityView";
+import { shallow } from "enzyme";
 
 describe("Capability View", () => {
   let treasureMapData;

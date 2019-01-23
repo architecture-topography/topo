@@ -16,6 +16,7 @@
 
 import React from "react";
 import Capability from "./Capability";
+import { mount } from "enzyme";
 
 describe("Capability", () => {
   it("renders the correct content for Capability", () => {

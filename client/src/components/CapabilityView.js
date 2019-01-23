@@ -155,7 +155,7 @@ export default class CapabilityView extends Component {
     if (capability.systems) {
       systems = capability.systems.map((system, index) => {
         return (
-          <Card className="system-card">
+          <Card className="system-card" key={index}>
             <Accordion>
               <Accordion.Title
                 active={activeIndex.indexOf(index) !== -1}

@@ -27,10 +27,10 @@ interface Props {
 export default class PlatformView extends Component<Props> {
   render() {
     return (
-      <Grid columns="equal">
+      <Grid columns="1">
         {this.props.treasureMapData.platforms.map((platform, index) => {
           return (
-            <Grid columns="equal" key={index}>
+            <Grid columns="1" key={index}>
               <Grid.Column>
                 <Header
                   as="h1"
