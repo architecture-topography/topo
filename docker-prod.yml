@@ -2,8 +2,6 @@ version: '3'
 services:
   web:
     image: 756379631373.dkr.ecr.ap-southeast-2.amazonaws.com/web
-    ports:
-      - "5000:5000"
   server:
     image: 756379631373.dkr.ecr.ap-southeast-2.amazonaws.com/server
   db:
