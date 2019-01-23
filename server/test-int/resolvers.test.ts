@@ -40,7 +40,6 @@ describe("resolvers", () => {
       const res = await query({
         query: QUERY
       });
-      expect(true).toBe(false);
       expect(res.data).toBeDefined();
       expect(res.data ? res.data.platforms : []).toContainEqual({
         name: "Test Platform",

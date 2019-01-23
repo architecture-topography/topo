@@ -11,8 +11,6 @@ jobs:
     steps:
       - checkout
 
-      - run: yarn install
-
       - run:
           name: Install client packages
           command: |
