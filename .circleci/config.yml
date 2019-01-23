@@ -55,8 +55,6 @@ jobs:
       - run: 
           name: Setup Docker Build
           command: |
-            docker-compose -f docker-base.yml -f docker-dev.yml build
-            yarn docker-dev up -d
-            docker ps
-            cd server
-            yarn test-int
+            docker-compose -f docker-int.yml up --build -d
+            sleep 5
+            docker-compose -f docker-int.yml run tests yarn jest --forceExit test-int/
