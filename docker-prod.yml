@@ -6,3 +6,7 @@ services:
     image: 756379631373.dkr.ecr.ap-southeast-2.amazonaws.com/server
   db:
     image: 756379631373.dkr.ecr.ap-southeast-2.amazonaws.com/db
+    environment:
+      - NEO4J_dbms_memory_pagecache_size=128M
+      - NEO4J_dbms_memory_heap_initial__size=64M
+      - NEO4J_dbms_memory_heap_max__size=256M
