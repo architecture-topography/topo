@@ -1,3 +1,3 @@
-FROM neo4j:latest
+FROM neo4j:3.5
 EXPOSE 7474
 EXPOSE 7687
