@@ -9,12 +9,25 @@ CREATE (Finance:Domain {name:'Finance'})
 CREATE (People:Domain {name:'People'})
 CREATE (PS:Domain {name:'Professional Services'})
 
+CREATE(Billing: Capability {name: 'Billing'})
+CREATE(SellingWork: Capability {name: 'Selling work'})
+CREATE(ManagingAccounts: Capability {name: 'Managing Accounts'})
+CREATE(StaffingProjects: Capability {name: 'Staffing projects'})
+CREATE(LeaveTracking: Capability {name: 'Leave tracking'})
+CREATE(InvoicingClients: Capability {name: 'Invoicing clients'})
+
 CREATE
   (TW)-[:HAS]->(Demand),
   (TW)-[:HAS]->(Staffing),
   (TW)-[:HAS]->(Finance),
   (TW)-[:HAS]->(People),
   (TW)-[:HAS]->(PS)
+  (Demand)-[:DOES]->(SellingWork),
+  (Demand)-[:DOES]->(ManagingAccounts),
+  (Staffing)-[:DOES]->(StaffingProjects),
+  (People)-[:DOES]->(LeaveTracking),
+  (PS)-[:DOES]->(Billing),
+  (Finance)-[:DOES]->(InvoicingClients)
 
 WITH TW as p
 MATCH(p)-[:HAS]->(d) RETURN p, d

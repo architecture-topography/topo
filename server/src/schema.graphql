@@ -12,4 +12,10 @@ type Platform {
 type Domain {
   id: ID!
   name: String!
+  capabilities: [Capability!]!
+}
+
+type Capability {
+  id: ID!
+  name: String!
 }

@@ -51,4 +51,28 @@ describe("Schema definitions", () => {
     });
     expect(res.errors).toBeUndefined();
   });
+
+  it("Accepts platform query with embedded domains and capabilities", async () => {
+    const QUERY = `
+    query {
+      platforms{
+        name,
+        id,
+        domains {
+          id,
+          name,
+          capabilities {
+            id,
+            name
+          }
+        }
+      }
+    }
+    `;
+
+    const res = await query({
+      query: QUERY
+    });
+    expect(res.errors).toBeUndefined();
+  });
 });

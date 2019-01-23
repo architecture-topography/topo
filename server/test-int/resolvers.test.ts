@@ -15,6 +15,7 @@ describe("resolvers", () => {
     it("should return all platforms", async () => {
       const platformName = "Test Platform";
       const domainName = "Test Domain";
+      const capabilityName = "Test Capability";
       const { query } = createTestClient(server);
 
       const QUERY = `
@@ -22,25 +23,37 @@ describe("resolvers", () => {
         platforms{
           name,
           domains {
-            name
+            name,
+            capabilities {
+              name
+            }
           }
         }
       }
       `;
 
-      await createTestPlatformAndDomain(platformName, domainName);
+      await createTestPlatformAndDomain(
+        platformName,
+        domainName,
+        capabilityName
+      );
       const res = await query({
         query: QUERY
       });
 
       expect(res.data).toBeDefined();
       expect(res.data ? res.data.platforms : []).toContainEqual({
+        name: "Test Platform",
         domains: [
           {
-            name: "Test Domain"
+            name: "Test Domain",
+            capabilities: [
+              {
+                name: "Test Capability"
+              }
+            ]
           }
-        ],
-        name: "Test Platform"
+        ]
       });
     });
     afterEach(clearDb);

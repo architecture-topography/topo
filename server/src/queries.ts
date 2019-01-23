@@ -1,7 +1,7 @@
 import * as Neo4j from "neo4j-driver";
+import { values, groupBy, uniqBy } from "lodash";
 import { driver } from "./neo";
 import { Platform } from "./domain";
-import { values, groupBy } from "lodash";
 
 export const findPlatforms = async (): Promise<Platform[]> => {
   const session = driver.session();
@@ -14,7 +14,7 @@ export const findPlatforms = async (): Promise<Platform[]> => {
 
   try {
     const result = await session.run(
-      "MATCH (platform:Platform)-[:HAS]->(domain:Domain) RETURN platform,domain"
+      "MATCH (platform:Platform)-[:HAS]->(domain:Domain)-[:DOES]->(capability:Capability) RETURN platform,domain,capability"
     );
 
     const groupedRecordsByPlatform: any = groupBy(
@@ -25,18 +25,40 @@ export const findPlatforms = async (): Promise<Platform[]> => {
       }
     );
 
+    const groupedRecordsByDomain: any = groupBy(
+      result.records,
+      (record: Neo4j.v1.Record) => {
+        const id = record.get("domain").identity.toString();
+        return id;
+      }
+    );
+
     const platforms = values(groupedRecordsByPlatform).map(
       (records: Neo4j.v1.Record[]) => {
         const platform = getProperties(records[0], "platform");
-        const domains = records.map(edge => {
-          return { ...getProperties(edge, "domain") };
+        const domains = uniqBy(
+          records.map(edge => {
+            return { ...getProperties(edge, "domain") };
+          }),
+          "id"
+        );
+
+        const domainsWithCapabilities = domains.map(domain => {
+          const capabilities = groupedRecordsByDomain[domain.id].map(
+            (record: Neo4j.v1.Record) => {
+              return { ...getProperties(record, "capability") };
+            }
+          );
+          return { ...domain, capabilities };
         });
+
         return {
           ...platform,
-          domains
+          domains: domainsWithCapabilities
         };
       }
     );
+
     return platforms;
   } finally {
     session.close();

@@ -7,9 +7,16 @@ describe("queries", () => {
   describe("findPlatforms with Domains", () => {
     const platformName = "Test Platform";
     const domainName = "Test Domain";
+    const capabilityName = "Test Capability";
+
     it("returns all the platforms", async () => {
-      await createTestPlatformAndDomain(platformName, domainName);
+      await createTestPlatformAndDomain(
+        platformName,
+        domainName,
+        capabilityName
+      );
       const platforms = await findPlatforms();
+
       expect(
         platforms.map((platform: Platform) => platform.name)
       ).toContainEqual(platformName);
@@ -19,6 +26,9 @@ describe("queries", () => {
       expect(testPlatform ? testPlatform.domains[0].name : "").toEqual(
         domainName
       );
+      expect(
+        testPlatform ? testPlatform.domains[0].capabilities[0].name : ""
+      ).toEqual(capabilityName);
     });
 
     afterEach(clearDb);

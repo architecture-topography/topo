@@ -1,4 +1,4 @@
-require("../testSetup");
+require("../dotenv.ts");
 
 import server from "./server";
 
