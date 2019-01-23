@@ -49,6 +49,6 @@ jobs:
           name: Run Integration Tests
           command: |
             docker-compose -f docker-base.yml -f docker-dev.yml build
-            yarn docker-dev up
+            yarn docker-dev up -d
             yarn test-int
     
