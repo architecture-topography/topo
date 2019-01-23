@@ -19,7 +19,36 @@ jobs:
             yarn install
 
       - run:
-          name: Run Unit Tests
+          name: Run Server Unit Tests
           command: |
             cd server
             yarn test
+
+      - run:
+          name: Install client packages
+          command: |
+            cd client
+            yarn install
+
+      - run:
+          name: Run Client Unit Tests
+          command: |
+            cd client
+            yarn test
+
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+
+      - setup_remote_docker:    
+
+      - run: 
+          name: Run Integration Tests
+          command: |
+            docker-compose -f docker-base.yml -f docker-dev.yml build
+            yarn docker-dev up
+            yarn test-int
+    
