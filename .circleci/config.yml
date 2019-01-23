@@ -53,8 +53,8 @@ jobs:
       - run: 
           name: Setup Docker Build
           command: |
-            docker-compose -f docker-base.yml -f docker-dev.yml build
-            yarn docker-dev up -d
+            sudo docker-compose -f docker-base.yml -f docker-dev.yml build
+            sudo yarn docker-dev up -d
             docker ps
             cd server
             yarn test-int
