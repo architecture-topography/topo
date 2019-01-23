@@ -11,17 +11,33 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          key: client-dependency-cache-{{ checksum "client/package.json" }}
+
+      - restore_cache:
+          key: server-dependency-cache-{{ checksum "server/package.json" }}
+
       - run:
           name: Install client packages
           command: |
             cd client
             yarn install
-      
+
+      - save_cache:
+          key: client-dependency-cache-{{ checksum "client/package.json" }}
+          paths:
+            - client/node_modules
+
       - run:
           name: Install server packages
           command: |
             cd server
             yarn install
+      
+      - save_cache:
+          key: server-dependency-cache-{{ checksum "server/package.json" }}
+          paths:
+            - server/node_modules
 
       - run:
           name: Run Client Unit Tests
