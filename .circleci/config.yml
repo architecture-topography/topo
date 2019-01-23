@@ -40,11 +40,7 @@ jobs:
       - setup_remote_docker
 
       - run: 
-          name: Build and Start Integration Test Docker Containers
+          name: Build Integration Test Docker Containers + Run Integration Tests
           command: |
             docker-compose -f docker-int.yml up --build -d
-
-      - run:
-          name: Run Server Integration tests
-          command: |
             docker-compose -f docker-int.yml run tests yarn jest --forceExit test-int/
