@@ -49,15 +49,13 @@ jobs:
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
-      - setup_remote_docker:    
+      - setup_remote_docker:
       
       - run: 
           name: Setup Docker Build
           command: |
             docker-compose -f docker-base.yml -f docker-dev.yml build
             yarn docker-dev up -d
-            docker ps
-            dockerize -wait tcp://localhost:7688 -timeout 5m
             docker ps
             cd server
             yarn test-int
