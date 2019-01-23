@@ -40,7 +40,9 @@ export default class DomainView extends Component {
 
   getCapability(capabilities, count) {
     if (capabilities && capabilities.length >= count) {
-      return capabilities.find(capability => capability.order === count);
+      return capabilities.find(capability =>
+        capability.order ? capability.order === count : capability.name
+      );
     } else {
       return null;
     }
@@ -69,6 +71,7 @@ export default class DomainView extends Component {
         color = color && this.validHex(color) ? color : defaultDomainColor;
         domains[index].color = color;
         let capability = this.getCapability(capabilities, count);
+
         if (capability) {
           capability["color"] = color;
         }

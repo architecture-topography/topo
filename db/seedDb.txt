@@ -21,7 +21,7 @@ CREATE
   (TW)-[:HAS]->(Staffing),
   (TW)-[:HAS]->(Finance),
   (TW)-[:HAS]->(People),
-  (TW)-[:HAS]->(PS)
+  (TW)-[:HAS]->(PS),
   (Demand)-[:DOES]->(SellingWork),
   (Demand)-[:DOES]->(ManagingAccounts),
   (Staffing)-[:DOES]->(StaffingProjects),

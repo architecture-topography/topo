@@ -31,7 +31,20 @@ const mocks = [
           {
             id: "0",
             name: "TW_test",
-            domains: [{ id: "1", name: "Katie", __typename: "Domain" }],
+            domains: [
+              {
+                id: "1",
+                name: "Katie",
+                __typename: "Domain",
+                capabilities: [
+                  {
+                    id: "1",
+                    name: "Capability",
+                    __typename: "Capability"
+                  }
+                ]
+              }
+            ],
             __typename: "Platform"
           }
         ]
@@ -64,5 +77,18 @@ describe("PlatformViewContainer", () => {
     component.update();
 
     expect(component.debug()).toContain("Katie");
+  });
+
+  it("renders a capability", async () => {
+    const component = mount(
+      <MockedProvider mocks={mocks}>
+        <PlatformViewContainer />
+      </MockedProvider>
+    );
+
+    await wait(0);
+    component.update();
+
+    expect(component.debug()).toContain("Capability");
   });
 });
