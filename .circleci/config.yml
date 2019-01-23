@@ -56,10 +56,7 @@ jobs:
           command: |
             docker-compose -f docker-base.yml -f docker-dev.yml build
             yarn docker-dev up -d
-      
-      - run:
-          name: Wait for db
-          command: dockerize -wait tcp://localhost:7688 -timeout 1m
+            dockerize -wait tcp://localhost:7688 -timeout 5m
 
       - run:
           name: Run Server Integration tests
