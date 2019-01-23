@@ -41,4 +41,5 @@ jobs:
           name: Build Integration Test Docker Containers + Run Integration Tests
           command: |
             docker-compose -f docker-int.yml up --build -d
+            sleep 5
             docker-compose -f docker-int.yml run tests yarn jest --forceExit test-int/
