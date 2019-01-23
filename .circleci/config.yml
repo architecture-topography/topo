@@ -37,6 +37,12 @@ jobs:
             yarn test
 
       - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+
+      - run:
           name: Install Docker Compose
           command: |
             curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
@@ -44,12 +50,16 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
       - setup_remote_docker:    
-
+      
       - run: 
           name: Setup Docker Build
           command: |
             docker-compose -f docker-base.yml -f docker-dev.yml build
             yarn docker-dev up -d
+      
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:7688 -timeout 1m
 
       - run:
           name: Run Server Integration tests
