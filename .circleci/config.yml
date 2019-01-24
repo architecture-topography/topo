@@ -33,13 +33,13 @@ jobs:
             - server/node_modules
 
       - run:
-          name: [Client] Run Unit Tests
+          name: '[Client] Run Unit Tests'
           command: |
             cd client
             yarn test
 
       - run:
-          name: [Server] Run Unit Tests
+          name: '[Server] Run Unit Tests'
           command: |
             cd server
             yarn test
