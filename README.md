@@ -11,7 +11,7 @@
 <br/>
 
 ## Description
-> At a number of clients we're doing serious Enterprise Architecture (in title case), in particular helping with the establishment of a town plan - business capability model, mapped to systems, data, ownership, health, dependencies and other attributes.
+> Topo is a living, interactive, queryable visual map of an organisation's software systems - what they are, how they are grouped together, and how they relate to each other.<br/><br/>Topo has two major components - 1) the rumour-mill: an automated aggregator that can combine together multiple overlapping sources of data to build a trustworthy repository of system information.  These might include traditional CMDBs, service registries, even source repositories and monitoring tools.  Also 2) a visualisation tool that allows users to interactively navigate the system information and answer questions.
 
 ## Development
 The project is split into Client, Server and Database. There is a docker compose file to spin an instance for all of them up.
