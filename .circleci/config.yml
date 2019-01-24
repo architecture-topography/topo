@@ -13,8 +13,9 @@ jobs:
 
       - restore_cache:
           name: Restore Cache
-          key: node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
-          key: node-dependency-cache-
+          key: 
+            - node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
+            - node-dependency-cache-
 
       - run:
           name: Install Dependencies
