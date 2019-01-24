@@ -9,6 +9,6 @@ it("should return hello", async () => {
   const { query } = createTestClient(server);
 
   const response = await query({ query: "query { hello }" });
-  expect(true).toBe(false);
+
   expect(response.data).toEqual(expectedResponse);
 });
