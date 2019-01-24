@@ -1,5 +1,5 @@
 <p align="right">
-  <img align="right" src="https://circleci.com/gh/architecture-topology/topo/tree/master.svg?style=svg&circle-token=2e4d21d7c386a802037b25ff4fd198899628c955" />
+  <img align="right" src="https://circleci.com/gh/architecture-topography/topo.svg?style=svg&circle-token=2e4d21d7c386a802037b25ff4fd198899628c955" />
 </p>
 <br />
 
