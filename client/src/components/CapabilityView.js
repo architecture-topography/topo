@@ -16,6 +16,10 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import gql from "graphql-tag";
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
+import { InMemoryCache } from "apollo-cache-inmemory";
 import {
   Grid,
   Header,
@@ -27,8 +31,40 @@ import {
 } from "semantic-ui-react";
 import "../resources/css/Topo.css";
 
+export const GET_PLATFORMS = gql`
+  {
+    platforms {
+      name
+      id
+      domains {
+        id
+        name
+        capabilities {
+          name
+          id
+        }
+      }
+    }
+  }
+`;
+
+const httpLink = createHttpLink({
+  uri: process.env.REACT_APP_SERVER_URI
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+  connectToDevTools: true
+});
+
 export default class CapabilityView extends Component {
-  state = { activeIndex: [] };
+  state = { activeIndex: [], gqlPlatforms: [] };
+
+  async componentDidMount() {
+    const gqlPlatforms = await this.getPlatforms();
+    this.setState({ gqlPlatforms: gqlPlatforms });
+  }
 
   handleClick = (e, titleProps) => {
     const { index } = titleProps;
@@ -75,13 +111,16 @@ export default class CapabilityView extends Component {
     return capabilityList;
   }
 
-  getCapabilityFromId() {
+  getCapabilityFromId = gqlPlatforms => {
     let platform;
     let domain;
     let capability;
 
-    for (let i = 0; i < this.props.treasureMapData.platforms.length; i++) {
-      platform = this.props.treasureMapData.platforms[i];
+    const jsonPlatforms = this.props.treasureMapData.platforms;
+    const allPlatforms = [...gqlPlatforms, ...jsonPlatforms];
+
+    for (let i = 0; i < allPlatforms.length; i++) {
+      platform = allPlatforms[i];
       for (let j = 0; j < platform.domains.length; j++) {
         domain = platform.domains[j];
 
@@ -96,11 +135,22 @@ export default class CapabilityView extends Component {
       }
     }
 
-    return null;
-  }
+    return;
+  };
+
+  getPlatforms = async () => {
+    const { data } = await client.query({
+      query: GET_PLATFORMS
+    });
+    return data.platforms;
+  };
 
   render() {
-    const capability = this.getCapabilityFromId();
+    const { gqlPlatforms } = this.state;
+    let capability =
+      gqlPlatforms.length > 0
+        ? this.getCapabilityFromId(gqlPlatforms)
+        : undefined;
 
     if (!capability) {
       return (

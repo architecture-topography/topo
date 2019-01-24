@@ -55,6 +55,9 @@ describe("Capability View", () => {
         capabilityId={capabilityId}
       />
     );
+
+    wrapper.setState({ gqlPlatforms: treasureMapData.platforms });
+
     expect(
       wrapper
         .find("Header")
@@ -79,6 +82,7 @@ describe("Capability View", () => {
         capabilityId={capabilityId}
       />
     );
+    wrapper.setState({ gqlPlatforms: treasureMapData.platforms });
     const accordionWrapper = shallow(wrapper.find("Accordion").get(0));
 
     ["Capability 2", "Capability 3"].forEach((element, index) => {
@@ -102,6 +106,7 @@ describe("Capability View", () => {
         capabilityId={capabilityId}
       />
     );
+    wrapper.setState({ gqlPlatforms: treasureMapData.platforms });
     const accordionWrapper = shallow(wrapper.find("Accordion").get(0));
 
     expect(accordionWrapper.find("#no-capabilities-text")).toHaveLength(1);
@@ -123,6 +128,7 @@ describe("Capability View", () => {
         capabilityId={capabilityId}
       />
     );
+    wrapper.setState({ gqlPlatforms: treasureMapData.platforms });
     const accordionWrapper = shallow(wrapper.find("Accordion").get(0));
     const listWrapper = accordionWrapper.find("List");
 
