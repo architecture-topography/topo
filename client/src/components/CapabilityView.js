@@ -86,46 +86,40 @@ export default class CapabilityView extends Component {
   };
 
   getListOfAllCapabilities() {
-    let platform;
-    let domain;
-    let capability;
+    const allPlatforms = this.mergeAllPlatforms();
     let capabilityList = [];
 
-    for (let i = 0; i < this.props.treasureMapData.platforms.length; i++) {
-      platform = this.props.treasureMapData.platforms[i];
-      for (let j = 0; j < platform.domains.length; j++) {
-        domain = platform.domains[j];
-        for (let k = 0; k < domain.capabilities.length; k++) {
-          capability = domain.capabilities[k];
+    allPlatforms.map(platform => {
+      return platform.domains.map(domain => {
+        return domain.capabilities.map(capability => {
           capabilityList.push(capability);
-        }
-      }
-    }
-    // sort capability list by capability id
+        });
+      });
+    });
+
     capabilityList.sort((a, b) => {
-      if (a.id < b.id) return -1;
-      else if (a.id > b.id) return 1;
-      return 0;
+      return parseInt(a.id) - parseInt(b.id);
     });
 
     return capabilityList;
   }
 
-  getCapabilityFromId = gqlPlatforms => {
-    let platform;
-    let domain;
-    let capability;
-
+  mergeAllPlatforms() {
+    const gqlPlatforms = this.state.gqlPlatforms;
     const jsonPlatforms = this.props.treasureMapData.platforms;
-    const allPlatforms = [...gqlPlatforms, ...jsonPlatforms];
+
+    return [...jsonPlatforms, ...gqlPlatforms];
+  }
+
+  getCapabilityFromId() {
+    const allPlatforms = this.mergeAllPlatforms();
 
     for (let i = 0; i < allPlatforms.length; i++) {
-      platform = allPlatforms[i];
+      let platform = allPlatforms[i];
       for (let j = 0; j < platform.domains.length; j++) {
-        domain = platform.domains[j];
-
+        let domain = platform.domains[j];
         for (let k = 0; k < domain.capabilities.length; k++) {
-          capability = domain.capabilities[k];
+          let capability = domain.capabilities[k];
           if (capability.id === this.props.capabilityId) {
             capability.domain = domain;
             capability.platformName = platform.name;
@@ -134,9 +128,7 @@ export default class CapabilityView extends Component {
         }
       }
     }
-
-    return;
-  };
+  }
 
   getPlatforms = async () => {
     const { data } = await client.query({
@@ -148,9 +140,9 @@ export default class CapabilityView extends Component {
   render() {
     const { gqlPlatforms } = this.state;
     let capability =
-      gqlPlatforms.length > 0
-        ? this.getCapabilityFromId(gqlPlatforms)
-        : undefined;
+      gqlPlatforms.length > 0 ? this.getCapabilityFromId() : undefined;
+
+    this.getListOfAllCapabilities();
 
     if (!capability) {
       return (
