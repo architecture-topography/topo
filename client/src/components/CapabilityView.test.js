@@ -108,7 +108,6 @@ describe("Capability View", () => {
   });
 
   it("capability links to the correct capability page", () => {
-    console.log("lol");
     // for each capability in "others" link is correct
     const capabilityId = "capability-1";
     const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
