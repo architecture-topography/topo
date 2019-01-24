@@ -18,7 +18,11 @@ jobs:
           name: ls client
           command: |
             ls
+            echo "___"
             cd client
+            ls
+            echo "___"
+            cd node_modules
             ls
     
       - run:
