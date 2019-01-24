@@ -12,54 +12,34 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: client-dependency-cache-{{ checksum "client/yarn.lock" }}
-
-      - restore_cache:
-          key: server-dependency-cache-{{ checksum "server/yarn.lock" }}
-
-      - restore_cache:
-          key: root-dependency-cache-{{ checksum "yarn.lock" }}
+          name: Restore Cache
+          key: node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
 
       - run:
-          name: Install shared packages in the root
+          name: Install Dependencies
           command: |
             yarn install
-      
-      - run:
-          name: Install client packages
-          command: |
             cd client
             yarn install
-
-      - run:
-          name: Install server packages
-          command: |
             cd server
             yarn install
 
       - save_cache:
-          key: client-dependency-cache-{{ checksum "client/yarn.lock" }}
-          paths:
-            - client/node_modules
-      
-      - save_cache:
-          key: server-dependency-cache-{{ checksum "server/yarn.lock" }}
-          paths:
-            - server/node_modules
-      
-      - save_cache:
-          key: root-dependency-cache-{{ checksum "yarn.lock" }}
+          name: Cache Dependencies
+          key: node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
           paths:
             - node_modules
+            - client/node_modules
+            - server/node_modules
 
       - run:
-          name: Run Client Unit Tests
+          name: [Client] Run Unit Tests
           command: |
             cd client
             yarn test
 
       - run:
-          name: Run Server Unit Tests
+          name: [Server] Run Unit Tests
           command: |
             cd server
             yarn test
