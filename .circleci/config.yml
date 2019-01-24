@@ -10,53 +10,47 @@ jobs:
 
     steps:
       - checkout
-      
-      - run:
-          name: ls client 1
-          command: |
-            ls
-            echo "___"
-            cd client
-            ls
 
       - restore_cache:
           key: client-dependency-cache-{{ checksum "client/yarn.lock" }}
-      
-      - run:
-          name: ls client 2
-          command: |
-            ls
-            echo "___"
-            cd client
-            ls
-            echo "___"
-            cd node_modules
-            ls
 
+      - restore_cache:
+          key: server-dependency-cache-{{ checksum "server/yarn.lock" }}
+
+      - restore_cache:
+          key: root-dependency-cache-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install shared packages in the root
+          command: |
+            yarn install
+      
       - run:
           name: Install client packages
           command: |
             cd client
             yarn install
 
-      - save_cache:
-          key: client-dependency-cache-{{ checksum "client/yarn.lock" }}
-          paths:
-            - client/node_modules
-
-      - restore_cache:
-          key: server-dependency-cache-{{ checksum "server/yarn.lock" }}
-      
       - run:
           name: Install server packages
           command: |
             cd server
             yarn install
+
+      - save_cache:
+          key: client-dependency-cache-{{ checksum "client/yarn.lock" }}
+          paths:
+            - client/node_modules
       
       - save_cache:
           key: server-dependency-cache-{{ checksum "server/yarn.lock" }}
           paths:
             - server/node_modules
+      
+      - save_cache:
+          key: root-dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
 
       - run:
           name: Run Client Unit Tests
