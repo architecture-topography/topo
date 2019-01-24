@@ -13,7 +13,14 @@ jobs:
 
       - restore_cache:
           key: client-dependency-cache-{{ checksum "client/package.json" }}
-
+      
+      - run:
+          name: ls client
+          command: |
+            ls
+            cd client
+            ls
+    
       - run:
           name: Install client packages
           command: |
@@ -27,7 +34,13 @@ jobs:
 
       - restore_cache:
           key: server-dependency-cache-{{ checksum "server/package.json" }}
-          
+      
+      - run:
+          name: ls server
+          command: |
+            ls
+            cd server
+            ls
       - run:
           name: Install server packages
           command: |
