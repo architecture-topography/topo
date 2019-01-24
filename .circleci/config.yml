@@ -13,18 +13,7 @@ jobs:
 
       - restore_cache:
           key: client-dependency-cache-{{ checksum "client/yarn.lock" }}
-      
-      - run:
-          name: ls client
-          command: |
-            ls
-            echo "___"
-            cd client
-            ls
-            echo "___"
-            cd node_modules
-            ls
-    
+          
       - run:
           name: Install client packages
           command: |
