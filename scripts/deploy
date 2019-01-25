@@ -4,4 +4,4 @@ eval $(scripts/docker-machine env --shell sh topo-demo)
 
 echo "Pulling images"
 docker-compose --file docker-base.yml --file docker-prod.yml pull
-#docker-compose --file docker-base.yml --file docker-prod.yml up --detach
+docker-compose --file docker-base.yml --file docker-prod.yml up --detach
