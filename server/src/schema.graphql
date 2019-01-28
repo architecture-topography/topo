@@ -1,6 +1,7 @@
 type Query {
   hello: String!
   platforms: [Platform]!
+  systems(capabilityId: String!): [System]!
 }
 
 type Platform {
@@ -16,6 +17,11 @@ type Domain {
 }
 
 type Capability {
+  id: ID!
+  name: String!
+}
+
+type System {
   id: ID!
   name: String!
 }

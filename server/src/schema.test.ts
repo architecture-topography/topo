@@ -16,6 +16,22 @@ describe("Schema definitions", () => {
     query = createTestClient(server).query;
   });
 
+  it("Accepts systems query", async () => {
+    const QUERY = `
+    query {
+      systems(capabilityId: "test"){
+        name,
+        id
+      }
+    }
+    `;
+
+    const res = await query({
+      query: QUERY
+    });
+    expect(res.errors).toBeUndefined();
+  });
+
   it("Accepts platform query", async () => {
     const QUERY = `
     query {
