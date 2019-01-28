@@ -35,7 +35,7 @@ Go into client folder
 Run `yarn install` to install all the dependencies
 
 ### Test
-Use `yarn test` to launch the test runner in the interactive watch mode.
+Use `yarn test` to launch the unit test runner. `yarn test-int` will run the integration tests.
 
 ## Decision Register
 
