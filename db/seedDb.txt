@@ -1,20 +1,24 @@
-// delete everything
+// deletes everything (copy one by one)
 MATCH(n) DETACH DELETE n
+DROP CONSTRAINT ON (p:TopoNode) ASSERT p.uid IS UNIQUE
 
-// Seed db (copy all statements in one go)
-CREATE (TW:Platform {name:'TW'})
-CREATE (Demand:Domain {name:'Demand'})
-CREATE (Staffing:Domain {name:'Staffing'})
-CREATE (Finance:Domain {name:'Finance'})
-CREATE (People:Domain {name:'People'})
-CREATE (PS:Domain {name:'Professional Services'})
+// creates the unique id constraint (copy first)
+CREATE CONSTRAINT ON (p:`TopoNode`) ASSERT (p.`uid`) IS UNIQUE
 
-CREATE(Billing: Capability {name: 'Billing'})
-CREATE(SellingWork: Capability {name: 'Selling work'})
-CREATE(ManagingAccounts: Capability {name: 'Managing Accounts'})
-CREATE(StaffingProjects: Capability {name: 'Staffing projects'})
-CREATE(LeaveTracking: Capability {name: 'Leave tracking'})
-CREATE(InvoicingClients: Capability {name: 'Invoicing clients'})
+// database data seed (copy all the statements in one go)
+CREATE (TW: Platform: TopoNode {name:'TW', uid:'plat_01'})
+CREATE (Demand: Domain: TopoNode {name:'Demand', uid:'domain_001'})
+CREATE (Staffing: Domain: TopoNode {name:'Staffing', uid:'domain_002'})
+CREATE (Finance: Domain: TopoNode {name:'Finance', uid:'domain_003'})
+CREATE (People: Domain: TopoNode {name:'People', uid:'domain_004'})
+CREATE (PS: Domain: TopoNode {name:'Professional Services', uid:'domain_005'})
+
+CREATE(Billing: Capbility: TopoNode {name: 'Billing', uid:'cap_0001'})
+CREATE(SellingWork: Capbility: TopoNode {name: 'Selling work', uid:'cap_0002'})
+CREATE(ManagingAccounts: Capbility: TopoNode {name: 'Managing Accounts', uid:'cap_0003'})
+CREATE(StaffingProjects: Capbility: TopoNode {name: 'Staffing projects', uid:'cap_0004'})
+CREATE(LeaveTracking: Capbility: TopoNode {name: 'Leave tracking', uid:'cap_0005'})
+CREATE(InvoicingClients: Capbility: TopoNode {name: 'Invoicing clients', uid:'cap_0006'})
 
 CREATE
   (TW)-[:HAS]->(Demand),
@@ -34,5 +38,3 @@ MATCH(p)-[:HAS]->(d) RETURN p, d
 
 // show everything in the db
 MATCH(n) RETURN n
-
-
