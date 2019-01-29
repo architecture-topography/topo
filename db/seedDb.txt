@@ -6,12 +6,12 @@ DROP CONSTRAINT ON (p:TopoNode) ASSERT p.uid IS UNIQUE
 CREATE CONSTRAINT ON (p:`TopoNode`) ASSERT (p.`uid`) IS UNIQUE
 
 // database data seed (copy all the statements in one go)
-CREATE (TW: Platform: TopoNode {name:'TW', uid:'plat_01'})
-CREATE (Demand: Domain: TopoNode {name:'Demand', uid:'domain_001'})
-CREATE (Staffing: Domain: TopoNode {name:'Staffing', uid:'domain_002'})
-CREATE (Finance: Domain: TopoNode {name:'Finance', uid:'domain_003'})
-CREATE (People: Domain: TopoNode {name:'People', uid:'domain_004'})
-CREATE (PS: Domain: TopoNode {name:'Professional Services', uid:'domain_005'})
+CREATE (TW: Platform: TopoNode {name:'TW', uid:'plat_0001'})
+CREATE (Demand: Domain: TopoNode {name:'Demand', uid:'domain_0001'})
+CREATE (Staffing: Domain: TopoNode {name:'Staffing', uid:'domain_0002'})
+CREATE (Finance: Domain: TopoNode {name:'Finance', uid:'domain_0003'})
+CREATE (People: Domain: TopoNode {name:'People', uid:'domain_0004'})
+CREATE (PS: Domain: TopoNode {name:'Professional Services', uid:'domain_0005'})
 
 CREATE(Billing: Capability: TopoNode {name: 'Billing', uid:'cap_0001'})
 CREATE(SellingWork: Capability: TopoNode {name: 'Selling work', uid:'cap_0002'})
