@@ -24,3 +24,28 @@ export const createTestPlatformAndDomain = async (
     session.close();
   }
 };
+
+export const createSystemWithCapability = async ({
+  name,
+  capabilityId
+}: {
+  name: String;
+  capabilityId: String;
+}) => {
+  const session = driver.session();
+  try {
+    await session.run(
+      `CREATE (system:System { name: $name })
+          CREATE (capability:Capability { name: $capabilityName, id: $capabilityId })
+          CREATE (capability)-[:SUPPORTEDBY]->(system)
+        `,
+      {
+        capabilityName: "test capability",
+        capabilityId,
+        name
+      }
+    );
+  } finally {
+    session.close();
+  }
+};

@@ -18,5 +18,6 @@ export interface Platform {
 export interface Context {
   queries: {
     findPlatforms: Function;
+    findSystemsByCapabilityId: Function;
   };
 }

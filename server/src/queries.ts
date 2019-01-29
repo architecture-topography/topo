@@ -2,6 +2,7 @@ import * as Neo4j from "neo4j-driver";
 import { values, groupBy, uniqBy } from "lodash";
 import { driver } from "./neo";
 import { Platform } from "./domain";
+import { applyResultTransforms } from "graphql-tools/dist/transforms/transforms";
 
 export const findPlatforms = async (): Promise<Platform[]> => {
   const session = driver.session();
@@ -65,6 +66,28 @@ export const findPlatforms = async (): Promise<Platform[]> => {
   }
 };
 
+export const findSystemsByCapabilityId = async (
+  capabilityId: String
+): Promise<Platform[]> => {
+  const session = driver.session();
+
+  try {
+    const result = await session.run(
+      `MATCH(capability: Capability) - [: SUPPORTEDBY] -> (system: System) WHERE capability.id = $capabilityId RETURN capability, system`,
+      { capabilityId }
+    );
+    return result.records.map(record => {
+      return record.get("system").properties;
+    });
+  } catch (error) {
+    console.log("error", error);
+    return [];
+  } finally {
+    session.close();
+  }
+};
+
 export default {
-  findPlatforms
+  findPlatforms,
+  findSystemsByCapabilityId
 };
