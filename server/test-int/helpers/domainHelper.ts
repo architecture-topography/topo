@@ -26,25 +26,28 @@ export const createTestPlatformAndDomain = async (
 };
 
 export const createSystemWithCapability = async ({
-  name,
-  capabilityId
+  name
 }: {
   name: String;
-  capabilityId: String;
 }) => {
   const session = driver.session();
   try {
-    await session.run(
+    const result = await session.run(
       `CREATE (system:System { name: $name })
-          CREATE (capability:Capability { name: $capabilityName, id: $capabilityId })
+          CREATE (capability:Capability { name: $capabilityName })
           CREATE (capability)-[:SUPPORTEDBY]->(system)
+          RETURN capability,system
         `,
       {
         capabilityName: "test capability",
-        capabilityId,
         name
       }
     );
+    const capabilityId = result.records[0]
+      .get("capability")
+      .identity.toString();
+    const systemId = result.records[0].get("system").identity.toString();
+    return { capabilityId, systemId };
   } finally {
     session.close();
   }

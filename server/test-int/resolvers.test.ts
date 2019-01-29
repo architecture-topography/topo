@@ -16,8 +16,10 @@ describe("resolvers", () => {
 
   describe("getSystems", () => {
     it("Should return systems for a particular capability", async () => {
-      const capabilityId = "capability-001";
       const { query } = createTestClient(server);
+      const { capabilityId } = await createSystemWithCapability({
+        name: "system cool"
+      });
 
       const QUERY = `
       query {
@@ -26,8 +28,6 @@ describe("resolvers", () => {
         }
       }
       `;
-
-      await createSystemWithCapability({ name: "system cool", capabilityId });
 
       const res = await query({ query: QUERY });
       expect(res.data).toBeDefined();

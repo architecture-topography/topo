@@ -67,14 +67,15 @@ export const findPlatforms = async (): Promise<Platform[]> => {
 };
 
 export const findSystemsByCapabilityId = async (
-  capabilityId: String
+  capabilityId: string
 ): Promise<Platform[]> => {
   const session = driver.session();
 
   try {
     const result = await session.run(
-      `MATCH(capability: Capability) - [: SUPPORTEDBY] -> (system: System) WHERE capability.id = $capabilityId RETURN capability, system`,
-      { capabilityId }
+      `MATCH(capability: Capability) - [: SUPPORTEDBY] -> (system: System) WHERE ID(capability) = ${parseInt(
+        capabilityId
+      )} RETURN capability, system`
     );
     return result.records.map(record => {
       return record.get("system").properties;
