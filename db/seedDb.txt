@@ -13,12 +13,12 @@ CREATE (Finance: Domain: TopoNode {name:'Finance', uid:'domain_003'})
 CREATE (People: Domain: TopoNode {name:'People', uid:'domain_004'})
 CREATE (PS: Domain: TopoNode {name:'Professional Services', uid:'domain_005'})
 
-CREATE(Billing: Capbility: TopoNode {name: 'Billing', uid:'cap_0001'})
-CREATE(SellingWork: Capbility: TopoNode {name: 'Selling work', uid:'cap_0002'})
-CREATE(ManagingAccounts: Capbility: TopoNode {name: 'Managing Accounts', uid:'cap_0003'})
-CREATE(StaffingProjects: Capbility: TopoNode {name: 'Staffing projects', uid:'cap_0004'})
-CREATE(LeaveTracking: Capbility: TopoNode {name: 'Leave tracking', uid:'cap_0005'})
-CREATE(InvoicingClients: Capbility: TopoNode {name: 'Invoicing clients', uid:'cap_0006'})
+CREATE(Billing: Capability: TopoNode {name: 'Billing', uid:'cap_0001'})
+CREATE(SellingWork: Capability: TopoNode {name: 'Selling work', uid:'cap_0002'})
+CREATE(ManagingAccounts: Capability: TopoNode {name: 'Managing Accounts', uid:'cap_0003'})
+CREATE(StaffingProjects: Capability: TopoNode {name: 'Staffing projects', uid:'cap_0004'})
+CREATE(LeaveTracking: Capability: TopoNode {name: 'Leave tracking', uid:'cap_0005'})
+CREATE(InvoicingClients: Capability: TopoNode {name: 'Invoicing clients', uid:'cap_0006'})
 
 CREATE
   (TW)-[:HAS]->(Demand),
