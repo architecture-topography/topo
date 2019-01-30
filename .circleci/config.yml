@@ -55,15 +55,16 @@ jobs:
           name: Deploy to AWS
           when: on_success
           command: |
+            apt install python3-pip
             pip install awscli --upgrade --user
             scripts/docker-machine-pull
             scripts/deploy
 
-      - run:
-          name: Chat Notification Fail
-          when: on_fail
-          command: >
-            curl --header "Content-Type: application/json"
-            --request POST
-            --data "{\"cards\":[{\"header\":{\"title\":\"[${CIRCLE_BUILD_NUM}] Oh no! The build is broken! @Giphy broken build\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170406/icon_failed__1325447.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
-            $CHAT_WEBHOOK_URL
+      # - run:
+      #     name: Chat Notification Fail
+      #     when: on_fail
+      #     command: >
+      #       curl --header "Content-Type: application/json"
+      #       --request POST
+      #       --data "{\"cards\":[{\"header\":{\"title\":\"[${CIRCLE_BUILD_NUM}] Oh no! The build is broken! @Giphy broken build\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170406/icon_failed__1325447.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
+      #       $CHAT_WEBHOOK_URL
