@@ -57,7 +57,7 @@ jobs:
           when: on_success
           command: |
             sudo apt-get -y -qq install awscli
-            # aws configure set default.s3.signature_version s3v4
+            aws configure set default.s3.signature_version s3v4
             scripts/docker-machine-pull
             scripts/deploy
 
