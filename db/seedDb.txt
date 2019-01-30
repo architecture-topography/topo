@@ -21,10 +21,12 @@ CREATE(StaffingProjects: Capability: TopoNode {name: 'Staffing projects', uid:'c
 CREATE(LeaveTracking: Capability: TopoNode {name: 'Leave tracking', uid:'cap_0005'})
 CREATE(InvoicingClients: Capability: TopoNode {name: 'Invoicing clients', uid:'cap_0006'})
 
-CREATE(Salesforce: System {name: 'Salesforce'})
-CREATE(SalesFunnel: System {name: 'Sales Tunnel'})
-CREATE(Jigsaw: System {name: 'Jigsaw'})
-CREATE(LeaveOz: System {name: 'LeaveOz'})
+CREATE(Salesforce: System: TopoNode {name: 'Salesforce', uid:'sys_0001'})
+CREATE(SalesFunnel: System: TopoNode {name: 'Sales Tunnel', uid:'sys_0002'})
+CREATE(Jigsaw: System: TopoNode {name: 'Jigsaw', uid:'sys_0003'})
+CREATE(LeaveOz: System: TopoNode {name: 'LeaveOz', uid:'sys_0004'})
+    
+CREATE(LeaveOz2: System: TopoNode {name: 'LeaveOz2', uid:'sys_0005'})
 
 CREATE
   (TW)-[:HAS]->(Demand),
@@ -43,7 +45,8 @@ CREATE
   (SellingWork)-[: SUPPORTEDBY]->(SalesFunnel),
   (ManagingAccounts)-[: SUPPORTEDBY]->(Jigsaw),
   (StaffingProjects)-[: SUPPORTEDBY]->(Jigsaw),
-  (LeaveTracking)-[: SUPPORTEDBY]->(LeaveOz)
+  (LeaveTracking)-[: SUPPORTEDBY]->(LeaveOz),
+  (LeaveTracking)-[: SUPPORTEDBY]->(LeaveOz2)
 
 WITH TW as p
 MATCH(p)-[:HAS]->(d) RETURN p, d
