@@ -1,5 +1,8 @@
 version: '3'
 services:
+  web:
+    ports: 
+      - "80:5000"
   db:
     environment: 
       - NEO4J_AUTH=neo4j/test

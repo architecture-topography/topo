@@ -50,6 +50,13 @@ jobs:
             docker-compose -f docker-int.yml up --build -d
             sleep 5
             docker-compose -f docker-int.yml run tests yarn jest --forceExit test-int/
+    
+      - run:
+          name: Deploy to AWS
+          when: on_success
+          command: |
+            scripts/docker-machine-pull
+            scripts/deploy
 
       - run:
           name: Chat Notification Fail
