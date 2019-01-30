@@ -44,6 +44,18 @@ describe("Capability View", () => {
     };
   });
 
+  it("if no systems, render SystemList component", () => {
+    const capabilityId = "capability-1";
+    const wrapper = shallow(
+      <CapabilityView
+        treasureMapData={treasureMapData}
+        capabilityId={capabilityId}
+      />
+    );
+    wrapper.setState({ gqlPlatforms: treasureMapData.platforms });
+    expect(wrapper.find("SystemList")).toExist();
+  });
+
   it("renders the correct content for Capability View", () => {
     const capabilityId = "capability-1";
     const domain = treasureMapData.platforms[0].domains[0];
