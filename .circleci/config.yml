@@ -55,6 +55,7 @@ jobs:
           name: Deploy to AWS
           when: on_success
           command: |
+            pip install awscli --upgrade --user
             scripts/docker-machine-pull
             scripts/deploy
 
