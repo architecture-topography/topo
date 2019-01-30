@@ -1,8 +1,23 @@
 import React, { Component } from "react";
+import SystemItem from "./SystemItem/SystemItem";
 
-class SystemList extends Component {
+interface ISystem {
+  id: number;
+  name: string;
+}
+interface ISystemListProps {
+  systems: Array<ISystem>;
+}
+
+class SystemList extends Component<ISystemListProps, any> {
+  static defaultProps = {
+    systems: []
+  };
+
   render() {
-    return <div>SystemList</div>;
+    return this.props.systems.map(system => {
+      return <SystemItem key={system.id} name={system.name} />;
+    });
   }
 }
 
