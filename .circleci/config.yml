@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.12
-      - image: circleci/python:3.6.2
+      # - image: circleci/python:3.6.2
 
     steps:
       - checkout
@@ -56,7 +56,7 @@ jobs:
           name: Deploy to AWS
           when: on_success
           command: |
-            pip install awscli
+            sudo apt-get -y -qq install awscli
             scripts/docker-machine-pull
             scripts/deploy
 
