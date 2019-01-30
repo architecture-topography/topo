@@ -31,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "styleguidist": "npx styleguidist server"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,6 +46,9 @@
   "devDependencies": {
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
-    "jest-environment-enzyme": "^7.0.1"
+    "jest-environment-enzyme": "^7.0.1",
+    "react-docgen-typescript": "^1.12.3",
+    "react-styleguidist": "^8.0.6",
+    "webpack-blocks": "^2.0.0-rc"
   }
 }
