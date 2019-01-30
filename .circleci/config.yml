@@ -55,8 +55,8 @@ jobs:
           name: Deploy to AWS
           when: on_success
           command: |
-            apt install python3-pip
-            pip install awscli --upgrade --user
+            sudo apt install python3-pip
+            sudo pip install awscli --upgrade --user
             scripts/docker-machine-pull
             scripts/deploy
 
