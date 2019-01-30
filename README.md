@@ -37,9 +37,12 @@ Run `yarn install` to install all the dependencies
 ### Test
 Use `yarn test` to launch the unit test runner. `yarn test-int` will run the integration tests.
 
+## [wiki](https://github.com/architecture-topography/topo/wiki)
+More information on the different topics.
+
 ## Decision Register
 
-We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision. More details in the wiki.
+We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision. More details in the [wiki](https://github.com/architecture-topography/topo/wiki/decision-register).
 
 ## License
 
