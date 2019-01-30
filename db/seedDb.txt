@@ -6,7 +6,7 @@ DROP CONSTRAINT ON (p:TopoNode) ASSERT p.uid IS UNIQUE
 CREATE CONSTRAINT ON (p:`TopoNode`) ASSERT (p.`uid`) IS UNIQUE
 
 // database data seed (copy all the statements in one go)
-CREATE (TW: Platform: TopoNode {name:'TW', uid:'plat_0001'})
+CREATE (TW: : TopoNode {name:'TW', uid:'plat_0001'})
 
 CREATE (Demand: Domain: TopoNode {name:'Demand', uid:'domain_0001'})
 CREATE (Staffing: Domain: TopoNode {name:'Staffing', uid:'domain_0002'})
