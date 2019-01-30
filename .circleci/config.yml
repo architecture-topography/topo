@@ -56,7 +56,7 @@ jobs:
           when: on_success
           command: |
             sudo apt install python3-pip
-            sudo pip install awscli --upgrade --user
+            pip install awscli
             scripts/docker-machine-pull
             scripts/deploy
 
