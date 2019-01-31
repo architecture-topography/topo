@@ -69,6 +69,13 @@ export const findPlatforms = async (): Promise<Platform[]> => {
 export const findSystemsByCapabilityId = async (
   capabilityId: string
 ): Promise<Platform[]> => {
+  const remapUidToId = (properties: any) => {
+    const newProperties = { ...properties };
+    newProperties.id = properties.uid;
+    delete newProperties.uid;
+    return newProperties;
+  };
+
   const session = driver.session();
 
   try {
@@ -77,8 +84,9 @@ export const findSystemsByCapabilityId = async (
         capabilityId
       )} RETURN capability, system`
     );
+
     return result.records.map(record => {
-      return record.get("system").properties;
+      return remapUidToId(record.get("system").properties);
     });
   } catch (error) {
     console.log("error", error);

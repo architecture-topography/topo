@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import SystemList from "./SystemList";
+import SystemListWithData from "./SystemListWithData";
 import {
   Grid,
   Header,
@@ -178,7 +178,7 @@ export default class CapabilityView extends Component {
 
   getSystems(capability) {
     if (!capability.systems) {
-      return <SystemList />;
+      return <SystemListWithData capabilityId={capability.id} />;
     }
 
     const { activeIndex } = this.state;
