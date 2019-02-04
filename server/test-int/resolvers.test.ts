@@ -37,7 +37,6 @@ describe("resolvers", () => {
       const { capabilityId } = await createSystemWithCapability({
         name: "system cool"
       });
-
       const QUERY = `
       query {
         systems(capabilityId: "${capabilityId}"){

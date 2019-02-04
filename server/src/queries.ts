@@ -94,7 +94,9 @@ export const findSystemsByCapabilityId = async (
 
   try {
     const result = await session.run(
-      `MATCH(capability: Capability) - [: SUPPORTEDBY] -> (system: System) WHERE (capability.uid = "${capabilityId}") RETURN capability, system`
+      `MATCH(capability: Capability) - [: SUPPORTEDBY] -> (system: System) WHERE ID(capability) = ${parseInt(
+        capabilityId
+      )} RETURN capability, system`
     );
 
     return result.records.map(record => {
