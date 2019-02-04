@@ -20,7 +20,8 @@ import { createTestClient } from "apollo-server-testing";
 import { clearDb } from "./helpers/testHelper";
 import {
   createTestPlatformAndDomain,
-  createSystemWithCapability
+  createSystemWithCapability,
+  createPlatform
 } from "./helpers/domainHelper";
 
 describe("resolvers", () => {
@@ -54,6 +55,31 @@ describe("resolvers", () => {
   });
 
   describe("getPlatfroms", () => {
+    it("should return uid as ID", async () => {
+      const platformName = "Test Platform";
+      const platformId = "ID-24601";
+      const { query } = createTestClient(server);
+
+      const QUERY = `
+      query {
+        platforms{
+          name
+          id
+        }
+      }
+      `;
+
+      await createPlatform(platformName, platformId);
+      const res = await query({
+        query: QUERY
+      });
+      expect(res.data).toBeDefined();
+      expect(res.data ? res.data.platforms : []).toContainEqual({
+        name: platformName,
+        id: platformId
+      });
+    });
+
     it("should return all platforms", async () => {
       const platformName = "Test Platform";
       const domainName = "Test Domain";

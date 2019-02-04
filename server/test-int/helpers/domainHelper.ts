@@ -16,6 +16,26 @@
 
 import { driver } from "../../src/neo";
 
+export const createPlatform = async (platformName: String, id: String) => {
+  const session = driver.session();
+  try {
+    await session.run(
+      `CREATE (platform:Platform { name: $platformName, uid: $id })
+      CREATE (domain:Domain { name: "domain", uid: "domain-01"})
+      CREATE (capability:Capability { name: "capability", uid: "capability-01" })
+      CREATE (platform)-[:HAS]->(domain)
+      CREATE (domain)-[:DOES]->(capability)
+    `,
+      {
+        platformName,
+        id
+      }
+    );
+  } finally {
+    session.close();
+  }
+};
+
 export const createTestPlatformAndDomain = async (
   platformName: String,
   domainName: String,

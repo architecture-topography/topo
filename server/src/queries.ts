@@ -20,13 +20,20 @@ import { driver } from "./neo";
 import { Platform } from "./domain";
 import { applyResultTransforms } from "graphql-tools/dist/transforms/transforms";
 
+const remapUidToId = (properties: any) => {
+  const newProperties = { ...properties };
+  newProperties.id = properties.uid;
+  delete newProperties.uid;
+  return newProperties;
+};
+
 export const findPlatforms = async (): Promise<Platform[]> => {
   const session = driver.session();
 
   const getProperties = (record: Neo4j.v1.Record, name: string) => {
     const properties = record.get(name).properties;
-    const id = record.get(name).identity.toString();
-    return { ...properties, id };
+    const mappedProperties = remapUidToId(properties);
+    return mappedProperties;
   };
 
   try {
@@ -37,16 +44,14 @@ export const findPlatforms = async (): Promise<Platform[]> => {
     const groupedRecordsByPlatform: any = groupBy(
       result.records,
       (record: Neo4j.v1.Record) => {
-        const id = record.get("platform").identity.toString();
-        return id;
+        return record.get("platform").properties.uid;
       }
     );
 
     const groupedRecordsByDomain: any = groupBy(
       result.records,
       (record: Neo4j.v1.Record) => {
-        const id = record.get("domain").identity.toString();
-        return id;
+        return record.get("domain").properties.uid;
       }
     );
 
@@ -85,13 +90,6 @@ export const findPlatforms = async (): Promise<Platform[]> => {
 export const findSystemsByCapabilityId = async (
   capabilityId: string
 ): Promise<Platform[]> => {
-  const remapUidToId = (properties: any) => {
-    const newProperties = { ...properties };
-    newProperties.id = properties.uid;
-    delete newProperties.uid;
-    return newProperties;
-  };
-
   const session = driver.session();
 
   try {
