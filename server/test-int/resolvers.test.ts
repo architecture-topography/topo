@@ -35,7 +35,8 @@ describe("resolvers", () => {
     it("Should return systems for a particular capability", async () => {
       const { query } = createTestClient(server);
       const { capabilityId } = await createSystemWithCapability({
-        name: "system cool"
+        name: "system cool",
+        uid: "cap_0001"
       });
       const QUERY = `
       query {
