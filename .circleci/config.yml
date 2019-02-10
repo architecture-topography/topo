@@ -52,14 +52,14 @@ jobs:
             sleep 5
             docker-compose -f docker-int.yml run tests yarn jest --forceExit test-int/
     
-      # - run:
-      #     name: Deploy to AWS
-      #     when: on_success
-      #     command: |
-      #       sudo apt-get -y -qq install awscli
-      #       aws configure set default.s3.signature_version s3v4
-      #       scripts/docker-machine-pull
-      #       scripts/deploy
+      - run:
+          name: Deploy to AWS
+          when: on_success
+          command: |
+            sudo apt-get -y -qq install awscli
+            aws configure set default.s3.signature_version s3v4
+            scripts/docker-machine-pull
+            scripts/deploy
 
       - run:
           name: Chat Notification Fail
