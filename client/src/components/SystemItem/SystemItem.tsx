@@ -1,11 +1,13 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
 import styles from "./styles.module.css";
+import Technologies, { ITechnology } from "./Technologies";
 
-const SystemItem = (props: { name: string }) => {
+const SystemItem = (props: { name: string; technologies?: ITechnology[] }) => {
   return (
     <Card>
       <Card.Header className={styles.title}>{props.name}</Card.Header>
+      <Technologies technologies={props.technologies} />
     </Card>
   );
 };
