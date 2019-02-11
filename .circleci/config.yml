@@ -51,12 +51,26 @@ jobs:
             docker-compose -f docker-int.yml up --build -d
             sleep 5
             docker-compose -f docker-int.yml run tests yarn jest --forceExit test-int/
-    
+
+      - run:
+          name: Chat Notification Fail
+          when: on_fail
+          command: >
+            curl --header "Content-Type: application/json"
+            --request POST
+            --data "{\"cards\":[{\"header\":{\"title\":\"[${CIRCLE_BUILD_NUM}] Oh no! The build is broken! @Giphy broken build\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170406/icon_failed__1325447.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
+            $CHAT_WEBHOOK_URL
+  deploy:
+    docker:
+      - image: circleci/python:3.6.2
+
+    steps:
+      - checkout
+
       - run:
           name: Deploy to AWS
-          when: on_success
           command: |
-            sudo apt-get -y -qq install awscli
+            pip install awscli
             aws configure set default.s3.signature_version s3v4
             scripts/docker-machine-pull
             scripts/deploy
@@ -69,3 +83,12 @@ jobs:
             --request POST
             --data "{\"cards\":[{\"header\":{\"title\":\"[${CIRCLE_BUILD_NUM}] Oh no! The build is broken! @Giphy broken build\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170406/icon_failed__1325447.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
             $CHAT_WEBHOOK_URL
+workflows:
+  version: 2
+
+  master:
+    jobs:
+    - build
+    - deploy:
+        requires:
+        - build
