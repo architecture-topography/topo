@@ -66,6 +66,7 @@ jobs:
 
     steps:
       - checkout
+      - setup_remote_docker
 
       - run:
           name: Deploy to AWS
