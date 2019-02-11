@@ -70,7 +70,7 @@ jobs:
       - run:
           name: Deploy to AWS
           command: |
-            pip install awscli
+            sudo pip install awscli
             aws configure set default.s3.signature_version s3v4
             scripts/docker-machine-pull
             scripts/deploy
