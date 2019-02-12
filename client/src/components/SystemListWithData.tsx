@@ -24,6 +24,10 @@ export const GET_SYSTEMS = gql`
     systems(capabilityId: $capabilityId) {
       name
       id
+      technologies {
+        name
+        id
+      }
     }
   }
 `;

@@ -10,9 +10,16 @@
 .greyBox{
   background: #f5f5f5;
   padding: 25px 0 25px 0;
+  height: 100%;
 }
 
 .bigBoldBeautiful{
  font-weight: bolder; 
   text-align: center;
+}
+
+.list{
+  text-align: center;
+  list-style: inside;
+  padding-left: 0;
 }

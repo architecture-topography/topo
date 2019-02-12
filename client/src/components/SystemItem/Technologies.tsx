@@ -11,7 +11,7 @@ const displayTechnologies = (technologies: ITechnology[]) => {
     return "None";
   } else {
     return (
-      <ul>
+      <ul className={styles.list}>
         {technologies.map(technology => (
           <li key={technology.id}>{technology.name}</li>
         ))}
