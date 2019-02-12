@@ -75,6 +75,7 @@ jobs:
             scripts/docker-machine-pull
             scripts/deploy
           environment:
+            COMPOSE_TLS_VERSION: TLSv1_2
             DOCKER_TLS_VERIFY: "1"
             DOCKER_HOST: "tcp://54.66.143.14:2376"
             DOCKER_CERT_PATH: ".docker/machine/machines/topo-demo"
