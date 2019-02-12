@@ -16,8 +16,7 @@ jobs:
 
       - run:
           name: Install Dependencies
-          command: |
-            - scripts/build
+          command: scripts/build
       - save_cache:
           name: Cache Dependencies
           key: node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
