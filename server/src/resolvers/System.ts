@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import { ApolloServer } from "apollo-server";
-import resolvers from "./resolvers";
-import { importSchema } from "graphql-import";
-import queries from "./queries";
+import { Context, System } from "../domain";
 
-const typeDefs = importSchema(require.resolve("./schema.graphql"));
+const System = {
+  technologies: async (parent: System, args: null, context: Context) => {
+    const technologies = await context.queries.findTechnologiesBySystemId(
+      parent.id
+    );
+    return technologies;
+  }
+};
 
-export default new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: () => ({ queries })
-});
+export default System;

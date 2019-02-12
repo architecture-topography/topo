@@ -14,15 +14,10 @@
  * limitations under the License.
  */
 
-import { ApolloServer } from "apollo-server";
-import resolvers from "./resolvers";
-import { importSchema } from "graphql-import";
-import queries from "./queries";
+import System from "./System";
+import Query from "./Query";
 
-const typeDefs = importSchema(require.resolve("./schema.graphql"));
-
-export default new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: () => ({ queries })
-});
+export default {
+  Query,
+  System
+};

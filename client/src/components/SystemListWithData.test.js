@@ -25,11 +25,13 @@ describe("SystemListWithData", () => {
   const systems = [
     {
       id: "test-01",
-      name: "LeaveOz"
+      name: "LeaveOz",
+      technologies: []
     },
     {
       id: "test-02",
-      name: "LeaveOz2"
+      name: "LeaveOz2",
+      technologies: []
     }
   ];
 
