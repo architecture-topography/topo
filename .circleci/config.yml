@@ -70,6 +70,7 @@ jobs:
       - run:
           name: Deploy to AWS
           command: |
+            set -e
             sudo pip install awscli
             aws configure set default.s3.signature_version s3v4
             eval $(aws ecr get-login --no-include-email)
