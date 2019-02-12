@@ -43,6 +43,8 @@ Then, change to the "client" directory and run:
 to install all the dependencies followed by
 ```yarn start``` to start the client in dev mode on http://localhost:3000/
 
+To **bootstrap the database**: follow the instructions in [db/seedDb.txt](db/seedDb.txt).
+
 ### Test
 Use `yarn test` to launch the unit test runner. `yarn test-int` will run the integration tests.
 
