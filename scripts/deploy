@@ -7,3 +7,8 @@ docker-compose --file docker-base.yml --file docker-prod.yml pull
 
 echo "Deploying to $DOCKER_HOST"
 docker-compose --file docker-base.yml --file docker-prod.yml up -d
+
+echo "Pushing images to ECR"
+docker push 756379631373.dkr.ecr.ap-southeast-2.amazonaws.com/server
+docker push 756379631373.dkr.ecr.ap-southeast-2.amazonaws.com/db
+docker push 756379631373.dkr.ecr.ap-southeast-2.amazonaws.com/web
