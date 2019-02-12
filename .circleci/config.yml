@@ -10,7 +10,7 @@ jobs:
 
       - restore_cache:
           name: Restore Cache
-          keys: 
+          keys:
             - node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
             - node-dependency-cache-
 
@@ -42,10 +42,10 @@ jobs:
           command: |
             cd server
             yarn test
-      
+
       - setup_remote_docker
 
-      - run: 
+      - run:
           name: Build Integration Test Docker Containers + Run Integration Tests
           command: |
             docker-compose -f docker-int.yml up --build -d
@@ -66,7 +66,6 @@ jobs:
 
     steps:
       - checkout
-      - setup_remote_docker
 
       - run:
           name: Deploy to AWS
@@ -75,6 +74,11 @@ jobs:
             aws configure set default.s3.signature_version s3v4
             scripts/docker-machine-pull
             scripts/deploy
+          environment:
+            DOCKER_TLS_VERIFY: "1"
+            DOCKER_HOST: "tcp://54.66.143.14:2376"
+            DOCKER_CERT_PATH: ".docker/machine/machines/topo-demo"
+            DOCKER_MACHINE_NAME: "topo-demo"
 
       - run:
           name: Chat Notification Fail
@@ -90,6 +94,6 @@ workflows:
   master:
     jobs:
     - build
-    # - deploy:
-    #    requires:
-    #    - build
+    - deploy:
+        requires:
+        - build
