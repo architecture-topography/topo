@@ -35,8 +35,8 @@ describe("resolvers", () => {
     it("Should return systems for a particular capability", async () => {
       const { query } = createTestClient(server);
       const { capabilityId } = await createSystemWithCapability({
-        name: "system cool",
-        uid: "cap_0001"
+        system: { name: "system cool", uid: "system-001" },
+        capability: { name: "capabiliyt", uid: "cap-001" }
       });
       const QUERY = `
       query {
@@ -50,6 +50,38 @@ describe("resolvers", () => {
       expect(res.data).toBeDefined();
       expect(res.data ? res.data.systems : []).toContainEqual({
         name: "system cool"
+      });
+    });
+
+    it("Should return technologies with system", async () => {
+      const { query } = createTestClient(server);
+      const { capabilityId } = await createSystemWithCapability({
+        capability: {
+          name: "capability",
+          uid: "cap-001"
+        },
+        technology: {
+          name: "kittensOnRails",
+          uid: "kit-001"
+        }
+      });
+      const QUERY = `
+      query {
+        systems(capabilityId: "${capabilityId}"){
+          name,
+          technologies {
+            name
+            id
+          }
+        }
+      }
+      `;
+
+      const res = await query({ query: QUERY });
+      expect(res.data).toBeDefined();
+      expect(res.data ? res.data.systems[0].technologies : []).toContainEqual({
+        name: "kittensOnRails",
+        id: "kit-001"
       });
     });
   });

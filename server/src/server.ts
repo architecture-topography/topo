@@ -15,7 +15,7 @@
  */
 
 import { ApolloServer } from "apollo-server";
-const resolvers = require("./resolvers").default;
+import resolvers from "./resolvers";
 import { importSchema } from "graphql-import";
 import queries from "./queries";
 

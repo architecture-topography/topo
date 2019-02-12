@@ -54,6 +54,25 @@ const mocks = [
 ];
 
 describe("PlatformViewContainer", () => {
+  it("Shows questionably good looking error message", async () => {
+    const errorMock = {
+      request: {
+        query: GET_PLATFORMS
+      },
+      error: new Error("oh no")
+    };
+
+    const component = mount(
+      <MockedProvider mocks={[errorMock]}>
+        <PlatformViewContainer />
+      </MockedProvider>
+    );
+
+    await wait(0);
+    component.update();
+
+    expect(component.text()).toContain("Error connecting to database");
+  });
   it("renders a platform", async () => {
     const component = mount(
       <MockedProvider mocks={mocks}>

@@ -14,32 +14,15 @@
  * limitations under the License.
  */
 
-export interface Domain {
-  id: string;
-  name: string;
-  capabilities: Capability[];
-}
+import { Context, System } from "../domain";
 
-export interface Capability {
-  id: string;
-  name: string;
-}
+const System = {
+  technologies: async (parent: System, args: null, context: Context) => {
+    const technologies = await context.queries.findTechnologiesBySystemId(
+      parent.id
+    );
+    return technologies;
+  }
+};
 
-export interface Platform {
-  id: string;
-  name: string;
-  domains: Domain[];
-}
-
-export interface Context {
-  queries: {
-    findPlatforms: Function;
-    findSystemsByCapabilityId: Function;
-    findTechnologiesBySystemId: Function;
-  };
-}
-
-export interface System {
-  id: string;
-  name: string;
-}
+export default System;
