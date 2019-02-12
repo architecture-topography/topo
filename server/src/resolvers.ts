@@ -14,9 +14,17 @@
  * limitations under the License.
  */
 
-import { Context, Platform } from "./domain";
+import { Context, Platform, System } from "./domain";
 
 export default {
+  System: {
+    technologies: async (parent: System, args: null, context: Context) => {
+      const technologies = await context.queries.findTechnologiesBySystemId(
+        parent.id
+      );
+      return technologies;
+    }
+  },
   Query: {
     hello: () => "Hello, Topo",
     platforms: async (parent: Platform, args: null, context: Context) => {

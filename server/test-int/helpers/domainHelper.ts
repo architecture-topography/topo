@@ -61,32 +61,52 @@ export const createTestPlatformAndDomain = async (
   }
 };
 
+interface arguments {
+  capability?: {
+    name: String;
+    uid: String;
+  };
+  system?: {
+    name: String;
+    uid: String;
+  };
+  technology?: {
+    name: String;
+    uid: String;
+  };
+}
+
 export const createSystemWithCapability = async ({
-  name,
-  uid
-}: {
-  name: String;
-  uid: String;
-}) => {
+  system,
+  technology,
+  capability
+}: arguments) => {
   const session = driver.session();
   try {
     const result = await session.run(
-      `CREATE (system:System { name: $name })
-          CREATE (capability:Capability { name: $capabilityName, uid: $uid })
+      `CREATE (system:System: TopoNode { name: $systemName, uid: $systemUid })
+          CREATE (capability:Capability: TopoNode { name: $capabilityName, uid: $capabilityUid })
+          CREATE (technology:Technology: TopoNode { name: $technologyName, uid: $technologyUid })
           CREATE (capability)-[:SUPPORTEDBY]->(system)
-          RETURN capability,system
+          CREATE (system)-[:BUILTIN]->(technology)
+          RETURN capability,system,technology
         `,
       {
         capabilityName: "test capability",
-        uid: "cap_0001",
-        name
+        capabilityUid: capability ? capability.uid : "cap-001",
+        systemName: system ? system.name : "test-system",
+        systemUid: system ? system.uid : "system-001",
+        technologyName: technology ? technology.name : "test-technology",
+        technologyUid: technology ? technology.uid : "technology-001"
       }
     );
-    // console.log(result.records[0].get("capability").properties.uid);
 
     const capabilityId = result.records[0].get("capability").properties.uid;
     const systemId = result.records[0].get("system").identity.toString();
-    return { capabilityId, systemId };
+    const technologyId = result.records[0]
+      .get("technology")
+      .identity.toString();
+    return { capabilityId, systemId, technologyId };
   } finally {
     session.close();
   }

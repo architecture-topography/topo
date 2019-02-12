@@ -24,4 +24,10 @@ type Capability {
 type System {
   id: ID!
   name: String!
+  technologies: [Technology!]!
+}
+
+type Technology {
+  id: ID!
+  name: String!
 }

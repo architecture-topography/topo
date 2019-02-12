@@ -108,7 +108,28 @@ export const findSystemsByCapabilityId = async (
   }
 };
 
+export const findTechnologiesBySystemId = async (
+  systemId: string
+): Promise<Platform[]> => {
+  const session = driver.session();
+
+  try {
+    const result = await session.run(
+      `MATCH(system:System) - [:BUILTIN] -> (technology: Technology) WHERE (system.uid = "${systemId}") RETURN system, technology`
+    );
+
+    return result.records.map(record => {
+      return remapUidToId(record.get("technology").properties);
+    });
+  } catch (error) {
+    console.log("error", error);
+    return [];
+  } finally {
+    session.close();
+  }
+};
 export default {
   findPlatforms,
-  findSystemsByCapabilityId
+  findSystemsByCapabilityId,
+  findTechnologiesBySystemId
 };

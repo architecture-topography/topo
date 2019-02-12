@@ -35,5 +35,11 @@ export interface Context {
   queries: {
     findPlatforms: Function;
     findSystemsByCapabilityId: Function;
+    findTechnologiesBySystemId: Function;
   };
+}
+
+export interface System {
+  id: string;
+  name: string;
 }

@@ -37,7 +37,11 @@ describe("Schema definitions", () => {
     query {
       systems(capabilityId: "test"){
         name,
-        id
+        id,
+        technologies {
+          name,
+          id
+        }
       }
     }
     `;
