@@ -16,7 +16,10 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build
-          command: scripts/build
+          command: |
+            sudo pip install awscli
+            eval $(aws ecr get-login --no-include-email)
+            scripts/build
       - save_cache:
           name: Cache Dependencies
           key: node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
