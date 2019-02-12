@@ -37,9 +37,10 @@ good stuff.
 First, run
 ```
 yarn docker-dev up
-```.
+```
 Then, change to the "client" directory and run:
-```yarn install``` to install all the dependencies followed by
+```yarn install``` 
+to install all the dependencies followed by
 ```yarn start``` to start the client in dev mode on http://localhost:3000/
 
 ### Test
