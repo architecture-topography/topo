@@ -45,6 +45,6 @@ describe("SystemItem", () => {
 
     const root = mount(<SystemItem name={name} technologies={technologies} />);
     expect(root).toIncludeText("Primary technologies");
-    expect(root).toIncludeText("none");
+    expect(root).toIncludeText("None");
   });
 });

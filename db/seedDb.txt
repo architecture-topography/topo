@@ -25,8 +25,11 @@ CREATE(Salesforce: System: TopoNode {name: 'Salesforce', uid:'sys_0001'})
 CREATE(SalesFunnel: System: TopoNode {name: 'Sales Tunnel', uid:'sys_0002'})
 CREATE(Jigsaw: System: TopoNode {name: 'Jigsaw', uid:'sys_0003'})
 CREATE(LeaveOz: System: TopoNode {name: 'LeaveOz', uid:'sys_0004'})
-    
 CREATE(LeaveOz2: System: TopoNode {name: 'LeaveOz2', uid:'sys_0005'})
+
+CREATE(RubyOnRails: Technology: TopoNode {name: 'Ruby on Rails', uid: 'tech_0001'})
+CREATE(Elixir: Technology: TopoNode {name: 'Elixir', uid: 'tech_0002'})
+CREATE(React: Technology: TopoNode {name: 'React', uid: 'tech_0003'})
 
 CREATE
   (TW)-[:HAS]->(Demand),
@@ -46,7 +49,10 @@ CREATE
   (ManagingAccounts)-[: SUPPORTEDBY]->(Jigsaw),
   (StaffingProjects)-[: SUPPORTEDBY]->(Jigsaw),
   (LeaveTracking)-[: SUPPORTEDBY]->(LeaveOz),
-  (LeaveTracking)-[: SUPPORTEDBY]->(LeaveOz2)
+  (LeaveTracking)-[: SUPPORTEDBY]->(LeaveOz2),
+  (LeaveOz)-[: BUILTIN] -> (RubyOnRails),
+  (LeaveOz)-[: BUILTIN] -> (Elixir),
+  (Jigsaw)-[: BUILTIN] -> (React)
 
 WITH TW as p
 MATCH(p)-[:HAS]->(d) RETURN p, d
