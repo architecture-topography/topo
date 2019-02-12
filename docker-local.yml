@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./client
+      args:
+      - REACT_APP_SERVER_URI=http://localhost:4000
+    command: yarn start
+    volumes:
+    - ./client/src:/var/app/src
+    ports:
+    - "5000:3000"
+  server:
+    command: yarn start
+    volumes:
+    - ./server/src:/var/app/src
+    build: ./server
+  db:
+    build: ./db
+  db-test:
+    ports:
+    - "7688:7688"
+    environment:
+    - NEO4J_dbms_connector_bolt_listen__address=:7688
+    - NEO4J_dbms_connector_bolt_advertised__address=:7688
+    - NEO4J_AUTH=neo4j/test
+    build:
+      context: ./db
+      dockerfile: Dockerfile
