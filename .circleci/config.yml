@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: Build
-          command: |
+          command:
             - setup_remote_docker
             - scripts/build
       - save_cache:
