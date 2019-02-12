@@ -90,10 +90,10 @@ workflows:
   version: 2
   master:
     jobs:
-    - build
-    - test:
+    - test
+    - build:
         requires:
-        - build
+        - test
     - deploy:
         requires:
         - build
