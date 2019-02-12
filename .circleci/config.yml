@@ -15,8 +15,10 @@ jobs:
             - node-dependency-cache-
 
       - run:
-          name: Install Dependencies
-          command: scripts/build
+          name: Build
+          command: |
+            - setup_remote_docker
+            - scripts/build
       - save_cache:
           name: Cache Dependencies
           key: node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
@@ -36,8 +38,6 @@ jobs:
           command: |
             cd server
             yarn test
-
-      - setup_remote_docker
 
       - run:
           name: Build Integration Test Docker Containers + Run Integration Tests
