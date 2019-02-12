@@ -74,8 +74,8 @@ jobs:
             set -x
             sudo pip install awscli
             aws configure set default.s3.signature_version s3v4
-            eval $(aws ecr get-login --no-include-email)
             scripts/docker-machine-pull
+            eval $(aws ecr get-login --no-include-email)
             scripts/deploy
           environment:
             COMPOSE_TLS_VERSION: TLSv1_2
