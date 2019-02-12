@@ -13,12 +13,10 @@ jobs:
           keys:
             - node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
             - node-dependency-cache-
-
+      - setup_remote_docker
       - run:
           name: Build
-          command:
-            - setup_remote_docker
-            - scripts/build
+          command: scripts/build
       - save_cache:
           name: Cache Dependencies
           key: node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
