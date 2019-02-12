@@ -43,7 +43,12 @@ Then, change to the "client" directory and run:
 to install all the dependencies followed by
 ```yarn start``` to start the client in dev mode on http://localhost:3000/
 
-To **bootstrap the database**: follow the instructions in [db/seedDb.txt](db/seedDb.txt).
+To **bootstrap the database**:
+
+* run ```yarn docker-local up``` navigate to http://localhost:7474/browser/ and login with the default user with ```test``` as the password.
+
+* There is a Neo4j command prompt at the top of the page and the scripts to run can be found in the [db/seedDb.txt](db/seedDb.txt) file of the repository. The scripts are labelled.
+
 
 ### Test
 Use `yarn test` to launch the unit test runner. `yarn test-int` will run the integration tests.
