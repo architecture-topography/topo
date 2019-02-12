@@ -1,18 +1,11 @@
 version: 2
 jobs:
+
   build:
     docker:
-      - image: circleci/node:8.12
-      # - image: circleci/python:3.6.2
-
+      -image: circleci/python:3.6.2
     steps:
       - checkout
-
-      - restore_cache:
-          name: Restore Cache
-          keys:
-            - node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
-            - node-dependency-cache-
       - setup_remote_docker
       - run:
           name: Build
@@ -20,6 +13,18 @@ jobs:
             sudo pip install awscli
             eval $(aws ecr get-login --no-include-email)
             scripts/build
+  test:
+    docker:
+      - image: circleci/node:8.12
+      # - image: circleci/python:3.6.2
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Cache
+          keys:
+            - node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
+            - node-dependency-cache-
+      - setup_remote_docker
       - save_cache:
           name: Cache Dependencies
           key: node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
@@ -27,26 +32,22 @@ jobs:
             - node_modules
             - client/node_modules
             - server/node_modules
-
       - run:
           name: '[Client] Run Unit Tests'
           command: |
             cd client
             yarn test
-
       - run:
           name: '[Server] Run Unit Tests'
           command: |
             cd server
             yarn test
-
       - run:
           name: Build Integration Test Docker Containers + Run Integration Tests
           command: |
             docker-compose -f docker-int.yml up --build -d
             sleep 5
             docker-compose -f docker-int.yml run tests yarn jest --forceExit test-int/
-
       - run:
           name: Chat Notification Fail
           when: on_fail
@@ -61,7 +62,6 @@ jobs:
 
     steps:
       - checkout
-
       - run:
           name: Deploy to AWS
           command: |
@@ -78,7 +78,6 @@ jobs:
             DOCKER_HOST: "tcp://54.66.143.14:2376"
             DOCKER_CERT_PATH: ".docker/machine/machines/topo-demo"
             DOCKER_MACHINE_NAME: "topo-demo"
-
       - run:
           name: Chat Notification Fail
           when: on_fail
@@ -89,10 +88,13 @@ jobs:
             $CHAT_WEBHOOK_URL
 workflows:
   version: 2
-
   master:
     jobs:
     - build
+    - test:
+        requires:
+        - build
     - deploy:
         requires:
         - build
+        - test
