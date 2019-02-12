@@ -18,6 +18,7 @@ import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import PlatformView from "./PlatformView";
 import React, { Component } from "react";
+import { Segment } from "semantic-ui-react";
 
 export const GET_PLATFORMS = gql`
   {
@@ -42,8 +43,12 @@ export default class PlatformViewContainer extends Component {
       <Query query={GET_PLATFORMS}>
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
-          if (error) return `Error! ${error.message}`;
-
+          if (error)
+            return (
+              <Segment inverted color="red">
+                Error connecting to database
+              </Segment>
+            );
           return <PlatformView treasureMapData={data} />;
         }}
       </Query>
