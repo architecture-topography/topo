@@ -1,11 +1,4 @@
 #!/bin/sh -e
 
-# eval $(scripts/docker-machine env --shell sh topo-demo)
-
 echo "Deploying to $DOCKER_HOST"
-docker-compose --file docker-base.yml --file docker-prod.yml up -d --build
-
-echo "Pushing images to ECR"
-docker push 756379631373.dkr.ecr.ap-southeast-2.amazonaws.com/server
-docker push 756379631373.dkr.ecr.ap-southeast-2.amazonaws.com/db
-docker push 756379631373.dkr.ecr.ap-southeast-2.amazonaws.com/web
+docker-compose --file docker-base.yml --file docker-prod.yml up -d
