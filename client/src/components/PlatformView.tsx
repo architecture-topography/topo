@@ -27,7 +27,7 @@ interface Props {
 export default class PlatformView extends Component<Props> {
   render() {
     return (
-      <Grid columns="1">
+      <div>
         {this.props.treasureMapData.platforms.map((platform, index) => {
           return (
             <Grid columns="1" key={index}>
@@ -49,7 +49,7 @@ export default class PlatformView extends Component<Props> {
             </Grid>
           );
         })}
-      </Grid>
+      </div>
     );
   }
 }
