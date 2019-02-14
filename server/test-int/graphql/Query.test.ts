@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import resolvers from "../src/resolvers";
-import server from "../src/server";
+import resolvers from "../../src/resolvers";
+import server from "../../src/server";
 import { createTestClient } from "apollo-server-testing";
-import { clearDb } from "./helpers/testHelper";
+import { clearDb } from "../helpers/testHelper";
 import {
   createTestPlatformAndDomain,
   createSystemWithCapability,
   createPlatform
-} from "./helpers/domainHelper";
+} from "../helpers/domainHelper";
 
 describe("resolvers", () => {
   describe("hello", () => {
