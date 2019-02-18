@@ -21,7 +21,7 @@ import { clearDb } from "../helpers/testHelper";
 import {
   createTestPlatformAndDomain,
   createSystemWithCapability,
-  createPlatform
+  createTestPlatform
 } from "../helpers/domainHelper";
 
 describe("resolvers", () => {
@@ -101,7 +101,7 @@ describe("resolvers", () => {
       }
       `;
 
-      await createPlatform(platformName, platformId);
+      await createTestPlatform(platformName, platformId);
       const res = await query({
         query: QUERY
       });

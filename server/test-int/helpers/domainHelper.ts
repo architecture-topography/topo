@@ -16,7 +16,7 @@
 
 import { driver } from "../../src/neo";
 
-export const createPlatform = async (platformName: String, id: String) => {
+export const createTestPlatform = async (platformName: String, id: String) => {
   const session = driver.session();
   try {
     await session.run(
@@ -74,7 +74,21 @@ interface arguments {
     name: String;
     uid: String;
   };
+  uid?: String;
 }
+
+export const findPlatform = async ({ uid }: arguments) => {
+  const session = driver.session();
+  try {
+    const result = await session.run(
+      `MATCH (platform:Platform { uid: $uid }) RETURN platform`,
+      { uid }
+    );
+    return result;
+  } finally {
+    session.close();
+  }
+};
 
 export const createSystemWithCapability = async ({
   system,

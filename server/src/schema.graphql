@@ -4,8 +4,13 @@ type Query {
   systems(capabilityId: String!): [System]!
 }
 
+type Mutation {
+  createPlatform(name: String!, uid: String!): Platform!
+}
+
 type Platform {
   id: ID!
+  uid: String!
   name: String!
   domains: [Domain!]!
 }

@@ -16,8 +16,10 @@
 
 import System from "./System";
 import Query from "./Query";
+import Mutation from "./Mutation";
 
 export default {
+  System,
   Query,
-  System
+  Mutation
 };

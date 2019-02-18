@@ -27,6 +27,22 @@ const remapUidToId = (properties: any) => {
   return newProperties;
 };
 
+export const createPlatform = async (
+  name: String,
+  uid: String
+): Promise<Platform> => {
+  const session = driver.session();
+  try {
+    const result = await session.run(
+      `CREATE (Node: Platform: TopoNode {name: $name, uid: $uid}) RETURN Node`,
+      { name, uid }
+    );
+    return result.records[0].get("Node").properties;
+  } finally {
+    session.close();
+  }
+};
+
 export const findPlatforms = async (): Promise<Platform[]> => {
   const session = driver.session();
 
@@ -131,5 +147,6 @@ export const findTechnologiesBySystemId = async (
 export default {
   findPlatforms,
   findSystemsByCapabilityId,
-  findTechnologiesBySystemId
+  findTechnologiesBySystemId,
+  createPlatform
 };

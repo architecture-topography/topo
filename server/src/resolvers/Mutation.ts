@@ -14,33 +14,17 @@
  * limitations under the License.
  */
 
-export interface Domain {
-  id: string;
-  name: string;
-  capabilities: Capability[];
-}
+import { Context, Platform } from "../domain";
 
-export interface Capability {
-  id: string;
-  name: string;
-}
+const Mutation = {
+  createPlatform: async (
+    parent: Platform,
+    args: { name: String; uid: String },
+    context: Context
+  ) => {
+    const platform = await context.queries.createPlatform(args.name, args.uid);
+    return platform;
+  }
+};
 
-export interface Platform {
-  uid: string;
-  name: string;
-  domains: Domain[];
-}
-
-export interface Context {
-  queries: {
-    findPlatforms: Function;
-    findSystemsByCapabilityId: Function;
-    findTechnologiesBySystemId: Function;
-    createPlatform: Function;
-  };
-}
-
-export interface System {
-  id: string;
-  name: string;
-}
+export default Mutation;
