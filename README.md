@@ -20,7 +20,7 @@ The project is split into Client, Server and Database. There is a docker compose
 yarn docker-local up
 ```
 
-The client starts up on http://localhost:5000
+The client starts up on http://localhost:3000
 The server on http://localhost:4000
 The database browser interface on http://localhost:7474/browser/
 
