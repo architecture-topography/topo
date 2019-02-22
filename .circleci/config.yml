@@ -1,6 +1,5 @@
 version: 2
 jobs:
-
   build:
     docker:
       - image: circleci/python:3.6.2
@@ -22,23 +21,23 @@ jobs:
       - restore_cache:
           name: Restore Cache
           keys:
-            - node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
+            - node-dependency-cache-{{ checksum "yarn.lock" }}
             - node-dependency-cache-
       - setup_remote_docker
       - save_cache:
           name: Cache Dependencies
-          key: node-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "client/yarn.lock" }}-{{ checksum "server/yarn.lock" }}
+          key: node-dependency-cache-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
             - client/node_modules
             - server/node_modules
       - run:
-          name: '[Client] Run Unit Tests'
+          name: "[Client] Run Unit Tests"
           command: |
             cd client
             yarn test
       - run:
-          name: '[Server] Run Unit Tests'
+          name: "[Server] Run Unit Tests"
           command: |
             cd server
             yarn test
@@ -90,11 +89,11 @@ workflows:
   version: 2
   master:
     jobs:
-    - test
-    - build:
-        requires:
-        - test
-    - deploy:
-        requires:
-        - build
-        - test
+      - test
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - build
+            - test
