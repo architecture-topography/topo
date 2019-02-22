@@ -74,15 +74,15 @@ interface arguments {
     name: String;
     uid: String;
   };
-  uid?: String;
+  id?: String;
 }
 
-export const findPlatform = async ({ uid }: arguments) => {
+export const findPlatform = async ({ id }: arguments) => {
   const session = driver.session();
   try {
     const result = await session.run(
-      `MATCH (platform:Platform { uid: $uid }) RETURN platform`,
-      { uid }
+      `MATCH (platform:Platform { uid: $id }) RETURN platform`,
+      { id }
     );
     return result;
   } finally {

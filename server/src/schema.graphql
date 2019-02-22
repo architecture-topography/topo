@@ -5,12 +5,11 @@ type Query {
 }
 
 type Mutation {
-  createPlatform(name: String!, uid: String!): Platform!
+  createPlatform(name: String!, id: String!): Platform!
 }
 
 type Platform {
   id: ID!
-  uid: String!
   name: String!
   domains: [Domain!]!
 }

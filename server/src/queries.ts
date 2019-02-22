@@ -27,17 +27,23 @@ const remapUidToId = (properties: any) => {
   return newProperties;
 };
 
+const getProperties = (record: Neo4j.v1.Record, name: string) => {
+  const properties = record.get(name).properties;
+  const mappedProperties = remapUidToId(properties);
+  return mappedProperties;
+};
+
 export const createPlatform = async (
   name: String,
-  uid: String
+  id: String
 ): Promise<Platform> => {
   const session = driver.session();
   try {
     const result = await session.run(
-      `CREATE (Node: Platform: TopoNode {name: $name, uid: $uid}) RETURN Node`,
-      { name, uid }
+      `CREATE (Node: Platform: TopoNode {name: $name, uid: $id}) RETURN Node`,
+      { name, id }
     );
-    return result.records[0].get("Node").properties;
+    return getProperties(result.records[0], "Node");
   } finally {
     session.close();
   }
@@ -45,12 +51,6 @@ export const createPlatform = async (
 
 export const findPlatforms = async (): Promise<Platform[]> => {
   const session = driver.session();
-
-  const getProperties = (record: Neo4j.v1.Record, name: string) => {
-    const properties = record.get(name).properties;
-    const mappedProperties = remapUidToId(properties);
-    return mappedProperties;
-  };
 
   try {
     const result = await session.run(

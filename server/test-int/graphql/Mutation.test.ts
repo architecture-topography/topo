@@ -10,7 +10,7 @@ describe("Mutation", () => {
   describe("createPlatform", () => {
     it("creates platform in neo db", async () => {
       const platformName = "Test Platform";
-      const uid = "123";
+      const id = "123";
 
       const { query } = createTestClient(server);
 
@@ -18,19 +18,19 @@ describe("Mutation", () => {
       mutation {
         createPlatform(
           name: "${platformName}",
-          uid: "${uid}"
+          id: "${id}"
         )
         {
           name
-        	uid
+        	id
         }
       }
       `;
       await query({ mutation: MUTATION });
-      const res = await findPlatform({ uid });
+      const res = await findPlatform({ id });
       expect(res.records[0].get("platform").properties).toEqual({
         name: `${platformName}`,
-        uid: `${uid}`
+        uid: `${id}`
       });
     });
   });

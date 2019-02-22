@@ -19,10 +19,10 @@ import { Context, Platform } from "../domain";
 const Mutation = {
   createPlatform: async (
     parent: Platform,
-    args: { name: String; uid: String },
+    args: { name: String; id: String },
     context: Context
   ) => {
-    const platform = await context.queries.createPlatform(args.name, args.uid);
+    const platform = await context.queries.createPlatform(args.name, args.id);
     return platform;
   }
 };
