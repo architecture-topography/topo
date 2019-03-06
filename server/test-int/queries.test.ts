@@ -15,7 +15,7 @@
  */
 
 import { Platform } from "../src/domain";
-import { findPlatforms } from "../src/queries";
+import { findPlatforms } from "../src/dbQueries";
 import { clearDb } from "./helpers/testHelper";
 import { createTestPlatformAndDomain } from "./helpers/domainHelper";
 

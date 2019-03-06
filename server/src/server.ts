@@ -17,7 +17,7 @@
 import { ApolloServer } from "apollo-server";
 import resolvers from "./resolvers";
 import { importSchema } from "graphql-import";
-import queries from "./queries";
+import queries from "./dbQueries";
 
 const typeDefs = importSchema(require.resolve("./schema.graphql"));
 
