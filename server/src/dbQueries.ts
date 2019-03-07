@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import * as Neo4j from "neo4j-driver";
-import { driver } from "./neo";
-import { Platform, Domain, Capability } from "./types";
+import * as Neo4j from 'neo4j-driver';
+import { driver } from './neo';
+import { ICapability, IDomain, IPlatform } from './types';
 
 const remapUidToId = (properties: any) => {
   const newProperties = { ...properties };
@@ -32,16 +32,16 @@ const getProperties = (record: Neo4j.v1.Record, name: string) => {
 };
 
 export const createPlatform = async (
-  name: String,
-  id: String
-): Promise<Platform> => {
+  name: string,
+  id: string
+): Promise<IPlatform> => {
   const session = driver.session();
   try {
     const result = await session.run(
       `CREATE (Node: Platform: TopoNode {name: $name, uid: $id}) RETURN Node`,
       { name, id }
     );
-    return getProperties(result.records[0], "Node");
+    return getProperties(result.records[0], 'Node');
   } finally {
     session.close();
   }
@@ -59,7 +59,7 @@ const runQueryAndReturnProperties = async (
       ? result.records.map(record => record.get(nodeName).properties)
       : [];
   } catch (error) {
-    console.error("Error running query: ", error);
+    console.error('Error running query: ', error);
     return [];
   } finally {
     session.close();
@@ -71,36 +71,36 @@ const findChildren = async (
   uid: string
 ): Promise<any[]> => {
   return runQueryAndReturnProperties(
-    "node",
+    'node',
     `MATCH (p:${parentType})-[]->(node) where p.uid = $uid AND NOT node:System return p, node`,
     { uid }
   );
 };
 
-export const findPlatforms = async (): Promise<Platform[]> => {
+export const findPlatforms = async (): Promise<IPlatform[]> => {
   return runQueryAndReturnProperties(
-    "platform",
-    "MATCH (platform:Platform) RETURN platform"
+    'platform',
+    'MATCH (platform:Platform) RETURN platform'
   );
 };
 
 export const findDomainsByPlatformId = async (
   platformUid: string
-): Promise<Domain[]> => {
-  return findChildren("Platform", platformUid);
+): Promise<IDomain[]> => {
+  return findChildren('Platform', platformUid);
 };
 
 export const findCapabilitiesByDomainId = async (
   domainUid: string
-): Promise<Capability[]> => {
-  return findChildren("Domain", domainUid);
+): Promise<ICapability[]> => {
+  return findChildren('Domain', domainUid);
 };
 
 export const findSystemsByCapabilityId = (
   capabilityUid: string
-): Promise<Platform[]> => {
+): Promise<IPlatform[]> => {
   return runQueryAndReturnProperties(
-    "system",
+    'system',
     `MATCH(capability: Capability) - [] -> (system: System) WHERE (capability.uid = $capabilityUid) RETURN system`,
     { capabilityUid }
   );
@@ -108,7 +108,7 @@ export const findSystemsByCapabilityId = (
 
 export const findTechnologiesBySystemId = async (
   systemId: string
-): Promise<Platform[]> => {
+): Promise<IPlatform[]> => {
   const session = driver.session();
 
   try {
@@ -117,20 +117,20 @@ export const findTechnologiesBySystemId = async (
     );
 
     return result.records.map(record => {
-      return remapUidToId(record.get("technology").properties);
+      return remapUidToId(record.get('technology').properties);
     });
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
     return [];
   } finally {
     session.close();
   }
 };
 export default {
+  createPlatform,
+  findCapabilitiesByDomainId,
+  findDomainsByPlatformId,
   findPlatforms,
   findSystemsByCapabilityId,
   findTechnologiesBySystemId,
-  findCapabilitiesByDomainId,
-  findDomainsByPlatformId,
-  createPlatform
 };

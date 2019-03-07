@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import { Capability } from "../types";
+import { ICapability } from '../types';
 
 const System = {
-  id: async (parent: Capability) => {
+  id: async (parent: ICapability) => {
     return parent.uid;
-  }
+  },
 };
 
 export default System;

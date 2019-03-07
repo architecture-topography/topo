@@ -1,8 +1,8 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
-import React, { Component } from "react";
-import SystemItem from "./SystemItem/SystemItem";
-import { ITechnology } from "./SystemItem/Technologies";
+import React, { Component } from 'react';
+import SystemItem from './SystemItem/SystemItem';
+import { ITechnology } from './SystemItem/Technologies';
 
 interface ISystem {
   id: number;
@@ -15,7 +15,7 @@ interface ISystemListProps {
 
 class SystemList extends Component<ISystemListProps, any> {
   static defaultProps = {
-    systems: []
+    systems: [],
   };
 
   render() {

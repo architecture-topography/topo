@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import { Domain, Context } from "../types";
+import { IContext, IDomain } from '../types';
 
 const System = {
-  id: async (parent: Domain) => {
+  capabilities: async (parent: IDomain, _args: null, context: IContext) => {
+    return context.queries.findCapabilitiesByDomainId(parent.uid);
+  },
+  id: async (parent: IDomain) => {
     return parent.uid;
   },
-  capabilities: async (parent: Domain, _args: null, context: Context) => {
-    return context.queries.findCapabilitiesByDomainId(parent.uid);
-  }
 };
 
 export default System;

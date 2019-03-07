@@ -1,12 +1,12 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
-import "../resources/css/App.css";
+import '../resources/css/App.css';
 
-import React, { Component } from "react";
-import { Image } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import "../resources/css/Topo.css";
-import topo_logo from "../resources/img/Topo-02.png";
+import React, { Component } from 'react';
+import { Image } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import '../resources/css/Topo.css';
+import topo_logo from '../resources/img/Topo-02.png';
 
 class Header extends Component {
   render() {

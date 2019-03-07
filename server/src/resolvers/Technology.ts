@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import { Technology } from "../types";
+import { Technology } from '../types';
 
 const Technology = {
   id: (parent: Technology) => {
     return parent.uid;
-  }
+  },
 };
 
 export default Technology;

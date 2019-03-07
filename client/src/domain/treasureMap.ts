@@ -1,6 +1,6 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
-import * as ConfigFile from "../actions/configLoader";
-import * as AssetFile from "../actions/assetLoader";
+import * as ConfigFile from '../actions/configLoader';
+import * as AssetFile from '../actions/assetLoader';
 
 export type TreasureMapCapability = ConfigFile.Capability & {
   id: string;

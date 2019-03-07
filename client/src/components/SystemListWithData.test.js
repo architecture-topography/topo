@@ -1,52 +1,52 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
-import React from "react";
-import { mount } from "enzyme";
-import { MockedProvider } from "react-apollo/test-utils";
-import SystemListWithData, { GET_SYSTEMS } from "./SystemListWithData";
-const wait = require("waait");
+import React from 'react';
+import { mount } from 'enzyme';
+import { MockedProvider } from 'react-apollo/test-utils';
+import SystemListWithData, { GET_SYSTEMS } from './SystemListWithData';
+const wait = require('waait');
 
-describe("SystemListWithData", () => {
-  const capabilityId = "capability-001";
+describe('SystemListWithData', () => {
+  const capabilityId = 'capability-001';
   const systems = [
     {
-      id: "test-01",
-      name: "LeaveOz",
-      technologies: []
+      id: 'test-01',
+      name: 'LeaveOz',
+      technologies: [],
     },
     {
-      id: "test-02",
-      name: "LeaveOz2",
-      technologies: []
-    }
+      id: 'test-02',
+      name: 'LeaveOz2',
+      technologies: [],
+    },
   ];
 
   const mocks = [
     {
       request: {
         query: GET_SYSTEMS,
-        variables: { capabilityId }
+        variables: { capabilityId },
       },
       result: {
         data: {
-          systems
-        }
-      }
-    }
+          systems,
+        },
+      },
+    },
   ];
-  it("Should show loading text while getting data", () => {
+  it('Should show loading text while getting data', () => {
     const root = mount(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SystemListWithData capabilityId={capabilityId} />
       </MockedProvider>
     );
-    expect(root.text()).toEqual("Loading...");
+    expect(root.text()).toEqual('Loading...');
   });
 
-  it("Should show error in UI", async () => {
+  it('Should show error in UI', async () => {
     const errorMock = {
       ...mocks[0],
-      error: new Error("Error! Getting systems")
+      error: new Error('Error! Getting systems'),
     };
 
     const root = mount(
@@ -58,10 +58,10 @@ describe("SystemListWithData", () => {
     await wait(0);
     root.update();
 
-    expect(root.text()).toEqual("Error! Getting systems");
+    expect(root.text()).toEqual('Error! Getting systems');
   });
 
-  it("Should pass data correctly on success", async () => {
+  it('Should pass data correctly on success', async () => {
     const root = mount(
       <MockedProvider mocks={mocks} addTypename={false}>
         <SystemListWithData capabilityId={capabilityId} />
@@ -71,6 +71,6 @@ describe("SystemListWithData", () => {
     await wait(0);
     root.update();
 
-    expect(root.find("SystemList").props().systems).toEqual(systems);
+    expect(root.find('SystemList').props().systems).toEqual(systems);
   });
 });

@@ -1,9 +1,9 @@
 /* Copyright (c) 2019 Thoughtworks Inc. All rights reserved. */
 
-import React from "react";
-import { Card } from "semantic-ui-react";
-import styles from "./styles.module.css";
-import Technologies, { ITechnology } from "./Technologies";
+import React from 'react';
+import { Card } from 'semantic-ui-react';
+import styles from './styles.module.css';
+import Technologies, { ITechnology } from './Technologies';
 
 const SystemItem = (props: { name: string; technologies?: ITechnology[] }) => {
   return (

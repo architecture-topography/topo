@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import { Context, Platform } from "../types";
+import { IContext, IPlatform } from '../types';
 
 const Mutation = {
   createPlatform: async (
-    parent: Platform,
-    args: { name: String; id: String },
-    context: Context
+    parent: IPlatform,
+    args: { name: string; id: string },
+    context: IContext
   ) => {
     const platform = await context.queries.createPlatform(args.name, args.id);
     return platform;
-  }
+  },
 };
 
 export default Mutation;

@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-require("../dotenv.ts");
+// tslint:disable-next-line
+require('../dotenv.ts');
 
-import server from "./server";
+import server from './server';
 
 server
   .listen()
-  .then(() => console.log("Server running at port http://localhost:4000"))
+  .then(() => console.log('Server running at port http://localhost:4000'))
   .catch((err: any) => {
     console.error(err);
     process.exit(1);

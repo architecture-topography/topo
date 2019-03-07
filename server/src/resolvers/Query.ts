@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-import { Context, Platform } from "../types";
+import { IContext, IPlatform } from '../types';
 
 const Query = {
-  hello: () => "Hello, Topo",
-  platforms: async (parent: Platform, args: null, context: Context) => {
+  hello: () => 'Hello, Topo',
+  platforms: async (parent: IPlatform, _args: null, context: IContext) => {
     const platforms = await context.queries.findPlatforms();
 
     return platforms;
   },
 
   systems: async (
-    _parent: Platform,
-    args: { capabilityId: String },
-    context: Context
+    _parent: IPlatform,
+    args: { capabilityId: string },
+    context: IContext
   ) => {
     const systems = await context.queries.findSystemsByCapabilityId(
       args.capabilityId
     );
 
     return systems;
-  }
+  },
 };
 
 export default Query;

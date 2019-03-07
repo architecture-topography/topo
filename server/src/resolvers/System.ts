@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-import { Context, System } from "../types";
+import { IContext, ISystem } from '../types';
 
 const System = {
-  id: (parent: System) => {
+  id: (parent: ISystem) => {
     return parent.uid;
   },
-  technologies: async (parent: System, args: null, context: Context) => {
+  technologies: async (parent: ISystem, args: null, context: IContext) => {
     const technologies = await context.queries.findTechnologiesBySystemId(
       parent.uid
     );
     return technologies;
-  }
+  },
 };
 
 export default System;

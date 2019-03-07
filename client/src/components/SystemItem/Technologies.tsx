@@ -1,7 +1,7 @@
 /* Copyright (c) 2019 Thoughtworks Inc. All rights reserved. */
 
-import React from "react";
-import styles from "./styles.module.css";
+import React from 'react';
+import styles from './styles.module.css';
 
 export interface ITechnology {
   id: string;
@@ -10,7 +10,7 @@ export interface ITechnology {
 
 const displayTechnologies = (technologies: ITechnology[]) => {
   if (technologies.length == 0) {
-    return "None";
+    return 'None';
   } else {
     return (
       <ul className={styles.list}>
@@ -32,7 +32,7 @@ const Technologies = (props: { technologies: ITechnology[] }) => {
 };
 
 Technologies.defaultProps = {
-  technologies: []
+  technologies: [],
 };
 
 export default Technologies;

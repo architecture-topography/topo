@@ -1,6 +1,6 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
-import { getResource } from "./resourceLoaderApi";
+import { getResource } from './resourceLoaderApi';
 
 export interface Capability {
   name: string;

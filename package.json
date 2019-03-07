@@ -5,7 +5,7 @@
     "server"
   ],
   "scripts": {
-    "prettier": "prettier --write '**/*.{ts,js,graphql}?(x)'",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write '**/{src,test-int}/**/*.{ts,js,graphql}?(x)'",
     "docker-prod": "docker-compose -f docker-base.yml -f docker-prod.yml",
     "docker-local": "docker-compose -f docker-base.yml -f docker-local.yml",
     "docker-dev": "docker-compose -f docker-base.yml -f docker-dev.yml",
@@ -23,7 +23,7 @@
       "git add"
     ],
     "*.{ts,js,graphql}?(x)": [
-      "prettier --write",
+      "prettier --single-quote --trailing-comma es5 --write '**/{src,test-int}/**/*.{ts,js,graphql}?(x)'",
       "git add"
     ]
   },

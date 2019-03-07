@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { driver } from "../../src/neo";
+import { driver } from '../../src/neo';
 
 export const createTestPlatform = async (platformName: String, id: String) => {
   const session = driver.session();
@@ -28,7 +28,7 @@ export const createTestPlatform = async (platformName: String, id: String) => {
     `,
       {
         platformName,
-        id
+        id,
       }
     );
   } finally {
@@ -53,7 +53,7 @@ export const createTestPlatformAndDomain = async (
       {
         platformName,
         domainName,
-        capabilityName
+        capabilityName,
       }
     );
   } finally {
@@ -93,7 +93,7 @@ export const findPlatform = async ({ id }: arguments) => {
 export const createSystemWithCapability = async ({
   system,
   technology,
-  capability
+  capability,
 }: arguments) => {
   const session = driver.session();
   try {
@@ -106,19 +106,19 @@ export const createSystemWithCapability = async ({
           RETURN capability,system,technology
         `,
       {
-        capabilityName: "test capability",
-        capabilityUid: capability ? capability.uid : "cap-001",
-        systemName: system ? system.name : "test-system",
-        systemUid: system ? system.uid : "system-001",
-        technologyName: technology ? technology.name : "test-technology",
-        technologyUid: technology ? technology.uid : "technology-001"
+        capabilityName: 'test capability',
+        capabilityUid: capability ? capability.uid : 'cap-001',
+        systemName: system ? system.name : 'test-system',
+        systemUid: system ? system.uid : 'system-001',
+        technologyName: technology ? technology.name : 'test-technology',
+        technologyUid: technology ? technology.uid : 'technology-001',
       }
     );
 
-    const capabilityId = result.records[0].get("capability").properties.uid;
-    const systemId = result.records[0].get("system").identity.toString();
+    const capabilityId = result.records[0].get('capability').properties.uid;
+    const systemId = result.records[0].get('system').identity.toString();
     const technologyId = result.records[0]
-      .get("technology")
+      .get('technology')
       .identity.toString();
     return { capabilityId, systemId, technologyId };
   } finally {

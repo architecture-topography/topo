@@ -1,12 +1,12 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import gql from "graphql-tag";
-import { ApolloClient } from "apollo-client";
-import { createHttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import SystemListWithData from "./SystemListWithData";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
+import { ApolloClient } from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import SystemListWithData from './SystemListWithData';
 import {
   Grid,
   Header,
@@ -14,9 +14,9 @@ import {
   Card,
   Segment,
   Accordion,
-  Icon
-} from "semantic-ui-react";
-import "../resources/css/Topo.css";
+  Icon,
+} from 'semantic-ui-react';
+import '../resources/css/Topo.css';
 
 export const GET_PLATFORMS = gql`
   {
@@ -36,13 +36,13 @@ export const GET_PLATFORMS = gql`
 `;
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_SERVER_URI
+  uri: process.env.REACT_APP_SERVER_URI,
 });
 
 const client = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),
-  connectToDevTools: true
+  connectToDevTools: true,
 });
 
 export default class CapabilityView extends Component {
@@ -69,7 +69,7 @@ export default class CapabilityView extends Component {
 
   static propTypes = {
     treasureMapData: PropTypes.instanceOf(Object).isRequired,
-    capabilityId: PropTypes.string.isRequired
+    capabilityId: PropTypes.string.isRequired,
   };
 
   getListOfAllCapabilities() {
@@ -119,7 +119,7 @@ export default class CapabilityView extends Component {
 
   getPlatforms = async () => {
     const { data } = await client.query({
-      query: GET_PLATFORMS
+      query: GET_PLATFORMS,
     });
     return data.platforms;
   };
@@ -184,7 +184,7 @@ export default class CapabilityView extends Component {
     }
 
     const { activeIndex } = this.state;
-    let systems = "";
+    let systems = '';
     if (capability.systems) {
       systems = capability.systems.map((system, index) => {
         return (
@@ -197,7 +197,7 @@ export default class CapabilityView extends Component {
               >
                 <Card.Content
                   style={{
-                    backgroundColor: capability.domain.color
+                    backgroundColor: capability.domain.color,
                   }}
                   className="system-card-header"
                   header={system.name}
@@ -207,20 +207,20 @@ export default class CapabilityView extends Component {
                   className="system-card-desc"
                   style={
                     !system.description || !system.description.length
-                      ? { fontStyle: "italic" }
+                      ? { fontStyle: 'italic' }
                       : {}
                   }
                 >
                   {!system.description || !system.description.length
-                    ? "No system description"
+                    ? 'No system description'
                     : system.description}
                 </Card.Content>
                 <Card.Content className="system-card-icon">
                   <Icon
                     name={
                       activeIndex.indexOf(index) !== -1
-                        ? "chevron up"
-                        : "chevron down"
+                        ? 'chevron up'
+                        : 'chevron down'
                     }
                   />
                 </Card.Content>
@@ -228,20 +228,20 @@ export default class CapabilityView extends Component {
 
               <Accordion.Content active={activeIndex.indexOf(index) !== -1}>
                 <Card.Content className="system-card-extra">
-                  <Header className={"primary-technologies"} as="h3">
+                  <Header className={'primary-technologies'} as="h3">
                     Primary technologies
                   </Header>
                   {this.getListOfSystemAttribute(
                     system,
-                    "primary-technologies"
+                    'primary-technologies'
                   )}
 
-                  <Header className={"infrastructure"} as="h3">
+                  <Header className={'infrastructure'} as="h3">
                     Infrastructure
                   </Header>
-                  {this.getListOfSystemAttribute(system, "infrastructure")}
+                  {this.getListOfSystemAttribute(system, 'infrastructure')}
 
-                  <Header className={"other-capabilities"} as="h3">
+                  <Header className={'other-capabilities'} as="h3">
                     Other Capabilities
                   </Header>
                   {this.getListOfOtherCapabilities(system, capability)}
@@ -264,7 +264,7 @@ export default class CapabilityView extends Component {
       return <span id="no-capabilities-text">None</span>;
     return this.getListOfSystemAttribute(
       system,
-      "capabilities",
+      'capabilities',
       otherCapabilities
     );
   }
@@ -286,16 +286,16 @@ export default class CapabilityView extends Component {
         <List as="ul" bulleted>
           {attributeList.map((val, index) => {
             let capabilityId = 0;
-            if (attribute === "capabilities") {
+            if (attribute === 'capabilities') {
               let capabilityFromList = capabilityList.find(
                 obj => obj.name == val
               );
               capabilityId = capabilityFromList ? capabilityFromList.id : 0; // 0 means capability view not rendered for it
             }
             let linkPath =
-              attribute === "capabilities"
-                ? "/#/capability/" + capabilityId
-                : "";
+              attribute === 'capabilities'
+                ? '/#/capability/' + capabilityId
+                : '';
             return (
               <List.Item key={index} href={linkPath}>
                 {val}
@@ -305,7 +305,7 @@ export default class CapabilityView extends Component {
         </List>
       );
     } else {
-      return <span id={attribute + "-none"}>None</span>;
+      return <span id={attribute + '-none'}>None</span>;
     }
   }
 }

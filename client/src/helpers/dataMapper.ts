@@ -1,7 +1,7 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
-import * as AssetFile from "../actions/assetLoader";
-import * as ConfigFile from "../actions/configLoader";
-import { TreasureMapData } from "../domain/treasureMap";
+import * as AssetFile from '../actions/assetLoader';
+import * as ConfigFile from '../actions/configLoader';
+import { TreasureMapData } from '../domain/treasureMap';
 
 const findLastIndex = <T extends any>(arr: T[], fn: (value: T) => boolean) => {
   for (let i = arr.length - 1; i >= 0; i--) {
@@ -41,11 +41,11 @@ const buildTreasureMapData = (
           return {
             ...capability,
             id: (capabilityId++).toString(),
-            systems: assets
+            systems: assets,
           };
-        })
-      }))
-    }))
+        }),
+      })),
+    })),
   };
 };
 
@@ -54,5 +54,5 @@ function _stringEquals(first: string, second: string) {
 }
 
 export default {
-  buildTreasureMapData
+  buildTreasureMapData,
 };

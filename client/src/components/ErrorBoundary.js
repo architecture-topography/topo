@@ -1,8 +1,8 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
-import styles from "./ErrorBoundary.module.css";
-import React from "react";
-import PropTyes from "prop-types";
+import styles from './ErrorBoundary.module.css';
+import React from 'react';
+import PropTyes from 'prop-types';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class ErrorBoundary extends React.Component {
     this.state = {
       hasError: false,
       error: null,
-      info: null
+      info: null,
     };
   }
 
@@ -20,7 +20,7 @@ class ErrorBoundary extends React.Component {
       {
         hasError: true,
         error: error,
-        info: info
+        info: info,
       },
       this._logError
     );
@@ -47,7 +47,7 @@ class ErrorBoundary extends React.Component {
 
 ErrorBoundary.propTypes = {
   message: PropTyes.string.isRequired,
-  displayError: PropTyes.bool
+  displayError: PropTyes.bool,
 };
 
 export default ErrorBoundary;

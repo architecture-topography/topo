@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import { Platform, Context } from "../types";
+import { IContext, IPlatform } from '../types';
 
 const System = {
-  id: async (parent: Platform) => {
+  domains: async (parent: IPlatform, _args: null, context: IContext) => {
+    return context.queries.findDomainsByPlatformId(parent.uid);
+  },
+  id: async (parent: IPlatform) => {
     return parent.uid;
   },
-  domains: async (parent: Platform, _args: null, context: Context) => {
-    return context.queries.findDomainsByPlatformId(parent.uid);
-  }
 };
 
 export default System;

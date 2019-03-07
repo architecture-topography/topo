@@ -14,29 +14,29 @@
  * limitations under the License.
  */
 
-import resolvers from "../../src/resolvers";
-import server from "../../src/server";
-import { createTestClient } from "apollo-server-testing";
-import { clearDb } from "../helpers/testHelper";
+import resolvers from '../../src/resolvers';
+import server from '../../src/server';
+import { createTestClient } from 'apollo-server-testing';
+import { clearDb } from '../helpers/testHelper';
 import {
   createTestPlatformAndDomain,
   createSystemWithCapability,
-  createTestPlatform
-} from "../helpers/domainHelper";
+  createTestPlatform,
+} from '../helpers/domainHelper';
 
-describe("resolvers", () => {
-  describe("hello", () => {
-    it("returns hello topo", () => {
-      expect(resolvers.Query.hello()).toEqual("Hello, Topo");
+describe('resolvers', () => {
+  describe('hello', () => {
+    it('returns hello topo', () => {
+      expect(resolvers.Query.hello()).toEqual('Hello, Topo');
     });
   });
 
-  describe("getSystems", () => {
-    it("Should return systems for a particular capability", async () => {
+  describe('getSystems', () => {
+    it('Should return systems for a particular capability', async () => {
       const { query } = createTestClient(server);
       const { capabilityId } = await createSystemWithCapability({
-        system: { name: "system cool", uid: "system-001" },
-        capability: { name: "capabiliyt", uid: "cap-001" }
+        system: { name: 'system cool', uid: 'system-001' },
+        capability: { name: 'capabiliyt', uid: 'cap-001' },
       });
       const QUERY = `
       query {
@@ -49,21 +49,21 @@ describe("resolvers", () => {
       const res = await query({ query: QUERY });
       expect(res.data).toBeDefined();
       expect(res.data ? res.data.systems : []).toContainEqual({
-        name: "system cool"
+        name: 'system cool',
       });
     });
 
-    it("Should return technologies with system", async () => {
+    it('Should return technologies with system', async () => {
       const { query } = createTestClient(server);
       const { capabilityId } = await createSystemWithCapability({
         capability: {
-          name: "capability",
-          uid: "cap-001"
+          name: 'capability',
+          uid: 'cap-001',
         },
         technology: {
-          name: "kittensOnRails",
-          uid: "kit-001"
-        }
+          name: 'kittensOnRails',
+          uid: 'kit-001',
+        },
       });
       const QUERY = `
       query {
@@ -80,16 +80,16 @@ describe("resolvers", () => {
       const res = await query({ query: QUERY });
       expect(res.data).toBeDefined();
       expect(res.data ? res.data.systems[0].technologies : []).toContainEqual({
-        name: "kittensOnRails",
-        id: "kit-001"
+        name: 'kittensOnRails',
+        id: 'kit-001',
       });
     });
   });
 
-  describe("getPlatfroms", () => {
-    it("should return uid as ID", async () => {
-      const platformName = "Test Platform";
-      const platformId = "ID-24601";
+  describe('getPlatfroms', () => {
+    it('should return uid as ID', async () => {
+      const platformName = 'Test Platform';
+      const platformId = 'ID-24601';
       const { query } = createTestClient(server);
 
       const QUERY = `
@@ -103,19 +103,19 @@ describe("resolvers", () => {
 
       await createTestPlatform(platformName, platformId);
       const res = await query({
-        query: QUERY
+        query: QUERY,
       });
       expect(res.data).toBeDefined();
       expect(res.data ? res.data.platforms : []).toContainEqual({
         name: platformName,
-        id: platformId
+        id: platformId,
       });
     });
 
-    it("should return all platforms", async () => {
-      const platformName = "Test Platform";
-      const domainName = "Test Domain";
-      const capabilityName = "Test Capability";
+    it('should return all platforms', async () => {
+      const platformName = 'Test Platform';
+      const domainName = 'Test Domain';
+      const capabilityName = 'Test Capability';
       const { query } = createTestClient(server);
 
       const QUERY = `
@@ -138,21 +138,21 @@ describe("resolvers", () => {
         capabilityName
       );
       const res = await query({
-        query: QUERY
+        query: QUERY,
       });
       expect(res.data).toBeDefined();
       expect(res.data ? res.data.platforms : []).toContainEqual({
-        name: "Test Platform",
+        name: 'Test Platform',
         domains: [
           {
-            name: "Test Domain",
+            name: 'Test Domain',
             capabilities: [
               {
-                name: "Test Capability"
-              }
-            ]
-          }
-        ]
+                name: 'Test Capability',
+              },
+            ],
+          },
+        ],
       });
     });
     afterEach(clearDb);

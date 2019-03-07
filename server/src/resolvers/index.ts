@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import Capability from "./Capability";
-import Domain from "./Domain";
-import Mutation from "./Mutation";
-import Platform from "./Platform";
-import Query from "./Query";
-import System from "./System";
+import Capability from './Capability';
+import Domain from './Domain';
+import Mutation from './Mutation';
+import Platform from './Platform';
+import Query from './Query';
+import System from './System';
 
 export default {
   Capability,
@@ -27,5 +27,5 @@ export default {
   Mutation,
   Platform,
   Query,
-  System
+  System,
 };

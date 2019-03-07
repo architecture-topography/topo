@@ -10,7 +10,8 @@
     "start-prod": "NODE_ENV=dev ts-node src",
     "test": "jest src/",
     "test-int": "jest test-int/",
-    "test-all": "yarn test && yarn test-int"
+    "test-all": "yarn test && yarn test-int",
+    "lint": "yarn tslint -c tslint.json 'src/**/*.ts'"
   },
   "dependencies": {
     "@types/jest": "^23.3.13",

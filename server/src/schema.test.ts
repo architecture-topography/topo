@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-import { ApolloServer } from "apollo-server";
-import { importSchema } from "graphql-import";
-import { createTestClient } from "apollo-server-testing";
+import { ApolloServer } from 'apollo-server';
+import { createTestClient } from 'apollo-server-testing';
+import { importSchema } from 'graphql-import';
 
-const typeDefs = importSchema(require.resolve("./schema.graphql"));
+const typeDefs = importSchema(require.resolve('./schema.graphql'));
 
-describe("Schema definitions", () => {
+describe('Schema definitions', () => {
   let server: ApolloServer;
   let query: any;
 
   beforeAll(() => {
     server = new ApolloServer({
+      mocks: true,
       typeDefs,
-      mocks: true
     });
     query = createTestClient(server).query;
   });
 
-  it("Accepts systems query", async () => {
+  it('Accepts systems query', async () => {
     const QUERY = `
     query {
       systems(capabilityId: "test"){
@@ -47,12 +47,12 @@ describe("Schema definitions", () => {
     `;
 
     const res = await query({
-      query: QUERY
+      query: QUERY,
     });
     expect(res.errors).toBeUndefined();
   });
 
-  it("Accepts platform query", async () => {
+  it('Accepts platform query', async () => {
     const QUERY = `
     query {
       platforms{
@@ -63,12 +63,12 @@ describe("Schema definitions", () => {
     `;
 
     const res = await query({
-      query: QUERY
+      query: QUERY,
     });
     expect(res.errors).toBeUndefined();
   });
 
-  it("Accepts platform query with embedded domains", async () => {
+  it('Accepts platform query with embedded domains', async () => {
     const QUERY = `
     query {
       platforms{
@@ -83,12 +83,12 @@ describe("Schema definitions", () => {
     `;
 
     const res = await query({
-      query: QUERY
+      query: QUERY,
     });
     expect(res.errors).toBeUndefined();
   });
 
-  it("Accepts platform query with embedded domains and capabilities", async () => {
+  it('Accepts platform query with embedded domains and capabilities', async () => {
     const QUERY = `
     query {
       platforms{
@@ -107,7 +107,7 @@ describe("Schema definitions", () => {
     `;
 
     const res = await query({
-      query: QUERY
+      query: QUERY,
     });
     expect(res.errors).toBeUndefined();
   });

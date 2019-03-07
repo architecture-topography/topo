@@ -1,28 +1,28 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
-import { getResource } from "./resourceLoaderApi";
+import { getResource } from './resourceLoaderApi';
 
 export interface Asset {
   name: string;
   description: string;
   capabilities: string[];
-  "primary-technologies": string[];
-  "cycle-time-hours": string;
-  "tech-lead": {
+  'primary-technologies': string[];
+  'cycle-time-hours': string;
+  'tech-lead': {
     name: string;
     email: string;
   };
-  "source-url": string;
-  "prod-url": string;
-  "depends-on": Array<{
+  'source-url': string;
+  'prod-url': string;
+  'depends-on': Array<{
     target: string;
     nature: string;
   }>;
-  "events-published": Array<{
+  'events-published': Array<{
     name: string;
   }>;
   infrastructure: string[];
-  "last-update": string;
+  'last-update': string;
   createsEntity: string[];
   dependsOnEntity: string[];
 }

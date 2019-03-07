@@ -14,28 +14,30 @@
  * limitations under the License.
  */
 
-import dbQueries from "./dbQueries";
+import dbQueries from './dbQueries';
 
-type BaseNode = {
+interface IBaseNode {
   uid: string;
   id?: string;
   name: string;
-};
-
-export interface Platform extends BaseNode {
-  domains: Domain[];
 }
 
-export interface Domain extends BaseNode {
-  capabilities: Capability[];
+export interface IPlatform extends IBaseNode {
+  domains: IDomain[];
 }
 
-export interface Capability extends BaseNode {}
+export interface IDomain extends IBaseNode {
+  capabilities: ICapability[];
+}
 
-export interface System extends BaseNode {}
+export interface ICapability extends IBaseNode {
+  systems: ISystem[];
+}
 
-export interface Technology extends BaseNode {}
+export interface ISystem extends IBaseNode {
+  technologies: IBaseNode[];
+}
 
-export interface Context {
+export interface IContext {
   queries: dbQueries;
 }

@@ -1,24 +1,24 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
-import "../resources/css/App.css";
+import '../resources/css/App.css';
 
-import { HashRouter, Switch, Route } from "react-router-dom";
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import PlatformView from "./PlatformView";
-import PlatformViewContainer from "./PlatformViewContainer";
-import CapabilityView from "./CapabilityView";
-import DataMapper from "../helpers/dataMapper";
-import Header from "./Header";
-import ErrorBoundary from "./ErrorBoundary";
-import { Container } from "semantic-ui-react";
+import { HashRouter, Switch, Route } from 'react-router-dom';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import PlatformView from './PlatformView';
+import PlatformViewContainer from './PlatformViewContainer';
+import CapabilityView from './CapabilityView';
+import DataMapper from '../helpers/dataMapper';
+import Header from './Header';
+import ErrorBoundary from './ErrorBoundary';
+import { Container } from 'semantic-ui-react';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      treasureMapData: {}
+      treasureMapData: {},
     };
   }
 
@@ -31,16 +31,16 @@ class App extends Component {
 
     this.setState(
       {
-        treasureMapData: treasureMapData
+        treasureMapData: treasureMapData,
       },
       this._logInputData
     );
   }
 
   _logInputData() {
-    console.log("CONFIG:", this.props.config);
-    console.log("SYSTEMS:", this.props.systems);
-    console.log("TREASURE MAP:", this.state.treasureMapData);
+    console.log('CONFIG:', this.props.config);
+    console.log('SYSTEMS:', this.props.systems);
+    console.log('TREASURE MAP:', this.state.treasureMapData);
   }
 
   buildDataMapping(systemMapping) {
@@ -61,7 +61,7 @@ class App extends Component {
   render() {
     return (
       <ErrorBoundary
-        message={"Please make sure your data is properly formatted."}
+        message={'Please make sure your data is properly formatted.'}
       >
         <div className="App">
           <HashRouter>
@@ -113,18 +113,18 @@ App.propTypes = {
             capabilities: PropTypes.arrayOf(
               PropTypes.shape({
                 name: PropTypes.string.isRequired,
-                order: PropTypes.number
+                order: PropTypes.number,
               })
-            )
+            ),
           })
-        )
+        ),
       })
     ),
-    others: PropTypes.array
+    others: PropTypes.array,
   }),
   systems: PropTypes.shape({
-    assets: PropTypes.arrayOf(PropTypes.object).isRequired
-  })
+    assets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }),
 };
 
 export default App;

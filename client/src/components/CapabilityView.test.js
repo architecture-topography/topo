@@ -1,37 +1,37 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
-import React from "react";
-import CapabilityView from "./CapabilityView";
-import { shallow } from "enzyme";
+import React from 'react';
+import CapabilityView from './CapabilityView';
+import { shallow } from 'enzyme';
 
-describe("Capability View", () => {
+describe('Capability View', () => {
   let treasureMapData;
 
   beforeEach(() => {
     treasureMapData = {
       platforms: [
         {
-          name: "Platform 1",
+          name: 'Platform 1',
           domains: [
             {
-              name: "Domain 1",
-              description: "Description 1",
+              name: 'Domain 1',
+              description: 'Description 1',
               capabilities: [
-                { name: "Capability 1", order: 1, id: "capability-1" },
-                { name: "Capability 2", order: 2, id: "capability-2" },
-                { name: "Capability 3", order: 3, id: "capability-3" }
+                { name: 'Capability 1', order: 1, id: 'capability-1' },
+                { name: 'Capability 2', order: 2, id: 'capability-2' },
+                { name: 'Capability 3', order: 3, id: 'capability-3' },
               ],
-              color: "#85C1E9"
-            }
-          ]
-        }
+              color: '#85C1E9',
+            },
+          ],
+        },
       ],
-      others: []
+      others: [],
     };
   });
 
-  it("if no systems, render SystemListWithData component", () => {
-    const capabilityId = "capability-1";
+  it('if no systems, render SystemListWithData component', () => {
+    const capabilityId = 'capability-1';
     const wrapper = shallow(
       <CapabilityView
         treasureMapData={treasureMapData}
@@ -39,11 +39,11 @@ describe("Capability View", () => {
       />
     );
     wrapper.setState({ gqlPlatforms: treasureMapData.platforms });
-    expect(wrapper.find("SystemListWithData")).toExist();
+    expect(wrapper.find('SystemListWithData')).toExist();
   });
 
-  it("renders the correct content for Capability View", () => {
-    const capabilityId = "capability-1";
+  it('renders the correct content for Capability View', () => {
+    const capabilityId = 'capability-1';
     const domain = treasureMapData.platforms[0].domains[0];
     const capability = domain.capabilities[0];
 
@@ -58,21 +58,21 @@ describe("Capability View", () => {
 
     expect(
       wrapper
-        .find("Header")
+        .find('Header')
         .at(0)
         .render()
         .text()
     ).toEqual(capability.name + domain.name);
   });
 
-  it("renders the correct content for other capabilties of the system (should be every capability but the capability expanded)", () => {
-    const capabilityId = "capability-1";
+  it('renders the correct content for other capabilties of the system (should be every capability but the capability expanded)', () => {
+    const capabilityId = 'capability-1';
     const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
     capability.systems = [
       {
-        name: "System 1",
-        capabilities: ["Capability 1", "Capability 2", "Capability 3"]
-      }
+        name: 'System 1',
+        capabilities: ['Capability 1', 'Capability 2', 'Capability 3'],
+      },
     ];
     const wrapper = shallow(
       <CapabilityView
@@ -81,12 +81,12 @@ describe("Capability View", () => {
       />
     );
     wrapper.setState({ gqlPlatforms: treasureMapData.platforms });
-    const accordionWrapper = shallow(wrapper.find("Accordion").get(0));
+    const accordionWrapper = shallow(wrapper.find('Accordion').get(0));
 
-    ["Capability 2", "Capability 3"].forEach((element, index) => {
+    ['Capability 2', 'Capability 3'].forEach((element, index) => {
       expect(
         accordionWrapper
-          .find("ListItem")
+          .find('ListItem')
           .at(index)
           .render()
           .text()
@@ -95,9 +95,9 @@ describe("Capability View", () => {
   });
 
   it('doesnt render "other capabilities" when there are no other capabilities but the one expanded on', () => {
-    const capabilityId = "capability-1";
+    const capabilityId = 'capability-1';
     const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
-    capability.systems = [{ name: "System 1", capabilities: ["Capability 1"] }];
+    capability.systems = [{ name: 'System 1', capabilities: ['Capability 1'] }];
     const wrapper = shallow(
       <CapabilityView
         treasureMapData={treasureMapData}
@@ -105,20 +105,20 @@ describe("Capability View", () => {
       />
     );
     wrapper.setState({ gqlPlatforms: treasureMapData.platforms });
-    const accordionWrapper = shallow(wrapper.find("Accordion").get(0));
+    const accordionWrapper = shallow(wrapper.find('Accordion').get(0));
 
-    expect(accordionWrapper.find("#no-capabilities-text")).toHaveLength(1);
+    expect(accordionWrapper.find('#no-capabilities-text')).toHaveLength(1);
   });
 
-  it("capability links to the correct capability page", () => {
+  it('capability links to the correct capability page', () => {
     // for each capability in "others" link is correct
-    const capabilityId = "capability-1";
+    const capabilityId = 'capability-1';
     const capability = treasureMapData.platforms[0].domains[0].capabilities[0];
     capability.systems = [
       {
-        name: "System 1",
-        capabilities: ["Capability 1", "Capability 2", "Capability 3"]
-      }
+        name: 'System 1',
+        capabilities: ['Capability 1', 'Capability 2', 'Capability 3'],
+      },
     ];
     const wrapper = shallow(
       <CapabilityView
@@ -127,16 +127,16 @@ describe("Capability View", () => {
       />
     );
     wrapper.setState({ gqlPlatforms: treasureMapData.platforms });
-    const accordionWrapper = shallow(wrapper.find("Accordion").get(0));
-    const listWrapper = accordionWrapper.find("List");
+    const accordionWrapper = shallow(wrapper.find('Accordion').get(0));
+    const listWrapper = accordionWrapper.find('List');
 
-    ["Capability 2", "Capability 3"].forEach((element, index) => {
+    ['Capability 2', 'Capability 3'].forEach((element, index) => {
       expect(
         listWrapper
-          .find("ListItem")
+          .find('ListItem')
           .at(index)
-          .prop("href")
-      ).toEqual("/#/capability/capability-" + (index + 2));
+          .prop('href')
+      ).toEqual('/#/capability/capability-' + (index + 2));
     });
   });
 });
