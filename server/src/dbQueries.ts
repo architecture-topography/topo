@@ -47,6 +47,42 @@ export const createPlatform = async (
   }
 };
 
+export const createLine = async (nodeAUid: string, nodeBUid: string) => {
+  const session = driver.session();
+  try {
+    const result = await session.run(
+      `
+      MATCH (a),(b)
+      WHERE a.uid = $nodeAUid AND b.uid = $nodeBUid
+      CREATE (a)-[r:CONTAINS]->(b)
+      RETURN r
+      `,
+      { nodeAUid, nodeBUid }
+    );
+    return result;
+  } finally {
+    session.close();
+  }
+};
+
+export const createDomain = async (
+  name: string,
+  id: string,
+  parentId: string
+): Promise<IPlatform> => {
+  const session = driver.session();
+  try {
+    const result = await session.run(
+      `CREATE (Node: Domain: TopoNode {name: $name, uid: $id}) RETURN Node`,
+      { name, id }
+    );
+    const properties = result.records[0].get('Node').properties;
+    return properties;
+  } finally {
+    session.close();
+  }
+};
+
 const runQueryAndReturnProperties = async (
   nodeName: string,
   queryString: string,
@@ -127,6 +163,8 @@ export const findTechnologiesBySystemId = async (
   }
 };
 export default {
+  createDomain,
+  createLine,
   createPlatform,
   findCapabilitiesByDomainId,
   findDomainsByPlatformId,

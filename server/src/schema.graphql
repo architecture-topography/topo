@@ -6,6 +6,7 @@ type Query {
 
 type Mutation {
   createPlatform(name: String!, id: String!): Platform!
+  createDomain(name: String!, id: String!, parentId: String): Domain!
 }
 
 type Platform {

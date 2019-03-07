@@ -25,7 +25,7 @@ export const createTestPlatform = async (platformName: String, id: String) => {
       CREATE (capability:Capability { name: "capability", uid: "capability-01" })
       CREATE (platform)-[:HAS]->(domain)
       CREATE (domain)-[:DOES]->(capability)
-    `,
+      `,
       {
         platformName,
         id,
@@ -45,11 +45,11 @@ export const createTestPlatformAndDomain = async (
   try {
     await session.run(
       `CREATE (platform:Platform { name: $platformName, uid: 'platform_0001' })
-          CREATE (domain:Domain { name: $domainName, uid: 'domain_0001' })
-          CREATE (capability:Capability { name: $capabilityName, uid: 'capability_0001' })
-          CREATE (platform)-[:HAS]->(domain)
-          CREATE (domain)-[:DOES]->(capability)
-        `,
+      CREATE (domain:Domain { name: $domainName, uid: 'domain_0001' })
+      CREATE (capability:Capability { name: $capabilityName, uid: 'capability_0001' })
+      CREATE (platform)-[:HAS]->(domain)
+      CREATE (domain)-[:DOES]->(capability)
+      `,
       {
         platformName,
         domainName,
@@ -90,6 +90,23 @@ export const findPlatform = async ({ id }: arguments) => {
   }
 };
 
+export const runQuery = async (queryString: string, params: object = {}) => {
+  const session = driver.session();
+  try {
+    const result = await session.run(queryString, params);
+    return result;
+  } finally {
+    session.close();
+  }
+};
+
+export const getNode = async (uid: string) => {
+  const res = await runQuery('MATCH (node) where node.uid=$uid RETURN node', {
+    uid,
+  });
+  return res.records[0].get('node').properties;
+};
+
 export const createSystemWithCapability = async ({
   system,
   technology,
@@ -99,12 +116,12 @@ export const createSystemWithCapability = async ({
   try {
     const result = await session.run(
       `CREATE (system:System: TopoNode { name: $systemName, uid: $systemUid })
-          CREATE (capability:Capability: TopoNode { name: $capabilityName, uid: $capabilityUid })
-          CREATE (technology:Technology: TopoNode { name: $technologyName, uid: $technologyUid })
-          CREATE (capability)-[:SUPPORTEDBY]->(system)
-          CREATE (system)-[:BUILTIN]->(technology)
-          RETURN capability,system,technology
-        `,
+      CREATE (capability:Capability: TopoNode { name: $capabilityName, uid: $capabilityUid })
+      CREATE (technology:Technology: TopoNode { name: $technologyName, uid: $technologyUid })
+      CREATE (capability)-[:SUPPORTEDBY]->(system)
+      CREATE (system)-[:BUILTIN]->(technology)
+      RETURN capability,system,technology
+      `,
       {
         capabilityName: 'test capability',
         capabilityUid: capability ? capability.uid : 'cap-001',
