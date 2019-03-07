@@ -16,7 +16,7 @@
 
 import * as Neo4j from "neo4j-driver";
 import { driver } from "./neo";
-import { Platform, Domain, Capability } from "./domain";
+import { Platform, Domain, Capability } from "./types";
 
 const remapUidToId = (properties: any) => {
   const newProperties = { ...properties };

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Domain, Context } from "../domain";
+import { Domain, Context } from "../types";
 
 const System = {
   id: async (parent: Domain) => {

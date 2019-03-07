@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Capability } from "../domain";
+import { Capability } from "../types";
 
 const System = {
   id: async (parent: Capability) => {

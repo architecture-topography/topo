@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Context, Platform } from "../domain";
+import { Context, Platform } from "../types";
 
 const Query = {
   hello: () => "Hello, Topo",

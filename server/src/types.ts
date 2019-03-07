@@ -16,38 +16,26 @@
 
 import dbQueries from "./dbQueries";
 
-export interface Domain {
+type BaseNode = {
   uid: string;
   id?: string;
   name: string;
-  capabilities: Capability[];
-}
+};
 
-export interface Capability {
-  uid: string;
-  id?: string;
-  name: string;
-}
-
-export interface Platform {
-  uid: string;
-  id?: string;
-  name: string;
+export interface Platform extends BaseNode {
   domains: Domain[];
 }
 
+export interface Domain extends BaseNode {
+  capabilities: Capability[];
+}
+
+export interface Capability extends BaseNode {}
+
+export interface System extends BaseNode {}
+
+export interface Technology extends BaseNode {}
+
 export interface Context {
   queries: dbQueries;
-}
-
-export interface System {
-  uid: string;
-  id?: string;
-  name: string;
-}
-
-export interface Technology {
-  uid: string;
-  id?: string;
-  name: string;
 }

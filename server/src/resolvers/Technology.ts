@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Technology } from "../domain";
+import { Technology } from "../types";
 
 const Technology = {
   id: (parent: Technology) => {

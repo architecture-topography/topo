@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Platform, Context } from "../domain";
+import { Platform, Context } from "../types";
 
 const System = {
   id: async (parent: Platform) => {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Context, System } from "../domain";
+import { Context, System } from "../types";
 
 const System = {
   id: (parent: System) => {
