@@ -3221,7 +3221,7 @@ commander@2.17.x, commander@~2.17.1:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
   integrity sha512-wPMUt6FnH2yzG95SA6mzjQOEKUU3aLaDEmzs1ti+1E9h+CsrZghRlqEM/EJ4KscsQVG8uNN4uVreUeT8+drlgg==
 
-commander@^2.11.0, commander@^2.14.1, commander@^2.19.0, commander@^2.9.0:
+commander@^2.11.0, commander@^2.14.1, commander@^2.16.0, commander@^2.19.0, commander@^2.9.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
   integrity sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg==
@@ -3399,6 +3399,13 @@ copy-webpack-plugin@^4.5.4:
     minimatch "^3.0.4"
     p-limit "^1.0.0"
     serialize-javascript "^1.4.0"
+
+copyright-header@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/copyright-header/-/copyright-header-0.4.4.tgz#86187645b68279e029519c4471de4be01024aa39"
+  integrity sha512-wBB7mWE5Y74Akxh3oDexQIPq/tdRRuzeTfFRPw4OccYZcbEb6x+TX709njuXwhiNYnkP+JZPpcUmXVL7RANISg==
+  dependencies:
+    commander "^2.16.0"
 
 core-js@2.6.4:
   version "2.6.4"

@@ -1,3 +1,5 @@
+/* Copyright (c) 2019 Thoughtworks Inc. All rights reserved. */
+
 import React from "react";
 import { Card } from "semantic-ui-react";
 import styles from "./styles.module.css";

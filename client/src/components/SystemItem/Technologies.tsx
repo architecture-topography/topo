@@ -1,3 +1,5 @@
+/* Copyright (c) 2019 Thoughtworks Inc. All rights reserved. */
+
 import React from "react";
 import styles from "./styles.module.css";
 
