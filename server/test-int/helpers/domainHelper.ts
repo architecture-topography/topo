@@ -44,9 +44,9 @@ export const createTestPlatformAndDomain = async (
   const session = driver.session();
   try {
     await session.run(
-      `CREATE (platform:Platform { name: $platformName })
-          CREATE (domain:Domain { name: $domainName })
-          CREATE (capability:Capability { name: $capabilityName })
+      `CREATE (platform:Platform { name: $platformName, uid: 'platform_0001' })
+          CREATE (domain:Domain { name: $domainName, uid: 'domain_0001' })
+          CREATE (capability:Capability { name: $capabilityName, uid: 'capability_0001' })
           CREATE (platform)-[:HAS]->(domain)
           CREATE (domain)-[:DOES]->(capability)
         `,

@@ -17,9 +17,12 @@
 import { Context, System } from "../domain";
 
 const System = {
+  id: (parent: System) => {
+    return parent.uid;
+  },
   technologies: async (parent: System, args: null, context: Context) => {
     const technologies = await context.queries.findTechnologiesBySystemId(
-      parent.id
+      parent.uid
     );
     return technologies;
   }

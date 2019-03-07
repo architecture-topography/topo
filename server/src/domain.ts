@@ -14,33 +14,40 @@
  * limitations under the License.
  */
 
+import dbQueries from "./dbQueries";
+
 export interface Domain {
-  id: string;
+  uid: string;
+  id?: string;
   name: string;
   capabilities: Capability[];
 }
 
 export interface Capability {
-  id: string;
+  uid: string;
+  id?: string;
   name: string;
 }
 
 export interface Platform {
   uid: string;
+  id?: string;
   name: string;
   domains: Domain[];
 }
 
 export interface Context {
-  queries: {
-    findPlatforms: Function;
-    findSystemsByCapabilityId: Function;
-    findTechnologiesBySystemId: Function;
-    createPlatform: Function;
-  };
+  queries: dbQueries;
 }
 
 export interface System {
-  id: string;
+  uid: string;
+  id?: string;
+  name: string;
+}
+
+export interface Technology {
+  uid: string;
+  id?: string;
   name: string;
 }

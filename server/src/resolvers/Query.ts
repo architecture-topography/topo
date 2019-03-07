@@ -25,7 +25,7 @@ const Query = {
   },
 
   systems: async (
-    parent: Platform,
+    _parent: Platform,
     args: { capabilityId: String },
     context: Context
   ) => {

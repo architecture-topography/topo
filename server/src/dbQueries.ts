@@ -15,10 +15,8 @@
  */
 
 import * as Neo4j from "neo4j-driver";
-import { values, groupBy, uniqBy } from "lodash";
 import { driver } from "./neo";
-import { Platform } from "./domain";
-import { applyResultTransforms } from "graphql-tools/dist/transforms/transforms";
+import { Platform, Domain, Capability } from "./domain";
 
 const remapUidToId = (properties: any) => {
   const newProperties = { ...properties };
@@ -49,79 +47,63 @@ export const createPlatform = async (
   }
 };
 
-export const findPlatforms = async (): Promise<Platform[]> => {
+const runQueryAndReturnProperties = async (
+  nodeName: string,
+  queryString: string,
+  queryParams: object = {}
+) => {
   const session = driver.session();
-
   try {
-    const result = await session.run(
-      "MATCH (platform:Platform)-[:HAS]->(domain:Domain)-[:DOES]->(capability:Capability) RETURN platform,domain,capability"
-    );
-
-    const groupedRecordsByPlatform: any = groupBy(
-      result.records,
-      (record: Neo4j.v1.Record) => {
-        return record.get("platform").properties.uid;
-      }
-    );
-
-    const groupedRecordsByDomain: any = groupBy(
-      result.records,
-      (record: Neo4j.v1.Record) => {
-        return record.get("domain").properties.uid;
-      }
-    );
-
-    const platforms = values(groupedRecordsByPlatform).map(
-      (records: Neo4j.v1.Record[]) => {
-        const platform = getProperties(records[0], "platform");
-        const domains = uniqBy(
-          records.map(edge => {
-            return { ...getProperties(edge, "domain") };
-          }),
-          "id"
-        );
-
-        const domainsWithCapabilities = domains.map(domain => {
-          const capabilities = groupedRecordsByDomain[domain.id].map(
-            (record: Neo4j.v1.Record) => {
-              return { ...getProperties(record, "capability") };
-            }
-          );
-          return { ...domain, capabilities };
-        });
-
-        return {
-          ...platform,
-          domains: domainsWithCapabilities
-        };
-      }
-    );
-
-    return platforms;
+    const result = await session.run(queryString, queryParams);
+    return result.records.length
+      ? result.records.map(record => record.get(nodeName).properties)
+      : [];
+  } catch (error) {
+    console.error("Error running query: ", error);
+    return [];
   } finally {
     session.close();
   }
 };
 
-export const findSystemsByCapabilityId = async (
-  capabilityId: string
+const findChildren = async (
+  parentType: string,
+  uid: string
+): Promise<any[]> => {
+  return runQueryAndReturnProperties(
+    "node",
+    `MATCH (p:${parentType})-[]->(node) where p.uid = $uid AND NOT node:System return p, node`,
+    { uid }
+  );
+};
+
+export const findPlatforms = async (): Promise<Platform[]> => {
+  return runQueryAndReturnProperties(
+    "platform",
+    "MATCH (platform:Platform) RETURN platform"
+  );
+};
+
+export const findDomainsByPlatformId = async (
+  platformUid: string
+): Promise<Domain[]> => {
+  return findChildren("Platform", platformUid);
+};
+
+export const findCapabilitiesByDomainId = async (
+  domainUid: string
+): Promise<Capability[]> => {
+  return findChildren("Domain", domainUid);
+};
+
+export const findSystemsByCapabilityId = (
+  capabilityUid: string
 ): Promise<Platform[]> => {
-  const session = driver.session();
-
-  try {
-    const result = await session.run(
-      `MATCH(capability: Capability) - [: SUPPORTEDBY] -> (system: System) WHERE (capability.uid = "${capabilityId}") RETURN capability, system`
-    );
-
-    return result.records.map(record => {
-      return remapUidToId(record.get("system").properties);
-    });
-  } catch (error) {
-    console.log("error", error);
-    return [];
-  } finally {
-    session.close();
-  }
+  return runQueryAndReturnProperties(
+    "system",
+    `MATCH(capability: Capability) - [] -> (system: System) WHERE (capability.uid = $capabilityUid) RETURN system`,
+    { capabilityUid }
+  );
 };
 
 export const findTechnologiesBySystemId = async (
@@ -148,5 +130,7 @@ export default {
   findPlatforms,
   findSystemsByCapabilityId,
   findTechnologiesBySystemId,
+  findCapabilitiesByDomainId,
+  findDomainsByPlatformId,
   createPlatform
 };
