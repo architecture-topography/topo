@@ -1,7 +1,12 @@
 import server from '../../src/server';
 import { createTestClient } from 'apollo-server-testing';
 import { clearDb } from '../helpers/testHelper';
-import { findPlatform, runQuery, getNode } from '../helpers/domainHelper';
+import {
+  findPlatform,
+  runQuery,
+  getNode,
+  addNode,
+} from '../helpers/domainHelper';
 
 describe('Mutation', () => {
   afterEach(clearDb);
@@ -12,13 +17,7 @@ describe('Mutation', () => {
       const domainName = 'Test Domain';
       const id = '123';
 
-      await runQuery(
-        'CREATE (platform:Platform { name: $platformName, uid: $platformUid })',
-        {
-          platformName: 'testPlatform',
-          platformUid,
-        }
-      );
+      await addNode('Platform', platformUid, 'test platform');
 
       const { query } = createTestClient(server);
 
@@ -29,10 +28,7 @@ describe('Mutation', () => {
           id: "${id}",
           parentId: "${platformUid}",
         )
-        {
-          name
-          id
-        }
+        { name }
       }
       `;
 
