@@ -32,6 +32,7 @@ const Mutation = {
     }
     return domain;
   },
+
   createPlatform: async (
     _parent: IPlatform,
     args: { name: string; id: string },

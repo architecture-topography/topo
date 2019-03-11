@@ -59,6 +59,9 @@ export const createLine = async (nodeAUid: string, nodeBUid: string) => {
       `,
       { nodeAUid, nodeBUid }
     );
+    if (result.records.length === 0) {
+      throw new Error('Could not create line');
+    }
     return result;
   } finally {
     session.close();

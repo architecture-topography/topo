@@ -13,6 +13,46 @@ describe('Mutation', () => {
 
   describe('createDomain', () => {
     it('creates a domain in neo db', async () => {
+      const domainName = 'Test Domain';
+      const id = '123';
+
+      const { query } = createTestClient(server);
+
+      const MUTATION = `
+      mutation {
+        createDomain( name: "${domainName}", id: "${id}")
+        { name }
+      }
+      `;
+
+      const queryResult = await query({ mutation: MUTATION });
+      expect(queryResult.errors).not.toBeDefined();
+
+      const domain = await getNode(id);
+      expect(domain.uid).toEqual(id);
+      expect(domain.name).toEqual(domainName);
+    });
+
+    it('returns an error if it cannot find the parent node', async () => {
+      const domainName = 'Test Domain';
+      const id = '123';
+
+      const { query } = createTestClient(server);
+
+      const MUTATION = `
+      mutation {
+        createDomain( name: "${domainName}", id: "${id}", parentId: "bogus-parent-id")
+        { name }
+      }
+      `;
+
+      const queryResult = await query({ mutation: MUTATION });
+      expect(
+        queryResult.errors ? queryResult.errors[0].toString() : ''
+      ).toContain('Could not create line');
+    });
+
+    it('creates a domain in neo db and links it to a platform', async () => {
       const platformUid = 'plat-00001';
       const domainName = 'Test Domain';
       const id = '123';
@@ -23,22 +63,13 @@ describe('Mutation', () => {
 
       const MUTATION = `
       mutation {
-        createDomain(
-          name: "${domainName}",
-          id: "${id}",
-          parentId: "${platformUid}",
-        )
+        createDomain( name: "${domainName}", id: "${id}", parentId: "${platformUid}")
         { name }
       }
       `;
 
       const queryResult = await query({ mutation: MUTATION });
       expect(queryResult.errors).not.toBeDefined();
-
-      // check node was added
-      const domain = await getNode(id);
-      expect(domain.uid).toEqual(id);
-      expect(domain.name).toEqual(domainName);
 
       // check domain was linked to platform
       const res = await runQuery(
