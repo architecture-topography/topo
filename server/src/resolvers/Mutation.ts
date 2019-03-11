@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { IContext, IPlatform, IBaseNode, ISystem } from '../types';
+import { IBaseNode, IContext, IPlatform, ISystem } from '../types';
 
 const Mutation = {
   createBox: async (

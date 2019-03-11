@@ -1,0 +1,13 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:latest",
+    "tslint-config-prettier"
+    ],
+    "jsRules": {},
+    "rules": {
+      "variable-name": ["allow-leading-underscore"],
+      "no-console": [false]
+    },
+    "rulesDirectory": []
+}
