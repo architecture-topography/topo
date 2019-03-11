@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { IContext, IPlatform } from '../types';
+import { IContext, IPlatform, IBaseNode } from '../types';
 
 const Mutation = {
   createBox: async (
@@ -31,6 +31,18 @@ const Mutation = {
       await context.queries.createLine(args.parentId, args.id);
     }
     return box;
+  },
+
+  createTechnology: async (
+    _parent: IBaseNode,
+    args: { name: string; id: string },
+    context: IContext
+  ) => {
+    const technology = await context.queries.createTechnology(
+      args.id,
+      args.name
+    );
+    return technology;
   },
 };
 

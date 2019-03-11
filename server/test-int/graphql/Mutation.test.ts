@@ -79,4 +79,25 @@ describe('Mutation', () => {
       ).toContain('Could not create line');
     });
   });
+
+  describe('createTechnology', () => {
+    it('create technology node', async () => {
+      const name = 'Test Platform';
+      const id = '123';
+
+      const { query } = createTestClient(server);
+
+      const MUTATION = `mutation {
+        createTechnology( id: "${id}", name: "${name}")
+        { id, name }
+      }`;
+
+      const result = await query({ mutation: MUTATION });
+      expect(result.errors).not.toBeDefined();
+
+      const node = await getNode(id);
+      expect(node.uid).toEqual(id);
+      expect(node.name).toEqual(name);
+    });
+  });
 });

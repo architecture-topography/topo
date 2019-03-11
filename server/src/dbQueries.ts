@@ -64,6 +64,15 @@ export const createBox = async (
   }
 };
 
+const createTechnology = async (uid: string, name: string): Promise<any> => {
+  const result = await runQueryAndReturnProperties(
+    'Node',
+    `CREATE (Node: Technology: TopoNode {name: $name, uid: $uid}) RETURN Node`,
+    { uid, name }
+  );
+  return remapUidToId(result[0]);
+};
+
 const runQueryAndReturnProperties = async (
   nodeName: string,
   queryString: string,
@@ -146,6 +155,7 @@ export const findTechnologiesBySystemId = async (
 export default {
   createBox,
   createLine,
+  createTechnology,
   findCapabilitiesByDomainId,
   findDomainsByPlatformId,
   findPlatforms,
