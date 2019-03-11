@@ -33,6 +33,18 @@ const Mutation = {
     return domain;
   },
 
+  createCapability: async (
+    _parent: IPlatform,
+    args: { name: string; id: string },
+    context: IContext
+  ) => {
+    const capability = await context.queries.createCapability(
+      args.name,
+      args.id
+    );
+    return capability;
+  },
+
   createPlatform: async (
     _parent: IPlatform,
     args: { name: string; id: string },

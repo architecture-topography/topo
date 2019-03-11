@@ -86,6 +86,24 @@ export const createDomain = async (
   }
 };
 
+export const createCapability = async (
+  name: string,
+  id: string,
+  parentId: string
+): Promise<IPlatform> => {
+  const session = driver.session();
+  try {
+    const result = await session.run(
+      `CREATE (Node: Capability: TopoNode {name: $name, uid: $id}) RETURN Node`,
+      { name, id }
+    );
+    const properties = result.records[0].get('Node').properties;
+    return properties;
+  } finally {
+    session.close();
+  }
+};
+
 const runQueryAndReturnProperties = async (
   nodeName: string,
   queryString: string,
@@ -166,6 +184,7 @@ export const findTechnologiesBySystemId = async (
   }
 };
 export default {
+  createCapability,
   createDomain,
   createLine,
   createPlatform,

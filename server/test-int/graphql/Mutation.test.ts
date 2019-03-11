@@ -80,6 +80,29 @@ describe('Mutation', () => {
     });
   });
 
+  describe('createCapability', () => {
+    it('creates a capability in neo db', async () => {
+      const capabilityName = 'Test Capability';
+      const id = 'cap-00012';
+
+      const { query } = createTestClient(server);
+
+      const MUTATION = `
+      mutation {
+        createCapability( name: "${capabilityName}", id: "${id}")
+        { name }
+      }
+      `;
+
+      const queryResult = await query({ mutation: MUTATION });
+      expect(queryResult.errors).not.toBeDefined();
+
+      const capability = await getNode(id);
+      expect(capability.uid).toEqual(id);
+      expect(capability.name).toEqual(capabilityName);
+    });
+  });
+
   describe('createPlatform', () => {
     it('creates platform in neo db', async () => {
       const platformName = 'Test Platform';
