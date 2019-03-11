@@ -53,6 +53,22 @@ const Mutation = {
     const platform = await context.queries.createPlatform(args.name, args.id);
     return platform;
   },
+
+  createBox: async (
+    _parent: IPlatform,
+    args: { name: string; id: string; boxType: string; parentId: string },
+    context: IContext
+  ) => {
+    const box = await context.queries.createBox(
+      args.id,
+      args.boxType,
+      args.name
+    );
+    if (args.parentId) {
+      await context.queries.createLine(args.parentId, args.id);
+    }
+    return box;
+  },
 };
 
 export default Mutation;

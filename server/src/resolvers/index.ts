@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import Box from './Box';
 import Capability from './Capability';
 import Domain from './Domain';
 import Mutation from './Mutation';
@@ -22,6 +23,7 @@ import Query from './Query';
 import System from './System';
 
 export default {
+  Box,
   Capability,
   Domain,
   Mutation,

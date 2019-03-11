@@ -4,10 +4,29 @@ type Query {
   systems(capabilityId: String!): [System]!
 }
 
+enum BoxType {
+  Platform
+  Domain
+  Capability
+  System
+  Technology
+}
+
 type Mutation {
+  createBox(
+    name: String!
+    id: String!
+    boxType: BoxType!
+    parentId: String
+  ): Box!
   createPlatform(name: String!, id: String!): Platform!
   createDomain(name: String!, id: String!, parentId: String): Domain!
   createCapability(name: String!, id: String!, parentId: String): Capability!
+}
+
+type Box {
+  id: ID!
+  name: String!
 }
 
 type Platform {

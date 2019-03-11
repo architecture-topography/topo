@@ -68,6 +68,24 @@ export const createLine = async (nodeAUid: string, nodeBUid: string) => {
   }
 };
 
+export const createBox = async (
+  id: string,
+  boxType: string,
+  name: string
+): Promise<IPlatform> => {
+  const session = driver.session();
+  try {
+    const result = await session.run(
+      `CREATE (Node: ${boxType}: TopoNode {name: $name, uid: $id}) RETURN Node`,
+      { name, id }
+    );
+    const properties = result.records[0].get('Node').properties;
+    return properties;
+  } finally {
+    session.close();
+  }
+};
+
 export const createDomain = async (
   name: string,
   id: string,
@@ -184,6 +202,7 @@ export const findTechnologiesBySystemId = async (
   }
 };
 export default {
+  createBox,
   createCapability,
   createDomain,
   createLine,

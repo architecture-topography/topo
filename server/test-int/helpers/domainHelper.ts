@@ -104,6 +104,9 @@ export const getNode = async (uid: string) => {
   const res = await runQuery('MATCH (node) where node.uid=$uid RETURN node', {
     uid,
   });
+  if (res.records.length === 0) {
+    throw new Error('Could not find node');
+  }
   return res.records[0].get('node').properties;
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Thoughtworks Inc. All rights reserved
+ * Copyright 2019 Thoughtworks Inc. All rights reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,12 @@
  * limitations under the License.
  */
 
-import dbQueries from './dbQueries';
+import { IBaseNode } from '../types';
 
-export interface IBaseNode {
-  uid: string;
-  id?: string;
-  name: string;
-}
+const Box = {
+  id: async (parent: IBaseNode) => {
+    return parent.uid;
+  },
+};
 
-export interface IPlatform extends IBaseNode {
-  domains: IDomain[];
-}
-
-export interface IDomain extends IBaseNode {
-  capabilities: ICapability[];
-}
-
-export interface ICapability extends IBaseNode {
-  systems: ISystem[];
-}
-
-export interface ISystem extends IBaseNode {
-  technologies: IBaseNode[];
-}
-
-export interface IContext {
-  queries: dbQueries;
-}
+export default Box;
