@@ -43,7 +43,12 @@ const Mutation = {
 
   createSystem: async (
     _parent: ISystem,
-    args: { name: string; id: string; parentBoxId: string },
+    args: {
+      name: string;
+      id: string;
+      parentBoxId: string;
+      technologies: string[];
+    },
     context: IContext
   ) => {
     const system = await context.queries.createSystem(
@@ -51,8 +56,16 @@ const Mutation = {
       args.name,
       args.parentBoxId
     );
+
     if (args.parentBoxId) {
       await context.queries.createLine(args.parentBoxId, args.id);
+    }
+
+    if (args.technologies) {
+      const links = args.technologies.map(technologyId =>
+        context.queries.createLine(args.id, technologyId)
+      );
+      await Promise.all(links); // wait for all links to be created
     }
     return system;
   },

@@ -125,5 +125,33 @@ describe('Mutation', () => {
       expect(node.uid).toEqual(id);
       expect(node.name).toEqual(name);
     });
+
+    it('create system node with technology', async () => {
+      const name = 'Test Platform';
+      const id = '123';
+      const technologyId = 'tech-001';
+
+      const { query } = createTestClient(server);
+
+      await addNode('Capability', capabilityId, 'test capability');
+      await addNode('Technology', technologyId, 'react (of course)');
+
+      const MUTATION = `mutation {
+        createSystem( id: "${id}", name: "${name}", parentBoxId: "${capabilityId}", technologies: ["${technologyId}"])
+        { name }
+      }`;
+
+      await query({ mutation: MUTATION });
+
+      // check domain was linked to platform
+      const res = await runQuery(
+        'MATCH (system)-[]->(technology) where system.uid=$id RETURN technology',
+        { id }
+      );
+      expect(res.records.length).toBe(1);
+      expect(res.records[0].get('technology').properties.uid).toEqual(
+        technologyId
+      );
+    });
   });
 });
