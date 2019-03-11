@@ -8,8 +8,6 @@ enum BoxType {
   Platform
   Domain
   Capability
-  System
-  Technology
 }
 
 type Mutation {
@@ -19,6 +17,15 @@ type Mutation {
     boxType: BoxType!
     parentId: String
   ): Box!
+
+  createTechnology(id: String!, name: String!): Technology!
+
+  createSystem(
+    id: String!
+    name: String!
+    parentBoxId: String!
+    technologies: [String!]
+  ): System!
 }
 
 type Box {
