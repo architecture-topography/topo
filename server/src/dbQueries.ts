@@ -18,6 +18,13 @@ import * as Neo4j from 'neo4j-driver';
 import { driver } from './neo';
 import { ICapability, IDomain, IPlatform } from './types';
 
+const remapUidToId = (properties: any) => {
+  const newProperties = { ...properties };
+  newProperties.id = properties.uid;
+  delete newProperties.uid;
+  return newProperties;
+};
+
 export const createLine = async (nodeAUid: string, nodeBUid: string) => {
   const session = driver.session();
   try {
@@ -127,7 +134,7 @@ export const findTechnologiesBySystemId = async (
     );
 
     return result.records.map(record => {
-      return record.get('technology').properties;
+      return remapUidToId(record.get('technology').properties);
     });
   } catch (error) {
     console.log('error', error);

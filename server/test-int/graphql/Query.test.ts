@@ -80,8 +80,8 @@ describe('resolvers', () => {
       const res = await query({ query: QUERY });
       expect(res.data).toBeDefined();
       expect(res.data ? res.data.systems[0].technologies : []).toContainEqual({
-        name: 'kittensOnRails',
         id: 'kit-001',
+        name: 'kittensOnRails',
       });
     });
   });
