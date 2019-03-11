@@ -9,7 +9,8 @@
       "variable-name": [false],
       "no-console": [false],
       "max-line-length": [false],
-      "ordered-imports": [false]
+      "ordered-imports": [false],
+      "arrow-parens": [false]
     },
     "rulesDirectory": []
 }

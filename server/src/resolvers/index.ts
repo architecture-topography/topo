@@ -21,6 +21,7 @@ import Mutation from './Mutation';
 import Platform from './Platform';
 import Query from './Query';
 import System from './System';
+import Technology from './Technology';
 
 export default {
   Box,
@@ -30,4 +31,5 @@ export default {
   Platform,
   Query,
   System,
+  Technology,
 };

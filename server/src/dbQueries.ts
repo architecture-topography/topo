@@ -14,16 +14,8 @@
  * limitations under the License.
  */
 
-import * as Neo4j from 'neo4j-driver';
 import { driver } from './neo';
 import { ICapability, IDomain, IPlatform, ISystem } from './types';
-
-const remapUidToId = (properties: any) => {
-  const newProperties = { ...properties };
-  newProperties.id = properties.uid;
-  delete newProperties.uid;
-  return newProperties;
-};
 
 export const createLine = async (nodeAUid: string, nodeBUid: string) => {
   const session = driver.session();
@@ -73,7 +65,7 @@ export const createSystem = async (
     `CREATE (Node: System: TopoNode {name: $name, uid: $uid}) RETURN Node`,
     { uid, name }
   );
-  return remapUidToId(result[0]);
+  return result[0];
 };
 
 const createTechnology = async (uid: string, name: string): Promise<any> => {
@@ -82,7 +74,7 @@ const createTechnology = async (uid: string, name: string): Promise<any> => {
     `CREATE (Node: Technology: TopoNode {name: $name, uid: $uid}) RETURN Node`,
     { uid, name }
   );
-  return remapUidToId(result[0]);
+  return result[0];
 };
 
 const runQueryAndReturnProperties = async (
@@ -147,22 +139,13 @@ export const findSystemsByCapabilityId = (
 export const findTechnologiesBySystemId = async (
   systemId: string
 ): Promise<IPlatform[]> => {
-  const session = driver.session();
+  const results = await runQueryAndReturnProperties(
+    'technology',
+    `MATCH(system) - [] -> (technology: Technology) WHERE (system.uid = $systemId) RETURN technology`,
+    { systemId }
+  );
 
-  try {
-    const result = await session.run(
-      `MATCH(system:System) - [:BUILTIN] -> (technology: Technology) WHERE (system.uid = "${systemId}") RETURN system, technology`
-    );
-
-    return result.records.map(record => {
-      return remapUidToId(record.get('technology').properties);
-    });
-  } catch (error) {
-    console.log('error', error);
-    return [];
-  } finally {
-    session.close();
-  }
+  return results;
 };
 export default {
   createBox,

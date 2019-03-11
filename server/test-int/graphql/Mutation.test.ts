@@ -115,7 +115,7 @@ describe('Mutation', () => {
 
       const MUTATION = `mutation {
         createSystem( id: "${id}", name: "${name}", parentBoxId: "${capabilityId}")
-        { name }
+        { name, id }
       }`;
 
       const result = await query({ mutation: MUTATION });
@@ -138,7 +138,7 @@ describe('Mutation', () => {
 
       const MUTATION = `mutation {
         createSystem( id: "${id}", name: "${name}", parentBoxId: "${capabilityId}", technologies: ["${technologyId}"])
-        { name }
+        { name, id }
       }`;
 
       await query({ mutation: MUTATION });

@@ -20,7 +20,7 @@ const System = {
   id: (parent: ISystem) => {
     return parent.uid;
   },
-  technologies: async (parent: ISystem, args: null, context: IContext) => {
+  technologies: async (parent: ISystem, _args: null, context: IContext) => {
     const technologies = await context.queries.findTechnologiesBySystemId(
       parent.uid
     );

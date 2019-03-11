@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { Technology } from '../types';
+import { IBaseNode } from '../types';
 
 const Technology = {
-  id: (parent: Technology) => {
+  id: (parent: IBaseNode) => {
     return parent.uid;
   },
 };
