@@ -17,43 +17,6 @@
 import { IContext, IPlatform } from '../types';
 
 const Mutation = {
-  createDomain: async (
-    _parent: IPlatform,
-    args: { name: string; id: string; parentId?: string },
-    context: IContext
-  ) => {
-    const domain = await context.queries.createDomain(
-      args.name,
-      args.id,
-      args.parentId
-    );
-    if (args.parentId) {
-      const line = await context.queries.createLine(args.parentId, args.id);
-    }
-    return domain;
-  },
-
-  createCapability: async (
-    _parent: IPlatform,
-    args: { name: string; id: string },
-    context: IContext
-  ) => {
-    const capability = await context.queries.createCapability(
-      args.name,
-      args.id
-    );
-    return capability;
-  },
-
-  createPlatform: async (
-    _parent: IPlatform,
-    args: { name: string; id: string },
-    context: IContext
-  ) => {
-    const platform = await context.queries.createPlatform(args.name, args.id);
-    return platform;
-  },
-
   createBox: async (
     _parent: IPlatform,
     args: { name: string; id: string; boxType: string; parentId: string },

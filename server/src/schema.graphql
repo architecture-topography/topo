@@ -19,9 +19,6 @@ type Mutation {
     boxType: BoxType!
     parentId: String
   ): Box!
-  createPlatform(name: String!, id: String!): Platform!
-  createDomain(name: String!, id: String!, parentId: String): Domain!
-  createCapability(name: String!, id: String!, parentId: String): Capability!
 }
 
 type Box {

@@ -18,35 +18,6 @@ import * as Neo4j from 'neo4j-driver';
 import { driver } from './neo';
 import { ICapability, IDomain, IPlatform } from './types';
 
-const remapUidToId = (properties: any) => {
-  const newProperties = { ...properties };
-  newProperties.id = properties.uid;
-  delete newProperties.uid;
-  return newProperties;
-};
-
-const getProperties = (record: Neo4j.v1.Record, name: string) => {
-  const properties = record.get(name).properties;
-  const mappedProperties = remapUidToId(properties);
-  return mappedProperties;
-};
-
-export const createPlatform = async (
-  name: string,
-  id: string
-): Promise<IPlatform> => {
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `CREATE (Node: Platform: TopoNode {name: $name, uid: $id}) RETURN Node`,
-      { name, id }
-    );
-    return getProperties(result.records[0], 'Node');
-  } finally {
-    session.close();
-  }
-};
-
 export const createLine = async (nodeAUid: string, nodeBUid: string) => {
   const session = driver.session();
   try {
@@ -76,43 +47,7 @@ export const createBox = async (
   const session = driver.session();
   try {
     const result = await session.run(
-      `CREATE (Node: ${boxType}: TopoNode {name: $name, uid: $id}) RETURN Node`,
-      { name, id }
-    );
-    const properties = result.records[0].get('Node').properties;
-    return properties;
-  } finally {
-    session.close();
-  }
-};
-
-export const createDomain = async (
-  name: string,
-  id: string,
-  parentId: string
-): Promise<IPlatform> => {
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `CREATE (Node: Domain: TopoNode {name: $name, uid: $id}) RETURN Node`,
-      { name, id }
-    );
-    const properties = result.records[0].get('Node').properties;
-    return properties;
-  } finally {
-    session.close();
-  }
-};
-
-export const createCapability = async (
-  name: string,
-  id: string,
-  parentId: string
-): Promise<IPlatform> => {
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `CREATE (Node: Capability: TopoNode {name: $name, uid: $id}) RETURN Node`,
+      `CREATE (Node: ${boxType}: Box: TopoNode {name: $name, uid: $id}) RETURN Node`,
       { name, id }
     );
     const properties = result.records[0].get('Node').properties;
@@ -192,7 +127,7 @@ export const findTechnologiesBySystemId = async (
     );
 
     return result.records.map(record => {
-      return remapUidToId(record.get('technology').properties);
+      return record.get('technology').properties;
     });
   } catch (error) {
     console.log('error', error);
@@ -203,10 +138,7 @@ export const findTechnologiesBySystemId = async (
 };
 export default {
   createBox,
-  createCapability,
-  createDomain,
   createLine,
-  createPlatform,
   findCapabilitiesByDomainId,
   findDomainsByPlatformId,
   findPlatforms,
