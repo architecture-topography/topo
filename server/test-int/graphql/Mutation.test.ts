@@ -100,4 +100,30 @@ describe('Mutation', () => {
       expect(node.name).toEqual(name);
     });
   });
+
+  describe('System', () => {
+    const capabilityId = 'capability-001';
+    beforeEach(() => addNode('Capability', capabilityId, 'test capability'));
+
+    it('create system node', async () => {
+      const name = 'Test Platform';
+      const id = '123';
+
+      const { query } = createTestClient(server);
+
+      await addNode('Capability', capabilityId, 'test capability');
+
+      const MUTATION = `mutation {
+        createSystem( id: "${id}", name: "${name}", parentBoxId: "${capabilityId}")
+        { name }
+      }`;
+
+      const result = await query({ mutation: MUTATION });
+      expect(result.errors).not.toBeDefined();
+
+      const node = await getNode(id);
+      expect(node.uid).toEqual(id);
+      expect(node.name).toEqual(name);
+    });
+  });
 });

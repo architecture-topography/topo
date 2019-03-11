@@ -16,7 +16,7 @@
 
 import * as Neo4j from 'neo4j-driver';
 import { driver } from './neo';
-import { ICapability, IDomain, IPlatform } from './types';
+import { ICapability, IDomain, IPlatform, ISystem } from './types';
 
 const remapUidToId = (properties: any) => {
   const newProperties = { ...properties };
@@ -62,6 +62,18 @@ export const createBox = async (
   } finally {
     session.close();
   }
+};
+
+export const createSystem = async (
+  uid: string,
+  name: string
+): Promise<ISystem> => {
+  const result = await runQueryAndReturnProperties(
+    'Node',
+    `CREATE (Node: System: TopoNode {name: $name, uid: $uid}) RETURN Node`,
+    { uid, name }
+  );
+  return remapUidToId(result[0]);
 };
 
 const createTechnology = async (uid: string, name: string): Promise<any> => {
@@ -155,6 +167,7 @@ export const findTechnologiesBySystemId = async (
 export default {
   createBox,
   createLine,
+  createSystem,
   createTechnology,
   findCapabilitiesByDomainId,
   findDomainsByPlatformId,
