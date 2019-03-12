@@ -29,7 +29,7 @@ describe('Schema definitions', () => {
       mocks: true,
       typeDefs,
     });
-    query = createTestClient(server).query;
+    query = createTestClient(server as any).query;
   });
 
   it('Accepts systems query', async () => {
