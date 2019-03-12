@@ -121,7 +121,7 @@ export const createSystemWithCapability = async ({
   system,
   technology,
   capability,
-}: arguments) => {
+}: IArguments) => {
   const session = driver.session();
   try {
     const result = await session.run(
