@@ -10,15 +10,15 @@ export default class DomainView extends Component {
   static propTypes = {
     domains: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string,
         capabilities: PropTypes.arrayOf(
           PropTypes.shape({
-            name: PropTypes.string.isRequired,
             id: PropTypes.string,
+            name: PropTypes.string.isRequired,
           })
         ),
         color: PropTypes.string,
+        description: PropTypes.string,
+        name: PropTypes.string.isRequired,
       })
     ).isRequired,
   };

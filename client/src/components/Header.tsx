@@ -3,8 +3,8 @@
 import '../resources/css/App.css';
 
 import React, { Component } from 'react';
-import { Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { Image } from 'semantic-ui-react';
 import '../resources/css/Topo.css';
 import topo_logo from '../resources/img/Topo-02.png';
 

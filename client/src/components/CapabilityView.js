@@ -40,9 +40,9 @@ const httpLink = createHttpLink({
 });
 
 const client = new ApolloClient({
-  link: httpLink,
   cache: new InMemoryCache(),
   connectToDevTools: true,
+  link: httpLink,
 });
 
 export default class CapabilityView extends Component {
@@ -68,8 +68,8 @@ export default class CapabilityView extends Component {
   };
 
   static propTypes = {
-    treasureMapData: PropTypes.instanceOf(Object).isRequired,
     capabilityId: PropTypes.string.isRequired,
+    treasureMapData: PropTypes.instanceOf(Object).isRequired,
   };
 
   getListOfAllCapabilities() {
@@ -85,7 +85,7 @@ export default class CapabilityView extends Component {
     });
 
     capabilityList.sort((a, b) => {
-      return parseInt(a.id) - parseInt(b.id);
+      return parseInt(a.id, 10) - parseInt(b.id, 10);
     });
 
     return capabilityList;
@@ -260,8 +260,9 @@ export default class CapabilityView extends Component {
       capability => capability !== expandedCapability.name
     );
 
-    if (otherCapabilities.length <= 1)
+    if (otherCapabilities.length <= 1) {
       return <span id="no-capabilities-text">None</span>;
+    }
     return this.getListOfSystemAttribute(
       system,
       'capabilities',
@@ -276,8 +277,9 @@ export default class CapabilityView extends Component {
         : system[attribute];
 
     let attributeList;
-    if (attributeListUnfiltered && attributeListUnfiltered.length)
+    if (attributeListUnfiltered && attributeListUnfiltered.length) {
       attributeList = attributeListUnfiltered.filter(element => element);
+    }
 
     let capabilityList = this.getListOfAllCapabilities();
 
@@ -288,7 +290,7 @@ export default class CapabilityView extends Component {
             let capabilityId = 0;
             if (attribute === 'capabilities') {
               let capabilityFromList = capabilityList.find(
-                obj => obj.name == val
+                obj => obj.name === val
               );
               capabilityId = capabilityFromList ? capabilityFromList.id : 0; // 0 means capability view not rendered for it
             }

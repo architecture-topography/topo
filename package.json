@@ -5,14 +5,15 @@
     "server"
   ],
   "scripts": {
-    "prettier-fix": "prettier --single-quote --trailing-comma es5 --write '**/{src,test-int}/**/*.{ts,js,graphql}?(x)'",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write '**/{src,test-int}/**/*.{ts,js,graphql}?(x)'",
+    "prettier-fix": "yarn prettier --fix",
     "docker-prod": "docker-compose -f docker-base.yml -f docker-prod.yml",
     "docker-local": "docker-compose -f docker-base.yml -f docker-local.yml",
     "docker-dev": "docker-compose -f docker-base.yml -f docker-dev.yml",
-    "check-copyright": "copyright-header --fix --copyrightHolder \"Thoughtworks Inc. All rights reserved\" --include \"server/src\" --templateId \"apache\"",
-    "fix-copyright": "yarn run check-copyright --fix",
-    "lint": "yarn tslint -c tslint.json 'server/src/**/*.ts'",
-    "lint-fix": "yarn tslint --fix -c tslint.json 'server/src/**/*.ts'"
+    "copyright": "copyright-header --fix --copyrightHolder \"Thoughtworks Inc. All rights reserved\" --include \"server/src\" --templateId \"apache\"",
+    "copyright-fix": "yarn run copyright --fix",
+    "lint": "yarn tslint -c tslint.json '{server,client}/**/*.{ts,js}?(x)'",
+    "lint-fix": "yarn run lint --fix"
   },
   "husky": {
     "hooks": {
@@ -21,15 +22,15 @@
   },
   "lint-staged": {
     "*": [
-      "yarn run fix-copyright",
+      "yarn run copyright-fix",
       "git add"
     ],
     "*.{ts,js,graphql}?(x)": [
-      "prettier --single-quote --trailing-comma es5 --write '**/{src,test-int}/**/*.{ts,js,graphql}?(x)'",
+      "yarn run prettier-fix",
       "git add"
     ],
     "*.{ts,js}?(x)": [
-      "yarn tslint --fix -c tslint.json",
+      "yarn run lint-fix",
       "git add"
     ]
   },

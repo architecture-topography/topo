@@ -1,16 +1,16 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
 import React, { Component } from 'react';
-import DomainView from './DomainView';
 import { Grid, Header, Segment } from 'semantic-ui-react';
-import '../resources/css/Topo.css';
 import { TreasureMapData } from '../domain/treasureMap';
+import '../resources/css/Topo.css';
+import DomainView from './DomainView';
 
-interface Props {
+interface IProps {
   treasureMapData: TreasureMapData;
 }
 
-export default class PlatformView extends Component<Props> {
+export default class PlatformView extends Component<IProps> {
   render() {
     return (
       <div>

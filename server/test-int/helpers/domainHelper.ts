@@ -16,7 +16,7 @@
 
 import { driver } from '../../src/neo';
 
-export const createTestPlatform = async (platformName: String, id: String) => {
+export const createTestPlatform = async (platformName: string, id: string) => {
   const session = driver.session();
   try {
     await session.run(
@@ -27,8 +27,8 @@ export const createTestPlatform = async (platformName: String, id: String) => {
       CREATE (domain)-[:DOES]->(capability)
       `,
       {
-        platformName,
         id,
+        platformName,
       }
     );
   } finally {
@@ -37,9 +37,9 @@ export const createTestPlatform = async (platformName: String, id: String) => {
 };
 
 export const createTestPlatformAndDomain = async (
-  platformName: String,
-  domainName: String,
-  capabilityName: String
+  platformName: string,
+  domainName: string,
+  capabilityName: string
 ) => {
   const session = driver.session();
   try {
@@ -51,9 +51,9 @@ export const createTestPlatformAndDomain = async (
       CREATE (domain)-[:DOES]->(capability)
       `,
       {
-        platformName,
-        domainName,
         capabilityName,
+        domainName,
+        platformName,
       }
     );
   } finally {
@@ -61,23 +61,23 @@ export const createTestPlatformAndDomain = async (
   }
 };
 
-interface arguments {
+interface IArguments {
   capability?: {
-    name: String;
-    uid: String;
+    name: string;
+    uid: string;
   };
   system?: {
-    name: String;
-    uid: String;
+    name: string;
+    uid: string;
   };
   technology?: {
-    name: String;
-    uid: String;
+    name: string;
+    uid: string;
   };
-  id?: String;
+  id?: string;
 }
 
-export const findPlatform = async ({ id }: arguments) => {
+export const findPlatform = async ({ id }: IArguments) => {
   const session = driver.session();
   try {
     const result = await session.run(

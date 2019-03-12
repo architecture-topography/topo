@@ -2,15 +2,15 @@
 
 import './resources/css/index.css';
 
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { createHttpLink } from 'apollo-link-http';
 import React, { ReactElement } from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
-import { register } from './serviceWorker';
-import ErrorBoundary from './components/ErrorBoundary';
 import * as AssetFile from './actions/assetLoader';
 import * as ConfigFile from './actions/configLoader';
-import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import App from './components/App';
+import ErrorBoundary from './components/ErrorBoundary';
+import { register } from './serviceWorker';
 
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
@@ -20,9 +20,9 @@ const httpLink = createHttpLink({
 });
 
 const client = new ApolloClient({
-  link: httpLink,
   cache: new InMemoryCache(),
   connectToDevTools: true,
+  link: httpLink,
 });
 
 const pathToConfigFile = process.env.REACT_APP_CONFIG_FILE;

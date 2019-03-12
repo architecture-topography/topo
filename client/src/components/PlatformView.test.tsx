@@ -1,8 +1,8 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
+import { shallow } from 'enzyme';
 import React from 'react';
 import PlatformView from './PlatformView';
-import { shallow } from 'enzyme';
 
 describe('PlatformView', () => {
   it('renders a platform', () => {

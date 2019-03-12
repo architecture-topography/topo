@@ -9,8 +9,8 @@ class ErrorBoundary extends React.Component {
     super(props);
 
     this.state = {
-      hasError: false,
       error: null,
+      hasError: false,
       info: null,
     };
   }
@@ -18,8 +18,8 @@ class ErrorBoundary extends React.Component {
   componentDidCatch(error, info) {
     this.setState(
       {
-        hasError: true,
         error: error,
+        hasError: true,
         info: info,
       },
       this._logError
@@ -27,8 +27,8 @@ class ErrorBoundary extends React.Component {
   }
 
   _logError() {
-    console.error(this.state.error.toString());
-    console.info(this.state.info.componentStack);
+    // console.error(this.state.error.toString());
+    // console.info(this.state.info.componentStack);
   }
 
   render() {
@@ -46,8 +46,8 @@ class ErrorBoundary extends React.Component {
 }
 
 ErrorBoundary.propTypes = {
-  message: PropTyes.string.isRequired,
   displayError: PropTyes.bool,
+  message: PropTyes.string.isRequired,
 };
 
 export default ErrorBoundary;

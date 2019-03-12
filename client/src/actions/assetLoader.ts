@@ -2,7 +2,7 @@
 
 import { getResource } from './resourceLoaderApi';
 
-export interface Asset {
+export interface IAsset {
   name: string;
   description: string;
   capabilities: string[];
@@ -27,10 +27,10 @@ export interface Asset {
   dependsOnEntity: string[];
 }
 
-export interface File {
-  assets: Asset[];
+export interface IFile {
+  assets: IAsset[];
 }
 
 export const load = (path: string | undefined) => {
-  return getResource(path) as Promise<File>;
+  return getResource(path) as Promise<IFile>;
 };

@@ -3,19 +3,19 @@
 import dataMapper from './dataMapper';
 
 const config = {
+  others: [],
   platforms: [
     {
-      name: 'Platform 1',
       domains: [
         {
-          name: 'Domain 1',
-          description: 'Description 1',
           capabilities: [{ name: 'Capability 1', order: 1 }],
+          description: 'Description 1',
+          name: 'Domain 1',
         },
       ],
+      name: 'Platform 1',
     },
   ],
-  others: [],
 };
 
 describe('dataMapper', () => {
@@ -24,10 +24,10 @@ describe('dataMapper', () => {
       const systems = {
         assets: [
           {
-            name: 'Test Name',
-            description: 'Test Description',
             capabilities: ['Capability 1'],
+            description: 'Test Description',
             infrastructure: ['aws'],
+            name: 'Test Name',
           },
         ],
       };
@@ -45,16 +45,16 @@ describe('dataMapper', () => {
       const multipleSystems = {
         assets: [
           {
-            name: 'Test Name 1',
-            description: 'Test Description 1',
             capabilities: ['Capability 1'],
+            description: 'Test Description 1',
             infrastructure: ['aws'],
+            name: 'Test Name 1',
           },
           {
-            name: 'Test Name 2',
-            description: 'Test Description 2',
             capabilities: ['Capability 1'],
+            description: 'Test Description 2',
             infrastructure: ['aws'],
+            name: 'Test Name 2',
           },
         ],
       };
@@ -70,10 +70,10 @@ describe('dataMapper', () => {
 
     it('should not map same system more than once', () => {
       const system = {
-        name: 'Test Name',
-        description: 'Test Description',
         capabilities: ['Capability 1'],
+        description: 'Test Description',
         infrastructure: ['aws'],
+        name: 'Test Name',
       };
 
       const repeatedSystems = {
@@ -93,16 +93,16 @@ describe('dataMapper', () => {
       const assets = {
         assets: [
           {
-            name: 'Test Name 2',
-            description: 'Test Description 2',
             capabilities: ['Capability 1'],
+            description: 'Test Description 2',
             infrastructure: ['db'],
+            name: 'Test Name 2',
           },
           {
-            name: 'Test Name 2',
-            description: 'Test Description 2',
             capabilities: ['Capability 1'],
+            description: 'Test Description 2',
             infrastructure: ['db', 'aws'],
+            name: 'Test Name 2',
           },
         ],
       };
@@ -121,16 +121,16 @@ describe('dataMapper', () => {
       const multipleSystems = {
         assets: [
           {
-            name: 'Test Name 1',
-            description: 'Test Description 1',
             capabilities: ['Capability 1'],
+            description: 'Test Description 1',
             infrastructure: ['aws'],
+            name: 'Test Name 1',
           },
           {
-            name: 'Test Name 2',
-            description: 'Test Description 2',
             capabilities: ['Capability 1'],
+            description: 'Test Description 2',
             infrastructure: ['aws'],
+            name: 'Test Name 2',
           },
         ],
       };

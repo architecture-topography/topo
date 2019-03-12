@@ -1,9 +1,9 @@
 /* Copyright (c) 2018-2019 Thoughtworks Inc. All rights reserved. */
 
-import React from 'react';
 import { mount } from 'enzyme';
-import PlatformViewContainer, { GET_PLATFORMS } from './PlatformViewContainer';
+import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
+import PlatformViewContainer, { GET_PLATFORMS } from './PlatformViewContainer';
 const wait = require('waait');
 
 const mocks = [
@@ -42,10 +42,10 @@ const mocks = [
 describe('PlatformViewContainer', () => {
   it('Shows questionably good looking error message', async () => {
     const errorMock = {
+      error: new Error('oh no'),
       request: {
         query: GET_PLATFORMS,
       },
-      error: new Error('oh no'),
     };
 
     const component = mount(

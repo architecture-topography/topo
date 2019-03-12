@@ -8,17 +8,17 @@ import '../resources/css/Topo.css';
 
 export default class Domain extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string,
     capabilities: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string.isRequired,
         description: PropTypes.string,
-        order: PropTypes.number.isRequired,
         id: PropTypes.string,
+        name: PropTypes.string.isRequired,
+        order: PropTypes.number.isRequired,
       })
     ),
     color: PropTypes.string,
+    description: PropTypes.string,
+    name: PropTypes.string.isRequired,
   };
 
   render() {

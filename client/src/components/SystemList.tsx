@@ -10,15 +10,15 @@ interface ISystem {
   technologies: ITechnology[];
 }
 interface ISystemListProps {
-  systems: Array<ISystem>;
+  systems: ISystem[];
 }
 
 class SystemList extends Component<ISystemListProps, any> {
-  static defaultProps = {
+  public static defaultProps = {
     systems: [],
   };
 
-  render() {
+  public render() {
     return this.props.systems.map(system => {
       return (
         <SystemItem

@@ -2,25 +2,25 @@
 
 import { getResource } from './resourceLoaderApi';
 
-export interface Capability {
+export interface ICapability {
   name: string;
   order: number;
 }
 
-export interface Domain {
+export interface IDomain {
   name: string;
   description: string;
-  capabilities: Capability[];
+  capabilities: ICapability[];
   color?: string;
 }
 
-export interface Platform {
+export interface IPlatform {
   name: string;
-  domains: Domain[];
+  domains: IDomain[];
 }
 
-export interface File {
-  platforms: Platform[];
+export interface IFile {
+  platforms: IPlatform[];
 }
 
 export const load = (path: string | undefined) => {

@@ -22,8 +22,12 @@ const SystemListWithData = (props: { capabilityId: string }) => {
   return (
     <Query query={GET_SYSTEMS} variables={{ capabilityId: props.capabilityId }}>
       {({ loading, error, data }) => {
-        if (loading) return 'Loading...';
-        if (error) return `Error! Getting systems`;
+        if (loading) {
+          return 'Loading...';
+        }
+        if (error) {
+          return `Error! Getting systems`;
+        }
 
         return <SystemList systems={data.systems} />;
       }}

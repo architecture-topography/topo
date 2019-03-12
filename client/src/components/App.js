@@ -29,18 +29,9 @@ class App extends Component {
   mapSystemsToCapabilities() {
     const treasureMapData = this.buildDataMapping(this.props.systems);
 
-    this.setState(
-      {
-        treasureMapData: treasureMapData,
-      },
-      this._logInputData
-    );
-  }
-
-  _logInputData() {
-    console.log('CONFIG:', this.props.config);
-    console.log('SYSTEMS:', this.props.systems);
-    console.log('TREASURE MAP:', this.state.treasureMapData);
+    this.setState({
+      treasureMapData: treasureMapData,
+    });
   }
 
   buildDataMapping(systemMapping) {
@@ -48,14 +39,10 @@ class App extends Component {
       return JSON.parse(JSON.stringify(object));
     }
 
-    try {
-      return DataMapper.buildTreasureMapData(
-        _deepClone(this.props.config),
-        _deepClone(systemMapping)
-      );
-    } catch (e) {
-      console.log(e);
-    }
+    return DataMapper.buildTreasureMapData(
+      _deepClone(this.props.config),
+      _deepClone(systemMapping)
+    );
   }
 
   render() {
@@ -103,24 +90,24 @@ class App extends Component {
 
 App.propTypes = {
   config: PropTypes.shape({
+    others: PropTypes.array,
     platforms: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string.isRequired,
         domains: PropTypes.arrayOf(
           PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            description: PropTypes.string.isRequired,
             capabilities: PropTypes.arrayOf(
               PropTypes.shape({
                 name: PropTypes.string.isRequired,
                 order: PropTypes.number,
               })
             ),
+            description: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
           })
         ),
+        name: PropTypes.string.isRequired,
       })
     ),
-    others: PropTypes.array,
   }),
   systems: PropTypes.shape({
     assets: PropTypes.arrayOf(PropTypes.object).isRequired,

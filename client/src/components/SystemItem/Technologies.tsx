@@ -9,7 +9,7 @@ export interface ITechnology {
 }
 
 const displayTechnologies = (technologies: ITechnology[]) => {
-  if (technologies.length == 0) {
+  if (technologies.length === 0) {
     return 'None';
   } else {
     return (
