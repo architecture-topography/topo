@@ -22,5 +22,5 @@ export type TreasureMapCapability = ConfigFile.ICapability & {
 };
 export type TreasureMapDomain = ConfigFile.IDomain;
 export type TreasureMapPlatform = ConfigFile.IPlatform;
-export type TreasureMapAsset = AssetFile.Asset;
+export type TreasureMapAsset = AssetFile.IAsset;
 export type TreasureMapData = ConfigFile.IFile;
