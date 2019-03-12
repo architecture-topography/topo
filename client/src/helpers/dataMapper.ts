@@ -29,7 +29,7 @@ const findLastIndex = <T extends any>(arr: T[], fn: (value: T) => boolean) => {
 
 const buildTreasureMapData = (
   treasureMapData: ConfigFile.IFile,
-  systemMapping: AssetFile.File
+  systemMapping: AssetFile.IFile
 ): TreasureMapData => {
   let capabilityId = 1;
 
