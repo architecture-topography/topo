@@ -69,6 +69,15 @@ const Mutation = {
     }
     return system;
   },
+
+  deleteAll: async (_parent: ISystem, _args: any, context: IContext) => {
+    try {
+      await context.queries.deleteAll();
+      return { result: true };
+    } catch (err) {
+      return { result: false };
+    }
+  },
 };
 
 export default Mutation;

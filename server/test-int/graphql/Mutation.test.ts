@@ -1,12 +1,9 @@
-import server from '../../src/server';
 import { createTestClient } from 'apollo-server-testing';
+import Server from '../../src/server';
 import { clearDb } from '../helpers/testHelper';
-import {
-  findPlatform,
-  runQuery,
-  getNode,
-  addNode,
-} from '../helpers/domainHelper';
+import { addNode, getNode, runQuery } from '../helpers/domainHelper';
+
+const server = Server as any;
 
 describe('Mutation', () => {
   afterEach(clearDb);
@@ -152,6 +149,24 @@ describe('Mutation', () => {
       expect(res.records[0].get('technology').properties.uid).toEqual(
         technologyId
       );
+    });
+  });
+
+  describe('deleteAll', () => {
+    it('should remove all nodes', async () => {
+      const { query } = createTestClient(server);
+      await addNode('Capability', 'id-001', 'test capability');
+      await addNode('Technology', 'id-002', 'react (of course)');
+
+      const MUTATION = `mutation {
+        deleteAll { result }
+      }`;
+
+      const result = await query({ mutation: MUTATION });
+      expect(result.errors).not.toBeDefined();
+
+      const nodes = await runQuery('MATCH (n) RETURN n');
+      expect(nodes.records.length).toBe(0);
     });
   });
 });

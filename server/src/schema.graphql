@@ -26,6 +26,12 @@ type Mutation {
     parentBoxId: String!
     technologies: [String!]
   ): System!
+
+  deleteAll: Result!
+}
+
+type Result {
+  result: Boolean!
 }
 
 type Box {

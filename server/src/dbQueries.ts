@@ -147,11 +147,17 @@ export const findTechnologiesBySystemId = async (
 
   return results;
 };
+
+const deleteAll = (): Promise<any> => {
+  return runQueryAndReturnProperties('n/a', 'MATCH(n) DETACH DELETE n');
+};
+
 export default {
   createBox,
   createLine,
   createSystem,
   createTechnology,
+  deleteAll,
   findCapabilitiesByDomainId,
   findDomainsByPlatformId,
   findPlatforms,

@@ -1,3 +1,4 @@
+
 // deletes everything (copy one by one)
 MATCH(n) DETACH DELETE n
 DROP CONSTRAINT ON (p:TopoNode) ASSERT p.uid IS UNIQUE

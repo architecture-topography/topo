@@ -1,21 +1,20 @@
 {
   "defaultSeverity": "error",
   "linterOptions": {
-      "exclude": [
-          "{client,server}/node_modules/**",
-          "{server,client}/build/**",
-          "**/*.test.{ts,js}?(x)"
-      ]
+    "exclude": [
+      "{client,server}/node_modules/**",
+      "{server,client}/build/**",
+      "**/*.test.{ts,js}?(x)"
+    ]
   },
-  "extends": [
-    "tslint:latest",
-    "tslint-config-prettier"
-    ],
-    "jsRules": {},
-    "rules": {
-      "variable-name": ["allow-leading-underscore"],
-      "no-console": [false],
-      "member-access": [false]
-    },
-    "rulesDirectory": []
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "jsRules": {},
+  "rules": {
+    "variable-name": ["allow-leading-underscore"],
+    "no-console": [false],
+    "member-access": [false],
+    "object-literal-sort-keys": [false],
+    "ordered-imports": [false]
+  },
+  "rulesDirectory": []
 }
