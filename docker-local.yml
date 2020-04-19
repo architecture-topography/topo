@@ -9,7 +9,7 @@ services:
     volumes:
     - ./client/src:/var/app/src
     ports:
-    - "5000:3000"
+    - "5000:5000"
   server:
     command: yarn start
     volumes:
