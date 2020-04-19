@@ -24,6 +24,10 @@ jobs:
             - node-dependency-cache-{{ checksum "yarn.lock" }}
             - node-dependency-cache-
       - setup_remote_docker
+      - run:
+        name: Install Dependencies
+        command: |
+          - yarn install
       - save_cache:
           name: Cache Dependencies
           key: node-dependency-cache-{{ checksum "yarn.lock" }}
