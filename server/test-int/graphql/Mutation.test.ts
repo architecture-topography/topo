@@ -14,14 +14,14 @@ describe('Mutation', () => {
       const boxType = 'Platform';
       const id = '123';
 
-      const { query } = createTestClient(server);
+      const { mutate } = createTestClient(server);
 
       const MUTATION = `mutation {
         createBox( id: "${id}", name: "${name}", boxType: ${boxType})
         { id, name }
       }`;
 
-      const result = await query({ mutation: MUTATION });
+      const result = await mutate({ mutation: MUTATION });
       expect(result.errors).not.toBeDefined();
 
       const node = await getNode(id);
@@ -36,7 +36,7 @@ describe('Mutation', () => {
 
       await addNode('Platform', platformUid, 'test platform');
 
-      const { query } = createTestClient(server);
+      const { mutate } = createTestClient(server);
 
       const MUTATION = `
       mutation {
@@ -45,7 +45,7 @@ describe('Mutation', () => {
       }
       `;
 
-      const queryResult = await query({ mutation: MUTATION });
+      const queryResult = await mutate({ mutation: MUTATION });
       expect(queryResult.errors).not.toBeDefined();
 
       // check domain was linked to platform
@@ -61,7 +61,7 @@ describe('Mutation', () => {
       const domainName = 'Test Domain';
       const id = '123';
 
-      const { query } = createTestClient(server);
+      const { mutate } = createTestClient(server);
 
       const MUTATION = `
       mutation {
@@ -70,7 +70,7 @@ describe('Mutation', () => {
       }
       `;
 
-      const queryResult = await query({ mutation: MUTATION });
+      const queryResult = await mutate({ mutation: MUTATION });
       expect(
         queryResult.errors ? queryResult.errors[0].toString() : ''
       ).toContain('Could not create line');
@@ -82,14 +82,14 @@ describe('Mutation', () => {
       const name = 'Test Platform';
       const id = '123';
 
-      const { query } = createTestClient(server);
+      const { mutate } = createTestClient(server);
 
       const MUTATION = `mutation {
         createTechnology( id: "${id}", name: "${name}")
         { id, name }
       }`;
 
-      const result = await query({ mutation: MUTATION });
+      const result = await mutate({ mutation: MUTATION });
       expect(result.errors).not.toBeDefined();
 
       const node = await getNode(id);
@@ -106,7 +106,7 @@ describe('Mutation', () => {
       const name = 'Test Platform';
       const id = '123';
 
-      const { query } = createTestClient(server);
+      const { mutate } = createTestClient(server);
 
       await addNode('Capability', capabilityId, 'test capability');
 
@@ -115,7 +115,7 @@ describe('Mutation', () => {
         { name, id }
       }`;
 
-      const result = await query({ mutation: MUTATION });
+      const result = await mutate({ mutation: MUTATION });
       expect(result.errors).not.toBeDefined();
 
       const node = await getNode(id);
@@ -128,7 +128,7 @@ describe('Mutation', () => {
       const id = '123';
       const technologyId = 'tech-001';
 
-      const { query } = createTestClient(server);
+      const { mutate } = createTestClient(server);
 
       await addNode('Capability', capabilityId, 'test capability');
       await addNode('Technology', technologyId, 'react (of course)');
@@ -138,7 +138,7 @@ describe('Mutation', () => {
         { name, id }
       }`;
 
-      await query({ mutation: MUTATION });
+      await mutate({ mutation: MUTATION });
 
       // check domain was linked to platform
       const res = await runQuery(
@@ -154,7 +154,7 @@ describe('Mutation', () => {
 
   describe('deleteAll', () => {
     it('should remove all nodes', async () => {
-      const { query } = createTestClient(server);
+      const { mutate } = createTestClient(server);
       await addNode('Capability', 'id-001', 'test capability');
       await addNode('Technology', 'id-002', 'react (of course)');
 
@@ -162,7 +162,7 @@ describe('Mutation', () => {
         deleteAll { result }
       }`;
 
-      const result = await query({ mutation: MUTATION });
+      const result = await mutate({ mutation: MUTATION });
       expect(result.errors).not.toBeDefined();
 
       const nodes = await runQuery('MATCH (n) RETURN n');
