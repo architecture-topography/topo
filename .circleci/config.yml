@@ -92,11 +92,12 @@ jobs:
 workflows:
   version: 2
   master:
-    branches:
-      ignore:
-        - /wip-.*/
     jobs:
-      - test
+      - test:
+        filters:
+          branches:
+            ignore:
+              - /wip-.*/
       # - build:
       #     requires:
       #       - test
