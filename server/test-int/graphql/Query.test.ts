@@ -38,7 +38,7 @@ describe('resolvers', () => {
       const { query } = createTestClient(server);
       const { capabilityId } = await createSystemWithCapability({
         system: { name: 'system cool', uid: 'system-001' },
-        capability: { name: 'capabiliyt', uid: 'cap-001' },
+        capability: { name: 'capability', uid: 'cap-001' },
       });
       const QUERY = `
       query {

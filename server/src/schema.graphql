@@ -16,6 +16,7 @@ type Mutation {
     id: String!
     boxType: BoxType!
     parentId: String
+    systems: [String!]
   ): Box!
 
   createTechnology(id: String!, name: String!): Technology!
@@ -23,7 +24,7 @@ type Mutation {
   createSystem(
     id: String!
     name: String!
-    parentBoxId: String!
+    parentBoxId: String
     technologies: [String!]
   ): System!
 

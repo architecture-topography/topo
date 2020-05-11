@@ -19,7 +19,13 @@ import { IBaseNode, IContext, IPlatform, ISystem } from '../types';
 const Mutation = {
   createBox: async (
     _parent: IPlatform,
-    args: { name: string; id: string; boxType: string; parentId: string },
+    args: {
+      name: string;
+      id: string;
+      boxType: string;
+      parentId: string;
+      systems: string[];
+    },
     context: IContext
   ) => {
     const box = await context.queries.createBox(
@@ -29,6 +35,12 @@ const Mutation = {
     );
     if (args.parentId) {
       await context.queries.createLine(args.parentId, args.id);
+    }
+    if (args.systems) {
+      const links = args.systems.map(systemId =>
+        context.queries.createLine(args.id, systemId)
+      );
+      await Promise.all(links); // wait for all links to be created
     }
     return box;
   },
