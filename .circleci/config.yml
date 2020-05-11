@@ -94,10 +94,10 @@ workflows:
   master:
     jobs:
       - test:
-        filters:
-          branches:
-            ignore:
-              - /wip-.*/
+          filters:
+            branches:
+              ignore:
+                - /wip-.*/
       # - build:
       #     requires:
       #       - test
