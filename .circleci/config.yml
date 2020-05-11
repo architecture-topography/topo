@@ -91,10 +91,10 @@ jobs:
   #           $CHAT_WEBHOOK_URL
 workflows:
   version: 2
-  branches:
-    ignore:
-      - /wip-.*/
   master:
+    branches:
+      ignore:
+        - /wip-.*/
     jobs:
       - test
       # - build:
