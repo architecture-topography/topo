@@ -100,7 +100,9 @@ describe('Mutation', () => {
 
   describe('System', () => {
     const capabilityId = 'capability-001';
-    beforeEach(() => addNode('Capability', capabilityId, 'test capability'));
+    beforeEach(
+      async () => await addNode('Capability', capabilityId, 'test capability')
+    );
 
     it('create system node', async () => {
       const name = 'Test Platform';

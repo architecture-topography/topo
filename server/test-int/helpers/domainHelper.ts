@@ -110,11 +110,14 @@ export const getNode = async (uid: string) => {
   return res.records[0].get('node').properties;
 };
 
-export const addNode = (nodeType: string, uid: string, name: string) => {
-  return runQuery(`CREATE (node:${nodeType} { name: $name, uid: $uid })`, {
-    name,
-    uid,
-  });
+export const addNode = async (nodeType: string, uid: string, name: string) => {
+  return runQuery(
+    `CREATE (node:${nodeType} { name: $name, uid: $uid })`,
+    {
+      name,
+      uid,
+    }
+  );
 };
 
 export const createSystemWithCapability = async ({
