@@ -9,7 +9,7 @@
     "start": "NODE_ENV=dev yarn nodemon",
     "start-prod": "NODE_ENV=dev ts-node src",
     "test": "jest src/",
-    "test-int": "jest test-int/",
+    "test-int": "jest -i --forceExit test-int/",
     "test-all": "yarn test && yarn test-int"
   },
   "dependencies": {
