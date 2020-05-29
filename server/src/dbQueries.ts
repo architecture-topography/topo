@@ -24,7 +24,7 @@ export const createLine = async (nodeAUid: string, nodeBUid: string) => {
       `
       MATCH (a),(b)
       WHERE a.uid = $nodeAUid AND b.uid = $nodeBUid
-      CREATE (a)-[r:CONTAINS]->(b)
+      CREATE (a)<-[r:CHILD_OF]-(b)
       RETURN r
       `,
       { nodeAUid, nodeBUid }
@@ -77,6 +77,30 @@ const createTechnology = async (uid: string, name: string): Promise<any> => {
   return result[0];
 };
 
+const createSystemTechnologyRelationship = async (
+  systemId: string,
+  technologyId: string
+) => {
+  const session = driver.session();
+  try {
+    const result = await session.run(
+      `
+      MATCH (a),(b)
+      WHERE a.uid = $systemId AND b.uid = $technologyId
+      CREATE (a)-[r:BUILT_OF]->(b)
+      RETURN r
+      `,
+      { systemId, technologyId }
+    );
+    if (result.records.length === 0) {
+      throw new Error('Could not create relationship');
+    }
+    return result;
+  } finally {
+    session.close();
+  }
+};
+
 const runQueryAndReturnProperties = async (
   nodeName: string,
   queryString: string,
@@ -102,7 +126,7 @@ const findChildren = async (
 ): Promise<any[]> => {
   return runQueryAndReturnProperties(
     'node',
-    `MATCH (p:${parentType})-[]->(node) where p.uid = $uid AND NOT node:System return p, node`,
+    `MATCH (p:${parentType})<-[r:CHILD_OF]-(node) where p.uid = $uid AND NOT node:System return p, node`,
     { uid }
   );
 };
@@ -131,7 +155,7 @@ export const findSystemsByCapabilityId = (
 ): Promise<IPlatform[]> => {
   return runQueryAndReturnProperties(
     'system',
-    `MATCH(capability: Capability) - [] -> (system: System) WHERE (capability.uid = $capabilityUid) RETURN system`,
+    `MATCH(capability: Capability) <-[r:CHILD_OF]- (system: System) WHERE (capability.uid = $capabilityUid) RETURN system`,
     { capabilityUid }
   );
 };
@@ -141,7 +165,7 @@ export const findTechnologiesBySystemId = async (
 ): Promise<IPlatform[]> => {
   const results = await runQueryAndReturnProperties(
     'technology',
-    `MATCH(system) - [] -> (technology: Technology) WHERE (system.uid = $systemId) RETURN technology`,
+    `MATCH(system) -[:BUILT_OF]-> (technology: Technology) WHERE (system.uid = $systemId) RETURN technology`,
     { systemId }
   );
 
@@ -157,6 +181,7 @@ export default {
   createLine,
   createSystem,
   createTechnology,
+  createSystemTechnologyRelationship,
   deleteAll,
   findCapabilitiesByDomainId,
   findDomainsByPlatformId,

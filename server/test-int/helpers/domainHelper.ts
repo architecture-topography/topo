@@ -23,8 +23,8 @@ export const createTestPlatform = async (platformName: string, id: string) => {
       `CREATE (platform:Platform { name: $platformName, uid: $id })
       CREATE (domain:Domain { name: "domain", uid: "domain-01"})
       CREATE (capability:Capability { name: "capability", uid: "capability-01" })
-      CREATE (platform)-[:HAS]->(domain)
-      CREATE (domain)-[:DOES]->(capability)
+      CREATE (platform)<-[:CHILD_OF]-(domain)
+      CREATE (domain)<-[:CHILD_OF]-(capability)
       `,
       {
         id,
@@ -47,8 +47,8 @@ export const createTestPlatformAndDomain = async (
       `CREATE (platform:Platform { name: $platformName, uid: 'platform_0001' })
       CREATE (domain:Domain { name: $domainName, uid: 'domain_0001' })
       CREATE (capability:Capability { name: $capabilityName, uid: 'capability_0001' })
-      CREATE (platform)-[:HAS]->(domain)
-      CREATE (domain)-[:DOES]->(capability)
+      CREATE (platform)<-[:CHILD_OF]-(domain)
+      CREATE (domain)<-[:CHILD_OF]-(capability)
       `,
       {
         capabilityName,
@@ -111,13 +111,10 @@ export const getNode = async (uid: string) => {
 };
 
 export const addNode = async (nodeType: string, uid: string, name: string) => {
-  return runQuery(
-    `CREATE (node:${nodeType} { name: $name, uid: $uid })`,
-    {
-      name,
-      uid,
-    }
-  );
+  return runQuery(`CREATE (node:${nodeType} { name: $name, uid: $uid })`, {
+    name,
+    uid,
+  });
 };
 
 export const createSystemWithCapability = async ({
@@ -131,8 +128,8 @@ export const createSystemWithCapability = async ({
       `CREATE (system:System: TopoNode { name: $systemName, uid: $systemUid })
       CREATE (capability:Capability: TopoNode { name: $capabilityName, uid: $capabilityUid })
       CREATE (technology:Technology: TopoNode { name: $technologyName, uid: $technologyUid })
-      CREATE (capability)-[:SUPPORTEDBY]->(system)
-      CREATE (system)-[:BUILTIN]->(technology)
+      CREATE (capability)<-[:CHILD_OF]-(system)
+      CREATE (system)-[:BUILT_OF]->(technology)
       RETURN capability,system,technology
       `,
       {

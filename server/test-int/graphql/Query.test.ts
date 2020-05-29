@@ -88,7 +88,7 @@ describe('resolvers', () => {
     });
   });
 
-  describe('getPlatfroms', () => {
+  describe('getPlatforms', () => {
     it('should return uid as ID', async () => {
       const platformName = 'Test Platform';
       const platformId = 'ID-24601';

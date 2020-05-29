@@ -74,10 +74,13 @@ const Mutation = {
     }
 
     if (args.technologies) {
-      const links = args.technologies.map(technologyId =>
-        context.queries.createLine(args.id, technologyId)
+      const relationships = args.technologies.map(technologyId =>
+        context.queries.createSystemTechnologyRelationship(
+          args.id,
+          technologyId
+        )
       );
-      await Promise.all(links); // wait for all links to be created
+      await Promise.all(relationships); // wait for all links to be created
     }
     return system;
   },

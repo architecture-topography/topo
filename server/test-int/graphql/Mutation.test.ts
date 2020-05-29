@@ -50,7 +50,7 @@ describe('Mutation', () => {
 
       // check domain was linked to platform
       const res = await runQuery(
-        'MATCH (p:Platform)-[]->(d:Domain) where p.uid=$platformUid RETURN d',
+        'MATCH (p:Platform)<-[]-(d:Domain) where p.uid=$platformUid RETURN d',
         { platformUid }
       );
       expect(res.records.length).toBe(1);
@@ -144,13 +144,11 @@ describe('Mutation', () => {
 
       // check domain was linked to platform
       const res = await runQuery(
-        'MATCH (system)-[]->(technology) where system.uid=$id RETURN technology',
+        'MATCH (s:System)-[USES]->(t:Technology) where s.uid=$id RETURN t',
         { id }
       );
       expect(res.records.length).toBe(1);
-      expect(res.records[0].get('technology').properties.uid).toEqual(
-        technologyId
-      );
+      expect(res.records[0].get('t').properties.uid).toEqual(technologyId);
     });
   });
 
