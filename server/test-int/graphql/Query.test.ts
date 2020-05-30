@@ -142,8 +142,7 @@ describe('resolvers', () => {
       const res = await query({
         query: QUERY,
       });
-      expect(res.data).toBeDefined();
-      expect(res.data!.platforms).toBeDefined();
+      expect(res.data?.platforms).toBeDefined();
       expect(res.data!.platforms!).toContainEqual({
         name: 'Test Platform',
         domains: [
@@ -185,8 +184,7 @@ describe('resolvers', () => {
       });
 
       // assert
-      expect(res.data).toBeDefined();
-      expect(res.data!.boxes).toBeDefined();
+      expect(res.data?.boxes).toBeDefined();
       expect(res.data!.boxes).toContainEqual({
         name: 'Test Platform',
       });
