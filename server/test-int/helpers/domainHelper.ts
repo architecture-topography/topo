@@ -20,9 +20,9 @@ export const createTestPlatform = async (platformName: string, id: string) => {
   const session = driver.session();
   try {
     await session.run(
-      `CREATE (platform:Platform { name: $platformName, uid: $id })
-      CREATE (domain:Domain { name: "domain", uid: "domain-01"})
-      CREATE (capability:Capability { name: "capability", uid: "capability-01" })
+      `CREATE (platform:Box:Platform { name: $platformName, uid: $id })
+      CREATE (domain:Box:Domain { name: "domain", uid: "domain-01"})
+      CREATE (capability:Box:Capability { name: "capability", uid: "capability-01" })
       CREATE (platform)<-[:CHILD_OF]-(domain)
       CREATE (domain)<-[:CHILD_OF]-(capability)
       `,
@@ -44,9 +44,9 @@ export const createTestPlatformAndDomain = async (
   const session = driver.session();
   try {
     await session.run(
-      `CREATE (platform:Platform { name: $platformName, uid: 'platform_0001' })
-      CREATE (domain:Domain { name: $domainName, uid: 'domain_0001' })
-      CREATE (capability:Capability { name: $capabilityName, uid: 'capability_0001' })
+      `CREATE (platform:Box:Platform { name: $platformName, uid: 'platform_0001' })
+      CREATE (domain:Box:Domain { name: $domainName, uid: 'domain_0001' })
+      CREATE (capability:Box:Capability { name: $capabilityName, uid: 'capability_0001' })
       CREATE (platform)<-[:CHILD_OF]-(domain)
       CREATE (domain)<-[:CHILD_OF]-(capability)
       `,
@@ -126,7 +126,7 @@ export const createSystemWithCapability = async ({
   try {
     const result = await session.run(
       `CREATE (system:System: TopoNode { name: $systemName, uid: $systemUid })
-      CREATE (capability:Capability: TopoNode { name: $capabilityName, uid: $capabilityUid })
+      CREATE (capability:Box:Capability: TopoNode { name: $capabilityName, uid: $capabilityUid })
       CREATE (technology:Technology: TopoNode { name: $technologyName, uid: $technologyUid })
       CREATE (capability)<-[:CHILD_OF]-(system)
       CREATE (system)-[:BUILT_OF]->(technology)

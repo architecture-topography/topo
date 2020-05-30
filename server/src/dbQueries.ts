@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Thoughtworks Inc. All rights reserved
+ * Copyright 2018-2020 Thoughtworks Inc. All rights reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 import { driver } from './neo';
-import { ICapability, IDomain, IPlatform, ISystem } from './types';
+import { IBox, ICapability, IDomain, IPlatform, ISystem } from './types';
 
 export const createLine = async (nodeAUid: string, nodeBUid: string) => {
   const session = driver.session();
@@ -46,10 +46,10 @@ export const createBox = async (
   const session = driver.session();
   try {
     const result = await session.run(
-      `CREATE (Node: ${boxType}: Box: TopoNode {name: $name, uid: $id}) RETURN Node`,
+      `CREATE (node:${boxType}:Box:TopoNode {name: $name, uid: $id}) RETURN node`,
       { name, id }
     );
-    const properties = result.records[0].get('Node').properties;
+    const properties = result.records[0].get('node').properties;
     return properties;
   } finally {
     session.close();
@@ -61,8 +61,8 @@ export const createSystem = async (
   name: string
 ): Promise<ISystem> => {
   const result = await runQueryAndReturnProperties(
-    'Node',
-    `CREATE (Node: System: TopoNode {name: $name, uid: $uid}) RETURN Node`,
+    'node',
+    `CREATE (node:System:TopoNode {name: $name, uid: $uid}) RETURN node`,
     { uid, name }
   );
   return result[0];
@@ -70,8 +70,8 @@ export const createSystem = async (
 
 const createTechnology = async (uid: string, name: string): Promise<any> => {
   const result = await runQueryAndReturnProperties(
-    'Node',
-    `CREATE (Node: Technology: TopoNode {name: $name, uid: $uid}) RETURN Node`,
+    'node',
+    `CREATE (node:Technology:TopoNode {name: $name, uid: $uid}) RETURN node`,
     { uid, name }
   );
   return result[0];
@@ -165,11 +165,18 @@ export const findTechnologiesBySystemId = async (
 ): Promise<IPlatform[]> => {
   const results = await runQueryAndReturnProperties(
     'technology',
-    `MATCH(system) -[:BUILT_OF]-> (technology: Technology) WHERE (system.uid = $systemId) RETURN technology`,
+    `MATCH(system) -[:BUILT_OF]-> (technology:Technology) WHERE (system.uid = $systemId) RETURN technology`,
     { systemId }
   );
 
   return results;
+};
+
+export const findTopLevelBoxes = async (): Promise<IBox[]> => {
+  return runQueryAndReturnProperties(
+    'box',
+    'MATCH (box:Box) WHERE NOT (box)-[:CHILD_OF]->(:Box) RETURN box'
+  );
 };
 
 const deleteAll = (): Promise<any> => {
@@ -188,4 +195,5 @@ export default {
   findPlatforms,
   findSystemsByCapabilityId,
   findTechnologiesBySystemId,
+  findTopLevelBoxes,
 };

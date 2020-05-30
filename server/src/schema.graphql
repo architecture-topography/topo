@@ -1,5 +1,6 @@
 type Query {
   hello: String!
+  boxes: [Box]!
   platforms: [Platform]!
   systems(capabilityId: String!): [System]!
 }

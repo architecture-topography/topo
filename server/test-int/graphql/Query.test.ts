@@ -143,7 +143,8 @@ describe('resolvers', () => {
         query: QUERY,
       });
       expect(res.data).toBeDefined();
-      expect(res.data ? res.data.platforms : []).toContainEqual({
+      expect(res.data!.platforms).toBeDefined();
+      expect(res.data!.platforms!).toContainEqual({
         name: 'Test Platform',
         domains: [
           {
@@ -156,6 +157,52 @@ describe('resolvers', () => {
           },
         ],
       });
+    });
+    afterEach(clearDb);
+  });
+
+  describe('getBoxes', () => {
+    it('should return top level boxes with no parents', async () => {
+      const { query } = createTestClient(server);
+
+      // arrange
+      await createTestPlatformAndDomain(
+        'Test Platform',
+        'Test Domain',
+        'Test Capability'
+      );
+
+      // act
+      const QUERY = `
+      query {
+        boxes{
+          name
+        }
+      }
+      `;
+      const res = await query({
+        query: QUERY,
+      });
+
+      // assert
+      expect(res.data).toBeDefined();
+      expect(res.data!.boxes).toBeDefined();
+      expect(res.data!.boxes).toContainEqual({
+        name: 'Test Platform',
+      });
+      // expect(res.data ? res.data.boxes : []).toContainEqual({
+      //   name: 'Test Platform',
+      //   domains: [
+      //     {
+      //       name: 'Test Domain',
+      //       capabilities: [
+      //         {
+      //           name: 'Test Capability',
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // });
     });
     afterEach(clearDb);
   });

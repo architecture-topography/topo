@@ -22,6 +22,10 @@ export interface IBaseNode {
   name: string;
 }
 
+export interface IBox extends IBaseNode {
+  children: IBox[];
+}
+
 export interface IPlatform extends IBaseNode {
   domains: IDomain[];
 }

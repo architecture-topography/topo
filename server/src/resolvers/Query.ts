@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-import { IContext, IPlatform } from '../types';
+import { IBox, IContext, IPlatform } from '../types';
 
 const Query = {
   hello: () => 'Hello, Topo',
-  platforms: async (parent: IPlatform, _args: null, context: IContext) => {
-    const platforms = await context.queries.findPlatforms();
 
-    return platforms;
+  boxes: async (parent: IBox, _args: null, context: IContext) => {
+    return context.queries.findTopLevelBoxes();
+  },
+
+  platforms: async (parent: IPlatform, _args: null, context: IContext) => {
+    return context.queries.findPlatforms();
   },
 
   systems: async (
