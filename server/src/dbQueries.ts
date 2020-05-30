@@ -46,8 +46,8 @@ export const createBox = async (
   const session = driver.session();
   try {
     const result = await session.run(
-      `CREATE (node:${boxType}:Box:TopoNode {name: $name, uid: $id}) RETURN node`,
-      { name, id }
+      `CREATE (node:${boxType}:Box:TopoNode {name: $name, uid: $id, type: $boxType}) RETURN node`,
+      { name, id, boxType }
     );
     const properties = result.records[0].get('node').properties;
     return properties;
@@ -179,6 +179,16 @@ export const findTopLevelBoxes = async (): Promise<IBox[]> => {
   );
 };
 
+export const findChildrenBoxesOf = async (
+  parentId: string
+): Promise<IBox[]> => {
+  return runQueryAndReturnProperties(
+    'box',
+    `MATCH(box:Box) -[:CHILD_OF]-> (parent:Box) WHERE (parent.uid = $parentId) RETURN box`,
+    { parentId }
+  );
+};
+
 const deleteAll = (): Promise<any> => {
   return runQueryAndReturnProperties('n/a', 'MATCH(n) DETACH DELETE n');
 };
@@ -196,4 +206,5 @@ export default {
   findSystemsByCapabilityId,
   findTechnologiesBySystemId,
   findTopLevelBoxes,
+  findChildrenBoxesOf,
 };

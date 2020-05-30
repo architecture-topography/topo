@@ -23,7 +23,8 @@ export interface IBaseNode {
 }
 
 export interface IBox extends IBaseNode {
-  children: IBox[];
+  type: string;
+  boxes: IBox[];
 }
 
 export interface IPlatform extends IBaseNode {

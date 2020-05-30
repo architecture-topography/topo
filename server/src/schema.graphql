@@ -39,6 +39,8 @@ type Result {
 type Box {
   id: ID!
   name: String!
+  type: String!
+  boxes: [Box!]!
 }
 
 type Platform {

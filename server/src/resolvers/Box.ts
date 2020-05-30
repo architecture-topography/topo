@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
-import { IBaseNode } from '../types';
+import { IContext, IBox } from '../types';
 
 const Box = {
-  id: async (parent: IBaseNode) => {
+  id: async (parent: IBox) => {
     return parent.uid;
+  },
+  type: async (parent: IBox) => {
+    return parent.type;
+  },
+  boxes: async (parent: IBox, _args: null, context: IContext) => {
+    return context.queries.findChildrenBoxesOf(parent.uid);
   },
 };
 
