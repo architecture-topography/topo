@@ -117,6 +117,13 @@ export const addNode = async (nodeType: string, uid: string, name: string) => {
   });
 };
 
+export const addBox = async (boxType: string, uid: string, name: string) => {
+  return runQuery(`CREATE (node:Box:${boxType} { name: $name, uid: $uid })`, {
+    name,
+    uid,
+  });
+};
+
 export const createSystemWithCapability = async ({
   system,
   technology,

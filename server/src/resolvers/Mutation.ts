@@ -38,7 +38,7 @@ const Mutation = {
     }
     if (args.systems) {
       const links = args.systems.map(systemId =>
-        context.queries.createLine(args.id, systemId)
+        context.queries.createSystemBoxRelationship(systemId, args.id)
       );
       await Promise.all(links); // wait for all links to be created
     }

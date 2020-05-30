@@ -3,6 +3,7 @@ import Server from '../../src/server';
 import { clearDb } from '../helpers/testHelper';
 import {
   addNode,
+  addBox,
   getNode,
   runQuery,
   createTestPlatformAndDomain,
@@ -14,9 +15,9 @@ describe('Mutation', () => {
   afterEach(clearDb);
 
   describe('createBox', () => {
-    it('create a Platform', async () => {
-      const name = 'Test Platform';
-      const boxType = 'Platform';
+    it('create a Domain', async () => {
+      const name = 'Test Domain';
+      const boxType = 'Domain';
       const id = '123';
 
       const { mutate } = createTestClient(server);
@@ -34,32 +35,59 @@ describe('Mutation', () => {
       expect(node.name).toEqual(name);
     });
 
-    it('create a Domain with a parent Platform', async () => {
-      const platformUid = 'plat-00001';
-      const domainName = 'Test Domain';
+    it('create a Subdomain box with a parent Domain box', async () => {
+      const domainId = 'domain-00001';
+      const name = 'Test Subdomain';
       const id = '123';
 
-      await addNode('Platform', platformUid, 'test platform');
+      // arrange
+      await addBox('Domain', domainId, 'test domain');
 
+      // act
       const { mutate } = createTestClient(server);
-
       const MUTATION = `
       mutation {
-        createBox( name: "${domainName}", id: "${id}", boxType: Domain, parentId: "${platformUid}")
+        createBox( name: "${name}", id: "${id}", boxType: Subdomain, parentId: "${domainId}")
         { name }
       }
       `;
-
       const queryResult = await mutate({ mutation: MUTATION });
+
+      // assert
       expect(queryResult.errors).not.toBeDefined();
 
-      // check domain was linked to platform
       const res = await runQuery(
-        'MATCH (p:Platform)<-[]-(d:Domain) where p.uid=$platformUid RETURN d',
-        { platformUid }
+        'MATCH (d:Box:Domain)<-[:CHILD_OF]-(s:Box:Subdomain) where d.uid=$domainId RETURN s',
+        { domainId: domainId }
       );
       expect(res.records.length).toBe(1);
-      expect(res.records[0].get('d').properties.uid).toEqual(id);
+      expect(res.records[0].get('s').properties.uid).toEqual(id);
+    });
+
+    it('create a Domain box and link to a System', async () => {
+      const domainId = 'domain-00001';
+
+      // arrange
+      await addNode('System', 'system-001', 'example system');
+
+      // act
+      const { mutate } = createTestClient(server);
+      const MUTATION = `
+      mutation {
+        createBox( name: "example domain", id: "${domainId}", boxType: Domain, systems: ["system-001"])
+        { name }
+      }
+      `;
+      const queryResult = await mutate({ mutation: MUTATION });
+
+      // assert
+      expect(queryResult.errors).not.toBeDefined();
+      const res = await runQuery(
+        'MATCH (d:Box:Domain)<-[:PROVIDES]-(system:System) where d.uid=$domainId RETURN system',
+        { domainId: domainId }
+      );
+      expect(res.records.length).toBe(1);
+      expect(res.records[0].get('system').properties.uid).toEqual('system-001');
     });
 
     it('returns an error if it cannot find the parent node', async () => {
@@ -159,7 +187,7 @@ describe('Mutation', () => {
   describe('deleteAll', () => {
     it('should remove all nodes', async () => {
       const { mutate } = createTestClient(server);
-      await addNode('Capability', 'id-001', 'test capability');
+      await addNode('Box:Capability', 'id-001', 'test capability');
       await addNode('Technology', 'id-002', 'react (of course)');
 
       const MUTATION = `mutation {

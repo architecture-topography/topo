@@ -8,6 +8,7 @@ type Query {
 enum BoxType {
   Platform
   Domain
+  Subdomain
   Capability
 }
 
