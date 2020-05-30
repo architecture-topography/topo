@@ -1,7 +1,12 @@
 import { createTestClient } from 'apollo-server-testing';
 import Server from '../../src/server';
 import { clearDb } from '../helpers/testHelper';
-import { addNode, getNode, runQuery } from '../helpers/domainHelper';
+import {
+  addNode,
+  getNode,
+  runQuery,
+  createTestPlatformAndDomain,
+} from '../helpers/domainHelper';
 
 const server = Server as any;
 
@@ -99,18 +104,20 @@ describe('Mutation', () => {
   });
 
   describe('System', () => {
-    const capabilityId = 'capability-001';
+    const capabilityId = 'capability_0001';
     beforeEach(
-      async () => await addNode('Capability', capabilityId, 'test capability')
+      async () =>
+        await createTestPlatformAndDomain(
+          'Test Platform',
+          'Test Domain',
+          'Test Capability'
+        )
     );
 
     it('create system node', async () => {
-      const name = 'Test Platform';
       const id = '123';
-
+      const name = 'example system';
       const { mutate } = createTestClient(server);
-
-      await addNode('Capability', capabilityId, 'test capability');
 
       const MUTATION = `mutation {
         createSystem( id: "${id}", name: "${name}", parentBoxId: "${capabilityId}")
@@ -126,23 +133,20 @@ describe('Mutation', () => {
     });
 
     it('create system node with technology', async () => {
-      const name = 'Test Platform';
       const id = '123';
       const technologyId = 'tech-001';
 
       const { mutate } = createTestClient(server);
 
-      await addNode('Capability', capabilityId, 'test capability');
       await addNode('Technology', technologyId, 'react (of course)');
 
       const MUTATION = `mutation {
-        createSystem( id: "${id}", name: "${name}", parentBoxId: "${capabilityId}", technologies: ["${technologyId}"])
-        { name, id }
+        createSystem( id: "${id}", name: "A System", technologies: ["${technologyId}"])
+        { id }
       }`;
 
       await mutate({ mutation: MUTATION });
 
-      // check domain was linked to platform
       const res = await runQuery(
         'MATCH (s:System)-[USES]->(t:Technology) where s.uid=$id RETURN t',
         { id }

@@ -68,6 +68,30 @@ export const createSystem = async (
   return result[0];
 };
 
+export const createSystemBoxRelationship = async (
+  systemId: string,
+  boxId: string
+) => {
+  const session = driver.session();
+  try {
+    const result = await session.run(
+      `
+      MATCH (system:System),(box:Box)
+      WHERE system.uid = $systemId AND box.uid = $boxId
+      CREATE (system)-[r:PROVIDES]->(box)
+      RETURN r
+      `,
+      { systemId, boxId }
+    );
+    if (result.records.length === 0) {
+      throw new Error('Could not create relationship');
+    }
+    return result;
+  } finally {
+    session.close();
+  }
+};
+
 const createTechnology = async (uid: string, name: string): Promise<any> => {
   const result = await runQueryAndReturnProperties(
     'node',
@@ -197,6 +221,7 @@ export default {
   createBox,
   createLine,
   createSystem,
+  createSystemBoxRelationship,
   createTechnology,
   createSystemTechnologyRelationship,
   deleteAll,

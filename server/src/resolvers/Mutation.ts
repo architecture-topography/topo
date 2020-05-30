@@ -63,14 +63,13 @@ const Mutation = {
     },
     context: IContext
   ) => {
-    const system = await context.queries.createSystem(
-      args.id,
-      args.name,
-      args.parentBoxId
-    );
+    const system = await context.queries.createSystem(args.id, args.name);
 
     if (args.parentBoxId) {
-      await context.queries.createLine(args.parentBoxId, args.id);
+      await context.queries.createSystemBoxRelationship(
+        args.id,
+        args.parentBoxId
+      );
     }
 
     if (args.technologies) {
