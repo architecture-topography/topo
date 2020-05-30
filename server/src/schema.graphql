@@ -40,7 +40,7 @@ type Result {
 type Box {
   id: ID!
   name: String!
-  type: String!
+  type: BoxType!
   boxes: [Box!]!
 }
 
