@@ -125,9 +125,9 @@ export const createSystemWithCapability = async ({
   const session = driver.session();
   try {
     const result = await session.run(
-      `CREATE (system:System: TopoNode { name: $systemName, uid: $systemUid })
-      CREATE (capability:Box:Capability: TopoNode { name: $capabilityName, uid: $capabilityUid })
-      CREATE (technology:Technology: TopoNode { name: $technologyName, uid: $technologyUid })
+      `CREATE (system:System { name: $systemName, uid: $systemUid })
+      CREATE (capability:Box:Capability { name: $capabilityName, uid: $capabilityUid })
+      CREATE (technology:Technology { name: $technologyName, uid: $technologyUid })
       CREATE (capability)<-[:CHILD_OF]-(system)
       CREATE (system)-[:BUILT_OF]->(technology)
       RETURN capability,system,technology

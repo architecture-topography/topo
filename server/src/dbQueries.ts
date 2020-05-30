@@ -46,7 +46,7 @@ export const createBox = async (
   const session = driver.session();
   try {
     const result = await session.run(
-      `CREATE (node:${boxType}:Box:TopoNode {name: $name, uid: $id, type: $boxType}) RETURN node`,
+      `CREATE (node:${boxType}:Box {name: $name, uid: $id, type: $boxType}) RETURN node`,
       { name, id, boxType }
     );
     const properties = result.records[0].get('node').properties;
@@ -62,7 +62,7 @@ export const createSystem = async (
 ): Promise<ISystem> => {
   const result = await runQueryAndReturnProperties(
     'node',
-    `CREATE (node:System:TopoNode {name: $name, uid: $uid}) RETURN node`,
+    `CREATE (node:System {name: $name, uid: $uid}) RETURN node`,
     { uid, name }
   );
   return result[0];
@@ -95,7 +95,7 @@ export const createSystemBoxRelationship = async (
 const createTechnology = async (uid: string, name: string): Promise<any> => {
   const result = await runQueryAndReturnProperties(
     'node',
-    `CREATE (node:Technology:TopoNode {name: $name, uid: $uid}) RETURN node`,
+    `CREATE (node:Technology {name: $name, uid: $uid}) RETURN node`,
     { uid, name }
   );
   return result[0];
