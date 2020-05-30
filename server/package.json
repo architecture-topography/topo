@@ -20,8 +20,12 @@
     "dotenv": "^6.2.0",
     "graphql": "^14.0.2",
     "graphql-import": "^0.7.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.7",
     "lodash": "^4.17.11",
     "neo4j-driver": "^1.7.2",
+    "prettier": "^2.0.5",
+    "tslint": "^6.1.2",
     "typescript": "^3.2.2"
   },
   "devDependencies": {
