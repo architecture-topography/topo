@@ -13,7 +13,7 @@
     "test-all": "yarn test && yarn test-int"
   },
   "dependencies": {
-    "@types/jest": "^23.3.13",
+    "@types/jest": "^25.2.3",
     "@types/lodash": "^4.14.154",
     "apollo-server": "^2.3.1",
     "apollo-server-testing": "^2.4.8",
