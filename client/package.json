@@ -31,7 +31,7 @@
     "serve": "^10.1.1",
     "typescript": "3.9.3",
     "waait": "^1.0.2",
-    "webpack-dev-server": "3.1.14"
+    "webpack-dev-server": "3.11.0"
   },
   "scripts": {
     "start-prod": "serve -s build",
