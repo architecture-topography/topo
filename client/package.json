@@ -15,7 +15,7 @@
     "apollo-client": "^2.5.1",
     "apollo-link-http": "^1.5.12",
     "axios": "^0.19.2",
-    "babel-loader": "8.0.4",
+    "babel-loader": "8.1.0",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.0",
     "jest-enzyme": "^7.0.1",
