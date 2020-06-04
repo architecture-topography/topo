@@ -1,5 +1,0 @@
-version: 1
-task_definition:
-  task_size:
-    mem_limit: 0.8GB
-    cpu_limit: 256
