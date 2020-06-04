@@ -23,17 +23,13 @@ const Query = {
     return context.queries.findTopLevelBoxes();
   },
 
-  platforms: async (parent: IPlatform, _args: null, context: IContext) => {
-    return context.queries.findPlatforms();
-  },
-
   systems: async (
     _parent: IPlatform,
-    args: { capabilityId: string },
+    args: { boxId: string },
     context: IContext
   ) => {
-    const systems = await context.queries.findSystemsByCapabilityId(
-      args.capabilityId
+    const systems = await context.queries.findSystemsByBoxId(
+      args.boxId
     );
 
     return systems;

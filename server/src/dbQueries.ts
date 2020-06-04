@@ -174,13 +174,13 @@ export const findCapabilitiesByDomainId = async (
   return findChildren('Domain', domainUid);
 };
 
-export const findSystemsByCapabilityId = (
-  capabilityUid: string
+export const findSystemsByBoxId = (
+  boxId: string
 ): Promise<IPlatform[]> => {
   return runQueryAndReturnProperties(
     'system',
-    `MATCH(capability: Capability) <-[r:CHILD_OF]- (system: System) WHERE (capability.uid = $capabilityUid) RETURN system`,
-    { capabilityUid }
+    `MATCH(box:Box) <-[r:PROVIDES]- (system:System) WHERE (box.uid = $boxId) RETURN system`,
+    { boxId }
   );
 };
 
@@ -228,7 +228,7 @@ export default {
   findCapabilitiesByDomainId,
   findDomainsByPlatformId,
   findPlatforms,
-  findSystemsByCapabilityId,
+  findSystemsByBoxId,
   findTechnologiesBySystemId,
   findTopLevelBoxes,
   findChildrenBoxesOf,

@@ -21,7 +21,6 @@ import { clearDb } from '../helpers/testHelper';
 import {
   createTestPlatformAndDomain,
   createSystemWithCapability,
-  createTestPlatform,
 } from '../helpers/domainHelper';
 
 const server = Server as any;
@@ -34,15 +33,15 @@ describe('resolvers', () => {
   });
 
   describe('getSystems', () => {
-    it('Should return systems for a particular capability', async () => {
+    it('Should return systems for a particular box', async () => {
       const { query } = createTestClient(server);
-      const { capabilityId } = await createSystemWithCapability({
+      const { boxId } = await createSystemWithCapability({
         system: { name: 'system cool', uid: 'system-001' },
         capability: { name: 'capability', uid: 'cap-001' },
       });
       const QUERY = `
       query {
-        systems(capabilityId: "${capabilityId}"){
+        systems(boxId: "${boxId}"){
           name
         }
       }
@@ -57,7 +56,7 @@ describe('resolvers', () => {
 
     it('Should return technologies with system', async () => {
       const { query } = createTestClient(server);
-      const { capabilityId } = await createSystemWithCapability({
+      const { boxId } = await createSystemWithCapability({
         capability: {
           name: 'capability',
           uid: 'cap-001',
@@ -69,7 +68,7 @@ describe('resolvers', () => {
       });
       const QUERY = `
       query {
-        systems(capabilityId: "${capabilityId}"){
+        systems(boxId: "${boxId}"){
           name,
           technologies {
             name
@@ -86,78 +85,6 @@ describe('resolvers', () => {
         name: 'kittensOnRails',
       });
     });
-  });
-
-  describe('getPlatforms', () => {
-    it('should return uid as ID', async () => {
-      const platformName = 'Test Platform';
-      const platformId = 'ID-24601';
-      const { query } = createTestClient(server);
-
-      const QUERY = `
-      query {
-        platforms{
-          name
-          id
-        }
-      }
-      `;
-
-      await createTestPlatform(platformName, platformId);
-      const res = await query({
-        query: QUERY,
-      });
-      expect(res.data).toBeDefined();
-      expect(res.data ? res.data.platforms : []).toContainEqual({
-        name: platformName,
-        id: platformId,
-      });
-    });
-
-    it('should return all platforms', async () => {
-      const platformName = 'Test Platform';
-      const domainName = 'Test Domain';
-      const capabilityName = 'Test Capability';
-      const { query } = createTestClient(server);
-
-      const QUERY = `
-      query {
-        platforms{
-          name,
-          domains {
-            name,
-            capabilities {
-              name
-            }
-          }
-        }
-      }
-      `;
-
-      await createTestPlatformAndDomain(
-        platformName,
-        domainName,
-        capabilityName
-      );
-      const res = await query({
-        query: QUERY,
-      });
-      expect(res.data?.platforms).toBeDefined();
-      expect(res.data!.platforms!).toContainEqual({
-        name: 'Test Platform',
-        domains: [
-          {
-            name: 'Test Domain',
-            capabilities: [
-              {
-                name: 'Test Capability',
-              },
-            ],
-          },
-        ],
-      });
-    });
-    afterEach(clearDb);
   });
 
   describe('getBoxes', () => {

@@ -16,26 +16,6 @@
 
 import { driver } from '../../src/neo';
 
-export const createTestPlatform = async (platformName: string, id: string) => {
-  const session = driver.session();
-  try {
-    await session.run(
-      `CREATE (platform:Box:Platform { name: $platformName, uid: $id })
-      CREATE (domain:Box:Domain { name: "domain", uid: "domain-01"})
-      CREATE (capability:Box:Capability { name: "capability", uid: "capability-01" })
-      CREATE (platform)<-[:CHILD_OF]-(domain)
-      CREATE (domain)<-[:CHILD_OF]-(capability)
-      `,
-      {
-        id,
-        platformName,
-      }
-    );
-  } finally {
-    session.close();
-  }
-};
-
 export const createTestPlatformAndDomain = async (
   platformName: string,
   domainName: string,
@@ -135,7 +115,7 @@ export const createSystemWithCapability = async ({
       `CREATE (system:System { name: $systemName, uid: $systemUid })
       CREATE (capability:Box:Capability { name: $capabilityName, uid: $capabilityUid })
       CREATE (technology:Technology { name: $technologyName, uid: $technologyUid })
-      CREATE (capability)<-[:CHILD_OF]-(system)
+      CREATE (capability)<-[:PROVIDES]-(system)
       CREATE (system)-[:BUILT_OF]->(technology)
       RETURN capability,system,technology
       `,
@@ -149,12 +129,12 @@ export const createSystemWithCapability = async ({
       }
     );
 
-    const capabilityId = result.records[0].get('capability').properties.uid;
+    const boxId = result.records[0].get('capability').properties.uid;
     const systemId = result.records[0].get('system').identity.toString();
     const technologyId = result.records[0]
       .get('technology')
       .identity.toString();
-    return { capabilityId, systemId, technologyId };
+    return { boxId, systemId, technologyId };
   } finally {
     session.close();
   }

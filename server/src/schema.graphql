@@ -1,12 +1,10 @@
 type Query {
   hello: String!
   boxes: [Box]!
-  platforms: [Platform]!
-  systems(capabilityId: String!): [System]!
+  systems(boxId: String!): [System]!
 }
 
 enum BoxType {
-  Platform
   Domain
   Subdomain
   Capability
@@ -42,23 +40,6 @@ type Box {
   name: String!
   type: BoxType!
   boxes: [Box!]!
-}
-
-type Platform {
-  id: ID!
-  name: String!
-  domains: [Domain!]!
-}
-
-type Domain {
-  id: ID!
-  name: String!
-  capabilities: [Capability!]!
-}
-
-type Capability {
-  id: ID!
-  name: String!
 }
 
 type System {

@@ -15,20 +15,14 @@
  */
 
 import Box from './Box';
-import Capability from './Capability';
-import Domain from './Domain';
 import Mutation from './Mutation';
-import Platform from './Platform';
 import Query from './Query';
 import System from './System';
 import Technology from './Technology';
 
 export default {
   Box,
-  Capability,
-  Domain,
   Mutation,
-  Platform,
   Query,
   System,
   Technology,

@@ -35,7 +35,7 @@ describe('Schema definitions', () => {
   it('Accepts systems query', async () => {
     const QUERY = `
     query {
-      systems(capabilityId: "test"){
+      systems(boxId: "test"){
         name,
         id,
         technologies {
@@ -52,63 +52,4 @@ describe('Schema definitions', () => {
     expect(res.errors).toBeUndefined();
   });
 
-  it('Accepts platform query', async () => {
-    const QUERY = `
-    query {
-      platforms{
-        name,
-        id
-      }
-    }
-    `;
-
-    const res = await query({
-      query: QUERY,
-    });
-    expect(res.errors).toBeUndefined();
-  });
-
-  it('Accepts platform query with embedded domains', async () => {
-    const QUERY = `
-    query {
-      platforms{
-        name,
-        id,
-        domains {
-          id,
-          name
-        }
-      }
-    }
-    `;
-
-    const res = await query({
-      query: QUERY,
-    });
-    expect(res.errors).toBeUndefined();
-  });
-
-  it('Accepts platform query with embedded domains and capabilities', async () => {
-    const QUERY = `
-    query {
-      platforms{
-        name,
-        id,
-        domains {
-          id,
-          name,
-          capabilities {
-            id,
-            name
-          }
-        }
-      }
-    }
-    `;
-
-    const res = await query({
-      query: QUERY,
-    });
-    expect(res.errors).toBeUndefined();
-  });
 });
