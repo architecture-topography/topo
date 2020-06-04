@@ -1,21 +1,8 @@
 version: 2
 jobs:
-  # build:
-  #   docker:
-  #     - image: circleci/python:3.6.2
-  #   steps:
-  #     - checkout
-  #     - setup_remote_docker
-  #     - run:
-  #         name: Build
-  #         command: |
-  #           sudo pip install awscli
-  #           eval $(aws ecr get-login --no-include-email)
-  #           scripts/build
   test:
     docker:
       - image: circleci/node:12.16.3
-      # - image: circleci/python:3.6.2
     steps:
       - checkout
       - restore_cache:
@@ -33,13 +20,7 @@ jobs:
           key: node-dependency-cache-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-            - client/node_modules
             - server/node_modules
-      - run:
-          name: "[Client] Run Unit Tests"
-          command: |
-            cd client
-            yarn test
       - run:
           name: "[Server] Run Unit Tests"
           command: |
@@ -59,36 +40,6 @@ jobs:
             --request POST
             --data "{\"cards\":[{\"header\":{\"title\":\"[${CIRCLE_BUILD_NUM}] Oh no! The build is broken! @Giphy broken build\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170406/icon_failed__1325447.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
             $CHAT_WEBHOOK_URL
-  # deploy:
-  #   docker:
-  #     - image: circleci/python:3.6.2
-  #
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Deploy to AWS
-  #         command: |
-  #           set -e
-  #           set -x
-  #           sudo pip install awscli
-  #           aws configure set default.s3.signature_version s3v4
-  #           scripts/docker-machine-pull
-  #           eval $(aws ecr get-login --no-include-email)
-  #           scripts/deploy
-  #         environment:
-  #           COMPOSE_TLS_VERSION: TLSv1_2
-  #           DOCKER_TLS_VERIFY: "1"
-  #           DOCKER_HOST: "tcp://54.66.143.14:2376"
-  #           DOCKER_CERT_PATH: ".docker/machine/machines/topo-demo"
-  #           DOCKER_MACHINE_NAME: "topo-demo"
-  #     - run:
-  #         name: Chat Notification Fail
-  #         when: on_fail
-  #         command: >
-  #           curl --header "Content-Type: application/json"
-  #           --request POST
-  #           --data "{\"cards\":[{\"header\":{\"title\":\"[${CIRCLE_BUILD_NUM}] Oh no! The build is broken! @Giphy broken build\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170406/icon_failed__1325447.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
-  #           $CHAT_WEBHOOK_URL
 workflows:
   version: 2
   master:
@@ -98,10 +49,3 @@ workflows:
             branches:
               ignore:
                 - /wip-.*/
-      # - build:
-      #     requires:
-      #       - test
-      # - deploy:
-      #     requires:
-      #       - build
-      #       - test
