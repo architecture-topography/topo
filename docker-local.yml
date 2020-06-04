@@ -1,15 +1,5 @@
 version: '3'
 services:
-  web:
-    build:
-      context: ./client
-      args:
-      - REACT_APP_SERVER_URI=http://localhost:4000
-    command: yarn start-prod
-    volumes:
-    - ./client/src:/var/app/src
-    ports:
-    - "3000:5000"
   server:
     command: yarn start
     volumes:
