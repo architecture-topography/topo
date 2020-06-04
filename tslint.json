@@ -2,8 +2,8 @@
   "defaultSeverity": "error",
   "linterOptions": {
     "exclude": [
-      "{client,server}/node_modules/**",
-      "{server,client}/build/**",
+      "{server}/node_modules/**",
+      "{server}/build/**",
       "**/*.test.{ts,js}?(x)"
     ]
   },

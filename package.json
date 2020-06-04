@@ -1,7 +1,6 @@
 {
   "private": true,
   "workspaces": [
-    "client",
     "server"
   ],
   "scripts": {
@@ -10,9 +9,9 @@
     "docker-prod": "docker-compose -f docker-base.yml -f docker-prod.yml",
     "docker-local": "docker-compose -f docker-base.yml -f docker-local.yml",
     "docker-dev": "docker-compose -f docker-base.yml -f docker-dev.yml",
-    "copyright": "copyright-header --copyrightHolder \"Thoughtworks Inc. All rights reserved\" --include \"server/src\" \"client/src\" --templateId \"apache\"",
+    "copyright": "copyright-header --copyrightHolder \"Thoughtworks Inc. All rights reserved\" --include \"server/src\" --templateId \"apache\"",
     "copyright-fix": "yarn run copyright --fix",
-    "lint": "yarn tslint -c tslint.json '{server,client}/**/*.{ts,js}?(x)'",
+    "lint": "yarn tslint -c tslint.json 'server/**/*.{ts,js}?(x)'",
     "lint-fix": "yarn run lint --fix"
   },
   "husky": {
