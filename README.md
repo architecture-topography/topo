@@ -11,47 +11,25 @@
 <br/>
 
 ## Description
-> Topo is a living, interactive, queryable visual map of an organisation's software systems - what they are, how they are grouped together, and how they relate to each other.<br/><br/>Topo has two major components - 1) the rumour-mill: an automated aggregator that can combine together multiple overlapping sources of data to build a trustworthy repository of system information.  These might include traditional CMDBs, service registries, even source repositories and monitoring tools.  Also 2) a visualisation tool that allows users to interactively navigate the system information and answer questions.
+Topo is a _reference implementation_ of an automated architecture repository - aggregating curated and live information about an organisation's software systems - what they are, how they are grouped together, and how they relate to each other.
 
 ## Starting topo locally
-The project is split into Server and Database. There is a docker compose file to spin an instance for all of them up:
 
 ```
 yarn docker-local up
 ```
 
-The server on http://localhost:4000
-The database browser interface on http://localhost:7474/browser/
+The topo GraphQL server is available on http://localhost:4000
+The neo4j browser is available on http://localhost:7474/browser/
 
-This also starts a second instance of the database (starting on :7473, but not exposed) that is used when running integration tests.
+A second instance of neo4j is started, and used when running integration tests (it starts on :7473, but is not exposed).
 This is done because NEO doesn't support the concept of multiple databases on the same server and we want to setup and tear down the database components on each test run.
 
+### Run the tests
 
-### Development Setup
-It's very slow and inconvenient to have to re-build the docker images every time
-you make a change. So instead we recommend running the client in dev mode
-locally. This allows you to make use of hot-reloading and all that
-good stuff.
+Use `yarn test` to run unit tests. `yarn test-int` will run the integration tests.
 
-First, run
-```
-yarn docker-dev up
-```
-
-To **bootstrap the database**:
-
-* run ```yarn docker-local up``` navigate to http://localhost:7474/browser/ and login with the default user with ```test``` as the password.
-
-* There is a Neo4j command prompt at the top of the page and the scripts to run can be found in the [db/seedDb.txt](db/seedDb.txt) file of the repository. The scripts are labelled.
-
-
-### Test
-Use `yarn test` to launch the unit test runner. `yarn test-int` will run the integration tests.
-
-## [wiki](https://github.com/architecture-topography/topo/wiki)
-More information on the different topics.
-
-## Decision Register
+# Decision Register
 
 We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision. More details in the [wiki](https://github.com/architecture-topography/topo/wiki/decision-register).
 
@@ -61,4 +39,4 @@ Topo is released under [Apache 2.0 License](https://www.apache.org/licenses/LICE
 
 ## Copyright
 
-Copyright 2018 ThoughtWorks, Inc.
+Copyright 2018-20 ThoughtWorks, Inc.
