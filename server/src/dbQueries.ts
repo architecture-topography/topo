@@ -134,7 +134,7 @@ const runQueryAndReturnProperties = async (
   try {
     const result = await session.run(queryString, queryParams);
     return result.records.length
-      ? result.records.map((record: any) => record.get(nodeName).properties)
+      ? result.records.map(record => record.get(nodeName).properties)
       : [];
   } catch (error) {
     console.error('Error running query: ', error);
