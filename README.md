@@ -4,7 +4,7 @@
 <br />
 
 <p align="center">
-  <img align="center" src="client/src/resources/img/Topo-02.png" width="350" alt="TOPO" />
+  <img align="center" src="Topo-02.png" width="350" alt="TOPO" />
 </p>
 
 
