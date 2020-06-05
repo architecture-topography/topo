@@ -134,7 +134,7 @@ const runQueryAndReturnProperties = async (
   try {
     const result = await session.run(queryString, queryParams);
     return result.records.length
-      ? result.records.map(record => record.get(nodeName).properties)
+      ? result.records.map((record) => record.get(nodeName).properties)
       : [];
   } catch (error) {
     console.error('Error running query: ', error);
@@ -174,9 +174,7 @@ export const findCapabilitiesByDomainId = async (
   return findChildren('Domain', domainUid);
 };
 
-export const findSystemsByBoxId = (
-  boxId: string
-): Promise<IPlatform[]> => {
+export const findSystemsByBoxId = (boxId: string): Promise<IPlatform[]> => {
   return runQueryAndReturnProperties(
     'system',
     `MATCH(box:Box) <-[r:PROVIDES]- (system:System) WHERE (box.uid = $boxId) RETURN system`,

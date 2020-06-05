@@ -37,7 +37,7 @@ const Mutation = {
       await context.queries.createLine(args.parentId, args.id);
     }
     if (args.systems) {
-      const links = args.systems.map(systemId =>
+      const links = args.systems.map((systemId) =>
         context.queries.createSystemBoxRelationship(systemId, args.id)
       );
       await Promise.all(links); // wait for all links to be created
@@ -73,7 +73,7 @@ const Mutation = {
     }
 
     if (args.technologies) {
-      const relationships = args.technologies.map(technologyId =>
+      const relationships = args.technologies.map((technologyId) =>
         context.queries.createSystemTechnologyRelationship(
           args.id,
           technologyId

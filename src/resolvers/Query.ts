@@ -28,9 +28,7 @@ const Query = {
     args: { boxId: string },
     context: IContext
   ) => {
-    const systems = await context.queries.findSystemsByBoxId(
-      args.boxId
-    );
+    const systems = await context.queries.findSystemsByBoxId(args.boxId);
 
     return systems;
   },

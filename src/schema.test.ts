@@ -51,5 +51,4 @@ describe('Schema definitions', () => {
     });
     expect(res.errors).toBeUndefined();
   });
-
 });

@@ -35,10 +35,7 @@ const getNeo4jCredentials = () => {
 
 export const driver = neo4j.driver(
   getNeo4jUrl(),
-  neo4j.auth.basic(
-    getNeo4jCredentials().user,
-    getNeo4jCredentials().password
-  )
+  neo4j.auth.basic(getNeo4jCredentials().user, getNeo4jCredentials().password)
 );
 
 process.on('exit', () => {

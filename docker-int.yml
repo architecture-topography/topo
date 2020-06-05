@@ -9,7 +9,7 @@ services:
       - NEO4J_dbms_connector_bolt_advertised__address=:7688
       - NEO4J_AUTH=neo4j/test
   tests:
-    build: ./server
+    build: .
     environment:
       - NODE_ENV=test-int
     command: tail -F anything

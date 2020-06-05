@@ -3,8 +3,8 @@ services:
   server:
     command: yarn start
     volumes:
-    - ./server/src:/var/app/src
-    build: ./server
+    - ./src:/var/app/src
+    build: .
   db:
     build: ./db
   db-test:
