@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import v1 from 'neo4j-driver';
+import neo4j from 'neo4j-driver';
 
 const getNeo4jUrl = () => {
   if (!process.env.NEO4J_URL) {
@@ -33,9 +33,9 @@ const getNeo4jCredentials = () => {
   };
 };
 
-export const driver = v1.driver(
+export const driver = neo4j.driver(
   getNeo4jUrl(),
-  v1.auth.basic(
+  neo4j.auth.basic(
     getNeo4jCredentials().user,
     getNeo4jCredentials().password
   )
