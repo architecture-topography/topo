@@ -1,1 +1,1 @@
-docker_compose("./docker-local.yml")
+docker_compose(["./docker-base.yml", "./docker-local.yml"])
