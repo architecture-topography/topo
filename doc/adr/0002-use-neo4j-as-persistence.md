@@ -17,3 +17,4 @@ We will use Neo4J as the persistence layer. It is a fairly popular graph databas
 ## Consequences
 
 We will need to use Cypher query language to create, read update and delete data.
+This will also increase the deployment complexity of Topo.

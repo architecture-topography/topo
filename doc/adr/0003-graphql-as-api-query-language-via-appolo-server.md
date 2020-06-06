@@ -12,7 +12,8 @@ We need a way to populate our Neo4J database via an API layer.
 
 ## Decision
 
-Use GraphQL libraries for the server API. GraphQL has been increasing in popularity and maturity lately. It provides a more flexible API query layer compared to REST based interactions.
+Use GraphQL libraries for the server API.  
+GraphQL has been increasing in popularity and maturity lately. It provides a more flexible API query layer compared to REST based interactions. Specifically being able to perform arbitrarily structured queries, with optional sub-elements and with query parameters.
 
 [Apollo Server](https://www.apollographql.com/) will be used as it's a popular well documented implementation.
 
