@@ -25,6 +25,11 @@ The neo4j browser is available on http://localhost:7474/browser/
 A second instance of neo4j is started, and used when running integration tests (it starts on :7473, but is not exposed).
 This is done because NEO doesn't support the concept of multiple databases on the same server and we want to setup and tear down the database components on each test run.
 
+#### Local dev with Tilt
+To install follow [this](https://github.com/tilt-dev/tilt#install-tilt) page.
+
+Then run `tilt up` , `ctrl + c` in the terminal then `tilt down` to stop.
+
 ### Run the tests
 
 Use `yarn test` to run unit tests. `yarn test-int` will run the integration tests.
