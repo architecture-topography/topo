@@ -40,9 +40,11 @@ We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://g
 
 ## yarn tasks
 
-To update the Copyright notice on the source files in the `src` directory run:
+We include a Copyright notice on the source files located in the `src` directory.
+
 ```bash
-yarn run copyright --fix
+yarn run copyright      # see what needs fixing
+yarn run copyright-fix  # to auto fix copyright notice
 ```
 
 ## License
