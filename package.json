@@ -9,7 +9,7 @@
     "prettier": "prettier --single-quote --trailing-comma es5 --write '**/{src,test-int}/**/*.{ts,js,graphql}?(x)'",
     "prettier-fix": "yarn prettier --fix",
     "docker-local": "docker-compose -f docker-base.yml -f docker-local.yml",
-    "copyright": "copyright-header --copyrightHolder \"Thoughtworks Inc. All rights reserved\" --include \"server/src\" --templateId \"apache\"",
+    "copyright": "copyright-header --copyrightHolder \"Thoughtworks Inc. All rights reserved\" --include \"src\" --templateId \"apache\"",
     "copyright-fix": "yarn run copyright --fix",
     "lint": "yarn tslint -c tslint.json 'src/**/*.{ts,js}?(x)'",
     "lint-fix": "yarn run lint --fix",
