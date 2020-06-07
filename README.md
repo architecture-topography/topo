@@ -35,12 +35,16 @@ Then run `tilt up` , `ctrl + c` in the terminal then `tilt down` to stop.
 Use `yarn test` to run unit tests. `yarn test-int` will run the integration tests.
 
 ## yarn tasks
+To get a list of yarn tasks
+```bash
+yarn run
+```
 
 We include a Copyright notice on the source files located in the `src` directory.
 
 ```bash
-yarn run copyright      # see what needs fixing
-yarn run copyright-fix  # to auto fix copyright notice
+yarn copyright      # see what needs fixing
+yarn copyright-fix  # to auto fix copyright notice
 ```
 
 # Decision Register
