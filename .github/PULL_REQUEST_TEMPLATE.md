@@ -11,4 +11,4 @@ Any supporting pics / gifs showing the changes from a user perspective? >
 -  My changes generate no new warnings.
 -  Any dependant downstream changes have been applied.
 
-[ ] I've read and complete all the applicable points above.
+- [ ] I've read and completed all the applicable points above.
