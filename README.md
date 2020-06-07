@@ -34,10 +34,6 @@ Then run `tilt up` , `ctrl + c` in the terminal then `tilt down` to stop.
 
 Use `yarn test` to run unit tests. `yarn test-int` will run the integration tests.
 
-# Decision Register
-
-We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision. More details in the [wiki](https://github.com/architecture-topography/topo/wiki/decision-register).
-
 ## yarn tasks
 
 We include a Copyright notice on the source files located in the `src` directory.
@@ -46,6 +42,10 @@ We include a Copyright notice on the source files located in the `src` directory
 yarn run copyright      # see what needs fixing
 yarn run copyright-fix  # to auto fix copyright notice
 ```
+
+# Decision Register
+
+We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision. More details in the [wiki](https://github.com/architecture-topography/topo/wiki/decision-register).
 
 ## License
 
