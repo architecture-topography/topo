@@ -47,11 +47,20 @@ workflows:
             branches:
               ignore:
                 - /wip-.*/
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - test
+      - deploy
   nightly:
-  triggers:
-    - schedule:
-        cron: "0 0 * * *"
-        filters:
-          branches:
-            only:
-              - master
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - test
