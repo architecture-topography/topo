@@ -13,7 +13,7 @@
 ## Description
 Topo is a _reference implementation_ of an automated architecture repository - aggregating curated and live information about an organisation's software systems - what they are, how they are grouped together, and how they relate to each other.
 
-## Starting topo locally
+## Starting Topo locally
 
 ```
 yarn docker-local up
@@ -37,6 +37,13 @@ Use `yarn test` to run unit tests. `yarn test-int` will run the integration test
 # Decision Register
 
 We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision. More details in the [wiki](https://github.com/architecture-topography/topo/wiki/decision-register).
+
+## yarn tasks
+
+To update the Copyright notice on the source files in the `src` directory run:
+```bash
+yarn run copyright --fix
+```
 
 ## License
 
