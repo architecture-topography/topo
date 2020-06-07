@@ -47,13 +47,6 @@ workflows:
             branches:
               ignore:
                 - /wip-.*/
-
-workflows:
-  version: 2
-  commit:
-    jobs:
-      - test
-      - deploy
   nightly:
     triggers:
       - schedule:
@@ -62,5 +55,3 @@ workflows:
             branches:
               only:
                 - master
-    jobs:
-      - test
