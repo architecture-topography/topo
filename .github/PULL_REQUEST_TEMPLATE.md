@@ -1,7 +1,7 @@
 ## Context
 
-[ What is this PR about?
-Any supporting pics / gifs showing the changes from a user perspective? ]
+What is this PR about?
+Any supporting pics / gifs showing the changes from a user perspective?
 
 ## Confirmation:
 
