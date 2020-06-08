@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-mkdir -p .docker/machine >/dev/null
-
-aws s3 sync s3://topo-docker-machine .docker/machine --sse AES256

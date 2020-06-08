@@ -1,7 +1,0 @@
-#!/bin/sh -e
-
-echo "Pulling images"
-docker-compose --file docker-base.yml --file docker-prod.yml pull
-
-echo "Deploying to $DOCKER_HOST"
-docker-compose --file docker-base.yml --file docker-prod.yml up -d
