@@ -7,8 +7,7 @@
   "private": false,
   "scripts": {
     "prettier": "prettier --single-quote --trailing-comma es5 --write '**/{src,test-int}/**/*.{ts,js,graphql}?(x)'",
-    "prettier-fix": "yarn prettier --fix",
-    "docker-local": "docker-compose -f docker-base.yml -f docker-local.yml",
+    "docker-local": "docker-compose -f docker-base.yml -f docker-local.yml up --remove-orphans",
     "copyright": "copyright-header --copyrightHolder \"Thoughtworks Inc. All rights reserved\" --include \"src\" --templateId \"apache\"",
     "copyright-fix": "yarn run copyright --fix",
     "lint": "yarn tslint -c tslint.json 'src/**/*.{ts,js}?(x)'",
@@ -30,7 +29,7 @@
       "git add"
     ],
     "*.{ts,js,graphql}?(x)": [
-      "yarn run prettier-fix",
+      "yarn run prettier",
       "git add"
     ],
     "*.{ts,js}?(x)": [

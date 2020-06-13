@@ -16,7 +16,7 @@ Topo is a _reference implementation_ of an automated architecture repository - a
 ## Starting Topo locally
 
 ```
-yarn docker-local up
+yarn docker-local
 ```
 
 The topo GraphQL server is available on http://localhost:4000
@@ -34,8 +34,16 @@ Then run `tilt up` , `ctrl + c` in the terminal then `tilt down` to stop.
 
 Use `yarn test` to run unit tests. `yarn test-int` will run the integration tests.
 
+### Run the server locally
+```bash
+yarn start
+# or
+yarn start-prod
+```
+
 ## yarn tasks
 To get a list of yarn tasks
+
 ```bash
 yarn run
 ```
@@ -45,6 +53,25 @@ We include a Copyright notice on the source files located in the `src` directory
 ```bash
 yarn copyright      # see what needs fixing
 yarn copyright-fix  # to auto fix copyright notice
+```
+
+Use `docker-compose` directly to run local dev containers.
+
+```bash
+yarn docker-local
+```
+
+Code linter via [tslint](https://github.com/palantir/tslint). (TODO: Move to ESLint)
+
+```bash
+yarn lint
+yarn lint-fix
+```
+
+[Prettier](https://prettier.io/) Code Formatter
+
+```bash
+yarn prettier
 ```
 
 # Decision Register
