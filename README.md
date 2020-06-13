@@ -16,7 +16,7 @@ Topo is a _reference implementation_ of an automated architecture repository - a
 ## Starting Topo locally
 
 ```
-yarn docker-local up
+yarn docker-local
 ```
 
 The topo GraphQL server is available on http://localhost:4000
