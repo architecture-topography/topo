@@ -29,7 +29,7 @@
       "git add"
     ],
     "*.{ts,js,graphql}?(x)": [
-      "yarn run prettier-fix",
+      "yarn run prettier",
       "git add"
     ],
     "*.{ts,js}?(x)": [
