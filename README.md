@@ -47,6 +47,12 @@ yarn copyright      # see what needs fixing
 yarn copyright-fix  # to auto fix copyright notice
 ```
 
+Use `docker-compose` directly to run local dev containers.
+
+```bash
+yarn docker-local
+```
+
 # Decision Register
 
 We document our decisions in the *doc/adr/* directory. Use [adr-tools](https://github.com/npryce/adr-tools) to automate creating a new decision register file for your decision.
