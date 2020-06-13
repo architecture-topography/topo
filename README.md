@@ -34,8 +34,16 @@ Then run `tilt up` , `ctrl + c` in the terminal then `tilt down` to stop.
 
 Use `yarn test` to run unit tests. `yarn test-int` will run the integration tests.
 
+### Run the server locally
+```bash
+yarn start
+# or
+yarn start-prod
+```
+
 ## yarn tasks
 To get a list of yarn tasks
+
 ```bash
 yarn run
 ```
@@ -51,6 +59,19 @@ Use `docker-compose` directly to run local dev containers.
 
 ```bash
 yarn docker-local
+```
+
+Code linter via [tslint](https://github.com/palantir/tslint). (TODO: Move to ESLint)
+
+```bash
+yarn lint
+yarn lint-fix
+```
+
+[Prettier](https://prettier.io/) Code Formatter
+
+```bash
+yarn prettier
 ```
 
 # Decision Register
