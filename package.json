@@ -48,7 +48,7 @@
     "lint-staged": "^10.2.11",
     "lodash": "^4.17.19",
     "neo4j-driver": "^4.1.0",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   },
   "devDependencies": {
     "jest": "^26.1.0",
