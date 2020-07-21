@@ -47,7 +47,7 @@
     "graphql-import": "^1.0.2",
     "lint-staged": "^10.2.11",
     "lodash": "^4.17.19",
-    "neo4j-driver": "^4.1.0",
+    "neo4j-driver": "^4.1.1",
     "typescript": "^3.9.7"
   },
   "devDependencies": {
