@@ -41,7 +41,7 @@
     "@types/jest": "^26.0.7",
     "@types/lodash": "^4.14.158",
     "apollo-server": "^2.16.0",
-    "apollo-server-testing": "^2.16.0",
+    "apollo-server-testing": "^2.16.1",
     "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "graphql-import": "^1.0.2",
