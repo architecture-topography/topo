@@ -40,7 +40,7 @@
   "dependencies": {
     "@types/jest": "^26.0.22",
     "@types/lodash": "^4.14.168",
-    "apollo-server": "^2.22.1",
+    "apollo-server": "^2.22.2",
     "apollo-server-testing": "^2.22.1",
     "dotenv": "^8.2.0",
     "graphql": "^15.5.0",
