@@ -42,7 +42,7 @@
     "@types/lodash": "^4.14.168",
     "apollo-server": "^2.24.0",
     "apollo-server-testing": "^2.24.0",
-    "dotenv": "^8.5.1",
+    "dotenv": "^9.0.0",
     "graphql": "^15.5.0",
     "graphql-import": "^1.0.2",
     "lint-staged": "^10.5.4",
