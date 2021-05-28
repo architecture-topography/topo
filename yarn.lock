@@ -4267,15 +4267,28 @@ negotiator@0.6.2:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
 
-neo4j-driver@^4.2.3:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.2.3.tgz#238c98cef329ff0fb11f9884360c4ff4650b2409"
-  integrity sha512-HCJ7+J5V/5yhP+b6G2zTb7SKlAN/oLYaMkD8Bo8L9veScDtgDHBlbkbYEHf1YSAd67OfjZKeF9l84J8Kjdw91g==
+neo4j-driver-bolt-connection@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/neo4j-driver-bolt-connection/-/neo4j-driver-bolt-connection-4.3.0.tgz#150089f92eb094792a63f62b9a8f0c34725380f3"
+  integrity sha512-MTzixvHoZNmYbWgUeggXFUhgetr5BlVZ9hY5pWCnkttoTwS21D/ygs+oDyn3tJKvNd8INRsrwKh4dG3izvp2Xg==
+  dependencies:
+    neo4j-driver-core "^4.3.0"
+    text-encoding-utf-8 "^1.0.2"
+
+neo4j-driver-core@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/neo4j-driver-core/-/neo4j-driver-core-4.3.0.tgz#a6d33f604dec7cf3b200bb14c1ac42292b3ab488"
+  integrity sha512-XJULrmfeTtDKonchufDqTpf5qQ93RI5vbyOxZ/S4VospfKGeWsl6KmwXvp3fY1nCKWTny/Ekm4hw1vod2XyZEA==
+
+neo4j-driver@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.3.0.tgz#367e80925c671d364ecd406d049958469c7ce577"
+  integrity sha512-vG+KsKQXTAIwhspMQw4pFVJ+Mr8XrBC2vPw19C+WVUR2qx5w+zynB2WxOyFI+9oxya9B5xCWxgQ4I5KyMDtElw==
   dependencies:
     "@babel/runtime" "^7.5.5"
+    neo4j-driver-bolt-connection "^4.3.0"
+    neo4j-driver-core "^4.3.0"
     rxjs "^6.6.3"
-    text-encoding-utf-8 "^1.0.2"
-    uri-js "^4.4.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -5810,7 +5823,7 @@ update-notifier@^4.1.0:
     semver-diff "^3.1.1"
     xdg-basedir "^4.0.0"
 
-uri-js@^4.2.2, uri-js@^4.4.0:
+uri-js@^4.2.2:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/uri-js/-/uri-js-4.4.0.tgz#aa714261de793e8a82347a7bcc9ce74e86f28602"
   integrity sha512-B0yRTzYdUCCn9n+F4+Gh4yIDtMQcaJsmYBDsTSG8g/OejKBodLQ2IHfN3bM7jUsRXndopT7OIXWdYqc1fjmV6g==
