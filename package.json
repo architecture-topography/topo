@@ -38,7 +38,7 @@
     ]
   },
   "dependencies": {
-    "@types/jest": "^26.0.23",
+    "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.170",
     "apollo-server": "^2.25.2",
     "apollo-server-testing": "^2.25.2",
