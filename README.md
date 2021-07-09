@@ -10,6 +10,8 @@
 
 <br/>
 
+<strong>Topo is inactive now - we were exploring ideas but never quite found the right application.  An idea for another time maybe :-)</strong>
+
 ## Description
 Topo is a _reference implementation_ of an automated architecture repository - aggregating curated and live information about an organisation's software systems - what they are, how they are grouped together, and how they relate to each other.
 
